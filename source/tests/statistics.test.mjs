@@ -204,7 +204,7 @@ test('shore supplements deduplicate destinations and never infer ports or unchec
 });
 
 test('non-cruise comparison preserves the owner grouping without contributing to cruise statistics', () => {
-  assert.deepEqual(nonCruiseVisits.countries.map(place => place.name), ['Egypt', 'South Africa', 'India', 'Israel', 'China']);
+  assert.deepEqual(nonCruiseVisits.countries.map(place => place.name), ['China', 'Egypt', 'India', 'Israel', 'South Africa']);
   assert.deepEqual(nonCruiseVisits.specialPlaces.map(place => place.name), ['Palestine', 'Hong Kong']);
   for (const place of [...nonCruiseVisits.countries, ...nonCruiseVisits.specialPlaces]) {
     assert.ok(place.flag, `${place.name} includes its flag`);

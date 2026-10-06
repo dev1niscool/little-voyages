@@ -143,7 +143,7 @@ try {
   assert.deepEqual(vatican.cruiseIds, []);
   assert.deepEqual(statistics.statistics.shoreExcursionPlaces, [vatican]);
   assert.deepEqual(nonCruiseVisits.countries.map(place => [place.name, place.flag]), [
-    ['Egypt', '🇪🇬'], ['South Africa', '🇿🇦'], ['India', '🇮🇳'], ['Israel', '🇮🇱'], ['China', '🇨🇳'],
+    ['China', '🇨🇳'], ['Egypt', '🇪🇬'], ['India', '🇮🇳'], ['Israel', '🇮🇱'], ['South Africa', '🇿🇦'],
   ]);
   assert.deepEqual(nonCruiseVisits.specialPlaces.map(place => [place.name, place.flag]), [
     ['Palestine', '🇵🇸'], ['Hong Kong', '🇭🇰'],
@@ -185,6 +185,12 @@ try {
   assert.match(guide, /non-cruise visits/i);
   assert.match(guide, /UN non-member observer State/);
   assert.match(guide, /Special Administrative Region of China/);
+  assert.ok(guide.includes(nonCruiseVisits.countNote), 'The guide and JSON explain the same country-count convention');
+  for (const place of nonCruiseVisits.specialPlaces) {
+    for (const reference of place.referenceLinks || []) {
+      assert.ok(guide.includes(reference.url), `${place.name} keeps its official source links in the guide`);
+    }
+  }
   assert.ok(guide.includes(logbook.personalVisitsSha256));
   assert.equal(guide.match(/^### Cruise \d+:/gm).length, 29, 'The readable guide retains every voyage’s research');
 

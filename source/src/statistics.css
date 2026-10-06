@@ -292,6 +292,13 @@ html[data-theme="dark"] .stats-country-item,html[data-theme="dark"] .stats-terri
 .stats-land-territory-card { background:linear-gradient(135deg,#ffecebdd,#f9e1e9e3); }
 .stats-land-passport .stats-passport-hero { min-height:204px; }
 .stats-land-passport .stats-passport-hero>.stats-number,.stats-land-passport .stats-passport-hero .stats-eyebrow { color:var(--land-accent); }
+.stats-land-number { display:flex; align-items:flex-start; gap:4px; margin:12px 0 3px; }
+.stats-land-number>.stats-number { font:400 66px/1.05 var(--serif); letter-spacing:-2px; color:var(--land-accent); }
+.stats-land-count-asterisk { font:600 13px/1 'DM Sans',sans-serif; color:var(--land-accent); text-decoration:none; padding:3px; margin-top:8px; }
+.stats-land-count-asterisk:focus-visible { outline:2px solid currentColor; outline-offset:2px; border-radius:3px; }
+.stats-count-note { color:var(--stats-secondary); font-size:9px; line-height:1.6; margin:13px 0 0; scroll-margin-top:150px; }
+.stats-count-note>span { color:var(--land-accent); }
+.stats-reference-links { display:flex; flex-wrap:wrap; gap:0 12px; }
 .stats-land-passport .stats-passport-hero h3 em { color:var(--land-accent); font-style:normal; font-weight:650; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; }
 .stats-land-passport .stats-place-details { border-color:var(--land-line); }
 .stats-land-passport .stats-place-details summary .stats-icon { color:var(--land-accent); }
@@ -311,6 +318,7 @@ html[data-theme="dark"] .stats-land-country-card,html[data-theme="dark"] .stats-
 @media(max-width:1100px) { .stats-land-passport .stats-passport-hero { min-height:228px; } }
 @media(max-width:800px) { .stats-country-list { grid-template-columns:repeat(2,minmax(0,1fr)); } .stats-land-passport .stats-passport-hero { min-height:204px; } }
 @media(max-width:500px) { .stats-country-list { grid-template-columns:1fr; } .stats-country-item>span:last-child { flex:1; display:flex; align-items:center; flex-wrap:wrap; justify-content:space-between; gap:2px 9px; } .stats-country-item strong { font-size:12px; } .stats-country-item small { font-size:9px; } .stats-land-passport { margin-top:30px; } .stats-land-passport .stats-passport-hero { min-height:222px; } .stats-land-country-item { gap:10px; flex-wrap:wrap; } .stats-land-country-item strong { font-size:12px; } .stats-land-country-item .stats-land-label { font-size:8px; } .stats-land-passport .stats-passport-heading h2 { font-size:25px; } }
+@media(max-width:500px) { .stats-land-number>.stats-number { font-size:60px; } .stats-land-count-asterisk { font-size:12px; } }
 @media (min-width: 1101px) { .stats-hero-grid > .stats-card { min-height: 320px; } .stats-nights-card > p { max-width: 260px; } }
 @media (max-width: 1100px) and (min-width: 801px) { .stats-nights-card > p { font-size: 10px; } .stats-card-note, .stats-nights-card > .stats-card-note { font-size: 8px; } .stats-distance-card > p { font-size: 10px; } .stats-earth-card > p { font-size: 9px; } .stats-fleet-ribbon > div { font-size: 11px; } .stats-small-card h2 { font-size: 12px; } .stats-small-card p { font-size: 9px; } .stats-chart-key { font-size: 9px; } .stats-chart-footer { font-size: 8px; } .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 10px; } .stats-voyage-copy small { font-size: 9px; } }
 @media (max-width: 800px) { .stats-intro p { font-size: 12px; } .stats-card-note, .stats-nights-card > .stats-card-note { font-size: 8px; } .stats-nights-card > p { font-size: 11px; } .stats-fleet-ribbon > div { font-size: 9px; } .stats-small-card h2 { font-size: 12px; } .stats-small-card p { font-size: 9px; } .stats-chart-key { font-size: 9px; } .stats-chart-footer { font-size: 8px; } .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 10px; } .stats-voyage-copy small { font-size: 9px; } .stats-port-name small, .stats-port-count small { font-size: 9px; } }

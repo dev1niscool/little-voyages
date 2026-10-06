@@ -10,7 +10,7 @@
     "restrictions": "No unauthorized automated harvesting, reuse, model training, fine-tuning, or incorporation into training datasets. A task-specific handoff does not authorize unrelated retention, redistribution, or training. No permission is granted to probe, exploit, or disrupt the site or repository.",
     "enforcement": "These statements express the owner’s usage preferences and do not technically prevent access to public files."
   },
-  "personalVisitsSha256": "84f35881319728c49291d49210ccc8cd27cbb7e4487013f8281a7ee62b2b5e50",
+  "personalVisitsSha256": "8767dedcca1a3a0b8784b02af0ac48fcff74c5a8085e561d8591b48f63001440",
   "dataNotes": {
     "coordinates": "WGS 84 decimal degrees; route and anchor arrays are [longitude, latitude]. Port objects use explicit lon and lat fields.",
     "precision": "Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation.",
@@ -4123,11 +4123,22 @@
         "sources": [
           "https://www.vaticanstate.va/en/state-and-government/general-informations.html"
         ],
-        "cruiseIds": []
+        "cruiseIds": [],
+        "referenceLinks": []
       }
     ],
     "nonCruiseVisits": {
       "countries": [
+        {
+          "name": "China",
+          "flag": "🇨🇳",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": [],
+          "referenceLinks": []
+        },
         {
           "name": "Egypt",
           "flag": "🇪🇬",
@@ -4135,16 +4146,8 @@
           "status": "Sovereign country",
           "evidence": "owner-reported",
           "cruiseIds": [],
-          "sources": []
-        },
-        {
-          "name": "South Africa",
-          "flag": "🇿🇦",
-          "type": "country",
-          "status": "Sovereign country",
-          "evidence": "owner-reported",
-          "cruiseIds": [],
-          "sources": []
+          "sources": [],
+          "referenceLinks": []
         },
         {
           "name": "India",
@@ -4153,7 +4156,8 @@
           "status": "Sovereign country",
           "evidence": "owner-reported",
           "cruiseIds": [],
-          "sources": []
+          "sources": [],
+          "referenceLinks": []
         },
         {
           "name": "Israel",
@@ -4162,16 +4166,18 @@
           "status": "Sovereign country",
           "evidence": "owner-reported",
           "cruiseIds": [],
-          "sources": []
+          "sources": [],
+          "referenceLinks": []
         },
         {
-          "name": "China",
-          "flag": "🇨🇳",
+          "name": "South Africa",
+          "flag": "🇿🇦",
           "type": "country",
           "status": "Sovereign country",
           "evidence": "owner-reported",
           "cruiseIds": [],
-          "sources": []
+          "sources": [],
+          "referenceLinks": []
         }
       ],
       "specialPlaces": [
@@ -4181,11 +4187,23 @@
           "type": "special-place",
           "status": "UN non-member observer State",
           "evidence": "owner-reported",
-          "note": "Shown in this personal “special places” group as requested. Palestine is a UN non-member observer State; recognition and borders remain disputed.",
-          "disputeNote": "Recognition and borders remain disputed.",
+          "note": "Shown in this personal “territories & special places” group. Palestine is a UN non-member observer State; recognition and borders remain disputed. A majority of UN member countries recognize Palestine as a state, but the United States does not.",
+          "disputeNote": "Recognition and borders remain disputed. Palestine is recognized as a state by a majority of UN member countries, but not by the United States.",
           "disputeUrl": "https://en.wikipedia.org/wiki/Legal_status_of_Palestine",
           "sources": [
-            "https://www.un.org/en/node/123012"
+            "https://www.un.org/en/node/123012",
+            "https://www.un.org/unispal/document/special-committee-israeli-practices-report-05sep25/",
+            "https://www.cbsnews.com/news/marco-rubio-secretary-of-state-face-the-nation-transcript-10-05-2025/"
+          ],
+          "referenceLinks": [
+            {
+              "label": "UN recognition report",
+              "url": "https://www.un.org/unispal/document/special-committee-israeli-practices-report-05sep25/"
+            },
+            {
+              "label": "U.S. position",
+              "url": "https://www.cbsnews.com/news/marco-rubio-secretary-of-state-face-the-nation-transcript-10-05-2025/"
+            }
           ],
           "cruiseIds": []
         },
@@ -4195,15 +4213,30 @@
           "type": "special-place",
           "status": "Special Administrative Region of China",
           "evidence": "owner-reported",
-          "note": "A Special Administrative Region of China, listed separately in this personal travel comparison.",
+          "note": "A Special Administrative Region of China, listed separately in this personal travel comparison. Hong Kong participates separately as “Hong Kong, China”: a WTO member and separate customs territory, and an APEC member economy. These economic arrangements do not make it an independent country.",
+          "contextNote": "Hong Kong participates separately as “Hong Kong, China”: a WTO member and separate customs territory, and an APEC member economy.",
           "contextUrl": "https://en.wikipedia.org/wiki/Hong_Kong",
           "sources": [
-            "https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html"
+            "https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html",
+            "https://www.wto.org/english/thewto_e/countries_e/hong_kong_china_e.htm",
+            "https://www.apec.org/who-we-are/our-members",
+            "https://www.tid.gov.hk/en/our_work/hk_participation_in_ito/wto/overview/hk_participation.html"
+          ],
+          "referenceLinks": [
+            {
+              "label": "WTO",
+              "url": "https://www.wto.org/english/thewto_e/countries_e/hong_kong_china_e.htm"
+            },
+            {
+              "label": "APEC",
+              "url": "https://www.apec.org/who-we-are/our-members"
+            }
           ],
           "cruiseIds": []
         }
       ],
-      "groupingNote": "This is a personal travel grouping, not a claim about sovereignty. These owner-reported visits happened without a cruise and are excluded from every cruise total."
+      "groupingNote": "This is a personal travel grouping, not a claim about sovereignty. These owner-reported visits happened without a cruise and are excluded from every cruise total.",
+      "countNote": "This personal count uses 5, consistent with U.S. recognition; counting Palestine as a country makes 6."
     }
   }
 }

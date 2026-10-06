@@ -2,7 +2,7 @@
 
 Schema version: 1. Collection fingerprint: `bcd1324ed6a95400db1360931f29539401be42177a31483b95c16529b1a1862c` (SHA-256 of the compact JSON cruise array).
 
-Personal-visit fingerprint: `84f35881319728c49291d49210ccc8cd27cbb7e4487013f8281a7ee62b2b5e50` (SHA-256 of the compact JSON `personalVisits` object; separate from the unchanged cruise-array fingerprint).
+Personal-visit fingerprint: `8767dedcca1a3a0b8784b02af0ac48fcff74c5a8085e561d8591b48f63001440` (SHA-256 of the compact JSON `personalVisits` object; separate from the unchanged cruise-array fingerprint).
 
 This bundle is a portable copy of the complete 29-cruise collection, independent of the website’s map filters. It contains 202 recorded nights, 87 distinct non-scenic ports, 36 sovereign countries reached through cruising (including separately reported shore excursions), and 9 territories or special jurisdictions under the definitions below. It also preserves 5 countries and 2 special places reported as non-cruise visits; these do not enter cruise totals. The website is <https://dev1niscool.github.io/little-voyages/>.
 
@@ -61,7 +61,7 @@ The top-level object contains `schemaVersion`, `title`, `siteUrl`, `scope`, `col
 Both JSON files preserve the same `personalVisits` object. These records are personal recollections, not reconstructed ship calls. Classification links explain political status; they are not evidence of a personal visit.
 
 - `shoreExcursions`: additional destinations visited ashore while cruising, each counted once as a country or special place, with an asterisk in the website. An empty `cruiseIds` array means the associated sailings have not been identified. `approximateVisits` records a recollection, not an exact dated count. These visits add no cruise nights, port calls, or sailing miles.
-- `nonCruiseVisits.countries`: the owner’s separate non-cruise list (Egypt, South Africa, India, Israel, China).
+- `nonCruiseVisits.countries`: the owner’s separate non-cruise list (China, Egypt, India, Israel, South Africa).
 - `nonCruiseVisits.specialPlaces`: the owner’s companion comparison list (Palestine, Hong Kong). These are not cruise destinations in these records.
 - Visit rows retain `name`, `flag`, `status`, any `note`, `evidence`, source URLs, and any background/dispute links supplied in the source. Unknown dates and trip associations remain unknown. Fields absent from a personal-visit record must not be inferred from a nearby cruise.
 
@@ -69,13 +69,15 @@ Both JSON files preserve the same `personalVisits` object. These records are per
 
 This is a personal travel grouping, not a claim about sovereignty. These owner-reported visits happened without a cruise and are excluded from every cruise total. The “NOT by cruise” comparison is a playful presentation of the owner’s travel history, grouped as requested by the owner. Palestine is a UN non-member observer State with disputed status; Hong Kong is a Special Administrative Region of China. The status labels describe each place individually.
 
+Country-count footnote: This personal count uses 5, consistent with U.S. recognition; counting Palestine as a country makes 6.
+
+- 🇨🇳 **China** — Sovereign country.
 - 🇪🇬 **Egypt** — Sovereign country.
-- 🇿🇦 **South Africa** — Sovereign country.
 - 🇮🇳 **India** — Sovereign country.
 - 🇮🇱 **Israel** — Sovereign country.
-- 🇨🇳 **China** — Sovereign country.
-- 🇵🇸 **Palestine** — UN non-member observer State. Shown in this personal “special places” group as requested. Palestine is a UN non-member observer State; recognition and borders remain disputed. Dispute background: <https://en.wikipedia.org/wiki/Legal_status_of_Palestine>. Status references: <https://www.un.org/en/node/123012>.
-- 🇭🇰 **Hong Kong** — Special Administrative Region of China. A Special Administrative Region of China, listed separately in this personal travel comparison. Background: <https://en.wikipedia.org/wiki/Hong_Kong>. Status references: <https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html>.
+- 🇿🇦 **South Africa** — Sovereign country.
+- 🇵🇸 **Palestine** — UN non-member observer State. Shown in this personal “territories & special places” group. Palestine is a UN non-member observer State; recognition and borders remain disputed. A majority of UN member countries recognize Palestine as a state, but the United States does not. Dispute background: <https://en.wikipedia.org/wiki/Legal_status_of_Palestine>. Status references: <https://www.un.org/en/node/123012>, <https://www.un.org/unispal/document/special-committee-israeli-practices-report-05sep25/>, <https://www.cbsnews.com/news/marco-rubio-secretary-of-state-face-the-nation-transcript-10-05-2025/>.
+- 🇭🇰 **Hong Kong** — Special Administrative Region of China. A Special Administrative Region of China, listed separately in this personal travel comparison. Hong Kong participates separately as “Hong Kong, China”: a WTO member and separate customs territory, and an APEC member economy. These economic arrangements do not make it an independent country. Background: <https://en.wikipedia.org/wiki/Hong_Kong>. Status references: <https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html>, <https://www.wto.org/english/thewto_e/countries_e/hong_kong_china_e.htm>, <https://www.apec.org/who-we-are/our-members>, <https://www.tid.gov.hk/en/our_work/hk_participation_in_ito/wto/overview/hk_participation.html>.
 
 ## Statistics JSON dictionary and definitions
 

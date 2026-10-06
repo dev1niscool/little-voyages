@@ -168,6 +168,8 @@ ${excursionNotes || 'No additional shore-excursion destinations are included in 
 
 ${visits.nonCruiseVisits.groupingNote || 'The personal comparison lists are separate from itinerary classifications.'} The “NOT by cruise” comparison is a playful presentation of the owner’s travel history, grouped as requested by the owner. Palestine is a UN non-member observer State with disputed status; Hong Kong is a Special Administrative Region of China. The status labels describe each place individually.
 
+${visits.nonCruiseVisits.countNote ? `Country-count footnote: ${visits.nonCruiseVisits.countNote}` : ''}
+
 ${nonCruisePlaces || 'No non-cruise visits are included in this export.'}
 
 ## Statistics JSON dictionary and definitions

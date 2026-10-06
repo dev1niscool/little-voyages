@@ -53,7 +53,7 @@ test('personal travel survives both JSON exports without becoming invented cruis
   assert.deepEqual(exported.personalVisits, logbook.personalVisits);
   assert.equal(logbook.personalVisits.nonCruiseVisits.countries.length, 5);
   assert.equal(logbook.personalVisits.nonCruiseVisits.specialPlaces.length, 2);
-  assert.deepEqual(logbook.personalVisits.nonCruiseVisits.countries.map(place => place.name), ['Egypt', 'South Africa', 'India', 'Israel', 'China']);
+  assert.deepEqual(logbook.personalVisits.nonCruiseVisits.countries.map(place => place.name), ['China', 'Egypt', 'India', 'Israel', 'South Africa']);
   assert.deepEqual(logbook.personalVisits.nonCruiseVisits.specialPlaces.map(place => place.name), ['Palestine', 'Hong Kong']);
   for (const place of [...nonCruiseVisits.countries, ...nonCruiseVisits.specialPlaces]) {
     assert.ok(place.flag, `${place.name} is missing its flag`);
@@ -174,6 +174,12 @@ test('guide retains complete readable research and explains the transfer and dat
   assert.match(guide, /personalVisitsSha256/);
   assert.match(guide, /Palestine is a UN non-member observer State/);
   assert.match(guide, /Hong Kong is a Special Administrative Region of China/);
+  assert.ok(guide.includes(nonCruiseVisits.countNote), 'The readable handoff preserves the country-count explanation');
+  for (const place of nonCruiseVisits.specialPlaces) {
+    for (const reference of place.referenceLinks || []) {
+      assert.ok(guide.includes(reference.url), `${place.name} retains its official context sources in the readable handoff`);
+    }
+  }
 });
 
 test('complete ZIP is deterministic, portable, and byte-identical to the six standalone files', async () => {

@@ -104,10 +104,25 @@ try {
 
   const landCountries = await page.locator('.stats-land-country-item strong').allTextContents();
   const landSpecialPlaces = await page.locator('.stats-land-territory-item strong').allTextContents();
-  assert.deepEqual(landCountries, ['Egypt', 'South Africa', 'India', 'Israel', 'China']);
+  assert.deepEqual(landCountries, ['China', 'Egypt', 'India', 'Israel', 'South Africa']);
   assert.deepEqual(landSpecialPlaces, ['Palestine', 'Hong Kong']);
-  assert.deepEqual(await page.locator('.stats-land-country-item .stats-place-flag').allTextContents(), ['🇪🇬', '🇿🇦', '🇮🇳', '🇮🇱', '🇨🇳']);
+  assert.deepEqual(await page.locator('.stats-land-country-item .stats-place-flag').allTextContents(), ['🇨🇳', '🇪🇬', '🇮🇳', '🇮🇱', '🇿🇦']);
   assert.deepEqual(await page.locator('.stats-land-territory-item .stats-place-flag').allTextContents(), ['🇵🇸', '🇭🇰']);
+  assert.equal(await page.locator('#stats-land-territories-title').textContent(), 'territories & special places visited NOT by cruise');
+  const countryCountAsterisk = page.locator('.stats-land-count-asterisk');
+  assert.equal(await countryCountAsterisk.textContent(), '*');
+  assert.equal(await countryCountAsterisk.getAttribute('href'), '#stats-land-count-note');
+  assert.equal(await page.locator('.stats-land-number').getAttribute('aria-describedby'), 'stats-land-count-note');
+  const countNote = page.locator('#stats-land-count-note');
+  const countExplanation = await countNote.textContent();
+  assert.match(countExplanation, /\b5\b/);
+  assert.match(countExplanation, /\b6\b/);
+  assert.match(countExplanation, /Palestine/);
+  assert.match(countExplanation, /owner|personal/i);
+  assert.match(countExplanation, /U\.S\.|United States/);
+  const countryCountSize = await page.locator('.stats-land-country-count').evaluate(element => parseFloat(getComputedStyle(element).fontSize));
+  const asteriskSize = await countryCountAsterisk.evaluate(element => parseFloat(getComputedStyle(element).fontSize));
+  assert.ok(asteriskSize < countryCountSize / 2, 'The linked asterisk stays visually subordinate to the country total');
   assert.deepEqual([...landCountries, ...landSpecialPlaces].filter(name => [...countryNames, ...specialNames].includes(name)), [], 'Non-cruise visits do not leak into cruise lists');
   assert.equal(await page.locator('.stats-land-passport').evaluate(section => section.previousElementSibling.classList.contains('stats-passport')), true, 'The non-cruise comparison directly follows the cruising passport');
   assert.match(await page.locator('.stats-land-passport h2').textContent(), /NOT/);
@@ -118,6 +133,20 @@ try {
   ])));
   assert.match(landStatuses.Palestine, /UN non-member observer State/);
   assert.match(landStatuses['Hong Kong'], /Special Administrative Region of China/);
+  const palestine = page.locator('.stats-land-territory-item').filter({ hasText: 'Palestine' });
+  const hongKong = page.locator('.stats-land-territory-item').filter({ hasText: 'Hong Kong' });
+  assert.match(await palestine.textContent(), /majority|most/i);
+  assert.match(await palestine.textContent(), /not (?:by )?(?:the )?(?:U\.S\.|United States)|(?:U\.S\.|United States) does not recognize/i);
+  assert.match(await hongKong.textContent(), /separate customs territory/i);
+  assert.match(await hongKong.textContent(), /member economy/i);
+  for (const domain of ['wto.org', 'apec.org']) {
+    const officialLinks = hongKong.locator(`a[href*="${domain}"]`);
+    assert.ok(await officialLinks.count() > 0, `Hong Kong links to its official ${domain} membership source`);
+    for (const link of await officialLinks.all()) {
+      assert.match(await link.getAttribute('href'), /^https:\/\//);
+      assert.match(await link.getAttribute('rel'), /noopener/);
+    }
+  }
 
   for (const [selector, expectedUrl] of [
     ['#stats-territory-list', 'https://en.wikipedia.org/wiki/Status_of_Gibraltar'],
