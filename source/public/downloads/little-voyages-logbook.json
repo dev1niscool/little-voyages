@@ -10,11 +10,13 @@
     "restrictions": "No unauthorized automated harvesting, reuse, model training, fine-tuning, or incorporation into training datasets. A task-specific handoff does not authorize unrelated retention, redistribution, or training. No permission is granted to probe, exploit, or disrupt the site or repository.",
     "enforcement": "These statements express the owner’s usage preferences and do not technically prevent access to public files."
   },
+  "personalVisitsSha256": "84f35881319728c49291d49210ccc8cd27cbb7e4487013f8281a7ee62b2b5e50",
   "dataNotes": {
     "coordinates": "WGS 84 decimal degrees; route and anchor arrays are [longitude, latitude]. Port objects use explicit lon and lat fields.",
     "precision": "Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation.",
     "provenance": "Original records combined with historical itinerary research and owner corrections. All research notes, confidence labels, and source references are preserved in each cruise.",
-    "dates": "Original dates may describe departure, arrival, or a day during the trip. Researched dates inherit the confidence and caveats of their record. No per-port dates or times are inferred."
+    "dates": "Original dates may describe departure, arrival, or a day during the trip. Researched dates inherit the confidence and caveats of their record. No per-port dates or times are inferred.",
+    "personalVisits": "The separate personalVisits object records owner-reported shore excursions and non-cruise destinations, with approximate visit counts when supplied. Empty cruiseIds mean the associated sailings are unknown. These records add no invented ports, cruises, routes, nights, or sailing miles."
   },
   "cruises": [
     {
@@ -4106,5 +4108,102 @@
         ]
       ]
     }
-  ]
+  ],
+  "personalVisits": {
+    "shoreExcursions": [
+      {
+        "name": "Vatican City",
+        "flag": "🇻🇦",
+        "type": "country",
+        "status": "Sovereign country",
+        "isShoreExcursion": true,
+        "approximateVisits": 2,
+        "evidence": "owner-reported",
+        "note": "Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country.",
+        "sources": [
+          "https://www.vaticanstate.va/en/state-and-government/general-informations.html"
+        ],
+        "cruiseIds": []
+      }
+    ],
+    "nonCruiseVisits": {
+      "countries": [
+        {
+          "name": "Egypt",
+          "flag": "🇪🇬",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "South Africa",
+          "flag": "🇿🇦",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "India",
+          "flag": "🇮🇳",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "Israel",
+          "flag": "🇮🇱",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "China",
+          "flag": "🇨🇳",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        }
+      ],
+      "specialPlaces": [
+        {
+          "name": "Palestine",
+          "flag": "🇵🇸",
+          "type": "special-place",
+          "status": "UN non-member observer State",
+          "evidence": "owner-reported",
+          "note": "Shown in this personal “special places” group as requested. Palestine is a UN non-member observer State; recognition and borders remain disputed.",
+          "disputeNote": "Recognition and borders remain disputed.",
+          "disputeUrl": "https://en.wikipedia.org/wiki/Legal_status_of_Palestine",
+          "sources": [
+            "https://www.un.org/en/node/123012"
+          ],
+          "cruiseIds": []
+        },
+        {
+          "name": "Hong Kong",
+          "flag": "🇭🇰",
+          "type": "special-place",
+          "status": "Special Administrative Region of China",
+          "evidence": "owner-reported",
+          "note": "A Special Administrative Region of China, listed separately in this personal travel comparison.",
+          "contextUrl": "https://en.wikipedia.org/wiki/Hong_Kong",
+          "sources": [
+            "https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html"
+          ],
+          "cruiseIds": []
+        }
+      ],
+      "groupingNote": "This is a personal travel grouping, not a claim about sovereignty. These owner-reported visits happened without a cruise and are excluded from every cruise total."
+    }
+  }
 }

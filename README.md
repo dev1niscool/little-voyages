@@ -10,7 +10,7 @@ This dedicated repository contains the complete Little Voyages website. It is in
 
 ## Take the logbook with you
 
-Open **About → Download everything** on the website, or [download the complete ZIP](https://dev1niscool.github.io/little-voyages/downloads/little-voyages-complete.zip). The bundle contains the full cruise logbook and travel statistics as JSON, cruise and port spreadsheets as CSV, illustrative routes as GeoJSON, and a readable Markdown guide with definitions, research notes, and source links. Individual files are available in the same panel. Every download covers all 29 voyages, regardless of map filters.
+Open **About → Download everything** on the website, or [download the complete ZIP](https://dev1niscool.github.io/little-voyages/downloads/little-voyages-complete.zip). The bundle contains the full cruise logbook and travel statistics as JSON, cruise and port spreadsheets as CSV, illustrative routes as GeoJSON, and a readable Markdown guide with definitions, research notes, and source links. The JSON and guide also preserve separately reported shore excursions and non-cruise visits. Individual files are available in the same panel. Every download covers all 29 voyages, regardless of map filters.
 
 For an owner-authorized AI handoff, unzip the bundle and give the agent `little-voyages-guide.md` together with the files relevant to your task. Research uncertainty and estimated routes are documented in the exports.
 

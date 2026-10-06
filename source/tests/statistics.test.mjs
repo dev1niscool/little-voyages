@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { cruises } from '../src/data.js';
+import { nonCruiseVisits, shoreExcursions } from '../src/personal-visits.js';
 import { computeStatistics, haversineKm, routeDistanceKm } from '../src/statistics-data.js';
 
 test('great-circle distances handle familiar landmarks, the dateline and antipodes', () => {
@@ -69,6 +70,8 @@ test('empty selections have no fictional winners or invalid numeric totals', () 
   assert.deepEqual(stats.countries, []);
   assert.deepEqual(stats.territories, []);
   assert.deepEqual(stats.unclassifiedPlaces, []);
+  assert.equal(stats.itineraryPlaceCount, 0);
+  assert.deepEqual(stats.shoreExcursionPlaces, []);
 });
 
 test('all 29 corrected voyages contribute to the live collection without changing their data', () => {
@@ -143,6 +146,7 @@ test('year selections recalculate destinations without inferring visits to assoc
   assert.deepEqual(stats.territories.map(place => place.name), ['Aruba', 'Curaçao']);
   assert.equal(stats.countryCount, 2, 'a visit to Aruba or Curaçao does not also add the Netherlands');
   assert.equal(stats.territoryCount, 2);
+  assert.ok(stats.countries.every(place => place.name !== 'Vatican City'), 'undated personal visits are not silently assigned to a year');
   assert.deepEqual(stats.territories[0].cruiseIds, [29]);
 
   const territoryOnly = computeStatistics([{ id: 1, ports: [
@@ -152,4 +156,70 @@ test('year selections recalculate destinations without inferring visits to assoc
   ] }]);
   assert.equal(territoryOnly.countryCount, 0, 'Crown Dependencies and territories do not add the UK or US');
   assert.equal(territoryOnly.territoryCount, 3);
+});
+
+test('explicit Vatican shore recollection adds one country without inventing port calls or dated sailings', () => {
+  const cruisesBefore = structuredClone(cruises);
+  const visitsBefore = structuredClone(shoreExcursions);
+  const itineraryOnly = computeStatistics(cruises);
+  const stats = computeStatistics(cruises, { shoreExcursions });
+  assert.equal(stats.countryCount, 36);
+  assert.equal(stats.territoryCount, 9);
+  assert.equal(stats.placeCount, 45);
+  assert.equal(stats.itineraryPlaceCount, 44);
+  const vatican = stats.countries.find(place => place.name === 'Vatican City');
+  assert.equal(vatican.flag, '🇻🇦');
+  assert.equal(vatican.isShoreExcursion, true);
+  assert.equal(vatican.approximateVisits, 2, 'two recalled visits count as one country');
+  assert.equal(vatican.evidence, 'owner-reported');
+  assert.deepEqual(vatican.ports, [], 'Vatican City is not a fabricated cruise port');
+  assert.deepEqual(vatican.cruiseIds, [], 'unknown sailings stay unknown');
+  assert.match(vatican.note, /shore visit, not a cruise port/);
+  assert.deepEqual(stats.shoreExcursionPlaces, [vatican]);
+  for (const key of ['cruiseCount', 'totalNights', 'tripHours', 'uniquePorts', 'portCalls', 'scenicStops', 'estimatedKm', 'estimatedMiles', 'earthLaps']) {
+    assert.equal(stats[key], itineraryOnly[key], `${key} is unchanged by a personal visit`);
+  }
+  assert.equal(stats.uniquePorts, 87);
+  assert.deepEqual(stats.years, itineraryOnly.years);
+  assert.deepEqual(stats.topPorts, itineraryOnly.topPorts);
+  assert.deepEqual(cruises, cruisesBefore);
+  assert.deepEqual(shoreExcursions, visitsBefore);
+});
+
+test('shore supplements deduplicate destinations and never infer ports or unchecked sovereignty', () => {
+  const italy = [{ id: 1, ports: [{ name: 'Naples', country: 'Italy' }] }];
+  const stats = computeStatistics(italy, { shoreExcursions: [
+    ...shoreExcursions, ...shoreExcursions,
+    { name: ' ITALY ', approximateVisits: 2, note: 'A personal visit.' },
+    { name: 'Unreviewed place', type: 'country' },
+  ] });
+  assert.equal(stats.countryCount, 2, 'repeated Vatican and Italy supplements add no duplicate country');
+  assert.equal(stats.placeCount, 3);
+  assert.equal(stats.itineraryPlaceCount, 1);
+  assert.equal(stats.uniquePorts, 1);
+  assert.equal(stats.portCalls, 1);
+  assert.deepEqual(stats.countries.find(place => place.name === 'Italy').ports, ['Naples']);
+  assert.deepEqual(stats.countries.find(place => place.name === 'Italy').cruiseIds, [1]);
+  assert.deepEqual(stats.unclassifiedPlaces.map(place => place.name), ['Unreviewed place']);
+});
+
+test('non-cruise comparison preserves the owner grouping without contributing to cruise statistics', () => {
+  assert.deepEqual(nonCruiseVisits.countries.map(place => place.name), ['Egypt', 'South Africa', 'India', 'Israel', 'China']);
+  assert.deepEqual(nonCruiseVisits.specialPlaces.map(place => place.name), ['Palestine', 'Hong Kong']);
+  for (const place of [...nonCruiseVisits.countries, ...nonCruiseVisits.specialPlaces]) {
+    assert.ok(place.flag, `${place.name} includes its flag`);
+    assert.equal(place.evidence, 'owner-reported');
+  }
+  assert.match(nonCruiseVisits.specialPlaces[0].status, /observer State/);
+  assert.match(nonCruiseVisits.specialPlaces[0].note, /recognition and borders remain disputed/);
+  assert.match(nonCruiseVisits.specialPlaces[0].disputeUrl, /^https:\/\/en\.wikipedia\.org\//);
+  assert.match(nonCruiseVisits.specialPlaces[1].status, /Special Administrative Region of China/);
+  assert.match(nonCruiseVisits.groupingNote, /not a claim about sovereignty/);
+  const stats = computeStatistics(cruises, { shoreExcursions });
+  for (const place of [...nonCruiseVisits.countries, ...nonCruiseVisits.specialPlaces]) {
+    assert.ok(![...stats.countries, ...stats.territories].some(destination => destination.name === place.name));
+  }
+  const gibraltar = stats.territories.find(place => place.name === 'Gibraltar');
+  assert.equal(gibraltar.disputeUrl, 'https://en.wikipedia.org/wiki/Status_of_Gibraltar');
+  assert.match(gibraltar.disputeNote, /sovereignty claimed by Spain/);
 });

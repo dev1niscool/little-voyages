@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { csvParse, csvParseRows } from 'd3';
 import { strFromU8, unzipSync } from 'fflate';
 import { cruises } from '../src/data.js';
+import { shoreExcursions, nonCruiseVisits } from '../src/personal-visits.js';
 import { computeStatistics, statsMethodology } from '../src/statistics-data.js';
 import { buildExportFiles, csvCell, encodeCsv, EXPORT_FILES } from '../scripts/build-exports.mjs';
 
@@ -29,17 +31,52 @@ test('logbook preserves every cruise field, confidence caveat, and source withou
 test('statistics preserve the full calculation, methodology, and territorial evidence', () => {
   const exported = parse(EXPORT_FILES.statistics);
   assert.equal(exported.schemaVersion, 1);
-  assert.deepEqual(exported.statistics, computeStatistics(cruises));
+  assert.deepEqual(exported.statistics, computeStatistics(cruises, { shoreExcursions }));
   assert.deepEqual(exported.methodology, statsMethodology);
   assert.equal(exported.statistics.totalNights, 202);
-  assert.equal(exported.statistics.countryCount, 35);
+  assert.equal(exported.statistics.countryCount, 36);
   assert.equal(exported.statistics.territoryCount, 9);
+  assert.equal(exported.statistics.itineraryPlaceCount, 44);
+  assert.equal(exported.statistics.placeCount, 45);
   for (const place of exported.statistics.territories) {
     assert.ok(place.sources.length > 0);
     assert.ok(place.cruiseIds.length > 0);
     assert.ok(place.status);
   }
   assert.match(exported.precision, /not real-world accuracy/);
+});
+
+test('personal travel survives both JSON exports without becoming invented cruise calls or routes', () => {
+  const logbook = parse(EXPORT_FILES.logbook);
+  const exported = parse(EXPORT_FILES.statistics);
+  assert.deepEqual(logbook.personalVisits, { shoreExcursions, nonCruiseVisits });
+  assert.deepEqual(exported.personalVisits, logbook.personalVisits);
+  assert.equal(logbook.personalVisits.nonCruiseVisits.countries.length, 5);
+  assert.equal(logbook.personalVisits.nonCruiseVisits.specialPlaces.length, 2);
+  assert.deepEqual(logbook.personalVisits.nonCruiseVisits.countries.map(place => place.name), ['Egypt', 'South Africa', 'India', 'Israel', 'China']);
+  assert.deepEqual(logbook.personalVisits.nonCruiseVisits.specialPlaces.map(place => place.name), ['Palestine', 'Hong Kong']);
+  for (const place of [...nonCruiseVisits.countries, ...nonCruiseVisits.specialPlaces]) {
+    assert.ok(place.flag, `${place.name} is missing its flag`);
+    assert.ok(!exported.statistics.countries.some(cruisePlace => cruisePlace.name === place.name));
+    assert.ok(!exported.statistics.territories.some(cruisePlace => cruisePlace.name === place.name));
+  }
+  const vatican = exported.statistics.countries.find(place => place.name === 'Vatican City');
+  assert.equal(vatican.flag, '🇻🇦');
+  assert.equal(vatican.isShoreExcursion, true);
+  assert.equal(vatican.approximateVisits, 2);
+  assert.deepEqual(vatican.ports, []);
+  assert.deepEqual(vatican.cruiseIds, []);
+  assert.ok(!('startDate' in vatican));
+  assert.ok(!('endDate' in vatican));
+  const itineraryStatistics = computeStatistics(cruises);
+  for (const key of ['cruiseCount', 'uniquePorts', 'portCalls', 'totalNights', 'estimatedMiles', 'routesMeasured']) {
+    assert.equal(exported.statistics[key], itineraryStatistics[key], `${key} changed because of a shore excursion`);
+  }
+  assert.ok(!csvParse(contents(EXPORT_FILES.ports)).some(row => row.place_name === 'Vatican City'));
+  assert.equal(parse(EXPORT_FILES.routes).features.length, 29);
+  assert.equal(logbook.collectionSha256, createHash('sha256').update(JSON.stringify(cruises)).digest('hex'));
+  assert.equal(logbook.personalVisitsSha256, createHash('sha256').update(JSON.stringify(logbook.personalVisits)).digest('hex'));
+  assert.equal(exported.personalVisitsSha256, logbook.personalVisitsSha256);
 });
 
 test('CSV quoting round-trips Unicode, punctuation, multiline text, and source objects safely', () => {
@@ -112,6 +149,8 @@ test('unknown values remain unknown rather than becoming dates, zero durations, 
   assert.equal(summary.nights, '');
   assert.equal(summary.start_date, '');
   assert.equal(geojson.features[0].geometry, null);
+  assert.deepEqual(logbook.personalVisits.shoreExcursions, [], 'custom selections do not inherit unassigned Vatican visits');
+  assert.deepEqual(logbook.personalVisits.nonCruiseVisits.countries, []);
 });
 
 test('guide retains complete readable research and explains the transfer and data dictionary', () => {
@@ -128,6 +167,13 @@ test('guide retains complete readable research and explains the transfer and dat
   assert.match(guide, /originalShip/);
   assert.match(guide, /owner-authorized AI task/);
   assert.match(guide, /AI-USAGE\.md/);
+  assert.match(guide, /Vatican City\*/);
+  assert.match(guide, /approximately twice/);
+  assert.match(guide, /not a port/);
+  assert.match(guide, /No cruise IDs or travel dates are inferred/);
+  assert.match(guide, /personalVisitsSha256/);
+  assert.match(guide, /Palestine is a UN non-member observer State/);
+  assert.match(guide, /Hong Kong is a Special Administrative Region of China/);
 });
 
 test('complete ZIP is deterministic, portable, and byte-identical to the six standalone files', async () => {

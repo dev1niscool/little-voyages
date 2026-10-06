@@ -39,13 +39,18 @@ try {
     assert.ok(dimensions.actual <= dimensions.expected + 1, `${label}: horizontal page overflow`);
   };
   const checkPassportCounts = async () => {
-    assert.equal(await page.locator('.stats-country-count').textContent(), '35');
+    assert.equal(await page.locator('.stats-country-count').textContent(), '36');
     assert.equal(await page.locator('.stats-territory-count').textContent(), '9');
-    assert.equal(await page.locator('.stats-country-item').count(), 35);
-    assert.equal(await page.locator('.stats-territory-item').count(), 9);
+    assert.equal(await page.locator('#stats-country-list .stats-country-item').count(), 36);
+    assert.equal(await page.locator('#stats-territory-list .stats-territory-item').count(), 9);
+    assert.equal(await page.locator('.stats-land-country-count').textContent(), '5');
+    assert.equal(await page.locator('.stats-land-territory-count').textContent(), '2');
+    assert.equal(await page.locator('.stats-land-country-item').count(), 5);
+    assert.equal(await page.locator('.stats-land-territory-item').count(), 2);
   };
+  const passportLists = ['#stats-country-list', '#stats-territory-list', '#stats-land-country-list', '#stats-land-territory-list'];
   const expandPassportLists = async () => {
-    for (const selector of ['#stats-country-list', '#stats-territory-list']) {
+    for (const selector of passportLists) {
       if (!await page.locator(selector).evaluate(details => details.open)) {
         await page.locator(`${selector} > summary`).click();
       }
@@ -65,12 +70,12 @@ try {
   await waitForView('statistics');
   assert.equal(new URL(page.url()).searchParams.get('view'), 'statistics');
   assert.deepEqual(await page.locator('[data-stats-count]').allTextContents(), [
-    '202', '55,200', '2.2', '4,848', '87', '44', '35', '9',
+    '202', '55,200', '2.2', '4,848', '87', '45', '36', '9', '5', '2',
   ]);
   await checkPassportCounts();
-  const countryNames = await page.locator('.stats-country-item strong').allTextContents();
-  const specialNames = await page.locator('.stats-territory-item strong').allTextContents();
-  assert.equal(new Set([...countryNames, ...specialNames]).size, 44, 'Places appear in exactly one category');
+  const countryNames = await page.locator('#stats-country-list .stats-country-item strong').allTextContents();
+  const specialNames = await page.locator('#stats-territory-list .stats-territory-item strong').allTextContents();
+  assert.equal(new Set([...countryNames, ...specialNames]).size, 45, 'Cruise places appear in exactly one category');
   assert.equal(countryNames.filter(name => name === 'United Kingdom').length, 1);
   assert.equal(countryNames.includes('Scotland'), false);
   assert.equal(countryNames.includes('Northern Ireland'), false);
@@ -79,7 +84,7 @@ try {
     'Aruba', 'Cayman Islands', 'Curaçao', 'Gibraltar', 'Guernsey',
     'Puerto Rico', 'Sint Maarten', 'Turks and Caicos Islands', 'U.S. Virgin Islands',
   ]);
-  const statuses = await page.locator('.stats-territory-item').evaluateAll(items => Object.fromEntries(items.map(item => [
+  const statuses = await page.locator('#stats-territory-list .stats-territory-item').evaluateAll(items => Object.fromEntries(items.map(item => [
     item.querySelector('strong').textContent,
     item.querySelector('.stats-place-status').textContent,
   ])));
@@ -87,7 +92,49 @@ try {
   assert.equal(statuses.Guernsey, 'Crown Dependency');
   assert.equal(statuses['Cayman Islands'], 'British Overseas Territory');
   assert.match(statuses['Puerto Rico'], /U\.S\. territory/);
-  for (const [selector, key] of [['#stats-country-list', 'Enter'], ['#stats-territory-list', 'Space']]) {
+
+  const vatican = page.locator('#stats-country-list .stats-country-item').filter({ hasText: 'Vatican City' });
+  assert.match(await vatican.locator('strong').textContent(), /^Vatican City\s*\*$/);
+  assert.equal(await vatican.locator('.stats-place-flag').textContent(), '🇻🇦');
+  assert.doesNotMatch(await vatican.textContent(), /0 ports|0 cruises/);
+  const vaticanNote = await page.locator('#stats-vatican-note').textContent();
+  assert.match(vaticanNote, /car|driv/i);
+  assert.match(vaticanNote, /approximately twice|about twice|approximately two|around twice/i);
+  assert.match(vaticanNote, /(?:not|isn[’']t) a (?:cruise )?port/i);
+
+  const landCountries = await page.locator('.stats-land-country-item strong').allTextContents();
+  const landSpecialPlaces = await page.locator('.stats-land-territory-item strong').allTextContents();
+  assert.deepEqual(landCountries, ['Egypt', 'South Africa', 'India', 'Israel', 'China']);
+  assert.deepEqual(landSpecialPlaces, ['Palestine', 'Hong Kong']);
+  assert.deepEqual(await page.locator('.stats-land-country-item .stats-place-flag').allTextContents(), ['🇪🇬', '🇿🇦', '🇮🇳', '🇮🇱', '🇨🇳']);
+  assert.deepEqual(await page.locator('.stats-land-territory-item .stats-place-flag').allTextContents(), ['🇵🇸', '🇭🇰']);
+  assert.deepEqual([...landCountries, ...landSpecialPlaces].filter(name => [...countryNames, ...specialNames].includes(name)), [], 'Non-cruise visits do not leak into cruise lists');
+  assert.equal(await page.locator('.stats-land-passport').evaluate(section => section.previousElementSibling.classList.contains('stats-passport')), true, 'The non-cruise comparison directly follows the cruising passport');
+  assert.match(await page.locator('.stats-land-passport h2').textContent(), /NOT/);
+  assert.ok(await page.locator('.stats-land-passport h2 strong').filter({ hasText: /^NOT$/ }).count(), 'NOT is explicitly emphasized');
+  const landStatuses = await page.locator('.stats-land-territory-item').evaluateAll(items => Object.fromEntries(items.map(item => [
+    item.querySelector('strong').textContent,
+    item.querySelector('.stats-place-status').textContent,
+  ])));
+  assert.match(landStatuses.Palestine, /UN non-member observer State/);
+  assert.match(landStatuses['Hong Kong'], /Special Administrative Region of China/);
+
+  for (const [selector, expectedUrl] of [
+    ['#stats-territory-list', 'https://en.wikipedia.org/wiki/Status_of_Gibraltar'],
+    ['#stats-land-territory-list', 'https://en.wikipedia.org/wiki/Legal_status_of_Palestine'],
+  ]) {
+    const link = page.locator(`${selector} a[href="${expectedUrl}"]`);
+    assert.equal(await link.count(), 1);
+    assert.match(await link.textContent(), /dispute|status|background/i);
+    assert.match(await link.getAttribute('rel'), /noopener/);
+  }
+  for (const [index, selector] of passportLists.entries()) {
+    const key = index % 2 ? 'Space' : 'Enter';
+    const expectedLabel = index % 2 ? 'List of all special places' : 'List of all countries';
+    assert.match(await page.locator(`${selector} > summary`).textContent(), new RegExp(expectedLabel, 'i'));
+    assert.equal(await page.locator(`${selector} > summary > svg`).count(), 1, 'Every disclosure has its own arrow');
+    const missingFlags = await page.locator(`${selector} > ul > li`).evaluateAll(items => items.filter(item => !item.querySelector('.stats-place-flag')?.textContent.trim()).length);
+    assert.equal(missingFlags, 0, 'Every destination includes its flag');
     assert.equal(await page.locator(`${selector} > ul`).isVisible(), false);
     await page.locator(`${selector} > summary`).press(key);
     assert.equal(await page.locator(selector).evaluate(details => details.open), true);
@@ -137,7 +184,7 @@ try {
     for (const width of [320, 390, 800, 1000, 1440]) {
       await page.setViewportSize({ width, height: 844 });
       await checkNoPageOverflow(`${width}px ${theme} statistics with expanded place lists`);
-      const overflowingPlaces = await page.locator('.stats-country-item, .stats-territory-item').evaluateAll(items => items
+      const overflowingPlaces = await page.locator('.stats-country-item, .stats-territory-item, .stats-land-country-item, .stats-land-territory-item').evaluateAll(items => items
         .filter(item => item.scrollWidth > item.clientWidth + 1)
         .map(item => item.querySelector('strong').textContent));
       assert.deepEqual(overflowingPlaces, [], `${width}px ${theme}: destination row overflow`);
@@ -184,7 +231,7 @@ try {
   assert.equal(await systemPage.evaluate(() => document.documentElement.dataset.theme), 'dark');
 
   assert.deepEqual(browserErrors, [], 'Browser runtime or console errors');
-  console.log('Browser checks passed: navigation, statistics, country and territory lists, keyboard expansion, unit conversions, map callbacks, deep links, dark mode, reduced motion, and expanded 320–1440px layouts.');
+  console.log('Browser checks passed: navigation, statistics, Vatican shore visit, separate non-cruise comparison, flags and status links, four keyboard disclosures, unit conversions, map callbacks, deep links, dark mode, reduced motion, and expanded 320–1440px layouts.');
 } finally {
   await browser.close();
 }

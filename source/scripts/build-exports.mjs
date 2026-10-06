@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { strToU8, zipSync } from 'fflate';
 import { cruises } from '../src/data.js';
 import { destinations } from '../src/destinations.js';
+import { shoreExcursions, nonCruiseVisits } from '../src/personal-visits.js';
 import { computeStatistics, isScenicStop, statsMethodology } from '../src/statistics-data.js';
 
 export const EXPORT_FILES = Object.freeze({
@@ -30,6 +31,8 @@ const precision = 'Distance values are reproducible calculations from illustrati
 const json = value => `${JSON.stringify(value, null, 2)}\n`;
 const normalized = value => String(value || '').trim().toLocaleLowerCase('en');
 const destinationByName = new Map(destinations.map(place => [normalized(place.name), place]));
+const personalVisits = Object.freeze({ shoreExcursions, nonCruiseVisits });
+const emptyPersonalVisits = Object.freeze({ shoreExcursions: [], nonCruiseVisits: { countries: [], specialPlaces: [] } });
 
 /** RFC 4180 quoting, with formula-like textual cells made inert for spreadsheets. */
 export function csvCell(value) {
@@ -74,11 +77,14 @@ export function itineraryRows(records) {
   });
 }
 
-function readableGuide(records, statistics, metadata) {
+function readableGuide(records, statistics, metadata, visits, personalVisitsSha256) {
   const definitions = Object.entries(statsMethodology).map(([key, description]) => `- **${key}:** ${description}`).join('\n');
   const places = [...statistics.countries, ...statistics.territories, ...statistics.unclassifiedPlaces]
     .sort((a, b) => a.name.localeCompare(b.name, 'en'))
-    .map(place => `- **${place.name}** — ${place.status}. Ports: ${place.ports.join('; ')}. Cruise IDs: ${place.cruiseIds.join(', ')}.${place.sources.length ? ` Classification evidence: ${place.sources.map(url => `<${url}>`).join(', ')}.` : ''}`).join('\n');
+    .map(place => `- ${place.flag} **${place.name}${place.isShoreExcursion ? '*' : ''}** — ${place.status}. ${place.isShoreExcursion ? `Owner-reported shore excursion; not a port. ${place.note} No cruise IDs or travel dates are inferred.` : `Ports: ${place.ports.join('; ')}. Cruise IDs: ${place.cruiseIds.join(', ')}.`}${place.disputeNote ? ` ${place.disputeNote}` : ''}${place.disputeUrl ? ` Dispute background: <${place.disputeUrl}>.` : ''}${place.sources.length ? ` Classification evidence: ${place.sources.map(url => `<${url}>`).join(', ')}.` : ''}`).join('\n');
+  const nonCruisePlaces = [...visits.nonCruiseVisits.countries, ...visits.nonCruiseVisits.specialPlaces]
+    .map(place => `- ${place.flag} **${place.name}** — ${place.status}.${place.note ? ` ${place.note}` : ''}${place.disputeUrl ? ` Dispute background: <${place.disputeUrl}>.` : ''}${place.contextUrl ? ` Background: <${place.contextUrl}>.` : ''}${place.sources?.length ? ` Status references: ${place.sources.map(url => `<${url}>`).join(', ')}.` : ''}`).join('\n');
+  const excursionNotes = visits.shoreExcursions.map(place => `- ${place.flag} **${place.name}***: ${place.note} Evidence: ${place.evidence}. Approximate visit count: ${place.approximateVisits ?? 'unknown'}. No port, specific cruise association, travel date, or route is invented.`).join('\n');
   const research = records.map(cruise => `### Cruise ${cruise.id}: ${cruise.ship} — ${cruise.region}
 
 - Original record date: ${cruise.originalDate}; recorded year: ${cruise.year}.
@@ -95,7 +101,9 @@ ${cruise.sources.map((source, index) => `${index + 1}. **${source.title}**\n   <
 
 Schema version: 1. Collection fingerprint: \`${metadata.collectionSha256}\` (SHA-256 of the compact JSON cruise array).
 
-This bundle is a portable copy of the complete ${records.length}-cruise collection, independent of the website’s map filters. It contains ${statistics.totalNights} recorded nights, ${statistics.uniquePorts} distinct non-scenic ports, ${statistics.countryCount} sovereign countries, and ${statistics.territoryCount} territories or special jurisdictions under the definitions below. The website is <${SITE_URL}>.
+Personal-visit fingerprint: \`${personalVisitsSha256}\` (SHA-256 of the compact JSON \`personalVisits\` object; separate from the unchanged cruise-array fingerprint).
+
+This bundle is a portable copy of the complete ${records.length}-cruise collection, independent of the website’s map filters. It contains ${statistics.totalNights} recorded nights, ${statistics.uniquePorts} distinct non-scenic ports, ${statistics.countryCount} sovereign countries reached through cruising (including separately reported shore excursions), and ${statistics.territoryCount} territories or special jurisdictions under the definitions below. It also preserves ${visits.nonCruiseVisits.countries.length} countries and ${visits.nonCruiseVisits.specialPlaces.length} special places reported as non-cruise visits; these do not enter cruise totals. The website is <${SITE_URL}>.
 
 ## Start here
 
@@ -105,8 +113,8 @@ For an owner-authorized AI task, provide the complete ZIP, or provide this guide
 
 | File | Contents |
 | --- | --- |
-| ${EXPORT_FILES.logbook} | Metadata plus every field of every cruise, including original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance. |
-| ${EXPORT_FILES.statistics} | The full statistics calculation, definitions, current destination classifications, associated cruise IDs and ports, and classification evidence URLs. |
+| ${EXPORT_FILES.logbook} | Metadata plus every field of every cruise, including original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance; separate owner-reported shore excursions and non-cruise visits. |
+| ${EXPORT_FILES.statistics} | The full statistics calculation, definitions, current destination classifications, associated cruise IDs and ports, classification evidence URLs, and separately preserved personal visits. |
 | ${EXPORT_FILES.cruises} | One row per cruise with dates, duration, labels, notes, and source references. |
 | ${EXPORT_FILES.ports} | One row per ordered itinerary entry, including scenic stops and final round-trip returns. |
 | ${EXPORT_FILES.routes} | GeoJSON FeatureCollection with one illustrative LineString per known route; unknown routes use null geometry. |
@@ -125,7 +133,7 @@ Full policy: <${POLICY_URL}>. ${usage.enforcement} This policy does not replace 
 
 ## Cruise JSON dictionary
 
-The top-level object contains \`schemaVersion\`, \`title\`, \`siteUrl\`, \`scope\`, \`collectionSha256\`, \`usage\`, \`dataNotes\`, and \`cruises\`. Cruise objects are copied in full from the atlas without renaming or removing fields.
+The top-level object contains \`schemaVersion\`, \`title\`, \`siteUrl\`, \`scope\`, \`collectionSha256\`, \`personalVisitsSha256\`, \`usage\`, \`dataNotes\`, \`cruises\`, and \`personalVisits\`. Cruise objects are copied in full from the atlas without renaming or removing fields. The two fingerprints cover independent source objects so updates to personal visits do not imply that historical itineraries changed.
 
 | Field | Meaning |
 | --- | --- |
@@ -145,17 +153,34 @@ The top-level object contains \`schemaVersion\`, \`title\`, \`siteUrl\`, \`scope
 | sources | Entries with title, exact url, and note explaining the evidence supported by that source. |
 | color | Website presentation color; no geographic or statistical meaning. |
 
-**Confidence:** confirmed identifies a supported historical sailing match, while individual calls may still follow a published schedule rather than a verified actual track. Likely identifies a plausible reconstruction from the available evidence. Unresolved means the available record is insufficient. Notes and source relevance take precedence over a simplified confidence label. The collection does not establish that a passenger went ashore, or that cruising was their only means of visiting a place.
+**Confidence:** confirmed identifies a supported historical sailing match, while individual calls may still follow a published schedule rather than a verified actual track. Likely identifies a plausible reconstruction from the available evidence. Unresolved means the available record is insufficient. Notes and source relevance take precedence over a simplified confidence label. Itinerary records alone do not establish that a passenger went ashore, or that cruising was their only means of visiting a place. Separate owner-reported visits are identified explicitly below.
+
+## Owner-reported personal visits
+
+Both JSON files preserve the same \`personalVisits\` object. These records are personal recollections, not reconstructed ship calls. Classification links explain political status; they are not evidence of a personal visit.
+
+- \`shoreExcursions\`: additional destinations visited ashore while cruising, each counted once as a country or special place, with an asterisk in the website. An empty \`cruiseIds\` array means the associated sailings have not been identified. \`approximateVisits\` records a recollection, not an exact dated count. These visits add no cruise nights, port calls, or sailing miles.
+- \`nonCruiseVisits.countries\`: the owner’s separate non-cruise list (${visits.nonCruiseVisits.countries.map(place => place.name).join(', ') || 'none supplied'}).
+- \`nonCruiseVisits.specialPlaces\`: the owner’s companion comparison list (${visits.nonCruiseVisits.specialPlaces.map(place => place.name).join(', ') || 'none supplied'}). These are not cruise destinations in these records.
+- Visit rows retain \`name\`, \`flag\`, \`status\`, any \`note\`, \`evidence\`, source URLs, and any background/dispute links supplied in the source. Unknown dates and trip associations remain unknown. Fields absent from a personal-visit record must not be inferred from a nearby cruise.
+
+${excursionNotes || 'No additional shore-excursion destinations are included in this export.'}
+
+${visits.nonCruiseVisits.groupingNote || 'The personal comparison lists are separate from itinerary classifications.'} The “NOT by cruise” comparison is a playful presentation of the owner’s travel history, grouped as requested by the owner. Palestine is a UN non-member observer State with disputed status; Hong Kong is a Special Administrative Region of China. The status labels describe each place individually.
+
+${nonCruisePlaces || 'No non-cruise visits are included in this export.'}
 
 ## Statistics JSON dictionary and definitions
 
-The statistics file has the same collection metadata plus \`methodology\`, \`precision\`, and \`statistics\`. Values in \`statistics\` exactly match the atlas calculation for the full collection:
+The statistics file has the same collection metadata plus \`personalVisitsSha256\`, \`personalVisits\`, \`methodology\`, \`precision\`, and \`statistics\`. Values in \`statistics\` exactly match the atlas calculation for the full collection with explicitly supplied shore excursions:
 
 - \`cruiseCount\`, \`shipCount\`, \`lineCount\`: distinct cruises, normalized ship names, and cruise companies.
 - \`totalNights\`, \`tripHours\`, \`knownDurationCruises\`, \`unknownDurationCruises\`, \`averageNights\`: duration totals and data coverage; averageNights excludes unknown durations.
 - \`estimatedKm\`, \`estimatedMiles\`, \`estimatedNauticalMiles\`, \`earthLaps\`, \`routesMeasured\`, \`missingRoutes\`: approximate route distance and route coverage. Miles are statute miles; nautical miles use 1,852 metres.
-- \`uniquePorts\`, \`portCalls\`, \`scenicStops\`, \`placeCount\`: distinct port locations, eligible recorded calls, scenic entries, and distinct raw country/territory labels.
+- \`uniquePorts\`, \`portCalls\`, \`scenicStops\`: distinct port locations, eligible recorded calls, and scenic entries. Shore excursions do not change these quantities.
+- \`itineraryPlaceCount\`: distinct raw country/territory labels from itinerary ports (44 in the current complete collection). \`placeCount\` additionally includes distinct owner-reported shore-excursion destinations (45 with Vatican City). Non-cruise visits do not enter either total.
 - \`countryCount\`, \`territoryCount\`, \`countries\`, \`territories\`, \`unclassifiedPlaces\`: explicit destination classifications. Destination rows contain name, flag, type, status, sovereign association, classification source URLs, distinct port names, and cruiseIds. Flags are decorative. A sovereign association is not an additional visit.
+- \`shoreExcursionPlaces\`: additional country/territory destination rows with their owner-reported shore-excursion evidence. Vatican City has empty \`ports\` and \`cruiseIds\` arrays; these must not be filled by guessing. Its approximate two visits contribute one distinct country.
 - \`years\`: chronological rows containing year, cruises, nights, and approximate miles.
 - \`lines\`: rows with name, count, nights, and presentation color.
 - \`regions\`: grouped region rows with name, count, nights, and approximate miles.
@@ -170,6 +195,8 @@ ${precision} Destination status reflects the atlas’s current classification, n
 ## CSV and GeoJSON conventions
 
 Both CSV files have a header row and use RFC 4180 quoting and CRLF row endings. Quotes are doubled within quoted cells; embedded line breaks stay within the cell. Empty cells represent unavailable optional fields. Formula-like text cells beginning with =, +, -, @, tab, or a line break (including an operator after whitespace) receive a leading apostrophe for safer spreadsheet opening. This affects only the CSV representation; the JSON preserves exact text. Negative numeric coordinates stay numeric. The \`sources_json\` cell is a JSON array, preserving each source’s title, URL, and note without an ambiguous separator.
+
+The CSV and GeoJSON files cover recorded cruises only. Owner-reported Vatican shore excursions and non-cruise travel remain in the JSON files and this guide; they are never fabricated as extra cruise rows, port calls, or ship routes.
 
 Cruise CSV columns use the corresponding dictionary fields in snake_case, plus \`port_entry_count\` (all itinerary entries), \`route_point_count\` (ports and illustrative waypoints), and \`sources_json\`. The CSV does not duplicate full geometry; use the logbook or GeoJSON for coordinates.
 
@@ -188,8 +215,9 @@ ${research}
 }
 
 /** Pure deterministic export generation, usable by tests without writing files. */
-export function buildExportFiles(records = cruises) {
-  const statistics = computeStatistics(records);
+export function buildExportFiles(records = cruises, visits = records === cruises ? personalVisits : emptyPersonalVisits) {
+  const statistics = computeStatistics(records, { shoreExcursions: visits.shoreExcursions });
+  const personalVisitsSha256 = createHash('sha256').update(JSON.stringify(visits)).digest('hex');
   const metadata = {
     schemaVersion: 1,
     title: 'Little Voyages',
@@ -203,6 +231,7 @@ export function buildExportFiles(records = cruises) {
     precision,
     provenance: 'Original records combined with historical itinerary research and owner corrections. All research notes, confidence labels, and source references are preserved in each cruise.',
     dates: 'Original dates may describe departure, arrival, or a day during the trip. Researched dates inherit the confidence and caveats of their record. No per-port dates or times are inferred.',
+    personalVisits: 'The separate personalVisits object records owner-reported shore excursions and non-cruise destinations, with approximate visit counts when supplied. Empty cruiseIds mean the associated sailings are unknown. These records add no invented ports, cruises, routes, nights, or sailing miles.',
   };
   const columns = ['cruise_id', 'year', 'original_date', 'start_date', 'end_date', 'nights', 'ship', 'original_ship', 'line', 'region', 'original_region', 'confidence', 'port_entry_count', 'route_point_count', 'notes', 'sources_json'];
   const rows = records.map(cruise => [cruise.id, cruise.year, cruise.originalDate, cruise.startDate, cruise.endDate, cruise.nights, cruise.ship, cruise.originalShip, cruise.line, cruise.region, cruise.originalRegion, cruise.confidence, cruise.ports?.length ?? 0, cruise.route?.length ?? 0, cruise.notes, cruise.sources]);
@@ -226,12 +255,12 @@ export function buildExportFiles(records = cruises) {
     })),
   };
   const files = {
-    [EXPORT_FILES.logbook]: strToU8(json({ ...metadata, dataNotes, cruises: records })),
-    [EXPORT_FILES.statistics]: strToU8(json({ ...metadata, methodology: statsMethodology, precision, statistics })),
+    [EXPORT_FILES.logbook]: strToU8(json({ ...metadata, personalVisitsSha256, dataNotes, cruises: records, personalVisits: visits })),
+    [EXPORT_FILES.statistics]: strToU8(json({ ...metadata, personalVisitsSha256, methodology: statsMethodology, precision, statistics, personalVisits: visits })),
     [EXPORT_FILES.cruises]: strToU8(encodeCsv(columns, rows)),
     [EXPORT_FILES.ports]: strToU8(encodeCsv(portColumns, itineraryRows(records))),
     [EXPORT_FILES.routes]: strToU8(json(geojson)),
-    [EXPORT_FILES.guide]: strToU8(readableGuide(records, statistics, metadata)),
+    [EXPORT_FILES.guide]: strToU8(readableGuide(records, statistics, metadata, visits, personalVisitsSha256)),
   };
   // ZIP uses local calendar components. A fixed local date makes bytes stable
   // across rebuild times and timezones while remaining within ZIP's date range.

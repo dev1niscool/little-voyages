@@ -2,7 +2,9 @@
 
 Schema version: 1. Collection fingerprint: `bcd1324ed6a95400db1360931f29539401be42177a31483b95c16529b1a1862c` (SHA-256 of the compact JSON cruise array).
 
-This bundle is a portable copy of the complete 29-cruise collection, independent of the website’s map filters. It contains 202 recorded nights, 87 distinct non-scenic ports, 35 sovereign countries, and 9 territories or special jurisdictions under the definitions below. The website is <https://dev1niscool.github.io/little-voyages/>.
+Personal-visit fingerprint: `84f35881319728c49291d49210ccc8cd27cbb7e4487013f8281a7ee62b2b5e50` (SHA-256 of the compact JSON `personalVisits` object; separate from the unchanged cruise-array fingerprint).
+
+This bundle is a portable copy of the complete 29-cruise collection, independent of the website’s map filters. It contains 202 recorded nights, 87 distinct non-scenic ports, 36 sovereign countries reached through cruising (including separately reported shore excursions), and 9 territories or special jurisdictions under the definitions below. It also preserves 5 countries and 2 special places reported as non-cruise visits; these do not enter cruise totals. The website is <https://dev1niscool.github.io/little-voyages/>.
 
 ## Start here
 
@@ -12,8 +14,8 @@ For an owner-authorized AI task, provide the complete ZIP, or provide this guide
 
 | File | Contents |
 | --- | --- |
-| little-voyages-logbook.json | Metadata plus every field of every cruise, including original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance. |
-| little-voyages-statistics.json | The full statistics calculation, definitions, current destination classifications, associated cruise IDs and ports, and classification evidence URLs. |
+| little-voyages-logbook.json | Metadata plus every field of every cruise, including original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance; separate owner-reported shore excursions and non-cruise visits. |
+| little-voyages-statistics.json | The full statistics calculation, definitions, current destination classifications, associated cruise IDs and ports, classification evidence URLs, and separately preserved personal visits. |
 | little-voyages-cruises.csv | One row per cruise with dates, duration, labels, notes, and source references. |
 | little-voyages-ports.csv | One row per ordered itinerary entry, including scenic stops and final round-trip returns. |
 | little-voyages-routes.geojson | GeoJSON FeatureCollection with one illustrative LineString per known route; unknown routes use null geometry. |
@@ -32,7 +34,7 @@ Full policy: <https://dev1niscool.github.io/little-voyages/AI-USAGE.md>. These s
 
 ## Cruise JSON dictionary
 
-The top-level object contains `schemaVersion`, `title`, `siteUrl`, `scope`, `collectionSha256`, `usage`, `dataNotes`, and `cruises`. Cruise objects are copied in full from the atlas without renaming or removing fields.
+The top-level object contains `schemaVersion`, `title`, `siteUrl`, `scope`, `collectionSha256`, `personalVisitsSha256`, `usage`, `dataNotes`, `cruises`, and `personalVisits`. Cruise objects are copied in full from the atlas without renaming or removing fields. The two fingerprints cover independent source objects so updates to personal visits do not imply that historical itineraries changed.
 
 | Field | Meaning |
 | --- | --- |
@@ -52,17 +54,40 @@ The top-level object contains `schemaVersion`, `title`, `siteUrl`, `scope`, `col
 | sources | Entries with title, exact url, and note explaining the evidence supported by that source. |
 | color | Website presentation color; no geographic or statistical meaning. |
 
-**Confidence:** confirmed identifies a supported historical sailing match, while individual calls may still follow a published schedule rather than a verified actual track. Likely identifies a plausible reconstruction from the available evidence. Unresolved means the available record is insufficient. Notes and source relevance take precedence over a simplified confidence label. The collection does not establish that a passenger went ashore, or that cruising was their only means of visiting a place.
+**Confidence:** confirmed identifies a supported historical sailing match, while individual calls may still follow a published schedule rather than a verified actual track. Likely identifies a plausible reconstruction from the available evidence. Unresolved means the available record is insufficient. Notes and source relevance take precedence over a simplified confidence label. Itinerary records alone do not establish that a passenger went ashore, or that cruising was their only means of visiting a place. Separate owner-reported visits are identified explicitly below.
+
+## Owner-reported personal visits
+
+Both JSON files preserve the same `personalVisits` object. These records are personal recollections, not reconstructed ship calls. Classification links explain political status; they are not evidence of a personal visit.
+
+- `shoreExcursions`: additional destinations visited ashore while cruising, each counted once as a country or special place, with an asterisk in the website. An empty `cruiseIds` array means the associated sailings have not been identified. `approximateVisits` records a recollection, not an exact dated count. These visits add no cruise nights, port calls, or sailing miles.
+- `nonCruiseVisits.countries`: the owner’s separate non-cruise list (Egypt, South Africa, India, Israel, China).
+- `nonCruiseVisits.specialPlaces`: the owner’s companion comparison list (Palestine, Hong Kong). These are not cruise destinations in these records.
+- Visit rows retain `name`, `flag`, `status`, any `note`, `evidence`, source URLs, and any background/dispute links supplied in the source. Unknown dates and trip associations remain unknown. Fields absent from a personal-visit record must not be inferred from a nearby cruise.
+
+- 🇻🇦 **Vatican City***: Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country. Evidence: owner-reported. Approximate visit count: 2. No port, specific cruise association, travel date, or route is invented.
+
+This is a personal travel grouping, not a claim about sovereignty. These owner-reported visits happened without a cruise and are excluded from every cruise total. The “NOT by cruise” comparison is a playful presentation of the owner’s travel history, grouped as requested by the owner. Palestine is a UN non-member observer State with disputed status; Hong Kong is a Special Administrative Region of China. The status labels describe each place individually.
+
+- 🇪🇬 **Egypt** — Sovereign country.
+- 🇿🇦 **South Africa** — Sovereign country.
+- 🇮🇳 **India** — Sovereign country.
+- 🇮🇱 **Israel** — Sovereign country.
+- 🇨🇳 **China** — Sovereign country.
+- 🇵🇸 **Palestine** — UN non-member observer State. Shown in this personal “special places” group as requested. Palestine is a UN non-member observer State; recognition and borders remain disputed. Dispute background: <https://en.wikipedia.org/wiki/Legal_status_of_Palestine>. Status references: <https://www.un.org/en/node/123012>.
+- 🇭🇰 **Hong Kong** — Special Administrative Region of China. A Special Administrative Region of China, listed separately in this personal travel comparison. Background: <https://en.wikipedia.org/wiki/Hong_Kong>. Status references: <https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html>.
 
 ## Statistics JSON dictionary and definitions
 
-The statistics file has the same collection metadata plus `methodology`, `precision`, and `statistics`. Values in `statistics` exactly match the atlas calculation for the full collection:
+The statistics file has the same collection metadata plus `personalVisitsSha256`, `personalVisits`, `methodology`, `precision`, and `statistics`. Values in `statistics` exactly match the atlas calculation for the full collection with explicitly supplied shore excursions:
 
 - `cruiseCount`, `shipCount`, `lineCount`: distinct cruises, normalized ship names, and cruise companies.
 - `totalNights`, `tripHours`, `knownDurationCruises`, `unknownDurationCruises`, `averageNights`: duration totals and data coverage; averageNights excludes unknown durations.
 - `estimatedKm`, `estimatedMiles`, `estimatedNauticalMiles`, `earthLaps`, `routesMeasured`, `missingRoutes`: approximate route distance and route coverage. Miles are statute miles; nautical miles use 1,852 metres.
-- `uniquePorts`, `portCalls`, `scenicStops`, `placeCount`: distinct port locations, eligible recorded calls, scenic entries, and distinct raw country/territory labels.
+- `uniquePorts`, `portCalls`, `scenicStops`: distinct port locations, eligible recorded calls, and scenic entries. Shore excursions do not change these quantities.
+- `itineraryPlaceCount`: distinct raw country/territory labels from itinerary ports (44 in the current complete collection). `placeCount` additionally includes distinct owner-reported shore-excursion destinations (45 with Vatican City). Non-cruise visits do not enter either total.
 - `countryCount`, `territoryCount`, `countries`, `territories`, `unclassifiedPlaces`: explicit destination classifications. Destination rows contain name, flag, type, status, sovereign association, classification source URLs, distinct port names, and cruiseIds. Flags are decorative. A sovereign association is not an additional visit.
+- `shoreExcursionPlaces`: additional country/territory destination rows with their owner-reported shore-excursion evidence. Vatican City has empty `ports` and `cruiseIds` arrays; these must not be filled by guessing. Its approximate two visits contribute one distinct country.
 - `years`: chronological rows containing year, cruises, nights, and approximate miles.
 - `lines`: rows with name, count, nights, and presentation color.
 - `regions`: grouped region rows with name, count, nights, and approximate miles.
@@ -74,8 +99,8 @@ The statistics file has the same collection metadata plus `methodology`, `precis
 - **distance:** Estimated distance adds great-circle segments along the atlas’s schematic routes. These are not GPS tracks or logged ship mileage; actual sailing distances vary. Miles are statute miles.
 - **earth:** Earth equivalents divide the estimated distance by the equatorial circumference of 40,075.017 km. This is a distance comparison, not a claim that these voyages circled the globe.
 - **ports:** Port visits count recorded itinerary stops, including embarkation and one-way arrival ports. The starting port counts once for a round trip: its final return is excluded, while separate repeat calls such as Castaway Cay count again. Glacier Bay and other scenic cruising stops are counted separately. Port visits do not establish that you went ashore.
-- **places:** Places are distinct country and territory labels attached to recorded ports. Dependencies and territories are listed separately, so this is not a sovereign-country count. Counts inherit the atlas’s itinerary uncertainty.
-- **destinations:** Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. These records do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed.
+- **places:** Places are distinct country and territory labels attached to recorded ports, plus explicitly included personal shore visits. Dependencies and territories are listed separately, so this is not a sovereign-country count. The itinerary-only place count is retained separately. Counts inherit the atlas’s itinerary uncertainty.
+- **destinations:** Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. The full collection also includes Vatican City, an owner-reported shore visit by car while a cruise ship was docked, approximately twice; it adds one country, not a port, and has no recorded sailing or date. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. Itinerary records alone do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed. The separate non-cruise comparison is owner-reported and never contributes to cruise totals.
 - **years:** Each trip belongs to the year of your original cruise record, including sailings that cross New Year. The collection’s span is the difference between its first and last recorded calendar years.
 
 Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation. Destination status reflects the atlas’s current classification, not necessarily the constitutional status at the time of each cruise. In particular, the Dutch Caribbean’s status changed in 2010. “Territories & special places” is a presentation grouping, not a claim that these jurisdictions are unrecognized states.
@@ -83,6 +108,8 @@ Distance values are reproducible calculations from illustrative routes, not meas
 ## CSV and GeoJSON conventions
 
 Both CSV files have a header row and use RFC 4180 quoting and CRLF row endings. Quotes are doubled within quoted cells; embedded line breaks stay within the cell. Empty cells represent unavailable optional fields. Formula-like text cells beginning with =, +, -, @, tab, or a line break (including an operator after whitespace) receive a leading apostrophe for safer spreadsheet opening. This affects only the CSV representation; the JSON preserves exact text. Negative numeric coordinates stay numeric. The `sources_json` cell is a JSON array, preserving each source’s title, URL, and note without an ambiguous separator.
+
+The CSV and GeoJSON files cover recorded cruises only. Owner-reported Vatican shore excursions and non-cruise travel remain in the JSON files and this guide; they are never fabricated as extra cruise rows, port calls, or ship routes.
 
 Cruise CSV columns use the corresponding dictionary fields in snake_case, plus `port_entry_count` (all itinerary entries), `route_point_count` (ports and illustrative waypoints), and `sources_json`. The CSV does not duplicate full geometry; use the logbook or GeoJSON for coordinates.
 
@@ -92,50 +119,51 @@ GeoJSON follows longitude, latitude order in decimal degrees on WGS 84 (RFC 7946
 
 ## Countries and special jurisdictions
 
-- **Antigua and Barbuda** — Sovereign country. Ports: Antigua. Cruise IDs: 16.
-- **Aruba** — Country within the Kingdom of the Netherlands. Ports: Aruba. Cruise IDs: 29. Classification evidence: <https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands>.
-- **Bahamas** — Sovereign country. Ports: Castaway Cay; Great Stirrup Cay; Half Moon Cay; Nassau. Cruise IDs: 1, 2, 3, 5, 6, 12, 19, 21, 23, 24.
-- **Barbados** — Sovereign country. Ports: Barbados. Cruise IDs: 16.
-- **Belize** — Sovereign country. Ports: Harvest Caye. Cruise IDs: 26.
-- **Canada** — Sovereign country. Ports: Victoria. Cruise IDs: 8.
-- **Cayman Islands** — British Overseas Territory. Ports: Grand Cayman. Cruise IDs: 9. Classification evidence: <https://www.gov.uk/government/publications/geographical-names-and-information>.
-- **Costa Rica** — Sovereign country. Ports: Puerto Limón. Cruise IDs: 7.
-- **Croatia** — Sovereign country. Ports: Dubrovnik. Cruise IDs: 10.
-- **Cuba** — Sovereign country. Ports: Havana. Cruise IDs: 21.
-- **Curaçao** — Country within the Kingdom of the Netherlands. Ports: Curaçao. Cruise IDs: 29. Classification evidence: <https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands>.
-- **Denmark** — Sovereign country. Ports: Copenhagen; Fredericia. Cruise IDs: 15.
-- **Dominica** — Sovereign country. Ports: Dominica. Cruise IDs: 14.
-- **Dominican Republic** — Sovereign country. Ports: Amber Cove. Cruise IDs: 18, 24, 29.
-- **Estonia** — Sovereign country. Ports: Tallinn. Cruise IDs: 15.
-- **Finland** — Sovereign country. Ports: Helsinki. Cruise IDs: 15.
-- **France** — Sovereign country. Ports: Ajaccio; Le Havre (Paris); Marseille; Villefranche. Cruise IDs: 10, 17, 20, 25.
-- **Germany** — Sovereign country. Ports: Warnemünde (Berlin). Cruise IDs: 15.
-- **Gibraltar** — British Overseas Territory. Ports: Gibraltar. Cruise IDs: 25. Classification evidence: <https://www.gov.uk/government/publications/geographical-names-and-information>.
-- **Greece** — Sovereign country. Ports: Athens (Piraeus); Mykonos; Santorini. Cruise IDs: 13, 22.
-- **Grenada** — Sovereign country. Ports: Grenada. Cruise IDs: 14.
-- **Guernsey** — Crown Dependency. Ports: St. Peter Port (Guernsey). Cruise IDs: 17. Classification evidence: <https://www.gov.uk/government/publications/guernsey-alderney-and-sark-knowledge-base-profile/guernsey-alderney-and-sark-knowledge-base-profile>.
-- **Honduras** — Sovereign country. Ports: Roatán. Cruise IDs: 26.
-- **Ireland** — Sovereign country. Ports: Cork (Cobh); Dún Laoghaire (Dublin). Cruise IDs: 17.
-- **Italy** — Sovereign country. Ports: Cagliari; Civitavecchia (Rome); Genoa; La Spezia; Livorno (Florence/Pisa); Messina; Naples; Venice. Cruise IDs: 10, 13, 20, 22, 25.
-- **Jamaica** — Sovereign country. Ports: Montego Bay. Cruise IDs: 9.
-- **Japan** — Sovereign country. Ports: Hiroshima; Kagoshima; Kobe; Kochi; Osaka; Shimizu (Mount Fuji); Yokohama (Tokyo). Cruise IDs: 28.
-- **Mexico** — Sovereign country. Ports: Cabo San Lucas; Costa Maya; Cozumel; Mazatlán; Progreso. Cruise IDs: 7, 9, 11, 26, 27.
-- **Montenegro** — Sovereign country. Ports: Kotor. Cruise IDs: 22.
-- **Netherlands** — Sovereign country. Ports: Amsterdam. Cruise IDs: 15, 17.
-- **Panama** — Sovereign country. Ports: Colón. Cruise IDs: 7.
-- **Puerto Rico** — U.S. territory · Commonwealth. Ports: San Juan. Cruise IDs: 4, 6, 14, 16. Classification evidence: <https://www.doi.gov/node/11613>.
-- **Russia** — Sovereign country. Ports: St. Petersburg. Cruise IDs: 15.
-- **Saint Kitts and Nevis** — Sovereign country. Ports: St. Kitts. Cruise IDs: 14.
-- **Saint Lucia** — Sovereign country. Ports: St. Lucia. Cruise IDs: 16.
-- **Sint Maarten** — Country within the Kingdom of the Netherlands. Ports: St. Maarten. Cruise IDs: 2, 4, 12, 16. Classification evidence: <https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands>.
-- **South Korea** — Sovereign country. Ports: Jeju. Cruise IDs: 28.
-- **Spain** — Sovereign country. Ports: Barcelona. Cruise IDs: 10, 22, 25.
-- **Sweden** — Sovereign country. Ports: Stockholm. Cruise IDs: 15.
-- **Turkey** — Sovereign country. Ports: Istanbul; Kuşadası (Ephesus). Cruise IDs: 13.
-- **Turks and Caicos Islands** — British Overseas Territory. Ports: Grand Turk. Cruise IDs: 6, 18, 24. Classification evidence: <https://www.gov.uk/government/publications/geographical-names-and-information>.
-- **U.S. Virgin Islands** — U.S. territory. Ports: St. Croix; St. Thomas. Cruise IDs: 2, 4, 6, 12, 14, 16. Classification evidence: <https://www.doi.gov/node/11613>.
-- **United Kingdom** — Sovereign country. Ports: Ayr; Belfast; Glasgow (Greenock); Liverpool. Cruise IDs: 17.
-- **United States** — Sovereign country. Ports: Fort Lauderdale; Galveston; Jacksonville; Juneau; Ketchikan; Los Angeles (San Pedro); Miami; New Orleans; Port Canaveral; San Diego; Seattle; Sitka. Cruise IDs: 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 18, 19, 21, 23, 24, 26, 27, 29.
+- 🇦🇬 **Antigua and Barbuda** — Sovereign country. Ports: Antigua. Cruise IDs: 16.
+- 🇦🇼 **Aruba** — Country within the Kingdom of the Netherlands. Ports: Aruba. Cruise IDs: 29. Classification evidence: <https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands>.
+- 🇧🇸 **Bahamas** — Sovereign country. Ports: Castaway Cay; Great Stirrup Cay; Half Moon Cay; Nassau. Cruise IDs: 1, 2, 3, 5, 6, 12, 19, 21, 23, 24.
+- 🇧🇧 **Barbados** — Sovereign country. Ports: Barbados. Cruise IDs: 16.
+- 🇧🇿 **Belize** — Sovereign country. Ports: Harvest Caye. Cruise IDs: 26.
+- 🇨🇦 **Canada** — Sovereign country. Ports: Victoria. Cruise IDs: 8.
+- 🇰🇾 **Cayman Islands** — British Overseas Territory. Ports: Grand Cayman. Cruise IDs: 9. Classification evidence: <https://www.gov.uk/government/publications/geographical-names-and-information>.
+- 🇨🇷 **Costa Rica** — Sovereign country. Ports: Puerto Limón. Cruise IDs: 7.
+- 🇭🇷 **Croatia** — Sovereign country. Ports: Dubrovnik. Cruise IDs: 10.
+- 🇨🇺 **Cuba** — Sovereign country. Ports: Havana. Cruise IDs: 21.
+- 🇨🇼 **Curaçao** — Country within the Kingdom of the Netherlands. Ports: Curaçao. Cruise IDs: 29. Classification evidence: <https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands>.
+- 🇩🇰 **Denmark** — Sovereign country. Ports: Copenhagen; Fredericia. Cruise IDs: 15.
+- 🇩🇲 **Dominica** — Sovereign country. Ports: Dominica. Cruise IDs: 14.
+- 🇩🇴 **Dominican Republic** — Sovereign country. Ports: Amber Cove. Cruise IDs: 18, 24, 29.
+- 🇪🇪 **Estonia** — Sovereign country. Ports: Tallinn. Cruise IDs: 15.
+- 🇫🇮 **Finland** — Sovereign country. Ports: Helsinki. Cruise IDs: 15.
+- 🇫🇷 **France** — Sovereign country. Ports: Ajaccio; Le Havre (Paris); Marseille; Villefranche. Cruise IDs: 10, 17, 20, 25.
+- 🇩🇪 **Germany** — Sovereign country. Ports: Warnemünde (Berlin). Cruise IDs: 15.
+- 🇬🇮 **Gibraltar** — British Overseas Territory. Ports: Gibraltar. Cruise IDs: 25. Administered by the United Kingdom; sovereignty claimed by Spain. Dispute background: <https://en.wikipedia.org/wiki/Status_of_Gibraltar>. Classification evidence: <https://www.gov.uk/government/publications/geographical-names-and-information>.
+- 🇬🇷 **Greece** — Sovereign country. Ports: Athens (Piraeus); Mykonos; Santorini. Cruise IDs: 13, 22.
+- 🇬🇩 **Grenada** — Sovereign country. Ports: Grenada. Cruise IDs: 14.
+- 🇬🇬 **Guernsey** — Crown Dependency. Ports: St. Peter Port (Guernsey). Cruise IDs: 17. Classification evidence: <https://www.gov.uk/government/publications/guernsey-alderney-and-sark-knowledge-base-profile/guernsey-alderney-and-sark-knowledge-base-profile>.
+- 🇭🇳 **Honduras** — Sovereign country. Ports: Roatán. Cruise IDs: 26.
+- 🇮🇪 **Ireland** — Sovereign country. Ports: Cork (Cobh); Dún Laoghaire (Dublin). Cruise IDs: 17.
+- 🇮🇹 **Italy** — Sovereign country. Ports: Cagliari; Civitavecchia (Rome); Genoa; La Spezia; Livorno (Florence/Pisa); Messina; Naples; Venice. Cruise IDs: 10, 13, 20, 22, 25.
+- 🇯🇲 **Jamaica** — Sovereign country. Ports: Montego Bay. Cruise IDs: 9.
+- 🇯🇵 **Japan** — Sovereign country. Ports: Hiroshima; Kagoshima; Kobe; Kochi; Osaka; Shimizu (Mount Fuji); Yokohama (Tokyo). Cruise IDs: 28.
+- 🇲🇽 **Mexico** — Sovereign country. Ports: Cabo San Lucas; Costa Maya; Cozumel; Mazatlán; Progreso. Cruise IDs: 7, 9, 11, 26, 27.
+- 🇲🇪 **Montenegro** — Sovereign country. Ports: Kotor. Cruise IDs: 22.
+- 🇳🇱 **Netherlands** — Sovereign country. Ports: Amsterdam. Cruise IDs: 15, 17.
+- 🇵🇦 **Panama** — Sovereign country. Ports: Colón. Cruise IDs: 7.
+- 🇵🇷 **Puerto Rico** — U.S. territory · Commonwealth. Ports: San Juan. Cruise IDs: 4, 6, 14, 16. Classification evidence: <https://www.doi.gov/node/11613>.
+- 🇷🇺 **Russia** — Sovereign country. Ports: St. Petersburg. Cruise IDs: 15.
+- 🇰🇳 **Saint Kitts and Nevis** — Sovereign country. Ports: St. Kitts. Cruise IDs: 14.
+- 🇱🇨 **Saint Lucia** — Sovereign country. Ports: St. Lucia. Cruise IDs: 16.
+- 🇸🇽 **Sint Maarten** — Country within the Kingdom of the Netherlands. Ports: St. Maarten. Cruise IDs: 2, 4, 12, 16. Classification evidence: <https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands>.
+- 🇰🇷 **South Korea** — Sovereign country. Ports: Jeju. Cruise IDs: 28.
+- 🇪🇸 **Spain** — Sovereign country. Ports: Barcelona. Cruise IDs: 10, 22, 25.
+- 🇸🇪 **Sweden** — Sovereign country. Ports: Stockholm. Cruise IDs: 15.
+- 🇹🇷 **Turkey** — Sovereign country. Ports: Istanbul; Kuşadası (Ephesus). Cruise IDs: 13.
+- 🇹🇨 **Turks and Caicos Islands** — British Overseas Territory. Ports: Grand Turk. Cruise IDs: 6, 18, 24. Classification evidence: <https://www.gov.uk/government/publications/geographical-names-and-information>.
+- 🇻🇮 **U.S. Virgin Islands** — U.S. territory. Ports: St. Croix; St. Thomas. Cruise IDs: 2, 4, 6, 12, 14, 16. Classification evidence: <https://www.doi.gov/node/11613>.
+- 🇬🇧 **United Kingdom** — Sovereign country. Ports: Ayr; Belfast; Glasgow (Greenock); Liverpool. Cruise IDs: 17.
+- 🇺🇸 **United States** — Sovereign country. Ports: Fort Lauderdale; Galveston; Jacksonville; Juneau; Ketchikan; Los Angeles (San Pedro); Miami; New Orleans; Port Canaveral; San Diego; Seattle; Sitka. Cruise IDs: 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 18, 19, 21, 23, 24, 26, 27, 29.
+- 🇻🇦 **Vatican City*** — Sovereign country. Owner-reported shore excursion; not a port. Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country. No cruise IDs or travel dates are inferred. Classification evidence: <https://www.vaticanstate.va/en/state-and-government/general-informations.html>.
 
 ## Complete research notes and sources
 

@@ -11,8 +11,8 @@ export const statsMethodology = Object.freeze({
   distance: 'Estimated distance adds great-circle segments along the atlas’s schematic routes. These are not GPS tracks or logged ship mileage; actual sailing distances vary. Miles are statute miles.',
   earth: 'Earth equivalents divide the estimated distance by the equatorial circumference of 40,075.017 km. This is a distance comparison, not a claim that these voyages circled the globe.',
   ports: 'Port visits count recorded itinerary stops, including embarkation and one-way arrival ports. The starting port counts once for a round trip: its final return is excluded, while separate repeat calls such as Castaway Cay count again. Glacier Bay and other scenic cruising stops are counted separately. Port visits do not establish that you went ashore.',
-  places: 'Places are distinct country and territory labels attached to recorded ports. Dependencies and territories are listed separately, so this is not a sovereign-country count. Counts inherit the atlas’s itinerary uncertainty.',
-  destinations: 'Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. These records do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed.',
+  places: 'Places are distinct country and territory labels attached to recorded ports, plus explicitly included personal shore visits. Dependencies and territories are listed separately, so this is not a sovereign-country count. The itinerary-only place count is retained separately. Counts inherit the atlas’s itinerary uncertainty.',
+  destinations: 'Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. The full collection also includes Vatican City, an owner-reported shore visit by car while a cruise ship was docked, approximately twice; it adds one country, not a port, and has no recorded sailing or date. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. Itinerary records alone do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed. The separate non-cruise comparison is owner-reported and never contributes to cruise totals.',
   years: 'Each trip belongs to the year of your original cruise record, including sailings that cross New Year. The collection’s span is the difference between its first and last recorded calendar years.',
 });
 
@@ -75,7 +75,7 @@ function validDate(date) {
 }
 
 /** Aggregate the supplied selection; neither cruises nor their nested arrays are changed. */
-export function computeStatistics(input = []) {
+export function computeStatistics(input = [], { shoreExcursions = [] } = {}) {
   const cruises = Array.isArray(input) ? input.filter(cruise => cruise && typeof cruise === 'object') : [];
   const ships = new Set();
   const lines = new Map();
@@ -151,6 +151,8 @@ export function computeStatistics(input = []) {
   const mostCruises = Math.max(0, ...orderedYears.map(row => row.cruises));
   const longest = Math.max(0, ...durations.map(cruise => cruise.nights));
   const byCount = (a, b) => b.count - a.count || a.name.localeCompare(b.name);
+  const destinationSummary = summarizeDestinations(destinationVisits, shoreExcursions);
+  const allDestinations = [...destinationSummary.countries, ...destinationSummary.territories, ...destinationSummary.unclassifiedPlaces];
   return {
     cruiseCount: cruises.length,
     shipCount: ships.size,
@@ -166,8 +168,10 @@ export function computeStatistics(input = []) {
     routesMeasured,
     missingRoutes: cruises.length - routesMeasured,
     uniquePorts: ports.size,
-    placeCount: places.size,
-    ...summarizeDestinations(destinationVisits),
+    placeCount: allDestinations.length,
+    itineraryPlaceCount: places.size,
+    ...destinationSummary,
+    shoreExcursionPlaces: allDestinations.filter(place => place.isShoreExcursion),
     portCalls,
     scenicStops,
     years: orderedYears,

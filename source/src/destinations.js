@@ -28,7 +28,11 @@ export const destinations = Object.freeze([
   country('Finland', '🇫🇮'),
   country('France', '🇫🇷'),
   country('Germany', '🇩🇪'),
-  territory('Gibraltar', '🇬🇮', 'British Overseas Territory', 'United Kingdom', UK_TERRITORIES_SOURCE),
+  {
+    ...territory('Gibraltar', '🇬🇮', 'British Overseas Territory', 'United Kingdom', UK_TERRITORIES_SOURCE),
+    disputeNote: 'Administered by the United Kingdom; sovereignty claimed by Spain.',
+    disputeUrl: 'https://en.wikipedia.org/wiki/Status_of_Gibraltar',
+  },
   country('Greece', '🇬🇷'),
   country('Grenada', '🇬🇩'),
   territory('Guernsey', '🇬🇬', 'Crown Dependency', 'British Crown', GUERNSEY_SOURCE),
@@ -54,6 +58,7 @@ export const destinations = Object.freeze([
   territory('U.S. Virgin Islands', '🇻🇮', 'U.S. territory', 'United States', US_TERRITORIES_SOURCE),
   country('United Kingdom', '🇬🇧'),
   country('United States', '🇺🇸'),
+  country('Vatican City', '🇻🇦'),
 ].map(destination => Object.freeze({ ...destination, sources: Object.freeze(destination.sources) })));
 
 const normalized = value => typeof value === 'string' ? value.trim().toLocaleLowerCase('en') : '';
@@ -62,25 +67,45 @@ const byName = (a, b) => a.name.localeCompare(b.name, 'en');
 const byId = (a, b) => typeof a === 'number' && typeof b === 'number'
   ? a - b : String(a).localeCompare(String(b), 'en', { numeric: true });
 
-/** Summarize only eligible port calls supplied by the statistics calculation. */
-export function summarizeDestinations(visits = []) {
+/** Summarize eligible port calls and explicitly supplied personal shore visits. */
+export function summarizeDestinations(visits = [], shoreExcursions = []) {
   const places = new Map();
-  for (const { port, cruiseId } of visits) {
-    const key = normalized(port?.country);
-    if (!key) continue;
+  const getPlace = name => {
+    const key = normalized(name);
+    if (!key) return null;
     if (!places.has(key)) {
       const definition = destinationByName.get(key);
       places.set(key, {
-        ...(definition || { name: port.country.trim(), type: 'unclassified', status: 'Classification pending', flag: '', sovereign: null, sources: [] }),
+        ...(definition || { name: name.trim(), type: 'unclassified', status: 'Classification pending', flag: '', sovereign: null, sources: [] }),
         ports: new Map(),
         cruiseIds: new Set(),
       });
     }
-    const place = places.get(key);
+    return places.get(key);
+  };
+  for (const { port, cruiseId } of visits) {
+    const place = getPlace(port?.country);
+    if (!place) continue;
     const portName = normalized(port.name);
     if (portName && !place.ports.has(portName)) place.ports.set(portName, port.name.trim());
     if ((typeof cruiseId === 'number' && Number.isFinite(cruiseId)) || (typeof cruiseId === 'string' && cruiseId.trim())) {
       place.cruiseIds.add(cruiseId);
+    }
+  }
+  for (const visit of Array.isArray(shoreExcursions) ? shoreExcursions : []) {
+    const place = getPlace(visit?.name);
+    if (!place) continue;
+    place.isShoreExcursion = true;
+    if (Number.isInteger(visit.approximateVisits) && visit.approximateVisits > 0) {
+      place.approximateVisits = visit.approximateVisits;
+    }
+    if (typeof visit.note === 'string') place.note = visit.note;
+    if (typeof visit.evidence === 'string') place.evidence = visit.evidence;
+    if (Array.isArray(visit.sources)) place.sources = [...new Set([...place.sources, ...visit.sources])];
+    for (const cruiseId of Array.isArray(visit.cruiseIds) ? visit.cruiseIds : []) {
+      if ((typeof cruiseId === 'number' && Number.isFinite(cruiseId)) || (typeof cruiseId === 'string' && cruiseId.trim())) {
+        place.cruiseIds.add(cruiseId);
+      }
     }
   }
   const rows = [...places.values()].map(place => ({

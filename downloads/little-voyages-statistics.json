@@ -10,13 +10,14 @@
     "restrictions": "No unauthorized automated harvesting, reuse, model training, fine-tuning, or incorporation into training datasets. A task-specific handoff does not authorize unrelated retention, redistribution, or training. No permission is granted to probe, exploit, or disrupt the site or repository.",
     "enforcement": "These statements express the owner’s usage preferences and do not technically prevent access to public files."
   },
+  "personalVisitsSha256": "84f35881319728c49291d49210ccc8cd27cbb7e4487013f8281a7ee62b2b5e50",
   "methodology": {
     "duration": "Cruise days use the recorded night counts. Trip hours are nights × 24 and include time ashore; actual hours aboard and underway were not recorded. Unknown durations are excluded.",
     "distance": "Estimated distance adds great-circle segments along the atlas’s schematic routes. These are not GPS tracks or logged ship mileage; actual sailing distances vary. Miles are statute miles.",
     "earth": "Earth equivalents divide the estimated distance by the equatorial circumference of 40,075.017 km. This is a distance comparison, not a claim that these voyages circled the globe.",
     "ports": "Port visits count recorded itinerary stops, including embarkation and one-way arrival ports. The starting port counts once for a round trip: its final return is excluded, while separate repeat calls such as Castaway Cay count again. Glacier Bay and other scenic cruising stops are counted separately. Port visits do not establish that you went ashore.",
-    "places": "Places are distinct country and territory labels attached to recorded ports. Dependencies and territories are listed separately, so this is not a sovereign-country count. Counts inherit the atlas’s itinerary uncertainty.",
-    "destinations": "Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. These records do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed.",
+    "places": "Places are distinct country and territory labels attached to recorded ports, plus explicitly included personal shore visits. Dependencies and territories are listed separately, so this is not a sovereign-country count. The itinerary-only place count is retained separately. Counts inherit the atlas’s itinerary uncertainty.",
+    "destinations": "Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. The full collection also includes Vatican City, an owner-reported shore visit by car while a cruise ship was docked, approximately twice; it adds one country, not a port, and has no recorded sailing or date. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. Itinerary records alone do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed. The separate non-cruise comparison is owner-reported and never contributes to cruise totals.",
     "years": "Each trip belongs to the year of your original cruise record, including sailings that cross New Year. The collection’s span is the difference between its first and last recorded calendar years."
   },
   "precision": "Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation.",
@@ -35,7 +36,8 @@
     "routesMeasured": 29,
     "missingRoutes": 0,
     "uniquePorts": 87,
-    "placeCount": 44,
+    "placeCount": 45,
+    "itineraryPlaceCount": 44,
     "countries": [
       {
         "name": "Antigua and Barbuda",
@@ -612,6 +614,22 @@
           27,
           29
         ]
+      },
+      {
+        "name": "Vatican City",
+        "flag": "🇻🇦",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [
+          "https://www.vaticanstate.va/en/state-and-government/general-informations.html"
+        ],
+        "ports": [],
+        "cruiseIds": [],
+        "isShoreExcursion": true,
+        "approximateVisits": 2,
+        "note": "Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country.",
+        "evidence": "owner-reported"
       }
     ],
     "territories": [
@@ -672,6 +690,8 @@
         "sources": [
           "https://www.gov.uk/government/publications/geographical-names-and-information"
         ],
+        "disputeNote": "Administered by the United Kingdom; sovereignty claimed by Spain.",
+        "disputeUrl": "https://en.wikipedia.org/wiki/Status_of_Gibraltar",
         "ports": [
           "Gibraltar"
         ],
@@ -774,9 +794,27 @@
         ]
       }
     ],
-    "countryCount": 35,
+    "countryCount": 36,
     "territoryCount": 9,
     "unclassifiedPlaces": [],
+    "shoreExcursionPlaces": [
+      {
+        "name": "Vatican City",
+        "flag": "🇻🇦",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [
+          "https://www.vaticanstate.va/en/state-and-government/general-informations.html"
+        ],
+        "ports": [],
+        "cruiseIds": [],
+        "isShoreExcursion": true,
+        "approximateVisits": 2,
+        "note": "Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country.",
+        "evidence": "owner-reported"
+      }
+    ],
     "portCalls": 141,
     "scenicStops": 1,
     "years": [
@@ -1448,5 +1486,102 @@
       }
     ],
     "averageNights": 6.9655172413793105
+  },
+  "personalVisits": {
+    "shoreExcursions": [
+      {
+        "name": "Vatican City",
+        "flag": "🇻🇦",
+        "type": "country",
+        "status": "Sovereign country",
+        "isShoreExcursion": true,
+        "approximateVisits": 2,
+        "evidence": "owner-reported",
+        "note": "Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country.",
+        "sources": [
+          "https://www.vaticanstate.va/en/state-and-government/general-informations.html"
+        ],
+        "cruiseIds": []
+      }
+    ],
+    "nonCruiseVisits": {
+      "countries": [
+        {
+          "name": "Egypt",
+          "flag": "🇪🇬",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "South Africa",
+          "flag": "🇿🇦",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "India",
+          "flag": "🇮🇳",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "Israel",
+          "flag": "🇮🇱",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        },
+        {
+          "name": "China",
+          "flag": "🇨🇳",
+          "type": "country",
+          "status": "Sovereign country",
+          "evidence": "owner-reported",
+          "cruiseIds": [],
+          "sources": []
+        }
+      ],
+      "specialPlaces": [
+        {
+          "name": "Palestine",
+          "flag": "🇵🇸",
+          "type": "special-place",
+          "status": "UN non-member observer State",
+          "evidence": "owner-reported",
+          "note": "Shown in this personal “special places” group as requested. Palestine is a UN non-member observer State; recognition and borders remain disputed.",
+          "disputeNote": "Recognition and borders remain disputed.",
+          "disputeUrl": "https://en.wikipedia.org/wiki/Legal_status_of_Palestine",
+          "sources": [
+            "https://www.un.org/en/node/123012"
+          ],
+          "cruiseIds": []
+        },
+        {
+          "name": "Hong Kong",
+          "flag": "🇭🇰",
+          "type": "special-place",
+          "status": "Special Administrative Region of China",
+          "evidence": "owner-reported",
+          "note": "A Special Administrative Region of China, listed separately in this personal travel comparison.",
+          "contextUrl": "https://en.wikipedia.org/wiki/Hong_Kong",
+          "sources": [
+            "https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html"
+          ],
+          "cruiseIds": []
+        }
+      ],
+      "groupingNote": "This is a personal travel grouping, not a claim about sovereignty. These owner-reported visits happened without a cruise and are excluded from every cruise total."
+    }
   }
 }
