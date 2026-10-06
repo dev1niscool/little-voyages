@@ -146,7 +146,7 @@ test('year selections recalculate destinations without inferring visits to assoc
   assert.deepEqual(stats.territories.map(place => place.name), ['Aruba', 'Curaçao']);
   assert.equal(stats.countryCount, 2, 'a visit to Aruba or Curaçao does not also add the Netherlands');
   assert.equal(stats.territoryCount, 2);
-  assert.ok(stats.countries.every(place => place.name !== 'Vatican City'), 'undated personal visits are not silently assigned to a year');
+  assert.ok(stats.countries.every(place => !['Vatican City', 'Monaco'].includes(place.name)), 'personal visits without confirmed sailing dates are not silently assigned to a year');
   assert.deepEqual(stats.territories[0].cruiseIds, [29]);
 
   const territoryOnly = computeStatistics([{ id: 1, ports: [
@@ -158,24 +158,34 @@ test('year selections recalculate destinations without inferring visits to assoc
   assert.equal(territoryOnly.territoryCount, 3);
 });
 
-test('explicit Vatican shore recollection adds one country without inventing port calls or dated sailings', () => {
+test('Confirmed Vatican and Monaco shore excursions add countries without inventing port calls or dated sailings', () => {
   const cruisesBefore = structuredClone(cruises);
   const visitsBefore = structuredClone(shoreExcursions);
   const itineraryOnly = computeStatistics(cruises);
   const stats = computeStatistics(cruises, { shoreExcursions });
-  assert.equal(stats.countryCount, 36);
+  assert.equal(stats.countryCount, 37);
   assert.equal(stats.territoryCount, 9);
-  assert.equal(stats.placeCount, 45);
+  assert.equal(stats.placeCount, 46);
   assert.equal(stats.itineraryPlaceCount, 44);
   const vatican = stats.countries.find(place => place.name === 'Vatican City');
   assert.equal(vatican.flag, '🇻🇦');
   assert.equal(vatican.isShoreExcursion, true);
   assert.equal(vatican.approximateVisits, 2, 'two recalled visits count as one country');
-  assert.equal(vatican.evidence, 'owner-reported');
+  assert.equal(vatican.evidence, 'owner-confirmed');
   assert.deepEqual(vatican.ports, [], 'Vatican City is not a fabricated cruise port');
   assert.deepEqual(vatican.cruiseIds, [], 'unknown sailings stay unknown');
-  assert.match(vatican.note, /shore visit, not a cruise port/);
-  assert.deepEqual(stats.shoreExcursionPlaces, [vatican]);
+  assert.match(vatican.note, /no ship port/);
+  const monaco = stats.countries.find(place => place.name === 'Monaco');
+  assert.equal(monaco.flag, '🇲🇨');
+  assert.equal(monaco.isShoreExcursion, true);
+  assert.equal(monaco.evidence, 'owner-confirmed');
+  assert.deepEqual(monaco.ports, [], 'a shore excursion does not add a Monaco ship port call');
+  assert.deepEqual(monaco.cruiseIds, [], 'the tentative 2018 sailing is not a confirmed association');
+  assert.deepEqual(monaco.candidateCruiseIds, [20]);
+  assert.equal(monaco.candidatePort, 'Villefranche');
+  assert.deepEqual(stats.shoreExcursionPlaces, [monaco, vatican]);
+  const monacoIndex = stats.countries.indexOf(monaco);
+  assert.deepEqual(stats.countries.slice(monacoIndex - 1, monacoIndex + 2).map(place => place.name), ['Mexico', 'Monaco', 'Montenegro']);
   for (const key of ['cruiseCount', 'totalNights', 'tripHours', 'uniquePorts', 'portCalls', 'scenicStops', 'estimatedKm', 'estimatedMiles', 'earthLaps']) {
     assert.equal(stats[key], itineraryOnly[key], `${key} is unchanged by a personal visit`);
   }
@@ -193,8 +203,8 @@ test('shore supplements deduplicate destinations and never infer ports or unchec
     { name: ' ITALY ', approximateVisits: 2, note: 'A personal visit.' },
     { name: 'Unreviewed place', type: 'country' },
   ] });
-  assert.equal(stats.countryCount, 2, 'repeated Vatican and Italy supplements add no duplicate country');
-  assert.equal(stats.placeCount, 3);
+  assert.equal(stats.countryCount, 3, 'repeated Vatican, Monaco and Italy supplements add no duplicate country');
+  assert.equal(stats.placeCount, 4);
   assert.equal(stats.itineraryPlaceCount, 1);
   assert.equal(stats.uniquePorts, 1);
   assert.equal(stats.portCalls, 1);

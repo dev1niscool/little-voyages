@@ -116,11 +116,11 @@ try {
   }
   assert.equal(statistics.statistics.cruiseCount, 29);
   assert.equal(statistics.statistics.totalNights, 202);
-  assert.equal(statistics.statistics.countryCount, 36);
+  assert.equal(statistics.statistics.countryCount, 37);
   assert.equal(statistics.statistics.territoryCount, 9);
-  assert.equal(statistics.statistics.countries.length, 36);
+  assert.equal(statistics.statistics.countries.length, 37);
   assert.equal(statistics.statistics.territories.length, 9);
-  assert.equal(statistics.statistics.placeCount, 45);
+  assert.equal(statistics.statistics.placeCount, 46);
   assert.equal(statistics.statistics.itineraryPlaceCount, 44);
   assert.equal(statistics.statistics.uniquePorts, 87);
   assert.deepEqual(statistics.personalVisits, logbook.personalVisits, 'Both JSON downloads preserve the same owner-reported visits');
@@ -129,19 +129,31 @@ try {
     assert.equal(exported.personalVisitsSha256, createHash('sha256').update(JSON.stringify(exported.personalVisits)).digest('hex'));
   }
   const { shoreExcursions, nonCruiseVisits } = logbook.personalVisits;
-  assert.equal(shoreExcursions.length, 1);
+  assert.equal(shoreExcursions.length, 2);
   assert.equal(shoreExcursions[0].name, 'Vatican City');
   assert.equal(shoreExcursions[0].flag, '🇻🇦');
   assert.equal(shoreExcursions[0].approximateVisits, 2);
-  assert.equal(shoreExcursions[0].evidence, 'owner-reported');
+  assert.equal(shoreExcursions[0].evidence, 'owner-confirmed');
   assert.deepEqual(shoreExcursions[0].cruiseIds, [], 'The Vatican visit has no invented sailing association');
-  assert.match(shoreExcursions[0].note, /not a cruise port/i);
+  assert.match(shoreExcursions[0].note, /no ship port/i);
+  assert.equal(shoreExcursions[1].name, 'Monaco');
+  assert.equal(shoreExcursions[1].flag, '🇲🇨');
+  assert.equal(shoreExcursions[1].evidence, 'owner-confirmed');
+  assert.deepEqual(shoreExcursions[1].cruiseIds, []);
+  assert.deepEqual(shoreExcursions[1].candidateCruiseIds, [20]);
+  assert.equal(shoreExcursions[1].candidatePort, 'Villefranche');
   const vatican = statistics.statistics.countries.find(place => place.name === 'Vatican City');
   assert.equal(vatican.isShoreExcursion, true);
   assert.equal(vatican.approximateVisits, 2);
   assert.deepEqual(vatican.ports, []);
   assert.deepEqual(vatican.cruiseIds, []);
-  assert.deepEqual(statistics.statistics.shoreExcursionPlaces, [vatican]);
+  const monaco = statistics.statistics.countries.find(place => place.name === 'Monaco');
+  assert.equal(monaco.isShoreExcursion, true);
+  assert.deepEqual(monaco.ports, []);
+  assert.deepEqual(monaco.cruiseIds, []);
+  assert.deepEqual(monaco.candidateCruiseIds, [20]);
+  assert.equal(monaco.candidatePort, 'Villefranche');
+  assert.deepEqual(statistics.statistics.shoreExcursionPlaces, [monaco, vatican]);
   assert.deepEqual(nonCruiseVisits.countries.map(place => [place.name, place.flag]), [
     ['China', '🇨🇳'], ['Egypt', '🇪🇬'], ['India', '🇮🇳'], ['Israel', '🇮🇱'], ['South Africa', '🇿🇦'],
   ]);
@@ -152,7 +164,7 @@ try {
   assert.equal(nonCruiseVisits.specialPlaces[1].status, 'Special Administrative Region of China');
   const nonCruiseNames = [...nonCruiseVisits.countries, ...nonCruiseVisits.specialPlaces].map(place => place.name);
   assert.deepEqual([...statistics.statistics.countries, ...statistics.statistics.territories].filter(place => nonCruiseNames.includes(place.name)), [], 'Non-cruise destinations do not contribute to cruise totals');
-  assert.deepEqual(logbook.cruises.flatMap(cruise => cruise.ports).filter(port => port.country === 'Vatican City' || nonCruiseNames.includes(port.country)), [], 'Personal visits are not converted into ship port calls');
+  assert.deepEqual(logbook.cruises.flatMap(cruise => cruise.ports).filter(port => ['Vatican City', 'Monaco', ...nonCruiseNames].includes(port.country)), [], 'Personal visits are not converted into ship port calls');
   assert.match(statistics.methodology.destinations, /departure.*arrival/i);
   assert.match(statistics.precision, /illustrative routes/i);
   assert.equal(routes.type, 'FeatureCollection');
@@ -171,7 +183,7 @@ try {
     assert.match(csv.split(/\r?\n/, 1)[0], /cruise/i);
     assert.match(csv, /Disney Wonder/);
     assert.match(csv, /Mardi Gras/);
-    assert.doesNotMatch(csv, /Vatican City/, 'The shore excursion does not create a CSV port call or sailing');
+    assert.doesNotMatch(csv, /Vatican City|Monaco/, 'Shore excursions do not create CSV port calls or sailings');
     assert.ok(csv.split(/\r?\n/).length > 29);
   }
   const guide = downloaded.get('little-voyages-guide.md').toString('utf8');
@@ -180,7 +192,9 @@ try {
   assert.match(guide, /illustrat|reconstruct/i);
   assert.match(guide, /permission|authoriz/i);
   assert.match(guide, /https:\/\//);
-  assert.match(guide, /Vatican City\*/);
+  assert.match(guide, /Vatican City/);
+  assert.match(guide, /Monaco/);
+  assert.match(guide, /Villefranche/);
   assert.match(guide, /approximately twice/);
   assert.match(guide, /non-cruise visits/i);
   assert.match(guide, /UN non-member observer State/);

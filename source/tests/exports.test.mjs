@@ -34,10 +34,10 @@ test('statistics preserve the full calculation, methodology, and territorial evi
   assert.deepEqual(exported.statistics, computeStatistics(cruises, { shoreExcursions }));
   assert.deepEqual(exported.methodology, statsMethodology);
   assert.equal(exported.statistics.totalNights, 202);
-  assert.equal(exported.statistics.countryCount, 36);
+  assert.equal(exported.statistics.countryCount, 37);
   assert.equal(exported.statistics.territoryCount, 9);
   assert.equal(exported.statistics.itineraryPlaceCount, 44);
-  assert.equal(exported.statistics.placeCount, 45);
+  assert.equal(exported.statistics.placeCount, 46);
   for (const place of exported.statistics.territories) {
     assert.ok(place.sources.length > 0);
     assert.ok(place.cruiseIds.length > 0);
@@ -68,11 +68,23 @@ test('personal travel survives both JSON exports without becoming invented cruis
   assert.deepEqual(vatican.cruiseIds, []);
   assert.ok(!('startDate' in vatican));
   assert.ok(!('endDate' in vatican));
+  const monaco = exported.statistics.countries.find(place => place.name === 'Monaco');
+  assert.equal(monaco.flag, '🇲🇨');
+  assert.equal(monaco.isShoreExcursion, true);
+  assert.equal(monaco.evidence, 'owner-confirmed');
+  assert.deepEqual(monaco.ports, []);
+  assert.deepEqual(monaco.cruiseIds, []);
+  assert.deepEqual(monaco.candidateCruiseIds, [20]);
+  assert.equal(monaco.candidatePort, 'Villefranche');
+  assert.ok(!('startDate' in monaco));
+  assert.ok(!('endDate' in monaco));
+  assert.deepEqual(logbook.personalVisits.shoreExcursions.map(place => place.name), ['Vatican City', 'Monaco']);
+  assert.deepEqual(exported.statistics.shoreExcursionPlaces, [monaco, vatican]);
   const itineraryStatistics = computeStatistics(cruises);
   for (const key of ['cruiseCount', 'uniquePorts', 'portCalls', 'totalNights', 'estimatedMiles', 'routesMeasured']) {
     assert.equal(exported.statistics[key], itineraryStatistics[key], `${key} changed because of a shore excursion`);
   }
-  assert.ok(!csvParse(contents(EXPORT_FILES.ports)).some(row => row.place_name === 'Vatican City'));
+  assert.ok(!csvParse(contents(EXPORT_FILES.ports)).some(row => ['Vatican City', 'Monaco'].includes(row.place_name)));
   assert.equal(parse(EXPORT_FILES.routes).features.length, 29);
   assert.equal(logbook.collectionSha256, createHash('sha256').update(JSON.stringify(cruises)).digest('hex'));
   assert.equal(logbook.personalVisitsSha256, createHash('sha256').update(JSON.stringify(logbook.personalVisits)).digest('hex'));
@@ -149,7 +161,7 @@ test('unknown values remain unknown rather than becoming dates, zero durations, 
   assert.equal(summary.nights, '');
   assert.equal(summary.start_date, '');
   assert.equal(geojson.features[0].geometry, null);
-  assert.deepEqual(logbook.personalVisits.shoreExcursions, [], 'custom selections do not inherit unassigned Vatican visits');
+  assert.deepEqual(logbook.personalVisits.shoreExcursions, [], 'custom selections do not inherit personal shore visits without confirmed sailing dates');
   assert.deepEqual(logbook.personalVisits.nonCruiseVisits.countries, []);
 });
 
@@ -167,7 +179,9 @@ test('guide retains complete readable research and explains the transfer and dat
   assert.match(guide, /originalShip/);
   assert.match(guide, /owner-authorized AI task/);
   assert.match(guide, /AI-USAGE\.md/);
-  assert.match(guide, /Vatican City\*/);
+  assert.match(guide, /Vatican City/);
+  assert.match(guide, /Monaco/);
+  assert.match(guide, /Villefranche/);
   assert.match(guide, /approximately twice/);
   assert.match(guide, /not a port/);
   assert.match(guide, /No cruise IDs or travel dates are inferred/);

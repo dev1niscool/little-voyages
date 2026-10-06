@@ -1,8 +1,9 @@
-// Personal recollections supplement the itinerary archive without creating ports,
+// Personal visits supplement the itinerary archive without creating ports,
 // ship routes, dated cruise calls, or visits to a place's associated country.
 const freezeVisit = visit => Object.freeze({
   ...visit,
   cruiseIds: Object.freeze(visit.cruiseIds || []),
+  ...(visit.candidateCruiseIds ? { candidateCruiseIds: Object.freeze(visit.candidateCruiseIds) } : {}),
   sources: Object.freeze(visit.sources || []),
   referenceLinks: Object.freeze((visit.referenceLinks || []).map(link => Object.freeze({ ...link }))),
 });
@@ -15,9 +16,25 @@ export const shoreExcursions = Object.freeze([
     status: 'Sovereign country',
     isShoreExcursion: true,
     approximateVisits: 2,
-    evidence: 'owner-reported',
-    note: 'Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country.',
+    evidence: 'owner-confirmed',
+    note: 'The owner confirms visiting Vatican City as a cruise shore excursion, by car while the ship was docked, approximately twice. Counted as one country; no ship port or dated sailing association is added.',
     sources: ['https://www.vaticanstate.va/en/state-and-government/general-informations.html'],
+  }),
+  freezeVisit({
+    name: 'Monaco',
+    flag: '🇲🇨',
+    type: 'country',
+    status: 'Sovereign country',
+    isShoreExcursion: true,
+    evidence: 'owner-confirmed',
+    candidateCruiseIds: [20],
+    candidatePort: 'Villefranche',
+    note: 'The owner confirms visiting Monaco as a cruise shore excursion from a nearby French port on Celebrity Reflection. The 2018 sailing includes Villefranche, where Celebrity offers Monaco excursions; this is a candidate sailing association. The visit itself is confirmed and counts as one country.',
+    sources: [
+      'https://www.un.org/en/about-us/member-states',
+      'https://www.celebritycruises.com/ports/nice/shore-excursions',
+      'https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/',
+    ],
   }),
 ]);
 

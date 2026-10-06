@@ -10,13 +10,13 @@
     "restrictions": "No unauthorized automated harvesting, reuse, model training, fine-tuning, or incorporation into training datasets. A task-specific handoff does not authorize unrelated retention, redistribution, or training. No permission is granted to probe, exploit, or disrupt the site or repository.",
     "enforcement": "These statements express the owner’s usage preferences and do not technically prevent access to public files."
   },
-  "personalVisitsSha256": "8767dedcca1a3a0b8784b02af0ac48fcff74c5a8085e561d8591b48f63001440",
+  "personalVisitsSha256": "28bff7e99f1c6e4d4b746122fc9ea11dbc50342cd60660b179860e84fdfc54a1",
   "dataNotes": {
     "coordinates": "WGS 84 decimal degrees; route and anchor arrays are [longitude, latitude]. Port objects use explicit lon and lat fields.",
     "precision": "Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation.",
     "provenance": "Original records combined with historical itinerary research and owner corrections. All research notes, confidence labels, and source references are preserved in each cruise.",
     "dates": "Original dates may describe departure, arrival, or a day during the trip. Researched dates inherit the confidence and caveats of their record. No per-port dates or times are inferred.",
-    "personalVisits": "The separate personalVisits object records owner-reported shore excursions and non-cruise destinations, with approximate visit counts when supplied. Empty cruiseIds mean the associated sailings are unknown. These records add no invented ports, cruises, routes, nights, or sailing miles."
+    "personalVisits": "The separate personalVisits object records owner-confirmed shore excursions and owner-reported non-cruise destinations, with approximate visit counts when supplied. Empty cruiseIds mean no specific sailing is confirmed for that visit. Optional candidateCruiseIds and candidatePort describe possible sailing associations, not uncertainty about the visit itself. These records add no invented ports, cruises, routes, nights, or sailing miles."
   },
   "cruises": [
     {
@@ -4118,10 +4118,30 @@
         "status": "Sovereign country",
         "isShoreExcursion": true,
         "approximateVisits": 2,
-        "evidence": "owner-reported",
-        "note": "Visited by car while the cruise ship was docked, approximately twice. This was a shore visit, not a cruise port; the exact sailings and dates are not recorded. Counted as one country.",
+        "evidence": "owner-confirmed",
+        "note": "The owner confirms visiting Vatican City as a cruise shore excursion, by car while the ship was docked, approximately twice. Counted as one country; no ship port or dated sailing association is added.",
         "sources": [
           "https://www.vaticanstate.va/en/state-and-government/general-informations.html"
+        ],
+        "cruiseIds": [],
+        "referenceLinks": []
+      },
+      {
+        "name": "Monaco",
+        "flag": "🇲🇨",
+        "type": "country",
+        "status": "Sovereign country",
+        "isShoreExcursion": true,
+        "evidence": "owner-confirmed",
+        "candidateCruiseIds": [
+          20
+        ],
+        "candidatePort": "Villefranche",
+        "note": "The owner confirms visiting Monaco as a cruise shore excursion from a nearby French port on Celebrity Reflection. The 2018 sailing includes Villefranche, where Celebrity offers Monaco excursions; this is a candidate sailing association. The visit itself is confirmed and counts as one country.",
+        "sources": [
+          "https://www.un.org/en/about-us/member-states",
+          "https://www.celebritycruises.com/ports/nice/shore-excursions",
+          "https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/"
         ],
         "cruiseIds": [],
         "referenceLinks": []

@@ -39,9 +39,9 @@ try {
     assert.ok(dimensions.actual <= dimensions.expected + 1, `${label}: horizontal page overflow`);
   };
   const checkPassportCounts = async () => {
-    assert.equal(await page.locator('.stats-country-count').textContent(), '36');
+    assert.equal(await page.locator('.stats-country-count').textContent(), '37');
     assert.equal(await page.locator('.stats-territory-count').textContent(), '9');
-    assert.equal(await page.locator('#stats-country-list .stats-country-item').count(), 36);
+    assert.equal(await page.locator('#stats-country-list .stats-country-item').count(), 37);
     assert.equal(await page.locator('#stats-territory-list .stats-territory-item').count(), 9);
     assert.equal(await page.locator('.stats-land-country-count').textContent(), '5');
     assert.equal(await page.locator('.stats-land-territory-count').textContent(), '2');
@@ -70,12 +70,12 @@ try {
   await waitForView('statistics');
   assert.equal(new URL(page.url()).searchParams.get('view'), 'statistics');
   assert.deepEqual(await page.locator('[data-stats-count]').allTextContents(), [
-    '202', '55,200', '2.2', '4,848', '87', '45', '36', '9', '5', '2',
+    '202', '55,200', '2.2', '4,848', '87', '46', '37', '9', '5', '2',
   ]);
   await checkPassportCounts();
   const countryNames = await page.locator('#stats-country-list .stats-country-item strong').allTextContents();
   const specialNames = await page.locator('#stats-territory-list .stats-territory-item strong').allTextContents();
-  assert.equal(new Set([...countryNames, ...specialNames]).size, 45, 'Cruise places appear in exactly one category');
+  assert.equal(new Set([...countryNames, ...specialNames]).size, 46, 'Cruise places appear in exactly one category');
   assert.equal(countryNames.filter(name => name === 'United Kingdom').length, 1);
   assert.equal(countryNames.includes('Scotland'), false);
   assert.equal(countryNames.includes('Northern Ireland'), false);
@@ -94,13 +94,20 @@ try {
   assert.match(statuses['Puerto Rico'], /U\.S\. territory/);
 
   const vatican = page.locator('#stats-country-list .stats-country-item').filter({ hasText: 'Vatican City' });
-  assert.match(await vatican.locator('strong').textContent(), /^Vatican City\s*\*$/);
+  assert.equal(await vatican.locator('strong').textContent(), 'Vatican City');
   assert.equal(await vatican.locator('.stats-place-flag').textContent(), '🇻🇦');
   assert.doesNotMatch(await vatican.textContent(), /0 ports|0 cruises/);
-  const vaticanNote = await page.locator('#stats-vatican-note').textContent();
-  assert.match(vaticanNote, /car|driv/i);
   assert.equal(await page.locator('.stats-country-item').filter({ hasText: 'Vatican City' }).locator('small').textContent(), 'Shore excursion');
-  assert.match(vaticanNote, /(?:not|isn[’']t) a (?:cruise )?port/i);
+  const monaco = page.locator('#stats-country-list .stats-country-item').filter({ hasText: 'Monaco' });
+  assert.equal(await monaco.locator('strong').textContent(), 'Monaco');
+  assert.equal(await monaco.locator('.stats-place-flag').textContent(), '🇲🇨');
+  assert.equal(await monaco.locator('small').textContent(), 'Shore excursion');
+  assert.doesNotMatch(await monaco.textContent(), /\d+ ports|\d+ cruises|visits/);
+  assert.equal(await vatican.locator('sup, [aria-describedby]').count(), 0, 'Confirmed Vatican visit has no qualification marker');
+  assert.equal(await monaco.locator('sup, [aria-describedby]').count(), 0, 'Confirmed Monaco visit has no qualification marker');
+  assert.equal(await page.locator('#stats-vatican-note, #stats-monaco-note').count(), 0);
+  const monacoIndex = countryNames.indexOf('Monaco');
+  assert.deepEqual(countryNames.slice(monacoIndex - 1, monacoIndex + 2), ['Mexico', 'Monaco', 'Montenegro']);
 
   const landCountries = await page.locator('.stats-land-country-item strong').allTextContents();
   const landSpecialPlaces = await page.locator('.stats-land-territory-item strong').allTextContents();
@@ -260,7 +267,7 @@ try {
   assert.equal(await systemPage.evaluate(() => document.documentElement.dataset.theme), 'dark');
 
   assert.deepEqual(browserErrors, [], 'Browser runtime or console errors');
-  console.log('Browser checks passed: navigation, statistics, Vatican shore visit, separate non-cruise comparison, flags and status links, four keyboard disclosures, unit conversions, map callbacks, deep links, dark mode, reduced motion, and expanded 320–1440px layouts.');
+  console.log('Browser checks passed: navigation, statistics, Vatican and Monaco shore visits, separate non-cruise comparison, flags and status links, four keyboard disclosures, unit conversions, map callbacks, deep links, dark mode, reduced motion, and expanded 320–1440px layouts.');
 } finally {
   await browser.close();
 }

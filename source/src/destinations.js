@@ -42,6 +42,7 @@ export const destinations = Object.freeze([
   country('Jamaica', '🇯🇲'),
   country('Japan', '🇯🇵'),
   country('Mexico', '🇲🇽'),
+  country('Monaco', '🇲🇨'),
   country('Montenegro', '🇲🇪'),
   country('Netherlands', '🇳🇱'),
   country('Panama', '🇵🇦'),
@@ -101,6 +102,10 @@ export function summarizeDestinations(visits = [], shoreExcursions = []) {
     }
     if (typeof visit.note === 'string') place.note = visit.note;
     if (typeof visit.evidence === 'string') place.evidence = visit.evidence;
+    if (Array.isArray(visit.candidateCruiseIds)) {
+      place.candidateCruiseIds = [...new Set(visit.candidateCruiseIds.filter(Number.isInteger))].sort(byId);
+    }
+    if (typeof visit.candidatePort === 'string') place.candidatePort = visit.candidatePort;
     if (Array.isArray(visit.sources)) place.sources = [...new Set([...place.sources, ...visit.sources])];
     for (const cruiseId of Array.isArray(visit.cruiseIds) ? visit.cruiseIds : []) {
       if ((typeof cruiseId === 'number' && Number.isFinite(cruiseId)) || (typeof cruiseId === 'string' && cruiseId.trim())) {
