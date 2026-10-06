@@ -40,8 +40,10 @@ try {
   };
 
   await page.goto(atlasUrl.href);
-  await page.locator('.atlas-map__ship').first().waitFor();
-  assert.equal(await page.locator('.atlas-map__ship').count(), 29);
+  await page.locator('.atlas-map__departure').first().waitFor();
+  assert.ok(await page.locator('.atlas-map__departure').count() > 0);
+  assert.equal(await page.locator('.atlas-map__departure').evaluateAll(markers => markers.reduce((sum, marker) => sum + Number(marker.dataset.portCount), 0)), 15);
+  assert.equal(await page.locator('.atlas-map__departure').evaluateAll(markers => markers.reduce((sum, marker) => sum + Number(marker.dataset.count), 0)), 29);
   assert.equal(await page.locator('.cruise-card').count(), 29);
   await checkNoPageOverflow('Desktop atlas');
 
@@ -66,7 +68,8 @@ try {
   await waitForView('atlas');
   assert.equal(new URL(page.url()).searchParams.get('year'), '2022');
   assert.equal(await page.locator('.cruise-card').count(), 3);
-  assert.equal(await page.locator('.atlas-map__ship').count(), 3);
+  assert.equal(await page.locator('.atlas-map__departure').evaluateAll(markers => markers.reduce((sum, marker) => sum + Number(marker.dataset.portCount), 0)), 3);
+  assert.equal(await page.locator('.atlas-map__departure').evaluateAll(markers => markers.reduce((sum, marker) => sum + Number(marker.dataset.count), 0)), 3);
   await page.locator('[data-view="statistics"]').click();
   await page.locator('.stats-longest-card').click();
   await waitForView('atlas');

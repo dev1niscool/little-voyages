@@ -4,8 +4,8 @@ An illustrated, interactive atlas of 29 personal cruises, from 2005 to 2025.
 
 **Explore:** https://dev1niscool.github.io/little-voyages/
 
-- Animated, individually selectable ships on a zoomable world map
-- Illustrated routes and port labels, with smooth focus on a selected voyage
+- Ships anchored to actual departure coordinates, with grouped harbors and a ship/date picker
+- Clickable routes, port labels, and a single animated pass through a selected itinerary, with replay
 - Year timeline, ship/port search, cruise-line filter, and chronological playback
 - Dates, duration, itinerary, historical research notes, and source links for every voyage
 - A statistics page with cruise duration, estimated sailing distance, Earth-distance equivalents, repeat ports, cruise-line breakdowns, and clickable year charts
@@ -32,6 +32,7 @@ Run the browser smoke checks against a local preview or the published site (requ
 
 ```sh
 ATLAS_URL=http://localhost:4173/ node scripts/check-browser.mjs
+ATLAS_URL=http://localhost:4173/ node scripts/check-map.mjs
 ```
 
 Set `CHROMIUM_EXECUTABLE_PATH` if Chromium is installed somewhere other than `/usr/bin/chromium`.
@@ -53,6 +54,14 @@ Confidence labels distinguish historical matches from likely reconstructions. A 
 
 Map routes are **illustrative**, using port connections and some offshore waypoints. They are not recorded ship tracks or suitable for navigation. Ports, scenic cruising locations, and candidate segments should not be interpreted as independently verified personal visits.
 
+## Map interaction
+
+Ships begin at their recorded departure ports. Nearby harbors form deterministic groups at overview scales; each group is anchored to a real member port, and zooming reveals its ports without moving their coordinates. Tap a harbor to zoom in and choose a dated voyage. Route lines are also selectable; shared stretches offer a choice of the voyages using them.
+
+Selecting a voyage fits its full illustrated route and animates one ship from departure to the final recorded port. Round trips return to their homeport; one-way trips end at their arrival port. Replay runs the route again. The geographic ship position pauses during touch/drag/zoom gestures, and playback pauses when the atlas or browser tab is hidden. With Motion off, the ship stays at departure. The camera retains its geographic center and scale when the mobile viewport resizes.
+
+`node scripts/check-map.mjs` tests geographic marker placement against rendered route origins through zoom, pan, resize, and real touch events, plus departure choices, route selection, filters, and animation endpoints.
+
 ## Statistics and appearance
 
 Open the **Statistics** tab or share https://dev1niscool.github.io/little-voyages/?view=statistics.
@@ -69,6 +78,6 @@ Design references: [Flighty Passport](https://flighty.com/help/passport), [Polar
 
 Vite, vanilla JavaScript, and D3. Static HTML/CSS/JS with no runtime services.
 
-- Map geometry: [Natural Earth, 1:110m countries](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson), public domain. Geometry simplified in precision, properties reduced, Antarctica omitted.
+- Map geometry: [Natural Earth, 1:10m countries](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/), public domain. Shared-arc simplification at 750 metres, small islands retained, Antarctica omitted. Bundled as TopoJSON (about 1.93 MB / 681 KB gzip); no map tiles or runtime service. Optional rebuild: `node scripts/build-map.mjs`, requiring Node.js, npm, and curl. The script pins the source checksum and Mapshaper version.
 - [DM Sans](https://github.com/googlefonts/dm-fonts) and [Fraunces](https://github.com/undercasetype/Fraunces), SIL Open Font License. Fonts bundled locally; license texts in `public/fonts/`.
 - Ship and whale illustrations are original SVG artwork.

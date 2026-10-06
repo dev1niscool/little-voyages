@@ -347,3 +347,26 @@ dialog p,.dialog-actions>a,dialog .map-credit { color: var(--muted); }
   .top-actions { gap:8px; }
   .view-nav button { padding-left:25px;padding-right:25px; }
 }
+
+/* Map controls stay separate from the geographically anchored departure pins. */
+.help-mobile { display: none; }
+.map-section.is-map-zoomed .map-heading:not(.is-selected),
+.map-section.is-map-zoomed .map-corner,
+.map-section.is-map-zoomed .sea-friend { visibility: hidden; }
+.map-section:has(.atlas-map.is-choosing) .map-heading,
+.map-section:has(.atlas-map.is-choosing) .map-legend,
+.map-section:has(.atlas-map.is-choosing) .map-help,
+.map-section:has(.atlas-map.is-choosing) .route-disclaimer,
+.map-section:has(.atlas-map.is-choosing) .mobile-details,
+.map-section:has(.atlas-map.is-choosing) .sea-friend { visibility: hidden; }
+@media(max-width:800px) { .help-mobile { display: inline; } }
+@media(max-width:800px) {
+  .map-section:not(:has(.map-heading.is-selected)):not(:has(.atlas-map.is-choosing)) .map-tools {
+    flex-direction: row;
+    bottom: 80px;
+  }
+  .map-section:not(:has(.map-heading.is-selected)):not(:has(.atlas-map.is-choosing)) .map-tools>span {
+    width: 1px;
+    height: 20px;
+  }
+}

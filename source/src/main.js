@@ -38,7 +38,7 @@ const years = [...new Set(cruises.map(c => c.year))].sort((a,b)=>a-b);
 const lines = [...new Set(cruises.map(c => c.line))];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const state = {view:'atlas',year:null,query:'',line:'',selected:null,newest:true,motion:!reducedMotion.matches,touring:false};
-let tourTimer, map, statisticsPage, visible = [], selectedTab = 'itinerary';
+let tourTimer, map, statisticsPage, visible = [], selectedTab = 'itinerary', atlasViewInitialized = false;
 
 document.querySelector('#app').innerHTML = `
   <header class="topbar">
@@ -57,7 +57,7 @@ document.querySelector('#app').innerHTML = `
       <div class="map-corner"><span class="live-dot"></span> A LITTLE ATLAS OF A LIFE AT SEA</div>
       <div class="map-tools"><button id="reset-map" aria-label="Show world map" title="Show the whole world">${icon('globe')}</button><span></span><button id="zoom-in" aria-label="Zoom in" title="Zoom in">${icon('plus')}</button><button id="zoom-out" aria-label="Zoom out" title="Zoom out">${icon('minus')}</button></div>
       <button id="mobile-details" class="mobile-details" hidden></button><div class="map-legend" id="map-legend"></div>
-      <div class="map-help"><span class="help-desktop">Drag to wander · Scroll to zoom · </span>Tap a ship to explore</div>
+      <div class="map-help"><span class="help-desktop">Drag to explore · Scroll to zoom · </span>Tap a port or route <span class="help-mobile">· Pinch to zoom</span></div>
       <span class="route-disclaimer">Illustrative routes, not navigation tracks</span>
       <div class="sea-friend" aria-hidden="true"><svg viewBox="0 0 106 58"><path d="M16 31c-3-12 14-23 32-18 12 3 15 13 19 16 5 4 17 1 22-8 4 16-9 23-22 17-10 16-44 15-51-7Z" fill="#79afb1"/><path d="M45 42q-8 10-14-1" fill="#508e91"/><circle cx="24" cy="27" r="2" fill="#255f69"/><path d="M20 33q3 4 6 0M38 8q-2-7-6-5m6 5q3-7 8-5" stroke="#427f85" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M7 50q7 3 14 0m49 0q8 3 16 0" stroke="#79afb1" stroke-width="1.5" fill="none"/></svg><span>oh, the places you’ve sailed.</span></div>
     </section>
@@ -102,7 +102,7 @@ function renderHeading() {
   const heading=document.querySelector('#map-heading');
   heading.classList.toggle('is-selected',!!c);
   const mobileDetails=document.querySelector('#mobile-details');mobileDetails.hidden=!c;mobileDetails.innerHTML=c?`${esc(c.ship)}<span>${c.nights?`${c.nights} nights · `:''}View voyage ${icon('chevron')}</span>`:'';
-  heading.innerHTML=c?`<span class="eyebrow">FOLLOW THE MEMORY</span><h2>${esc(c.region)}<span class="little-star">✧</span></h2><p>${c.ports.length?`${c.ports[0].name} ${icon('chevron')} ${c.ports.at(-1).name}`:'A port of possibility, a route to rediscover.'}</p>`:`<span class="eyebrow">${state.year?`A CHAPTER CALLED ${state.year}`:'2005 — 2025 · A PERSONAL VOYAGE COLLECTION'}</span><h2>${state.year?'Same sea.': 'A world of places.'}<br><em>${state.year?'New memories.':'A sea of memories.'}</em><span class="little-star">✧</span></h2><p>${state.year?`${visible.length} ${visible.length===1?'journey':'journeys'} from ${state.year}, waiting to be revisited.`:'Every little ship holds a story. Where shall we go?'}</p><div class="map-stats"><div><strong>${visible.length.toString().padStart(2,'0')}</strong><span>voyages</span></div><i></i><div><strong>${new Set(visible.map(c=>c.ship)).size.toString().padStart(2,'0')}</strong><span>ships</span></div><i></i><div><strong>${new Set(visible.map(c=>c.line)).size.toString().padStart(2,'0')}</strong><span>cruise lines</span></div></div>`;
+  heading.innerHTML=c?`<span class="eyebrow">FOLLOW THE MEMORY</span><h2>${esc(c.region)}<span class="little-star">✧</span></h2><p>${c.ports.length?`${c.ports[0].name} ${icon('chevron')} ${c.ports.at(-1).name}`:'A port of possibility, a route to rediscover.'}</p>`:`<span class="eyebrow">${state.year?`A CHAPTER CALLED ${state.year}`:'2005 — 2025 · A PERSONAL VOYAGE COLLECTION'}</span><h2>${state.year?'Same sea.': 'A world of places.'}<br><em>${state.year?'New memories.':'A sea of memories.'}</em><span class="little-star">✧</span></h2><p>${state.year?`${visible.length} ${visible.length===1?'journey':'journeys'} from ${state.year}, waiting to be revisited.`:'Start at a port. Pick a ship. Follow the voyage.'}</p><div class="map-stats"><div><strong>${visible.length.toString().padStart(2,'0')}</strong><span>voyages</span></div><i></i><div><strong>${new Set(visible.map(c=>c.ship)).size.toString().padStart(2,'0')}</strong><span>ships</span></div><i></i><div><strong>${new Set(visible.map(c=>c.line)).size.toString().padStart(2,'0')}</strong><span>cruise lines</span></div></div>`;
   const shownLines=[...new Set(visible.map(c=>c.line))];
   document.querySelector('#map-legend').innerHTML=shownLines.map(line=>{const cruise=cruises.find(c=>c.line===line);return `<span><i style="background:${cruise.color}"></i>${esc(line.replace(' Cruise Line','').replace(' Cruises','').replace(' Line',''))}</span>`}).join('');
 }
@@ -122,9 +122,9 @@ function clearFilters() {stopTour();Object.assign(state,{year:null,query:'',line
 function selectYear(year) {stopTour();state.year=year;state.selected=null;render();map.reset();if(visible.length===1)map.focus(visible[0]);document.querySelector(`[data-year="${year}"]`)?.scrollIntoView({behavior:state.motion?'smooth':'instant',block:'nearest',inline:'nearest'})}
 function updateTourButton() {document.querySelector('#tour').innerHTML=`${icon(state.touring?'pause':'play')}<span>${state.touring?'Pause the journey':'Sail through time'}</span>`;document.querySelector('#tour').setAttribute('aria-pressed',state.touring)}
 function stopTour(){clearTimeout(tourTimer);state.touring=false;updateTourButton()}
-function startTour(){if(state.touring){stopTour();return}state.touring=true;state.query='';state.line='';state.year=null;let index=state.selected?cruises.findIndex(c=>c.id===state.selected):0;if(index===cruises.length-1)index=0;const sail=()=>{if(!state.touring)return;selectCruise(cruises[index].id,true);updateTourButton();index++;tourTimer=setTimeout(()=>index<cruises.length?sail():stopTour(),6500)};sail()}
+function startTour(){if(state.touring){stopTour();return}state.touring=true;state.query='';state.line='';state.year=null;let index=state.selected?cruises.findIndex(c=>c.id===state.selected):0;if(index===cruises.length-1)index=0;const sail=()=>{if(!state.touring)return;selectCruise(cruises[index].id,true);updateTourButton();index++;tourTimer=setTimeout(()=>index<cruises.length?sail():stopTour(),state.motion?14000:6500)};sail()}
 
-map=createCruiseMap(document.querySelector('#map'),{onSelect:c=>selectCruise(c.id),onViewChange:({zoomed})=>document.querySelector('#reset-map').classList.toggle('zoomed',zoomed)});
+map=createCruiseMap(document.querySelector('#map'),{onSelect:c=>selectCruise(c.id),onInteract:()=>stopTour(),onViewChange:({zoomed})=>{document.querySelector('#reset-map').classList.toggle('zoomed',zoomed);document.querySelector('.map-section').classList.toggle('is-map-zoomed',zoomed)}});
 map.setMotion(state.motion);
 document.body.classList.toggle('still-seas',!state.motion);
 document.querySelector('#motion').addEventListener('click',()=>{state.motion=!state.motion;document.querySelector('#motion').setAttribute('aria-pressed',state.motion);document.body.classList.toggle('still-seas',!state.motion);map.setMotion(state.motion)});
@@ -138,7 +138,10 @@ document.querySelectorAll('[data-year]').forEach(el=>el.addEventListener('click'
 document.querySelector('#tour').addEventListener('click',startTour);
 document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();clearFilters();setView('atlas')});
 const dialog=document.querySelector('#about-dialog');
-document.querySelector('#about').addEventListener('click',()=>{stopTour();dialog.showModal()});
+document.querySelector('#about').addEventListener('click',()=>{stopTour();dialog.showModal();syncMapActivity()});
+dialog.addEventListener('close',syncMapActivity);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopTour();syncMapActivity()});
+function syncMapActivity(){map?.setActive(state.view==='atlas'&&!document.hidden&&!dialog.open)}
 document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',e=>{if(e.target===dialog){const rect=dialog.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)dialog.close()}});
 document.querySelector('#download').addEventListener('click',()=>{const data={title:'Little voyages — My cruise atlas',routeNote:'Illustrative port connections, not recorded navigation tracks.',cruises};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='little-voyages-logbook.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
@@ -167,13 +170,14 @@ function setView(view,{push=true,scroll=true}={}){
   document.querySelectorAll('[data-view]').forEach(button=>{if(button.dataset.view===state.view)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')});
   document.title=stats?'By the numbers — Little voyages':'Little voyages — My cruise atlas';
   if(stats)statisticsPage?.show();else statisticsPage?.hide();
+  syncMapActivity();
   syncUrl(push);
   if(scroll)window.scrollTo({top:0,behavior:'instant'});
-  if(!stats)requestAnimationFrame(()=>{map.update(visible,state.selected);const cruise=cruises.find(c=>c.id===state.selected);if(cruise)map.focus(cruise,false);else map.reset()});
+  if(!stats){const firstView=!atlasViewInitialized;atlasViewInitialized=true;requestAnimationFrame(()=>{map.update(visible,state.selected);const cruise=cruises.find(c=>c.id===state.selected);if(firstView&&cruise)map.focus(cruise,false)});}
   document.querySelector('#announcer').textContent=stats?'Statistics page. Your entire cruise collection, by the numbers.':`${visible.length} voyages shown on the cruise atlas.`;
 }
 document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.view)));
-window.addEventListener('popstate',()=>{const p=new URLSearchParams(location.search);const y=Number(p.get('year')),id=Number(p.get('cruise'));Object.assign(state,{year:years.includes(y)?y:null,query:'',line:'',selected:cruises.some(c=>c.id===id)?id:null});state.view=p.get('view')==='statistics'?'statistics':'atlas';render();setView(state.view,{push:false});});
+window.addEventListener('popstate',()=>{const p=new URLSearchParams(location.search);const y=Number(p.get('year')),id=Number(p.get('cruise'));Object.assign(state,{year:years.includes(y)?y:null,query:'',line:'',selected:cruises.some(c=>c.id===id)?id:null});state.view=p.get('view')==='statistics'?'statistics':'atlas';render();setView(state.view,{push:false});if(state.view==='atlas')requestAnimationFrame(()=>{const cruise=cruises.find(c=>c.id===state.selected);if(cruise)map.focus(cruise,false);else map.reset()});});
 const themePreference=matchMedia('(prefers-color-scheme: dark)');
 function setTheme(theme,persist=false){
   document.documentElement.dataset.theme=theme;
