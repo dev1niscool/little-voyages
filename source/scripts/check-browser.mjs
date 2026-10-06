@@ -39,10 +39,10 @@ try {
     assert.ok(dimensions.actual <= dimensions.expected + 1, `${label}: horizontal page overflow`);
   };
   const checkPassportCounts = async () => {
-    assert.equal(await page.locator('.stats-country-count').textContent(), '37');
-    assert.equal(await page.locator('.stats-territory-count').textContent(), '9');
-    assert.equal(await page.locator('#stats-country-list .stats-country-item').count(), 37);
-    assert.equal(await page.locator('#stats-territory-list .stats-territory-item').count(), 9);
+    assert.equal(await page.locator('.stats-country-count').textContent(), '40');
+    assert.equal(await page.locator('.stats-territory-count').textContent(), '6');
+    assert.equal(await page.locator('#stats-country-list .stats-country-item').count(), 40);
+    assert.equal(await page.locator('#stats-territory-list .stats-territory-item').count(), 6);
     assert.equal(await page.locator('.stats-land-country-count').textContent(), '5');
     assert.equal(await page.locator('.stats-land-territory-count').textContent(), '2');
     assert.equal(await page.locator('.stats-land-country-item').count(), 5);
@@ -70,7 +70,7 @@ try {
   await waitForView('statistics');
   assert.equal(new URL(page.url()).searchParams.get('view'), 'statistics');
   assert.deepEqual(await page.locator('[data-stats-count]').allTextContents(), [
-    '202', '55,200', '2.2', '4,848', '87', '46', '37', '9', '5', '2',
+    '202', '55,200', '2.2', '4,848', '87', '46', '40', '6', '5', '2',
   ]);
   await checkPassportCounts();
   const countryNames = await page.locator('#stats-country-list .stats-country-item strong').allTextContents();
@@ -81,14 +81,21 @@ try {
   assert.equal(countryNames.includes('Northern Ireland'), false);
   assert.equal([...countryNames, ...specialNames].includes('Saint Martin'), false, 'Dutch port calls do not imply visiting French Saint Martin');
   assert.deepEqual(specialNames, [
-    'Aruba', 'Cayman Islands', 'Curaçao', 'Gibraltar', 'Guernsey',
-    'Puerto Rico', 'Sint Maarten', 'Turks and Caicos Islands', 'U.S. Virgin Islands',
+    'Cayman Islands', 'Gibraltar', 'Guernsey',
+    'Puerto Rico', 'Turks and Caicos Islands', 'U.S. Virgin Islands',
   ]);
   const statuses = await page.locator('#stats-territory-list .stats-territory-item').evaluateAll(items => Object.fromEntries(items.map(item => [
     item.querySelector('strong').textContent,
     item.querySelector('.stats-place-status').textContent,
   ])));
-  assert.match(statuses.Aruba, /Kingdom of the Netherlands/);
+  for (const [name, flag] of [['Aruba', '🇦🇼'], ['Curaçao', '🇨🇼'], ['Sint Maarten', '🇸🇽']]) {
+    assert.ok(countryNames.includes(name), `${name} appears in the country list`);
+    const row = page.locator('#stats-country-list .stats-country-item').filter({ has: page.locator('strong', { hasText: new RegExp(`^${name}$`) }) });
+    assert.equal(await row.locator('.stats-place-flag').textContent(), flag);
+    assert.equal(await row.locator('.stats-place-status, .stats-country-status').count(), 0, 'Constituent countries use the same presentation as other countries');
+    assert.match(await row.locator('small').textContent(), /^\d+ ports? · \d+ cruises?$/);
+    assert.doesNotMatch(await row.textContent(), /Kingdom of the Netherlands/);
+  }
   assert.equal(statuses.Guernsey, 'Crown Dependency');
   assert.equal(statuses['Cayman Islands'], 'British Overseas Territory');
   assert.match(statuses['Puerto Rico'], /U\.S\. territory/);
@@ -267,7 +274,7 @@ try {
   assert.equal(await systemPage.evaluate(() => document.documentElement.dataset.theme), 'dark');
 
   assert.deepEqual(browserErrors, [], 'Browser runtime or console errors');
-  console.log('Browser checks passed: navigation, statistics, Vatican and Monaco shore visits, separate non-cruise comparison, flags and status links, four keyboard disclosures, unit conversions, map callbacks, deep links, dark mode, reduced motion, and expanded 320–1440px layouts.');
+  console.log('Browser checks passed: navigation, statistics, Dutch constituent countries, Vatican and Monaco shore visits, separate non-cruise comparison, flags and status links, four keyboard disclosures, unit conversions, map callbacks, deep links, dark mode, reduced motion, and expanded 320–1440px layouts.');
 } finally {
   await browser.close();
 }

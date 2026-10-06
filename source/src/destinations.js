@@ -7,11 +7,12 @@ const GUERNSEY_SOURCE = 'https://www.gov.uk/government/publications/guernsey-ald
 const US_TERRITORIES_SOURCE = 'https://www.doi.gov/node/11613';
 
 const country = (name, flag) => ({ name, flag, type: 'country', status: 'Sovereign country', sovereign: null, sources: [] });
+const kingdomCountry = (name, flag) => ({ ...country(name, flag), status: 'Country within the Kingdom of the Netherlands', sovereign: 'Kingdom of the Netherlands', sources: [KINGDOM_SOURCE] });
 const territory = (name, flag, status, sovereign, source) => ({ name, flag, type: 'territory', status, sovereign, sources: [source] });
 
 export const destinations = Object.freeze([
   country('Antigua and Barbuda', '🇦🇬'),
-  territory('Aruba', '🇦🇼', 'Country within the Kingdom of the Netherlands', 'Kingdom of the Netherlands', KINGDOM_SOURCE),
+  kingdomCountry('Aruba', '🇦🇼'),
   country('Bahamas', '🇧🇸'),
   country('Barbados', '🇧🇧'),
   country('Belize', '🇧🇿'),
@@ -20,7 +21,7 @@ export const destinations = Object.freeze([
   country('Costa Rica', '🇨🇷'),
   country('Croatia', '🇭🇷'),
   country('Cuba', '🇨🇺'),
-  territory('Curaçao', '🇨🇼', 'Country within the Kingdom of the Netherlands', 'Kingdom of the Netherlands', KINGDOM_SOURCE),
+  kingdomCountry('Curaçao', '🇨🇼'),
   country('Denmark', '🇩🇰'),
   country('Dominica', '🇩🇲'),
   country('Dominican Republic', '🇩🇴'),
@@ -50,7 +51,7 @@ export const destinations = Object.freeze([
   country('Russia', '🇷🇺'),
   country('Saint Kitts and Nevis', '🇰🇳'),
   country('Saint Lucia', '🇱🇨'),
-  territory('Sint Maarten', '🇸🇽', 'Country within the Kingdom of the Netherlands', 'Kingdom of the Netherlands', KINGDOM_SOURCE),
+  kingdomCountry('Sint Maarten', '🇸🇽'),
   country('South Korea', '🇰🇷'),
   country('Spain', '🇪🇸'),
   country('Sweden', '🇸🇪'),

@@ -85,14 +85,24 @@ test('all 29 corrected voyages contribute to the live collection without changin
   assert.equal(stats.lineCount, 7);
   assert.equal(stats.scenicStops, 1);
   assert.equal(stats.spanYears, 20);
-  assert.equal(stats.countryCount, 35);
-  assert.equal(stats.territoryCount, 9);
+  assert.equal(stats.countryCount, 38);
+  assert.equal(stats.territoryCount, 6);
   assert.equal(stats.placeCount, stats.countryCount + stats.territoryCount);
   assert.deepEqual(stats.unclassifiedPlaces, []);
   assert.deepEqual(stats.territories.map(place => place.name), [
-    'Aruba', 'Cayman Islands', 'Curaçao', 'Gibraltar', 'Guernsey',
-    'Puerto Rico', 'Sint Maarten', 'Turks and Caicos Islands', 'U.S. Virgin Islands',
+    'Cayman Islands', 'Gibraltar', 'Guernsey',
+    'Puerto Rico', 'Turks and Caicos Islands', 'U.S. Virgin Islands',
   ]);
+  for (const [name, flag] of [['Aruba', '🇦🇼'], ['Curaçao', '🇨🇼'], ['Sint Maarten', '🇸🇽']]) {
+    const place = stats.countries.find(destination => destination.name === name);
+    assert.ok(place, `${name} belongs in the country category`);
+    assert.equal(place.type, 'country');
+    assert.equal(place.flag, flag);
+    assert.equal(place.status, 'Country within the Kingdom of the Netherlands');
+    assert.equal(place.sovereign, 'Kingdom of the Netherlands');
+    assert.ok(place.sources.some(url => new URL(url).hostname === 'www.government.nl'), `${name} retains its official classification source`);
+    assert.ok(!stats.territories.some(destination => destination.name === name));
+  }
   assert.deepEqual(stats.countries.find(place => place.name === 'United Kingdom').ports,
     ['Ayr', 'Belfast', 'Glasgow (Greenock)', 'Liverpool'], 'Northern Ireland and Scotland are included once under the United Kingdom');
   assert.deepEqual(stats.countries.find(place => place.name === 'South Korea').ports, ['Jeju']);
@@ -124,13 +134,13 @@ test('destination lists deduplicate calls while preserving direct port evidence 
   ];
   const original = structuredClone(fixture);
   const stats = computeStatistics(fixture);
-  assert.deepEqual(stats.countries.map(place => place.name), ['Bahamas']);
-  assert.deepEqual(stats.countries[0].ports, ['Harbor A', 'Harbor B']);
-  assert.deepEqual(stats.territories.map(place => place.name), ['Aruba', 'Curaçao', 'Puerto Rico']);
-  assert.deepEqual(stats.territories.find(place => place.name === 'Aruba').cruiseIds, [2, 10]);
-  assert.deepEqual(stats.territories.find(place => place.name === 'Aruba').ports, ['Oranjestad']);
+  assert.deepEqual(stats.countries.map(place => place.name), ['Aruba', 'Bahamas', 'Curaçao']);
+  assert.deepEqual(stats.countries.find(place => place.name === 'Bahamas').ports, ['Harbor A', 'Harbor B']);
+  assert.deepEqual(stats.territories.map(place => place.name), ['Puerto Rico']);
+  assert.deepEqual(stats.countries.find(place => place.name === 'Aruba').cruiseIds, [2, 10]);
+  assert.deepEqual(stats.countries.find(place => place.name === 'Aruba').ports, ['Oranjestad']);
   assert.deepEqual(stats.territories.find(place => place.name === 'Puerto Rico').ports, ['San Juan'], 'one-way arrival and departure are eligible calls');
-  assert.equal(stats.territories.find(place => place.name === 'Curaçao').status, 'Country within the Kingdom of the Netherlands');
+  assert.equal(stats.countries.find(place => place.name === 'Curaçao').status, 'Country within the Kingdom of the Netherlands');
   assert.ok(stats.territories.every(place => place.sources.length > 0), 'special statuses have a source');
   assert.deepEqual(stats.unclassifiedPlaces.map(place => place.name), ['Future place']);
   assert.deepEqual(stats.unclassifiedPlaces[0].ports, ['Other roadstead', 'Roadstead']);
@@ -142,12 +152,13 @@ test('destination lists deduplicate calls while preserving direct port evidence 
 test('year selections recalculate destinations without inferring visits to associated countries', () => {
   const stats = computeStatistics(cruises.filter(cruise => cruise.year === 2025));
   assert.equal(stats.cruiseCount, 1);
-  assert.deepEqual(stats.countries.map(place => place.name), ['Dominican Republic', 'United States']);
-  assert.deepEqual(stats.territories.map(place => place.name), ['Aruba', 'Curaçao']);
-  assert.equal(stats.countryCount, 2, 'a visit to Aruba or Curaçao does not also add the Netherlands');
-  assert.equal(stats.territoryCount, 2);
+  assert.deepEqual(stats.countries.map(place => place.name), ['Aruba', 'Curaçao', 'Dominican Republic', 'United States']);
+  assert.deepEqual(stats.territories, []);
+  assert.equal(stats.countryCount, 4, 'a visit to Aruba or Curaçao does not also add the Netherlands');
+  assert.ok(!stats.countries.some(place => place.name === 'Netherlands'));
+  assert.equal(stats.territoryCount, 0);
   assert.ok(stats.countries.every(place => !['Vatican City', 'Monaco'].includes(place.name)), 'personal visits without confirmed sailing dates are not silently assigned to a year');
-  assert.deepEqual(stats.territories[0].cruiseIds, [29]);
+  assert.deepEqual(stats.countries.find(place => place.name === 'Aruba').cruiseIds, [29]);
 
   const territoryOnly = computeStatistics([{ id: 1, ports: [
     { name: 'St. Peter Port', country: 'Guernsey' },
@@ -156,6 +167,17 @@ test('year selections recalculate destinations without inferring visits to assoc
   ] }]);
   assert.equal(territoryOnly.countryCount, 0, 'Crown Dependencies and territories do not add the UK or US');
   assert.equal(territoryOnly.territoryCount, 3);
+
+  const constituentVisits = computeStatistics([{ id: 1, ports: [
+    { name: 'Oranjestad', country: 'Aruba' },
+    { name: 'Philipsburg', country: 'Sint Maarten' },
+    { name: 'St. Peter Port', country: 'Guernsey' },
+  ] }]);
+  assert.deepEqual(constituentVisits.countries.map(place => place.name), ['Aruba', 'Sint Maarten']);
+  assert.equal(constituentVisits.countryCount, 2);
+  assert.deepEqual(constituentVisits.territories.map(place => place.name), ['Guernsey']);
+  assert.equal(constituentVisits.territoryCount, 1);
+  assert.ok(!constituentVisits.countries.some(place => ['Netherlands', 'United Kingdom'].includes(place.name)), 'Associated countries require their own visit evidence');
 });
 
 test('Confirmed Vatican and Monaco shore excursions add countries without inventing port calls or dated sailings', () => {
@@ -163,8 +185,8 @@ test('Confirmed Vatican and Monaco shore excursions add countries without invent
   const visitsBefore = structuredClone(shoreExcursions);
   const itineraryOnly = computeStatistics(cruises);
   const stats = computeStatistics(cruises, { shoreExcursions });
-  assert.equal(stats.countryCount, 37);
-  assert.equal(stats.territoryCount, 9);
+  assert.equal(stats.countryCount, 40);
+  assert.equal(stats.territoryCount, 6);
   assert.equal(stats.placeCount, 46);
   assert.equal(stats.itineraryPlaceCount, 44);
   const vatican = stats.countries.find(place => place.name === 'Vatican City');

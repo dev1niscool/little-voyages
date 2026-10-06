@@ -17,7 +17,7 @@
     "earth": "Earth equivalents divide the estimated distance by the equatorial circumference of 40,075.017 km. This is a distance comparison, not a claim that these voyages circled the globe.",
     "ports": "Port visits count recorded itinerary stops, including embarkation and one-way arrival ports. The starting port counts once for a round trip: its final return is excluded, while separate repeat calls such as Castaway Cay count again. Glacier Bay and other scenic cruising stops are counted separately. Port visits do not establish that you went ashore.",
     "places": "Places are distinct country and territory labels attached to recorded ports, plus explicitly included personal shore visits. Dependencies and territories are listed separately, so this is not a sovereign-country count. The itinerary-only place count is retained separately. Counts inherit the atlas’s itinerary uncertainty.",
-    "destinations": "Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. The full collection also includes Monaco and Vatican City, confirmed by the owner as cruise shore excursions. These add countries without adding ship ports, route segments, nights, or mileage. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. Itinerary records alone do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed. The separate non-cruise comparison is owner-reported and never contributes to cruise totals.",
+    "destinations": "Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. The full collection also includes Monaco and Vatican City, confirmed by the owner as cruise shore excursions. These add countries without adding ship ports, route segments, nights, or mileage. The country list includes sovereign states plus Aruba, Curaçao, and Sint Maarten, constituent countries of the Kingdom of the Netherlands. Other territories and Crown Dependencies appear separately. Visiting a constituent country or territory does not also count as a visit to its associated country. Itinerary records alone do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed. The separate non-cruise comparison is owner-reported and never contributes to cruise totals.",
     "years": "Each trip belongs to the year of your original cruise record, including sailings that cross New Year. The collection’s span is the difference between its first and last recorded calendar years."
   },
   "precision": "Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation.",
@@ -51,6 +51,22 @@
         ],
         "cruiseIds": [
           16
+        ]
+      },
+      {
+        "name": "Aruba",
+        "flag": "🇦🇼",
+        "type": "country",
+        "status": "Country within the Kingdom of the Netherlands",
+        "sovereign": "Kingdom of the Netherlands",
+        "sources": [
+          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
+        ],
+        "ports": [
+          "Aruba"
+        ],
+        "cruiseIds": [
+          29
         ]
       },
       {
@@ -161,6 +177,22 @@
         ],
         "cruiseIds": [
           21
+        ]
+      },
+      {
+        "name": "Curaçao",
+        "flag": "🇨🇼",
+        "type": "country",
+        "status": "Country within the Kingdom of the Netherlands",
+        "sovereign": "Kingdom of the Netherlands",
+        "sources": [
+          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
+        ],
+        "ports": [
+          "Curaçao"
+        ],
+        "cruiseIds": [
+          29
         ]
       },
       {
@@ -518,6 +550,25 @@
         ]
       },
       {
+        "name": "Sint Maarten",
+        "flag": "🇸🇽",
+        "type": "country",
+        "status": "Country within the Kingdom of the Netherlands",
+        "sovereign": "Kingdom of the Netherlands",
+        "sources": [
+          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
+        ],
+        "ports": [
+          "St. Maarten"
+        ],
+        "cruiseIds": [
+          2,
+          4,
+          12,
+          16
+        ]
+      },
+      {
         "name": "South Korea",
         "flag": "🇰🇷",
         "type": "country",
@@ -655,22 +706,6 @@
     ],
     "territories": [
       {
-        "name": "Aruba",
-        "flag": "🇦🇼",
-        "type": "territory",
-        "status": "Country within the Kingdom of the Netherlands",
-        "sovereign": "Kingdom of the Netherlands",
-        "sources": [
-          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
-        ],
-        "ports": [
-          "Aruba"
-        ],
-        "cruiseIds": [
-          29
-        ]
-      },
-      {
         "name": "Cayman Islands",
         "flag": "🇰🇾",
         "type": "territory",
@@ -684,22 +719,6 @@
         ],
         "cruiseIds": [
           9
-        ]
-      },
-      {
-        "name": "Curaçao",
-        "flag": "🇨🇼",
-        "type": "territory",
-        "status": "Country within the Kingdom of the Netherlands",
-        "sovereign": "Kingdom of the Netherlands",
-        "sources": [
-          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
-        ],
-        "ports": [
-          "Curaçao"
-        ],
-        "cruiseIds": [
-          29
         ]
       },
       {
@@ -756,25 +775,6 @@
         ]
       },
       {
-        "name": "Sint Maarten",
-        "flag": "🇸🇽",
-        "type": "territory",
-        "status": "Country within the Kingdom of the Netherlands",
-        "sovereign": "Kingdom of the Netherlands",
-        "sources": [
-          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
-        ],
-        "ports": [
-          "St. Maarten"
-        ],
-        "cruiseIds": [
-          2,
-          4,
-          12,
-          16
-        ]
-      },
-      {
         "name": "Turks and Caicos Islands",
         "flag": "🇹🇨",
         "type": "territory",
@@ -815,8 +815,8 @@
         ]
       }
     ],
-    "countryCount": 37,
-    "territoryCount": 9,
+    "countryCount": 40,
+    "territoryCount": 6,
     "unclassifiedPlaces": [],
     "shoreExcursionPlaces": [
       {

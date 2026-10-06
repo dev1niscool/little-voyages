@@ -116,13 +116,22 @@ try {
   }
   assert.equal(statistics.statistics.cruiseCount, 29);
   assert.equal(statistics.statistics.totalNights, 202);
-  assert.equal(statistics.statistics.countryCount, 37);
-  assert.equal(statistics.statistics.territoryCount, 9);
-  assert.equal(statistics.statistics.countries.length, 37);
-  assert.equal(statistics.statistics.territories.length, 9);
+  assert.equal(statistics.statistics.countryCount, 40);
+  assert.equal(statistics.statistics.territoryCount, 6);
+  assert.equal(statistics.statistics.countries.length, 40);
+  assert.equal(statistics.statistics.territories.length, 6);
   assert.equal(statistics.statistics.placeCount, 46);
   assert.equal(statistics.statistics.itineraryPlaceCount, 44);
   assert.equal(statistics.statistics.uniquePorts, 87);
+  for (const name of ['Aruba', 'Curaçao', 'Sint Maarten']) {
+    const place = statistics.statistics.countries.find(destination => destination.name === name);
+    assert.equal(place.type, 'country');
+    assert.equal(place.status, 'Country within the Kingdom of the Netherlands');
+    assert.equal(place.sovereign, 'Kingdom of the Netherlands');
+    assert.ok(place.sources.some(url => new URL(url).hostname === 'www.government.nl'));
+    assert.ok(!statistics.statistics.territories.some(destination => destination.name === name));
+  }
+  assert.match(statistics.methodology.destinations, /constituent countries/i);
   assert.deepEqual(statistics.personalVisits, logbook.personalVisits, 'Both JSON downloads preserve the same owner-reported visits');
   for (const exported of [logbook, statistics]) {
     assert.match(exported.personalVisitsSha256, /^[a-f0-9]{64}$/);

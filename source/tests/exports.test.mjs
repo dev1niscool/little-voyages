@@ -34,8 +34,8 @@ test('statistics preserve the full calculation, methodology, and territorial evi
   assert.deepEqual(exported.statistics, computeStatistics(cruises, { shoreExcursions }));
   assert.deepEqual(exported.methodology, statsMethodology);
   assert.equal(exported.statistics.totalNights, 202);
-  assert.equal(exported.statistics.countryCount, 37);
-  assert.equal(exported.statistics.territoryCount, 9);
+  assert.equal(exported.statistics.countryCount, 40);
+  assert.equal(exported.statistics.territoryCount, 6);
   assert.equal(exported.statistics.itineraryPlaceCount, 44);
   assert.equal(exported.statistics.placeCount, 46);
   for (const place of exported.statistics.territories) {
@@ -43,6 +43,15 @@ test('statistics preserve the full calculation, methodology, and territorial evi
     assert.ok(place.cruiseIds.length > 0);
     assert.ok(place.status);
   }
+  for (const name of ['Aruba', 'Curaçao', 'Sint Maarten']) {
+    const place = exported.statistics.countries.find(destination => destination.name === name);
+    assert.equal(place.type, 'country');
+    assert.equal(place.status, 'Country within the Kingdom of the Netherlands');
+    assert.equal(place.sovereign, 'Kingdom of the Netherlands');
+    assert.ok(place.sources.some(url => new URL(url).hostname === 'www.government.nl'));
+    assert.ok(!exported.statistics.territories.some(destination => destination.name === name));
+  }
+  assert.match(exported.methodology.destinations, /constituent countries/i);
   assert.match(exported.precision, /not real-world accuracy/);
 });
 
@@ -175,6 +184,8 @@ test('guide retains complete readable research and explains the transfer and dat
     }
   }
   assert.match(guide, /not a claim that these jurisdictions are unrecognized states/);
+  assert.match(guide, /constituent countries/i);
+  assert.doesNotMatch(guide, /40 sovereign countries/i);
   assert.match(guide, /position in the recorded itinerary, not a cruise day/);
   assert.match(guide, /originalShip/);
   assert.match(guide, /owner-authorized AI task/);
