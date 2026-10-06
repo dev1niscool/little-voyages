@@ -222,7 +222,7 @@ body.still-seas .statistics-page *, body.still-seas .statistics-page *::before, 
 /* A cruise passport, with the place lists tucked into matching glass cards. */
 .stats-passport { margin:32px 0; }
 .stats-passport-heading { padding:0 5px; margin-bottom:20px; }
-.stats-passport-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:start; }
+.stats-passport-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:24px; align-items:start; }
 .stats-country-card { background:linear-gradient(135deg,#eaf9f1e6,#edf7fbce); }
 .stats-territory-card { background:linear-gradient(135deg,#f4efffe6,#fbf1f7ce); }
 .stats-passport-hero { position:relative; padding-right:145px; min-height:186px; }
@@ -244,13 +244,11 @@ body.still-seas .statistics-page *, body.still-seas .statistics-page *::before, 
 .stats-place-details[open] summary>.stats-icon { transform:rotate(180deg); }
 .stats-place-details summary:focus-visible { outline:3px solid var(--teal); outline-offset:4px; }
 .stats-country-list,.stats-territory-list { list-style:none; padding:0; margin:18px 0 0; }
-.stats-country-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
 .stats-country-item { display:flex; align-items:center; gap:9px; min-width:0; padding:10px 9px; border:1px solid var(--stats-outline); background:#ffffff57; border-radius:12px; }
 .stats-place-flag { font-size:23px; line-height:1; flex:none; }
 .stats-country-item>span:last-child,.stats-territory-item>div { min-width:0; }
 .stats-country-item strong,.stats-territory-item strong { display:block; font-size:11px; font-weight:650; line-height:1.5; overflow-wrap:anywhere; }
 .stats-country-item small,.stats-territory-item small { display:block; color:var(--stats-secondary); font-size:9px; line-height:1.6; margin-top:3px; }
-.stats-territory-list { display:grid; gap:10px; }
 .stats-territory-item { display:flex; gap:13px; align-items:flex-start; padding:14px; background:#ffffff57; border:1px solid var(--stats-outline); border-radius:14px; }
 .stats-territory-item .stats-place-flag { margin-top:4px; }
 .stats-territory-item strong { font-size:13px; }
@@ -266,15 +264,18 @@ html[data-theme="dark"] .stats-passport-hero>.stats-number { color:#94d9cd; }
 html[data-theme="dark"] .stats-territory-card .stats-passport-hero>.stats-number { color:#d4b1ea; }
 html[data-theme="dark"] .stats-country-item,html[data-theme="dark"] .stats-territory-item { background:#ffffff06; }
 @media(max-width:1100px) { .stats-passport-hero { padding-right:104px; min-height:195px; } .stats-passport-scene { width:103px; height:100px; top:35px; right:-5px; } .stats-passport-hero h3 { font-size:22px; } }
-@media(max-width:800px) { .stats-passport-grid { gap:17px; grid-template-columns:1fr; } .stats-passport-hero { padding-right:145px; min-height:185px; } .stats-passport-scene { width:135px; height:118px; top:25px; right:0; } .stats-country-list { grid-template-columns:repeat(3,minmax(0,1fr)); } }
-@media(max-width:500px) { .stats-passport { margin:26px 0; } .stats-passport-heading { margin-bottom:16px; } .stats-passport-grid>.stats-card { padding:23px 20px; border-radius:22px; } .stats-passport-hero { padding-right:88px; min-height:178px; } .stats-passport-hero>.stats-number { font-size:60px; } .stats-passport-hero h3 { font-size:21px; } .stats-passport-hero p { font-size:10px; } .stats-passport-hero .stats-eyebrow { font-size:6.5px; letter-spacing:1.1px; } .stats-passport-scene { width:94px; height:90px; right:-9px; top:27px; } .stats-country-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; } .stats-country-item { padding:9px 7px; gap:6px; } .stats-country-item .stats-place-flag { font-size:20px; } .stats-country-item strong { font-size:10px; } .stats-country-item small { font-size:8px; } .stats-territory-item { padding:12px; gap:10px; } .stats-passport-note { font-size:9px; } }
+@media(max-width:800px) { .stats-passport-grid { gap:17px; grid-template-columns:1fr; } .stats-passport-hero { padding-right:145px; min-height:185px; } .stats-passport-scene { width:135px; height:118px; top:25px; right:0; } }
+@media(max-width:500px) { .stats-passport { margin:26px 0; } .stats-passport-heading { margin-bottom:16px; } .stats-passport-grid>.stats-card { padding:23px 20px; border-radius:22px; } .stats-passport-hero { padding-right:88px; min-height:178px; } .stats-passport-hero>.stats-number { font-size:60px; } .stats-passport-hero h3 { font-size:21px; } .stats-passport-hero p { font-size:10px; } .stats-passport-hero .stats-eyebrow { font-size:6.5px; letter-spacing:1.1px; } .stats-passport-scene { width:94px; height:90px; right:-9px; top:27px; } .stats-country-item { padding:9px 7px; gap:6px; } .stats-country-item .stats-place-flag { font-size:20px; } .stats-country-item strong { font-size:10px; } .stats-country-item small { font-size:8px; } .stats-territory-item { padding:12px; gap:10px; } .stats-passport-note { font-size:9px; } }
 
-/* Open the arrow to unfold flag-first lists; keep the land edition a cheeky mirror. */
-.stats-country-list { gap:0 20px; }
+/* Full-width passport cards unfold into one to four columns within the 1320px content width. */
+.stats-country-list,.stats-territory-list,.stats-land-country-list,.stats-land-territory-list {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  gap:0 24px;
+}
 .stats-country-item { padding:13px 0; border:0; border-bottom:1px solid var(--line); border-radius:0; background:transparent; gap:11px; }
 .stats-country-item strong { font-size:12px; }
 .stats-country-item small { font-size:10px; }
-.stats-territory-list { gap:0; }
 .stats-territory-item { padding:16px 0; border:0; border-bottom:1px solid var(--line); border-radius:0; background:transparent; }
 html[data-theme="dark"] .stats-country-item,html[data-theme="dark"] .stats-territory-item { background:transparent; }
 .stats-status-link { display:inline-block; color:var(--teal); font-size:10px; line-height:1.7; margin-top:7px; text-underline-offset:3px; }
@@ -301,6 +302,7 @@ html[data-theme="dark"] .stats-country-item,html[data-theme="dark"] .stats-terri
 .stats-land-country-list,.stats-land-territory-list { list-style:none; padding:0; margin:17px 0 0; }
 .stats-land-country-item,.stats-land-territory-item { display:flex; align-items:center; gap:13px; padding:14px 0; border-bottom:1px solid var(--land-line); }
 .stats-land-country-item strong,.stats-land-territory-item strong { font-size:13px; line-height:1.6; font-weight:650; }
+.stats-land-country-item { flex-wrap:wrap; min-width:0; }
 .stats-land-country-item .stats-land-label { font-size:9px; color:var(--stats-secondary); margin-left:auto; text-align:right; }
 .stats-land-territory-item { align-items:flex-start; padding:16px 0; }
 .stats-land-territory-item>.stats-place-flag { margin-top:4px; }
@@ -312,8 +314,8 @@ html[data-theme="dark"] .stats-land-passport { --land-accent:#ffb1b8; --land-lin
 html[data-theme="dark"] .stats-land-passport .stats-passport-hero>.stats-number { color:var(--land-accent); }
 html[data-theme="dark"] .stats-land-country-card,html[data-theme="dark"] .stats-land-territory-card { background:linear-gradient(135deg,#492a3ce8,#372a3ee8); border-color:#c782903d; }
 @media(max-width:1100px) { .stats-land-passport .stats-passport-hero { min-height:228px; } }
-@media(max-width:800px) { .stats-country-list { grid-template-columns:repeat(2,minmax(0,1fr)); } .stats-land-passport .stats-passport-hero { min-height:204px; } }
-@media(max-width:500px) { .stats-country-list { grid-template-columns:1fr; } .stats-country-item>span:last-child { flex:1; display:flex; align-items:center; flex-wrap:wrap; justify-content:space-between; gap:2px 9px; } .stats-country-item strong { font-size:12px; } .stats-country-item small { font-size:9px; } .stats-land-passport { margin-top:30px; } .stats-land-passport .stats-passport-hero { min-height:222px; } .stats-land-country-item { gap:10px; flex-wrap:wrap; } .stats-land-country-item strong { font-size:12px; } .stats-land-country-item .stats-land-label { font-size:8px; } .stats-land-passport .stats-passport-heading h2 { font-size:25px; } }
+@media(max-width:800px) { .stats-land-passport .stats-passport-hero { min-height:204px; } }
+@media(max-width:500px) { .stats-country-item>span:last-child { flex:1; display:flex; align-items:center; flex-wrap:wrap; justify-content:space-between; gap:2px 9px; } .stats-country-item strong { font-size:12px; } .stats-country-item small { font-size:9px; } .stats-land-passport { margin-top:30px; } .stats-land-passport .stats-passport-hero { min-height:222px; } .stats-land-country-item { gap:10px; flex-wrap:wrap; } .stats-land-country-item strong { font-size:12px; } .stats-land-country-item .stats-land-label { font-size:8px; } .stats-land-passport .stats-passport-heading h2 { font-size:25px; } }
 @media(max-width:500px) { .stats-land-number>.stats-number { font-size:60px; } .stats-land-count-asterisk { font-size:12px; } }
 @media (min-width: 1101px) { .stats-hero-grid > .stats-card { min-height: 320px; } .stats-nights-card > p { max-width: 260px; } }
 @media (max-width: 1100px) and (min-width: 801px) { .stats-nights-card > p { font-size: 10px; } .stats-card-note, .stats-nights-card > .stats-card-note { font-size: 8px; } .stats-distance-card > p { font-size: 10px; } .stats-earth-card > p { font-size: 9px; } .stats-fleet-ribbon > div { font-size: 11px; } .stats-small-card h2 { font-size: 12px; } .stats-small-card p { font-size: 9px; } .stats-chart-key { font-size: 9px; } .stats-chart-footer { font-size: 8px; } .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 10px; } .stats-voyage-copy small { font-size: 9px; } }
