@@ -99,7 +99,7 @@ try {
   assert.doesNotMatch(await vatican.textContent(), /0 ports|0 cruises/);
   const vaticanNote = await page.locator('#stats-vatican-note').textContent();
   assert.match(vaticanNote, /car|driv/i);
-  assert.match(vaticanNote, /approximately twice|about twice|approximately two|around twice/i);
+  assert.equal(await page.locator('.stats-country-item').filter({ hasText: 'Vatican City' }).locator('small').textContent(), 'Shore excursion');
   assert.match(vaticanNote, /(?:not|isn[’']t) a (?:cruise )?port/i);
 
   const landCountries = await page.locator('.stats-land-country-item strong').allTextContents();
