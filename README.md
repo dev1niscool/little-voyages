@@ -8,6 +8,18 @@ An illustrated atlas and personal logbook of 29 cruises, with animated ship rout
 
 This dedicated repository contains the complete Little Voyages website. It is independent of the portfolio repository.
 
+## Take the logbook with you
+
+Open **About → Download everything** on the website, or [download the complete ZIP](https://dev1niscool.github.io/little-voyages/downloads/little-voyages-complete.zip). The bundle contains the full cruise logbook and travel statistics as JSON, cruise and port spreadsheets as CSV, illustrative routes as GeoJSON, and a readable Markdown guide with definitions, research notes, and source links. Individual files are available in the same panel. Every download covers all 29 voyages, regardless of map filters.
+
+For an owner-authorized AI handoff, unzip the bundle and give the agent `little-voyages-guide.md` together with the files relevant to your task. Research uncertainty and estimated routes are documented in the exports.
+
+## Data use and crawler preferences
+
+The [AI-use policy](AI-USAGE.md) allows tasks explicitly authorized by the logbook owner and withholds permission for unauthorized AI collection, model training, and unrelated reuse. [SECURITY.md](SECURITY.md) describes responsible reporting and prohibits unauthorized access and disruption. Third-party licenses still apply.
+
+[robots.txt](robots.txt) lists AI crawler exclusions, and the page includes voluntary `noai` / `noimageai` metadata. These are permission signals, not protection against copying or attacks. Because this is a project site at `/little-voyages/`, its robots file is an **advisory template**: effective rules must be served at the domain's `/robots.txt`. The separate portfolio repository remains untouched. GitHub's own domain controls crawling of repository pages.
+
 ## Development
 
 The repository root is the static GitHub Pages site. The app, research, data generator, and tests are in [`source/`](source/). See the [source README](source/README.md) for research notes, statistics methodology, and browser checks.

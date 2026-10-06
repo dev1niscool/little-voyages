@@ -11,7 +11,8 @@ An illustrated, interactive atlas of 29 personal cruises, from 2005 to 2025.
 - A statistics page with cruise duration, estimated sailing distance, Earth-distance equivalents, repeat ports, cruise-line breakdowns, and clickable year charts
 - Colorful glass panels, a persistent light/dark switch, and animated SVG sea creatures
 - Responsive desktop and mobile layout; keyboard ship controls and reduced-motion support
-- Downloadable JSON logbook; bundled map geometry and fonts; no map API key, trackers, or backend
+- Complete download bundle: JSON logbook and statistics, CSV cruise and port tables, GeoJSON routes, and a Markdown research guide
+- Bundled map geometry and fonts; no map API key, trackers, or backend
 
 ## Run locally
 
@@ -33,11 +34,27 @@ Run the browser smoke checks against a local preview or the published site (requ
 ```sh
 ATLAS_URL=http://localhost:4173/ node scripts/check-browser.mjs
 ATLAS_URL=http://localhost:4173/ node scripts/check-map.mjs
+ATLAS_URL=http://localhost:4173/ node scripts/check-downloads.mjs
 ```
 
 Set `CHROMIUM_EXECUTABLE_PATH` if Chromium is installed somewhere other than `/usr/bin/chromium`.
 
 The atlas lives in its own repository, [`dev1niscool/little-voyages`](https://github.com/dev1niscool/little-voyages). The repository root holds the published site, and `source/` holds this source project. GitHub Pages serves the root of the `main` branch. To prepare updated files from this source folder, run `npm run build` followed by `npm run stage`, review the changes, and commit them in this dedicated repository.
+
+## Downloads and authorized AI handoffs
+
+The About panel offers a complete ZIP plus six individual exports from `public/downloads/`. `scripts/build-exports.mjs` generates them from the same cruise records and statistics functions used by the website; `npm run build` regenerates them before Vite builds the site. They describe the full collection rather than the currently filtered map.
+
+- `little-voyages-logbook.json`: complete normalized cruise records, including research notes and source URLs.
+- `little-voyages-statistics.json`: full-collection calculations, destination classifications and evidence, and methodology.
+- `little-voyages-cruises.csv`: one summary row per voyage.
+- `little-voyages-ports.csv`: ordered itinerary entries, including scenic stops and final homeport returns that some statistics exclude.
+- `little-voyages-routes.geojson`: illustrative route coordinates in GeoJSON longitude/latitude order, not actual GPS tracks.
+- `little-voyages-guide.md`: data dictionary, research notes and source links, interpretation guidance, and permission scope.
+
+The ZIP contains all six. Builds are deterministic, and the guide explains CSV safety escaping and the limitations of historical itinerary estimates. An owner-authorized AI task may use supplied files; downloading them does not grant training or unrelated reuse rights.
+
+Edit `public/AI-USAGE.md`, `public/SECURITY.md`, and `public/robots.txt` as the canonical policy files; the stage step copies them to the repository root. The page-level `noai` / `noimageai` metadata is a voluntary, nonstandard signal. **Project-path robots.txt is advisory only:** crawler rules are normally read from the origin root, which belongs to the separate portfolio site. Do not change that repository as part of this project's build or publication. These notices cannot prevent copying or attacks against a public site.
 
 ## Historical research
 
@@ -47,6 +64,7 @@ The starting point was a personal list of ships, destinations, and dates. A supp
 
 ```sh
 node scripts/build-data.mjs
+npm run exports
 npm test
 ```
 

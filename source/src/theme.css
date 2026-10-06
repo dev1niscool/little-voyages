@@ -233,6 +233,36 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 dialog { color: var(--ink); background: var(--glass-strong); border-color: var(--border-glass); backdrop-filter: blur(25px); border-radius: 26px; box-shadow: 0 30px 100px #0b244663; }
 dialog::backdrop { background: #15203d77; }
 dialog p,.dialog-actions>a,dialog .map-credit { color: var(--muted); }
+.about-downloads { margin-top:27px; padding-top:25px; border-top:1px solid var(--line); }
+.about-downloads h3 { margin:8px 0 10px; }
+.about-downloads>.eyebrow { font-size:8px; letter-spacing:1.3px; }
+.download-bundle { display:flex; align-items:center; gap:13px; padding:18px 16px; margin-top:18px; border:1px solid color-mix(in srgb,var(--teal) 26%,transparent); border-radius:17px; text-decoration:none; background:linear-gradient(120deg,#44c7ba16,#9c8bde17); transition:background .2s; }
+.download-bundle:hover { background:linear-gradient(120deg,#44c7ba29,#9c8bde29); }
+.download-bundle-icon { display:grid; place-items:center; width:39px; height:43px; flex:none; border-radius:12px; background:color-mix(in srgb,var(--teal) 12%,transparent); color:var(--teal); }
+.download-bundle>span:nth-child(2) { min-width:0; }
+.download-bundle strong { display:flex; align-items:center; flex-wrap:wrap; gap:9px; font-size:13px; color:var(--ink); }
+.download-bundle strong small { padding:3px 6px; border-radius:5px; font-size:8px; letter-spacing:.7px; color:var(--teal); background:color-mix(in srgb,var(--teal) 9%,transparent); }
+.download-bundle>span>span { display:block; margin-top:6px; font-size:10px; line-height:1.6; color:var(--muted); }
+.download-bundle>.icon { width:15px; flex:none; margin-left:auto; color:var(--teal); }
+.about-downloads .download-hint { font-size:10px; line-height:1.7; margin:11px 3px 0; }
+.download-hint strong { font-weight:500; color:var(--ink); overflow-wrap:anywhere; }
+.download-options { margin-top:18px; }
+.download-options summary { display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:44px; list-style:none; cursor:pointer; font-size:12px; font-weight:600; border-radius:6px; }
+.download-options summary::-webkit-details-marker { display:none; }
+.download-options summary>.icon { width:14px; height:14px; color:var(--violet); transform:rotate(90deg); transition:transform .2s; }
+.download-options[open] summary>.icon { transform:rotate(-90deg); }
+.download-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:8px; }
+.download-file { padding:15px; border:1px solid var(--line); border-radius:14px; background:color-mix(in srgb,var(--soft-panel) 55%,transparent); text-decoration:none; min-width:0; transition:border-color .2s; }
+.download-file:hover { border-color:var(--teal); }
+.download-file-top { display:flex; align-items:center; gap:8px; color:var(--teal); font-size:8px; font-weight:700; letter-spacing:.7px; }
+.download-file-top>.icon { width:17px; height:17px; }
+.download-file-top>.icon:last-child { margin-left:auto; width:13px; height:13px; color:var(--muted); }
+.download-file>strong { display:block; font-size:11px; line-height:1.55; margin-top:12px; }
+.download-file-description { display:block; color:var(--muted); font-size:10px; line-height:1.65; margin-top:5px; }
+.download-bundle:focus-visible,.download-file:focus-visible,.download-options summary:focus-visible { outline:3px solid var(--teal); outline-offset:3px; }
+.about-downloads .download-use-note { font-size:10px; line-height:1.7; margin:18px 2px 0; }
+.download-use-note a { color:var(--teal); text-underline-offset:3px; }
+@media(max-width:500px) { .download-bundle { padding:15px 12px; gap:10px; } .download-bundle-icon { width:32px; height:38px; } .download-bundle strong { font-size:12px; } .download-bundle>span>span { font-size:10px; } .download-grid { grid-template-columns:1fr; } .download-file { padding:14px 15px; } .download-file>strong { margin-top:8px; } }
 .about-rule { background: var(--line); }
 .icon-button { color: var(--muted); }
 .view-statistics .topbar { position: sticky; top: 0; background: color-mix(in srgb,var(--paper) 78%,transparent); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-glass); }

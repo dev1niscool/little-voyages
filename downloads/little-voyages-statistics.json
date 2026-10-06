@@ -1,0 +1,1452 @@
+{
+  "schemaVersion": 1,
+  "title": "Little Voyages",
+  "siteUrl": "https://dev1niscool.github.io/little-voyages/",
+  "scope": "Complete cruise collection; independent of map filters.",
+  "collectionSha256": "bcd1324ed6a95400db1360931f29539401be42177a31483b95c16529b1a1862c",
+  "usage": {
+    "policyUrl": "https://dev1niscool.github.io/little-voyages/AI-USAGE.md",
+    "authorizedUse": "The owner may download and provide these files to an AI agent for a specifically authorized task. This export is not general permission for third parties to collect or reuse the collection.",
+    "restrictions": "No unauthorized automated harvesting, reuse, model training, fine-tuning, or incorporation into training datasets. A task-specific handoff does not authorize unrelated retention, redistribution, or training. No permission is granted to probe, exploit, or disrupt the site or repository.",
+    "enforcement": "These statements express the owner’s usage preferences and do not technically prevent access to public files."
+  },
+  "methodology": {
+    "duration": "Cruise days use the recorded night counts. Trip hours are nights × 24 and include time ashore; actual hours aboard and underway were not recorded. Unknown durations are excluded.",
+    "distance": "Estimated distance adds great-circle segments along the atlas’s schematic routes. These are not GPS tracks or logged ship mileage; actual sailing distances vary. Miles are statute miles.",
+    "earth": "Earth equivalents divide the estimated distance by the equatorial circumference of 40,075.017 km. This is a distance comparison, not a claim that these voyages circled the globe.",
+    "ports": "Port visits count recorded itinerary stops, including embarkation and one-way arrival ports. The starting port counts once for a round trip: its final return is excluded, while separate repeat calls such as Castaway Cay count again. Glacier Bay and other scenic cruising stops are counted separately. Port visits do not establish that you went ashore.",
+    "places": "Places are distinct country and territory labels attached to recorded ports. Dependencies and territories are listed separately, so this is not a sovereign-country count. Counts inherit the atlas’s itinerary uncertainty.",
+    "destinations": "Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. These records do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed.",
+    "years": "Each trip belongs to the year of your original cruise record, including sailings that cross New Year. The collection’s span is the difference between its first and last recorded calendar years."
+  },
+  "precision": "Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation.",
+  "statistics": {
+    "cruiseCount": 29,
+    "shipCount": 21,
+    "lineCount": 7,
+    "totalNights": 202,
+    "tripHours": 4848,
+    "knownDurationCruises": 29,
+    "unknownDurationCruises": 0,
+    "estimatedKm": 88869.29046388023,
+    "estimatedMiles": 55220.81696882719,
+    "estimatedNauticalMiles": 47985.57800425498,
+    "earthLaps": 2.2175733690613337,
+    "routesMeasured": 29,
+    "missingRoutes": 0,
+    "uniquePorts": 87,
+    "placeCount": 44,
+    "countries": [
+      {
+        "name": "Antigua and Barbuda",
+        "flag": "🇦🇬",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Antigua"
+        ],
+        "cruiseIds": [
+          16
+        ]
+      },
+      {
+        "name": "Bahamas",
+        "flag": "🇧🇸",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Castaway Cay",
+          "Great Stirrup Cay",
+          "Half Moon Cay",
+          "Nassau"
+        ],
+        "cruiseIds": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          12,
+          19,
+          21,
+          23,
+          24
+        ]
+      },
+      {
+        "name": "Barbados",
+        "flag": "🇧🇧",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Barbados"
+        ],
+        "cruiseIds": [
+          16
+        ]
+      },
+      {
+        "name": "Belize",
+        "flag": "🇧🇿",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Harvest Caye"
+        ],
+        "cruiseIds": [
+          26
+        ]
+      },
+      {
+        "name": "Canada",
+        "flag": "🇨🇦",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Victoria"
+        ],
+        "cruiseIds": [
+          8
+        ]
+      },
+      {
+        "name": "Costa Rica",
+        "flag": "🇨🇷",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Puerto Limón"
+        ],
+        "cruiseIds": [
+          7
+        ]
+      },
+      {
+        "name": "Croatia",
+        "flag": "🇭🇷",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Dubrovnik"
+        ],
+        "cruiseIds": [
+          10
+        ]
+      },
+      {
+        "name": "Cuba",
+        "flag": "🇨🇺",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Havana"
+        ],
+        "cruiseIds": [
+          21
+        ]
+      },
+      {
+        "name": "Denmark",
+        "flag": "🇩🇰",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Copenhagen",
+          "Fredericia"
+        ],
+        "cruiseIds": [
+          15
+        ]
+      },
+      {
+        "name": "Dominica",
+        "flag": "🇩🇲",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Dominica"
+        ],
+        "cruiseIds": [
+          14
+        ]
+      },
+      {
+        "name": "Dominican Republic",
+        "flag": "🇩🇴",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Amber Cove"
+        ],
+        "cruiseIds": [
+          18,
+          24,
+          29
+        ]
+      },
+      {
+        "name": "Estonia",
+        "flag": "🇪🇪",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Tallinn"
+        ],
+        "cruiseIds": [
+          15
+        ]
+      },
+      {
+        "name": "Finland",
+        "flag": "🇫🇮",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Helsinki"
+        ],
+        "cruiseIds": [
+          15
+        ]
+      },
+      {
+        "name": "France",
+        "flag": "🇫🇷",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Ajaccio",
+          "Le Havre (Paris)",
+          "Marseille",
+          "Villefranche"
+        ],
+        "cruiseIds": [
+          10,
+          17,
+          20,
+          25
+        ]
+      },
+      {
+        "name": "Germany",
+        "flag": "🇩🇪",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Warnemünde (Berlin)"
+        ],
+        "cruiseIds": [
+          15
+        ]
+      },
+      {
+        "name": "Greece",
+        "flag": "🇬🇷",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Athens (Piraeus)",
+          "Mykonos",
+          "Santorini"
+        ],
+        "cruiseIds": [
+          13,
+          22
+        ]
+      },
+      {
+        "name": "Grenada",
+        "flag": "🇬🇩",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Grenada"
+        ],
+        "cruiseIds": [
+          14
+        ]
+      },
+      {
+        "name": "Honduras",
+        "flag": "🇭🇳",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Roatán"
+        ],
+        "cruiseIds": [
+          26
+        ]
+      },
+      {
+        "name": "Ireland",
+        "flag": "🇮🇪",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Cork (Cobh)",
+          "Dún Laoghaire (Dublin)"
+        ],
+        "cruiseIds": [
+          17
+        ]
+      },
+      {
+        "name": "Italy",
+        "flag": "🇮🇹",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Cagliari",
+          "Civitavecchia (Rome)",
+          "Genoa",
+          "La Spezia",
+          "Livorno (Florence/Pisa)",
+          "Messina",
+          "Naples",
+          "Venice"
+        ],
+        "cruiseIds": [
+          10,
+          13,
+          20,
+          22,
+          25
+        ]
+      },
+      {
+        "name": "Jamaica",
+        "flag": "🇯🇲",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Montego Bay"
+        ],
+        "cruiseIds": [
+          9
+        ]
+      },
+      {
+        "name": "Japan",
+        "flag": "🇯🇵",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Hiroshima",
+          "Kagoshima",
+          "Kobe",
+          "Kochi",
+          "Osaka",
+          "Shimizu (Mount Fuji)",
+          "Yokohama (Tokyo)"
+        ],
+        "cruiseIds": [
+          28
+        ]
+      },
+      {
+        "name": "Mexico",
+        "flag": "🇲🇽",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Cabo San Lucas",
+          "Costa Maya",
+          "Cozumel",
+          "Mazatlán",
+          "Progreso"
+        ],
+        "cruiseIds": [
+          7,
+          9,
+          11,
+          26,
+          27
+        ]
+      },
+      {
+        "name": "Montenegro",
+        "flag": "🇲🇪",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Kotor"
+        ],
+        "cruiseIds": [
+          22
+        ]
+      },
+      {
+        "name": "Netherlands",
+        "flag": "🇳🇱",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Amsterdam"
+        ],
+        "cruiseIds": [
+          15,
+          17
+        ]
+      },
+      {
+        "name": "Panama",
+        "flag": "🇵🇦",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Colón"
+        ],
+        "cruiseIds": [
+          7
+        ]
+      },
+      {
+        "name": "Russia",
+        "flag": "🇷🇺",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "St. Petersburg"
+        ],
+        "cruiseIds": [
+          15
+        ]
+      },
+      {
+        "name": "Saint Kitts and Nevis",
+        "flag": "🇰🇳",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "St. Kitts"
+        ],
+        "cruiseIds": [
+          14
+        ]
+      },
+      {
+        "name": "Saint Lucia",
+        "flag": "🇱🇨",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "St. Lucia"
+        ],
+        "cruiseIds": [
+          16
+        ]
+      },
+      {
+        "name": "South Korea",
+        "flag": "🇰🇷",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Jeju"
+        ],
+        "cruiseIds": [
+          28
+        ]
+      },
+      {
+        "name": "Spain",
+        "flag": "🇪🇸",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Barcelona"
+        ],
+        "cruiseIds": [
+          10,
+          22,
+          25
+        ]
+      },
+      {
+        "name": "Sweden",
+        "flag": "🇸🇪",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Stockholm"
+        ],
+        "cruiseIds": [
+          15
+        ]
+      },
+      {
+        "name": "Turkey",
+        "flag": "🇹🇷",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Istanbul",
+          "Kuşadası (Ephesus)"
+        ],
+        "cruiseIds": [
+          13
+        ]
+      },
+      {
+        "name": "United Kingdom",
+        "flag": "🇬🇧",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Ayr",
+          "Belfast",
+          "Glasgow (Greenock)",
+          "Liverpool"
+        ],
+        "cruiseIds": [
+          17
+        ]
+      },
+      {
+        "name": "United States",
+        "flag": "🇺🇸",
+        "type": "country",
+        "status": "Sovereign country",
+        "sovereign": null,
+        "sources": [],
+        "ports": [
+          "Fort Lauderdale",
+          "Galveston",
+          "Jacksonville",
+          "Juneau",
+          "Ketchikan",
+          "Los Angeles (San Pedro)",
+          "Miami",
+          "New Orleans",
+          "Port Canaveral",
+          "San Diego",
+          "Seattle",
+          "Sitka"
+        ],
+        "cruiseIds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          12,
+          18,
+          19,
+          21,
+          23,
+          24,
+          26,
+          27,
+          29
+        ]
+      }
+    ],
+    "territories": [
+      {
+        "name": "Aruba",
+        "flag": "🇦🇼",
+        "type": "territory",
+        "status": "Country within the Kingdom of the Netherlands",
+        "sovereign": "Kingdom of the Netherlands",
+        "sources": [
+          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
+        ],
+        "ports": [
+          "Aruba"
+        ],
+        "cruiseIds": [
+          29
+        ]
+      },
+      {
+        "name": "Cayman Islands",
+        "flag": "🇰🇾",
+        "type": "territory",
+        "status": "British Overseas Territory",
+        "sovereign": "United Kingdom",
+        "sources": [
+          "https://www.gov.uk/government/publications/geographical-names-and-information"
+        ],
+        "ports": [
+          "Grand Cayman"
+        ],
+        "cruiseIds": [
+          9
+        ]
+      },
+      {
+        "name": "Curaçao",
+        "flag": "🇨🇼",
+        "type": "territory",
+        "status": "Country within the Kingdom of the Netherlands",
+        "sovereign": "Kingdom of the Netherlands",
+        "sources": [
+          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
+        ],
+        "ports": [
+          "Curaçao"
+        ],
+        "cruiseIds": [
+          29
+        ]
+      },
+      {
+        "name": "Gibraltar",
+        "flag": "🇬🇮",
+        "type": "territory",
+        "status": "British Overseas Territory",
+        "sovereign": "United Kingdom",
+        "sources": [
+          "https://www.gov.uk/government/publications/geographical-names-and-information"
+        ],
+        "ports": [
+          "Gibraltar"
+        ],
+        "cruiseIds": [
+          25
+        ]
+      },
+      {
+        "name": "Guernsey",
+        "flag": "🇬🇬",
+        "type": "territory",
+        "status": "Crown Dependency",
+        "sovereign": "British Crown",
+        "sources": [
+          "https://www.gov.uk/government/publications/guernsey-alderney-and-sark-knowledge-base-profile/guernsey-alderney-and-sark-knowledge-base-profile"
+        ],
+        "ports": [
+          "St. Peter Port (Guernsey)"
+        ],
+        "cruiseIds": [
+          17
+        ]
+      },
+      {
+        "name": "Puerto Rico",
+        "flag": "🇵🇷",
+        "type": "territory",
+        "status": "U.S. territory · Commonwealth",
+        "sovereign": "United States",
+        "sources": [
+          "https://www.doi.gov/node/11613"
+        ],
+        "ports": [
+          "San Juan"
+        ],
+        "cruiseIds": [
+          4,
+          6,
+          14,
+          16
+        ]
+      },
+      {
+        "name": "Sint Maarten",
+        "flag": "🇸🇽",
+        "type": "territory",
+        "status": "Country within the Kingdom of the Netherlands",
+        "sovereign": "Kingdom of the Netherlands",
+        "sources": [
+          "https://www.government.nl/faq/what-are-the-different-parts-of-the-kingdom-of-the-netherlands"
+        ],
+        "ports": [
+          "St. Maarten"
+        ],
+        "cruiseIds": [
+          2,
+          4,
+          12,
+          16
+        ]
+      },
+      {
+        "name": "Turks and Caicos Islands",
+        "flag": "🇹🇨",
+        "type": "territory",
+        "status": "British Overseas Territory",
+        "sovereign": "United Kingdom",
+        "sources": [
+          "https://www.gov.uk/government/publications/geographical-names-and-information"
+        ],
+        "ports": [
+          "Grand Turk"
+        ],
+        "cruiseIds": [
+          6,
+          18,
+          24
+        ]
+      },
+      {
+        "name": "U.S. Virgin Islands",
+        "flag": "🇻🇮",
+        "type": "territory",
+        "status": "U.S. territory",
+        "sovereign": "United States",
+        "sources": [
+          "https://www.doi.gov/node/11613"
+        ],
+        "ports": [
+          "St. Croix",
+          "St. Thomas"
+        ],
+        "cruiseIds": [
+          2,
+          4,
+          6,
+          12,
+          14,
+          16
+        ]
+      }
+    ],
+    "countryCount": 35,
+    "territoryCount": 9,
+    "unclassifiedPlaces": [],
+    "portCalls": 141,
+    "scenicStops": 1,
+    "years": [
+      {
+        "year": 2005,
+        "cruises": 1,
+        "nights": 3,
+        "miles": 630.7298487347136
+      },
+      {
+        "year": 2007,
+        "cruises": 1,
+        "nights": 7,
+        "miles": 2685.983018096057
+      },
+      {
+        "year": 2008,
+        "cruises": 1,
+        "nights": 4,
+        "miles": 637.312396273825
+      },
+      {
+        "year": 2009,
+        "cruises": 2,
+        "nights": 12,
+        "miles": 3547.4081063179674
+      },
+      {
+        "year": 2010,
+        "cruises": 1,
+        "nights": 7,
+        "miles": 2216.2582297573827
+      },
+      {
+        "year": 2011,
+        "cruises": 2,
+        "nights": 15,
+        "miles": 5645.265922447875
+      },
+      {
+        "year": 2012,
+        "cruises": 1,
+        "nights": 7,
+        "miles": 2783.548650914132
+      },
+      {
+        "year": 2013,
+        "cruises": 2,
+        "nights": 14,
+        "miles": 3422.00665874504
+      },
+      {
+        "year": 2014,
+        "cruises": 2,
+        "nights": 18,
+        "miles": 5367.248467577401
+      },
+      {
+        "year": 2015,
+        "cruises": 2,
+        "nights": 19,
+        "miles": 3508.9852192281814
+      },
+      {
+        "year": 2016,
+        "cruises": 2,
+        "nights": 19,
+        "miles": 3583.579285826532
+      },
+      {
+        "year": 2017,
+        "cruises": 2,
+        "nights": 8,
+        "miles": 2364.6099470117615
+      },
+      {
+        "year": 2018,
+        "cruises": 1,
+        "nights": 6,
+        "miles": 1290.3819328869965
+      },
+      {
+        "year": 2019,
+        "cruises": 2,
+        "nights": 11,
+        "miles": 3035.8922978554865
+      },
+      {
+        "year": 2021,
+        "cruises": 1,
+        "nights": 4,
+        "miles": 797.7075236703566
+      },
+      {
+        "year": 2022,
+        "cruises": 3,
+        "nights": 21,
+        "miles": 5625.674109162588
+      },
+      {
+        "year": 2023,
+        "cruises": 1,
+        "nights": 7,
+        "miles": 2530.8048734220233
+      },
+      {
+        "year": 2024,
+        "cruises": 1,
+        "nights": 12,
+        "miles": 2456.0760889498306
+      },
+      {
+        "year": 2025,
+        "cruises": 1,
+        "nights": 8,
+        "miles": 3091.3443919490323
+      }
+    ],
+    "lines": [
+      {
+        "name": "Carnival Cruise Line",
+        "count": 12,
+        "nights": 75,
+        "color": "#ef827b"
+      },
+      {
+        "name": "Celebrity Cruises",
+        "count": 8,
+        "nights": 74,
+        "color": "#8674d6"
+      },
+      {
+        "name": "Disney Cruise Line",
+        "count": 3,
+        "nights": 14,
+        "color": "#dca12e"
+      },
+      {
+        "name": "Norwegian Cruise Line",
+        "count": 2,
+        "nights": 11,
+        "color": "#1aaa99"
+      },
+      {
+        "name": "Princess Cruises",
+        "count": 2,
+        "nights": 14,
+        "color": "#b07bd5"
+      },
+      {
+        "name": "Holland America Line",
+        "count": 1,
+        "nights": 7,
+        "color": "#4c9cbf"
+      },
+      {
+        "name": "Royal Caribbean",
+        "count": 1,
+        "nights": 7,
+        "color": "#79a951"
+      }
+    ],
+    "regions": [
+      {
+        "name": "Caribbean & Bahamas",
+        "count": 19,
+        "nights": 112,
+        "miles": 32845.96879598713
+      },
+      {
+        "name": "Mediterranean",
+        "count": 5,
+        "nights": 40,
+        "miles": 10288.963749661121
+      },
+      {
+        "name": "Northern Europe",
+        "count": 2,
+        "nights": 24,
+        "miles": 4696.086655425981
+      },
+      {
+        "name": "Alaska",
+        "count": 1,
+        "nights": 7,
+        "miles": 2402.916805381099
+      },
+      {
+        "name": "Japan & Korea",
+        "count": 1,
+        "nights": 12,
+        "miles": 2456.0760889498306
+      },
+      {
+        "name": "Mexican Riviera",
+        "count": 1,
+        "nights": 7,
+        "miles": 2530.8048734220233
+      }
+    ],
+    "topPorts": [
+      {
+        "name": "Port Canaveral",
+        "country": "United States",
+        "count": 8
+      },
+      {
+        "name": "Nassau",
+        "country": "Bahamas",
+        "count": 7
+      },
+      {
+        "name": "St. Thomas",
+        "country": "U.S. Virgin Islands",
+        "count": 6
+      },
+      {
+        "name": "Castaway Cay",
+        "country": "Bahamas",
+        "count": 4
+      },
+      {
+        "name": "Civitavecchia (Rome)",
+        "country": "Italy",
+        "count": 4
+      },
+      {
+        "name": "Cozumel",
+        "country": "Mexico",
+        "count": 4
+      },
+      {
+        "name": "Miami",
+        "country": "United States",
+        "count": 4
+      },
+      {
+        "name": "Naples",
+        "country": "Italy",
+        "count": 4
+      },
+      {
+        "name": "San Juan",
+        "country": "Puerto Rico",
+        "count": 4
+      },
+      {
+        "name": "St. Maarten",
+        "country": "Sint Maarten",
+        "count": 4
+      },
+      {
+        "name": "Amber Cove",
+        "country": "Dominican Republic",
+        "count": 3
+      },
+      {
+        "name": "Barcelona",
+        "country": "Spain",
+        "count": 3
+      },
+      {
+        "name": "Grand Turk",
+        "country": "Turks and Caicos Islands",
+        "count": 3
+      },
+      {
+        "name": "Half Moon Cay",
+        "country": "Bahamas",
+        "count": 3
+      },
+      {
+        "name": "Amsterdam",
+        "country": "Netherlands",
+        "count": 2
+      },
+      {
+        "name": "Athens (Piraeus)",
+        "country": "Greece",
+        "count": 2
+      },
+      {
+        "name": "Fort Lauderdale",
+        "country": "United States",
+        "count": 2
+      },
+      {
+        "name": "Livorno (Florence/Pisa)",
+        "country": "Italy",
+        "count": 2
+      },
+      {
+        "name": "Marseille",
+        "country": "France",
+        "count": 2
+      },
+      {
+        "name": "Messina",
+        "country": "Italy",
+        "count": 2
+      },
+      {
+        "name": "Santorini",
+        "country": "Greece",
+        "count": 2
+      },
+      {
+        "name": "Ajaccio",
+        "country": "France",
+        "count": 1
+      },
+      {
+        "name": "Antigua",
+        "country": "Antigua and Barbuda",
+        "count": 1
+      },
+      {
+        "name": "Aruba",
+        "country": "Aruba",
+        "count": 1
+      },
+      {
+        "name": "Ayr",
+        "country": "United Kingdom",
+        "count": 1
+      },
+      {
+        "name": "Barbados",
+        "country": "Barbados",
+        "count": 1
+      },
+      {
+        "name": "Belfast",
+        "country": "United Kingdom",
+        "count": 1
+      },
+      {
+        "name": "Cabo San Lucas",
+        "country": "Mexico",
+        "count": 1
+      },
+      {
+        "name": "Cagliari",
+        "country": "Italy",
+        "count": 1
+      },
+      {
+        "name": "Colón",
+        "country": "Panama",
+        "count": 1
+      },
+      {
+        "name": "Copenhagen",
+        "country": "Denmark",
+        "count": 1
+      },
+      {
+        "name": "Cork (Cobh)",
+        "country": "Ireland",
+        "count": 1
+      },
+      {
+        "name": "Costa Maya",
+        "country": "Mexico",
+        "count": 1
+      },
+      {
+        "name": "Curaçao",
+        "country": "Curaçao",
+        "count": 1
+      },
+      {
+        "name": "Dominica",
+        "country": "Dominica",
+        "count": 1
+      },
+      {
+        "name": "Dubrovnik",
+        "country": "Croatia",
+        "count": 1
+      },
+      {
+        "name": "Dún Laoghaire (Dublin)",
+        "country": "Ireland",
+        "count": 1
+      },
+      {
+        "name": "Fredericia",
+        "country": "Denmark",
+        "count": 1
+      },
+      {
+        "name": "Galveston",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Genoa",
+        "country": "Italy",
+        "count": 1
+      },
+      {
+        "name": "Gibraltar",
+        "country": "Gibraltar",
+        "count": 1
+      },
+      {
+        "name": "Glasgow (Greenock)",
+        "country": "United Kingdom",
+        "count": 1
+      },
+      {
+        "name": "Grand Cayman",
+        "country": "Cayman Islands",
+        "count": 1
+      },
+      {
+        "name": "Great Stirrup Cay",
+        "country": "Bahamas",
+        "count": 1
+      },
+      {
+        "name": "Grenada",
+        "country": "Grenada",
+        "count": 1
+      },
+      {
+        "name": "Harvest Caye",
+        "country": "Belize",
+        "count": 1
+      },
+      {
+        "name": "Havana",
+        "country": "Cuba",
+        "count": 1
+      },
+      {
+        "name": "Helsinki",
+        "country": "Finland",
+        "count": 1
+      },
+      {
+        "name": "Hiroshima",
+        "country": "Japan",
+        "count": 1
+      },
+      {
+        "name": "Istanbul",
+        "country": "Turkey",
+        "count": 1
+      },
+      {
+        "name": "Jacksonville",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Jeju",
+        "country": "South Korea",
+        "count": 1
+      },
+      {
+        "name": "Juneau",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Kagoshima",
+        "country": "Japan",
+        "count": 1
+      },
+      {
+        "name": "Ketchikan",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Kobe",
+        "country": "Japan",
+        "count": 1
+      },
+      {
+        "name": "Kochi",
+        "country": "Japan",
+        "count": 1
+      },
+      {
+        "name": "Kotor",
+        "country": "Montenegro",
+        "count": 1
+      },
+      {
+        "name": "Kuşadası (Ephesus)",
+        "country": "Turkey",
+        "count": 1
+      },
+      {
+        "name": "La Spezia",
+        "country": "Italy",
+        "count": 1
+      },
+      {
+        "name": "Le Havre (Paris)",
+        "country": "France",
+        "count": 1
+      },
+      {
+        "name": "Liverpool",
+        "country": "United Kingdom",
+        "count": 1
+      },
+      {
+        "name": "Los Angeles (San Pedro)",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Mazatlán",
+        "country": "Mexico",
+        "count": 1
+      },
+      {
+        "name": "Montego Bay",
+        "country": "Jamaica",
+        "count": 1
+      },
+      {
+        "name": "Mykonos",
+        "country": "Greece",
+        "count": 1
+      },
+      {
+        "name": "New Orleans",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Osaka",
+        "country": "Japan",
+        "count": 1
+      },
+      {
+        "name": "Progreso",
+        "country": "Mexico",
+        "count": 1
+      },
+      {
+        "name": "Puerto Limón",
+        "country": "Costa Rica",
+        "count": 1
+      },
+      {
+        "name": "Roatán",
+        "country": "Honduras",
+        "count": 1
+      },
+      {
+        "name": "San Diego",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Seattle",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "Shimizu (Mount Fuji)",
+        "country": "Japan",
+        "count": 1
+      },
+      {
+        "name": "Sitka",
+        "country": "United States",
+        "count": 1
+      },
+      {
+        "name": "St. Croix",
+        "country": "U.S. Virgin Islands",
+        "count": 1
+      },
+      {
+        "name": "St. Kitts",
+        "country": "Saint Kitts and Nevis",
+        "count": 1
+      },
+      {
+        "name": "St. Lucia",
+        "country": "Saint Lucia",
+        "count": 1
+      },
+      {
+        "name": "St. Peter Port (Guernsey)",
+        "country": "Guernsey",
+        "count": 1
+      },
+      {
+        "name": "St. Petersburg",
+        "country": "Russia",
+        "count": 1
+      },
+      {
+        "name": "Stockholm",
+        "country": "Sweden",
+        "count": 1
+      },
+      {
+        "name": "Tallinn",
+        "country": "Estonia",
+        "count": 1
+      },
+      {
+        "name": "Venice",
+        "country": "Italy",
+        "count": 1
+      },
+      {
+        "name": "Victoria",
+        "country": "Canada",
+        "count": 1
+      },
+      {
+        "name": "Villefranche",
+        "country": "France",
+        "count": 1
+      },
+      {
+        "name": "Warnemünde (Berlin)",
+        "country": "Germany",
+        "count": 1
+      },
+      {
+        "name": "Yokohama (Tokyo)",
+        "country": "Japan",
+        "count": 1
+      }
+    ],
+    "longestCruises": [
+      {
+        "id": 15,
+        "ship": "Celebrity Silhouette",
+        "nights": 12
+      },
+      {
+        "id": 17,
+        "ship": "Celebrity Silhouette",
+        "nights": 12
+      },
+      {
+        "id": 28,
+        "ship": "Celebrity Millennium",
+        "nights": 12
+      }
+    ],
+    "farthestCruise": {
+      "id": 7,
+      "ship": "Carnival Freedom",
+      "miles": 3242.3491170667758
+    },
+    "firstDate": "2005-05-19",
+    "lastDate": "2025-06-15",
+    "spanYears": 20,
+    "busiestYears": [
+      {
+        "year": 2022,
+        "cruises": 3,
+        "nights": 21,
+        "miles": 5625.674109162588
+      }
+    ],
+    "averageNights": 6.9655172413793105
+  }
+}

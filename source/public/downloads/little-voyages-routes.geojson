@@ -1,0 +1,3129 @@
+{
+  "type": "FeatureCollection",
+  "schemaVersion": 1,
+  "title": "Little Voyages",
+  "siteUrl": "https://dev1niscool.github.io/little-voyages/",
+  "scope": "Complete cruise collection; independent of map filters.",
+  "collectionSha256": "bcd1324ed6a95400db1360931f29539401be42177a31483b95c16529b1a1862c",
+  "usage": {
+    "policyUrl": "https://dev1niscool.github.io/little-voyages/AI-USAGE.md",
+    "authorizedUse": "The owner may download and provide these files to an AI agent for a specifically authorized task. This export is not general permission for third parties to collect or reuse the collection.",
+    "restrictions": "No unauthorized automated harvesting, reuse, model training, fine-tuning, or incorporation into training datasets. A task-specific handoff does not authorize unrelated retention, redistribution, or training. No permission is granted to probe, exploit, or disrupt the site or repository.",
+    "enforcement": "These statements express the owner’s usage preferences and do not technically prevent access to public files."
+  },
+  "description": "WGS 84 decimal degrees; route and anchor arrays are [longitude, latitude]. Port objects use explicit lon and lat fields. Distance values are reproducible calculations from illustrative routes, not measured ship mileage. Extra decimal places express calculation precision only, not real-world accuracy. Trip hours include time ashore. Coordinates are approximate map locations; routes must not be used for navigation.",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "properties": {
+        "cruiseId": 1,
+        "ship": "Disney Wonder",
+        "line": "Disney Cruise Line",
+        "region": "Bahamas",
+        "year": 2005,
+        "originalDate": "2005-05-19",
+        "startDate": "2005-05-19",
+        "endDate": "2005-05-22",
+        "nights": 3,
+        "confidence": "confirmed",
+        "notes": "A contemporary roll call confirms the May 19, 2005 three-night Wonder departure. The port sequence is the published 2005 three-night schedule; individual weather-related changes have not been verified.",
+        "sources": [
+          {
+            "title": "DISboards: May 19, 2005 3 day Wonder",
+            "url": "https://www.disboards.com/threads/may-19-2005-3-day-wonder-anyone.632193/",
+            "note": "Contemporary passenger roll call confirms ship, departure date, and three-night duration."
+          },
+          {
+            "title": "AllEars: Magical Disney Cruise Guide (2005/2006)",
+            "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+            "note": "Section 2.1 gives Thursday Port Canaveral, Friday Nassau, Saturday Castaway Cay, Sunday Port Canaveral."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -79.4,
+            27
+          ],
+          [
+            -78.25,
+            26.4
+          ],
+          [
+            -77.3386,
+            25.0838
+          ],
+          [
+            -77.5334,
+            26.0843
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "properties": {
+        "cruiseId": 2,
+        "ship": "Disney Magic",
+        "line": "Disney Cruise Line",
+        "region": "Eastern Caribbean",
+        "year": 2007,
+        "originalDate": "2007-02-03",
+        "startDate": "2007-02-03",
+        "endDate": "2007-02-10",
+        "nights": 7,
+        "confidence": "likely",
+        "notes": "A contemporary passenger post explicitly calls February 3, 2007 an Eastern sailing. The seven-night route is reconstructed from Disney's established Eastern itinerary and a January 6, 2007 sailing record. Exact daily calls for this departure remain unverified.",
+        "sources": [
+          {
+            "title": "DISboards: October 21st 2006 cruise discussion",
+            "url": "https://www.disboards.com/threads/october-21st-2006.1059529/",
+            "note": "Post 18, dated March 27, 2006, says the passenger rebooked the same cabin for the February 3, 2007 Eastern sailing."
+          },
+          {
+            "title": "Cruisemans: Disney Magic January 6, 2007",
+            "url": "https://cruisemans.com/%40namber/m2v6ac46zzwa6mcn",
+            "note": "Nearby 2007 seven-night Eastern sailing from Port Canaveral lists St. Maarten, St. Thomas and Castaway Cay."
+          },
+          {
+            "title": "AllEars: Magical Disney Cruise Guide",
+            "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+            "note": "Historical established Eastern sequence: Port Canaveral, St. Maarten, St. Thomas, Castaway Cay, Port Canaveral."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -78.5,
+            27
+          ],
+          [
+            -73,
+            23
+          ],
+          [
+            -67,
+            20.8
+          ],
+          [
+            -63.0457,
+            18.008
+          ],
+          [
+            -64.9235,
+            18.3356
+          ],
+          [
+            -67,
+            20.2
+          ],
+          [
+            -72,
+            22.5
+          ],
+          [
+            -75,
+            24.5
+          ],
+          [
+            -77.5334,
+            26.0843
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "properties": {
+        "cruiseId": 3,
+        "ship": "Disney Wonder",
+        "line": "Disney Cruise Line",
+        "region": "Bahamas",
+        "year": 2008,
+        "originalDate": "2008-08-10",
+        "startDate": "2008-08-10",
+        "endDate": "2008-08-14",
+        "nights": 4,
+        "confidence": "confirmed",
+        "notes": "You clarified that this was Disney Wonder in the Bahamas. A contemporary roll call identifies the August 10, 2008 four-night Wonder sailing. Disney’s published summer 2008 schedule confirms the double visit to Castaway Cay: depart Port Canaveral Sunday August 10, Castaway Cay Monday August 11, Nassau Tuesday August 12, Castaway Cay Wednesday August 13, and return Thursday August 14. The itinerary is the historical published schedule; any unrecorded operational changes have not been independently verified.",
+        "sources": [
+          {
+            "title": "DISboards: Wonder Aug. 10, 2008 — 4 Night",
+            "url": "https://www.disboards.com/threads/wonder-aug-10-2008-4-night.1849941/",
+            "note": "Contemporary passenger roll call identifies Disney Wonder’s August 10, 2008 four-night sailing."
+          },
+          {
+            "title": "Cruise Industry News: Disney Cruise Line announces future itineraries",
+            "url": "https://cruiseindustrynews.com/cruise-news/2007/12/12407-disney-cruise-line-announces-future-itineraries/",
+            "note": "Contemporary announcement: four-night Wonder sailings May 11–August 24, 2008 follow Port Canaveral, Castaway Cay, Nassau, Castaway Cay, Port Canaveral."
+          },
+          {
+            "title": "DISboards: 4-night double-dip schedule",
+            "url": "https://www.disboards.com/threads/4-night-dd-question.1343251/",
+            "note": "Reproduces the summer 2008 departure list, including August 10, and the Sunday-to-Thursday port order."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -77.5334,
+            26.0843
+          ],
+          [
+            -77.3386,
+            25.0838
+          ],
+          [
+            -77.5334,
+            26.0843
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "properties": {
+        "cruiseId": 4,
+        "ship": "Carnival Triumph",
+        "line": "Carnival Cruise Line",
+        "region": "Eastern Caribbean",
+        "year": 2009,
+        "originalDate": "2009-03-15",
+        "startDate": "2009-03-15",
+        "endDate": "2009-03-22",
+        "nights": 7,
+        "confidence": "likely",
+        "notes": "Likely seven-night Miami roundtrip, treating the supplied Sunday date as departure. The route is reconstructed from contemporary Triumph Eastern Caribbean sailings; a source for the exact March 15 departure was not located. Dates and stop order should be treated as provisional.",
+        "sources": [
+          {
+            "title": "Cruiseline: Carnival Triumph April 26, 2009 passenger review",
+            "url": "https://cruiseline.com/ship/carnival-triumph/review/314186",
+            "note": "Nearby seasonal sailing confirms seven-night Eastern Miami roundtrip and San Juan, St. Thomas, St. Maarten ports, not the exact March date."
+          },
+          {
+            "title": "Cruise Critic: Just off the Triumph, April 2009",
+            "url": "https://boards.cruisecritic.com/topic/922849-just-off-the-triumph-it-was-great",
+            "note": "Contemporary account of April 12 sailing corroborates the seasonal Eastern operation."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.1765,
+            25.7783
+          ],
+          [
+            -79,
+            25
+          ],
+          [
+            -76,
+            24.2
+          ],
+          [
+            -72.5,
+            21.9
+          ],
+          [
+            -68.5,
+            19.6
+          ],
+          [
+            -66.1107,
+            18.4598
+          ],
+          [
+            -64.9235,
+            18.3356
+          ],
+          [
+            -63.0457,
+            18.008
+          ],
+          [
+            -67,
+            20.8
+          ],
+          [
+            -73,
+            22.6
+          ],
+          [
+            -77,
+            24.6
+          ],
+          [
+            -79,
+            25.2
+          ],
+          [
+            -80.1765,
+            25.7783
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "properties": {
+        "cruiseId": 5,
+        "ship": "Carnival Fascination",
+        "line": "Carnival Cruise Line",
+        "region": "Bahamas",
+        "year": 2009,
+        "originalDate": "2009-08-08",
+        "startDate": "2009-08-08",
+        "endDate": "2009-08-13",
+        "nights": 5,
+        "confidence": "likely",
+        "notes": "The supplied Saturday date fits Carnival's official 2009 five-night Saturday schedule from Jacksonville to Nassau and Half Moon Cay. Stop order is reconstructed from a near-period advertised itinerary; the exact August 8 departure has not been independently located.",
+        "sources": [
+          {
+            "title": "Carnival: Fascination refurbishment and operating schedule, August 2009",
+            "url": "https://www.carnival-news.com/2009/08/28/reservations-open-today-on-98-new-balcony-staterooms-added-during-carnival-fascinations-multimillion-dollar-refurb",
+            "note": "Official contemporary source: Saturday five-night sailings from Jacksonville visit Half Moon Cay and Nassau; other weekday departures use different itineraries."
+          },
+          {
+            "title": "Owen Family Newsletter, Summer 2009",
+            "url": "https://www.owenfuneralhome.com/download/97998/OwenFamilyNewsletter-2009Summer.pdf",
+            "note": "Advertisement for a February 2010 Saturday Fascination departure provides day order: Jacksonville, sea, Nassau, Half Moon Cay, sea, Jacksonville; supports the reconstruction rather than exact August calls."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -81.5784,
+            30.4084
+          ],
+          [
+            -77.3386,
+            25.0838
+          ],
+          [
+            -75.95,
+            24.576
+          ],
+          [
+            -81.5784,
+            30.4084
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "properties": {
+        "cruiseId": 6,
+        "ship": "Carnival Liberty",
+        "line": "Carnival Cruise Line",
+        "region": "Eastern Caribbean",
+        "year": 2010,
+        "originalDate": "2010-01-23",
+        "startDate": "2010-01-23",
+        "endDate": "2010-01-30",
+        "nights": 7,
+        "confidence": "likely",
+        "notes": "A contemporary fare bulletin confirms January 23, 2010, seven nights from Miami, labeled Exotic Eastern Caribbean. Port order is reconstructed from the itinerary introduced in April 2009 and continued in 2010. Exact daily calls for this January departure have not been found.",
+        "sources": [
+          {
+            "title": "Military Cruise Deals: archived 2009 fare bulletin",
+            "url": "https://militarycruisedeals.blogspot.com/2009/",
+            "note": "Lists CARNIVAL LIBERTY 1/23/2010 7 MIA EXOTIC EASTERN CARIB, directly supporting date, duration, homeport and route name."
+          },
+          {
+            "title": "Cruise Critic: Liberty's new Eastern route, April 25–May 2, 2009",
+            "url": "https://boards.cruisecritic.com/showthread.php?t=988736",
+            "note": "Gives route order Miami, Half Moon Cay, sea, St. Thomas, San Juan, Grand Turk, sea, Miami for the same Exotic Eastern program."
+          },
+          {
+            "title": "Cruise Critic: Two Sisters Enjoying Liberty, May 2010",
+            "url": "https://www.cruisecritic.com/cruise/carnival/carnival-liberty/reviews/68074",
+            "note": "2010 passenger account corroborates continued Half Moon Cay Eastern itinerary."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.1765,
+            25.7783
+          ],
+          [
+            -75.95,
+            24.576
+          ],
+          [
+            -64.9235,
+            18.3356
+          ],
+          [
+            -66.1107,
+            18.4598
+          ],
+          [
+            -71.1466,
+            21.4287
+          ],
+          [
+            -80.1765,
+            25.7783
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "properties": {
+        "cruiseId": 7,
+        "ship": "Carnival Freedom",
+        "line": "Carnival Cruise Line",
+        "region": "Western Caribbean",
+        "year": 2011,
+        "originalDate": "2011-01-15",
+        "startDate": "2011-01-15",
+        "endDate": "2011-01-23",
+        "nights": 8,
+        "confidence": "confirmed",
+        "notes": "A contemporary advertisement confirms the January 15–23, 2011 eight-night sailing from Fort Lauderdale to Cozumel, Limón and Colón. This was an Exotic Western Caribbean itinerary reaching Costa Rica and Panama; it does not imply the ship transited the Panama Canal.",
+        "sources": [
+          {
+            "title": "Groomer to Groomer, October 2010: Pet Pro Cruise",
+            "url": "https://www.groomertogroomer.com/ebooks/GTG_Oct%202010_w_links.pdf",
+            "note": "Page 49 explicitly advertises January 15–23, 2011 on Carnival Freedom, nine days/eight nights, Fort Lauderdale with Cozumel, Limon, Colon."
+          },
+          {
+            "title": "Port Everglades photograph, January 15, 2011",
+            "url": "https://www.flickr.com/photos/captainmartini/5467735599",
+            "note": "Dated ship photograph independently places Carnival Freedom in Port Everglades on January 15, 2011."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.1159,
+            26.094
+          ],
+          [
+            -79.8,
+            24.6
+          ],
+          [
+            -81.3,
+            24.2
+          ],
+          [
+            -83.7,
+            23.8
+          ],
+          [
+            -85.5,
+            22.2
+          ],
+          [
+            -86.5,
+            21.3
+          ],
+          [
+            -86.9484,
+            20.5118
+          ],
+          [
+            -86,
+            19.1
+          ],
+          [
+            -82.8,
+            17
+          ],
+          [
+            -82,
+            13
+          ],
+          [
+            -82.7,
+            10.4
+          ],
+          [
+            -83.0246,
+            9.9915
+          ],
+          [
+            -79.8916,
+            9.3613
+          ],
+          [
+            -80.5,
+            12
+          ],
+          [
+            -82.5,
+            16
+          ],
+          [
+            -84.7,
+            20
+          ],
+          [
+            -85.5,
+            22.2
+          ],
+          [
+            -83.7,
+            23.8
+          ],
+          [
+            -81.3,
+            24.2
+          ],
+          [
+            -79.8,
+            24.6
+          ],
+          [
+            -80.1159,
+            26.094
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "properties": {
+        "cruiseId": 8,
+        "ship": "Oosterdam",
+        "line": "Holland America Line",
+        "region": "Alaska",
+        "year": 2011,
+        "originalDate": "2011-06-05",
+        "startDate": "2011-06-05",
+        "endDate": "2011-06-12",
+        "nights": 7,
+        "confidence": "confirmed",
+        "notes": "Holland America's 2011 brochure lists the June 5 seven-day Explorer departure from Seattle, and the Southern Medical Association lists June 5–12 on Oosterdam. The seasonal schedule included Glacier Bay; ordered calls are corroborated by a May 22, 2011 passenger diary. Glacier Bay is scenic cruising, not a disembarkation port. Actual day-specific deviations have not been checked.",
+        "sources": [
+          {
+            "title": "Holland America: The Americas 2011–2012 brochure",
+            "url": "https://www.rejsy.pl/sites/default/files/armator_files/HAL_AM11_Ebrochure_TA.pdf",
+            "note": "Alaska section lists Oosterdam 7-day Explorer from Seattle departures including June 5, 2011, and regional calls."
+          },
+          {
+            "title": "Southern Medical Association 2011 calendar",
+            "url": "https://sma.org/wp-content/uploads/2012/02/2011-yearbook2.pdf",
+            "note": "Page 63 lists June 5–12 seven-day Alaska cruise aboard Oosterdam."
+          },
+          {
+            "title": "Cruise Critic: Oosterdam Alaska, May 2011",
+            "url": "https://www.cruisecritic.com/cruise/holland-america/oosterdam/reviews/85183",
+            "note": "Nearby May 22 departure diary establishes Tuesday Glacier Bay, Wednesday Juneau, then Sitka, Ketchikan and Victoria on this seasonal itinerary."
+          },
+          {
+            "title": "2011 Seattle cruises to Alaska: Holland America Line",
+            "url": "https://eriktomrenwrites.com/2011-seattle-cruises-alaska-holland-america-line/",
+            "note": "Distinguishes Oosterdam's Glacier Bay route from Westerdam's Hubbard Glacier route in 2011."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.3795,
+            47.6335
+          ],
+          [
+            -122.5,
+            47.9
+          ],
+          [
+            -122.8,
+            48.1
+          ],
+          [
+            -123.1,
+            48.2
+          ],
+          [
+            -125,
+            48.2
+          ],
+          [
+            -128,
+            50.4
+          ],
+          [
+            -132.5,
+            54.3
+          ],
+          [
+            -135.5,
+            57
+          ],
+          [
+            -136.5,
+            58
+          ],
+          [
+            -136.15,
+            58.45
+          ],
+          [
+            -136.1521,
+            58.8056
+          ],
+          [
+            -136.15,
+            58.45
+          ],
+          [
+            -135.9,
+            58.3
+          ],
+          [
+            -135.2,
+            58.15
+          ],
+          [
+            -134.7,
+            58.15
+          ],
+          [
+            -134.4119,
+            58.2984
+          ],
+          [
+            -134.7,
+            58.15
+          ],
+          [
+            -135.2,
+            58.15
+          ],
+          [
+            -135.9,
+            58.3
+          ],
+          [
+            -136.6,
+            58.1
+          ],
+          [
+            -137,
+            57.8
+          ],
+          [
+            -136.5,
+            57.3
+          ],
+          [
+            -135.7,
+            56.8
+          ],
+          [
+            -135.3,
+            57
+          ],
+          [
+            -135.3961,
+            57.121
+          ],
+          [
+            -136,
+            56.75
+          ],
+          [
+            -134.4,
+            55.5
+          ],
+          [
+            -132.2,
+            54.75
+          ],
+          [
+            -131.6505,
+            55.3422
+          ],
+          [
+            -132,
+            54.5
+          ],
+          [
+            -130,
+            52
+          ],
+          [
+            -127,
+            49.5
+          ],
+          [
+            -125,
+            48.2
+          ],
+          [
+            -123.65,
+            48.2
+          ],
+          [
+            -123.3901,
+            48.4154
+          ],
+          [
+            -123.3,
+            48.2
+          ],
+          [
+            -122.8,
+            48.1
+          ],
+          [
+            -122.5,
+            47.9
+          ],
+          [
+            -122.3795,
+            47.6335
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "properties": {
+        "cruiseId": 9,
+        "ship": "Carnival Magic",
+        "line": "Carnival Cruise Line",
+        "region": "Western Caribbean",
+        "year": 2012,
+        "originalDate": "2012-02-19",
+        "startDate": "2012-02-19",
+        "endDate": "2012-02-26",
+        "nights": 7,
+        "confidence": "likely",
+        "notes": "Likely seven-night Galveston roundtrip, treating the supplied Sunday date as departure. Carnival's official 2011 deployment announcement and nearby February/March 2012 accounts identify its Western route as Montego Bay, Grand Cayman and Cozumel. Exact February 19–26 documentation was not located; dates and order are reconstructed.",
+        "sources": [
+          {
+            "title": "Carnival: Magic's Galveston deployment announcement",
+            "url": "https://www.carnival-news.com/2010/06/23/carnival-magic-to-operate-seven-day-cruises-from-galveston-to-be-ports-largest-ship",
+            "note": "Official source identifies seven-day Western Caribbean route from Galveston to Montego Bay, Grand Cayman and Cozumel beginning November 2011."
+          },
+          {
+            "title": "Cajun Radio: Carnival Magic February 5–12, 2012 cruise",
+            "url": "https://cajunradio.com/cruise-the-caribbean-with-damon-troy-on-new-carnival-magic/",
+            "note": "Nearby February 2012 seven-day departure from Galveston calls Jamaica, Grand Cayman and Cozumel."
+          },
+          {
+            "title": "Ray's Cruise and Travel Blog: Carnival Magic March 2012",
+            "url": "https://snoozemanscruiseblog.blogspot.com/2012/03/carnival-magic.html",
+            "note": "Nearby March 4 sailing account corroborates ordered Galveston, Montego Bay, Grand Cayman, Cozumel route; not the exact February departure."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -94.7927,
+            29.3102
+          ],
+          [
+            -89,
+            25
+          ],
+          [
+            -85.7,
+            22.3
+          ],
+          [
+            -84.5,
+            20.5
+          ],
+          [
+            -81,
+            18.8
+          ],
+          [
+            -77.9445,
+            18.4618
+          ],
+          [
+            -81.3831,
+            19.2965
+          ],
+          [
+            -86.9484,
+            20.5118
+          ],
+          [
+            -86.5,
+            22.2
+          ],
+          [
+            -89,
+            24.5
+          ],
+          [
+            -94.7927,
+            29.3102
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "properties": {
+        "cruiseId": 10,
+        "ship": "Carnival Sunshine",
+        "line": "Carnival Cruise Line",
+        "region": "Mediterranean",
+        "year": 2013,
+        "originalDate": "2013-06-07",
+        "startDate": "2013-06-07",
+        "endDate": "2013-06-16",
+        "nights": 9,
+        "confidence": "confirmed",
+        "notes": "Exact sailing match in a contemporary passenger review: 9-night Italy & Adriatic cruise from Barcelona to Venice. Port sequence follows the sailing review; the end date is calculated from the verified departure and nine-night duration. This was Sunshine's first Mediterranean season after the conversion from Carnival Destiny.",
+        "sources": [
+          {
+            "title": "Cruiseline: Carnival Sunshine, June 7, 2013 — 9 Night Italy & Adriatic",
+            "url": "https://cruiseline.com/ship/carnival-sunshine/review/381014",
+            "note": "Exact departure, nine nights, endpoints and ordered ports."
+          },
+          {
+            "title": "Travel Weekly: Carnival Sunshine metamorphosis was ambitious and complicated",
+            "url": "https://www.travelweekly.com/Cruise-Travel/Carnival-Sunshine-metamorphosis-was-ambitious-and-complicated",
+            "note": "Contemporary June 2013 account corroborates the June 7 sailing and first-season refurbishment context."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            2.1688,
+            41.344
+          ],
+          [
+            5.3392,
+            43.3393
+          ],
+          [
+            6.2,
+            42.7
+          ],
+          [
+            8.3,
+            43
+          ],
+          [
+            10.2998,
+            43.5512
+          ],
+          [
+            10.6,
+            43
+          ],
+          [
+            10.75,
+            42.7
+          ],
+          [
+            11.7878,
+            42.0954
+          ],
+          [
+            14.2536,
+            40.8374
+          ],
+          [
+            14.3,
+            40.4
+          ],
+          [
+            15.1,
+            38.5
+          ],
+          [
+            15.55,
+            38.3
+          ],
+          [
+            15.5587,
+            38.1908
+          ],
+          [
+            15.6,
+            37.95
+          ],
+          [
+            16,
+            37.65
+          ],
+          [
+            17.6,
+            38.2
+          ],
+          [
+            18.7,
+            39.2
+          ],
+          [
+            18.9,
+            40.1
+          ],
+          [
+            18.0867,
+            42.6603
+          ],
+          [
+            12.3074,
+            45.4366
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "properties": {
+        "cruiseId": 11,
+        "ship": "Carnival Elation",
+        "line": "Carnival Cruise Line",
+        "region": "Western Caribbean",
+        "year": 2013,
+        "originalDate": "2013-12-28",
+        "startDate": "2013-12-28",
+        "endDate": "2014-01-02",
+        "nights": 5,
+        "confidence": "likely",
+        "notes": "Seasonal reconstruction, not an independently verified exact sailing. Elation was based in New Orleans on four- and five-night Mexico cruises in December 2013. The five-night Progreso/Cozumel itinerary and next four-night departure on January 2, 2014 support a December 28–January 2 sailing. Port order and the assumption that the supplied date is embarkation need confirmation; December 28 could instead be disembarkation from the preceding five-night cruise.",
+        "sources": [
+          {
+            "title": "New Orleans tourism: December 2013 / January 2014 industry update",
+            "url": "https://www.neworleans.com/articles/post/whats-new-in-new-orleans-hospitality-industry-december-2013january-2014/",
+            "note": "Contemporary confirmation of Elation's year-round New Orleans homeport."
+          },
+          {
+            "title": "Carnival Cruise Lines 2014 brochure",
+            "url": "https://www.slideshare.net/slideshow/carnival-cruise-lines-2014/28593553",
+            "note": "Period brochure shows the five-night New Orleans–Progreso–Cozumel itinerary and January 2, 2014 four-night departure. Does not directly verify December 28, 2013."
+          },
+          {
+            "title": "Cruise with Jill: New Orleans cruise port, December 4, 2013",
+            "url": "https://cruisewithjill.wordpress.com/",
+            "note": "Contemporary post describes Elation's four-night Cozumel and five-night Western Caribbean cruises."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -90.0602,
+            29.9366
+          ],
+          [
+            -89.6834,
+            21.3428
+          ],
+          [
+            -89.2,
+            21.8
+          ],
+          [
+            -87.7,
+            22
+          ],
+          [
+            -86.6,
+            21.7
+          ],
+          [
+            -86.9484,
+            20.5118
+          ],
+          [
+            -86.5,
+            22.2
+          ],
+          [
+            -89,
+            25
+          ],
+          [
+            -89.3,
+            28.9
+          ],
+          [
+            -90.0602,
+            29.9366
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "properties": {
+        "cruiseId": 12,
+        "ship": "Allure of the Seas",
+        "line": "Royal Caribbean",
+        "region": "Eastern Caribbean",
+        "year": 2014,
+        "originalDate": "2014-03-15",
+        "startDate": "2014-03-16",
+        "endDate": "2014-03-23",
+        "nights": 7,
+        "confidence": "likely",
+        "notes": "Likely one-day date correction: a passenger review explicitly identifies the March 16–23, 2014 Eastern Caribbean sailing. The supplied March 15 is the day before departure. That season's Eastern route was Fort Lauderdale–Nassau–St. Thomas–St. Maarten; the date-to-user-trip match remains an inference. The March 9 sailing containing March 15 was Western Caribbean, so it conflicts with the supplied destination.",
+        "sources": [
+          {
+            "title": "Cruise Critic: Alluring cruise — March 16–23, 2014",
+            "url": "https://www.cruisecritic.com/cruise/royal-caribbean/allure-of-the-seas/reviews/253085",
+            "note": "Passenger explicitly gives March 16–23 and Eastern Caribbean."
+          },
+          {
+            "title": "Royal Caribbean: Allure inaugural-season itinerary announcement",
+            "url": "https://www.royalcaribbeanpresscenter.com/download-press-kit/35/",
+            "note": "Historical Fort Lauderdale Eastern route via Nassau, Charlotte Amalie and Philipsburg; route pattern, not exact 2014 sailing verification."
+          },
+          {
+            "title": "Cruiseline: Allure March 9, 2014 Western Caribbean",
+            "url": "https://cruiseline.com/ship/allure-of-the-seas/review/386483",
+            "note": "Confirms the preceding sailing was Western, supporting the one-day date discrepancy rather than an Eastern voyage on March 15."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.1159,
+            26.094
+          ],
+          [
+            -77.3386,
+            25.0838
+          ],
+          [
+            -64.9235,
+            18.3356
+          ],
+          [
+            -63.0457,
+            18.008
+          ],
+          [
+            -80.1159,
+            26.094
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "properties": {
+        "cruiseId": 13,
+        "ship": "Celebrity Reflection",
+        "line": "Celebrity Cruises",
+        "region": "Eastern Mediterranean",
+        "year": 2014,
+        "originalDate": "2014-06-02",
+        "startDate": "2014-06-02",
+        "endDate": "2014-06-13",
+        "nights": 11,
+        "confidence": "confirmed",
+        "notes": "Contemporary passenger photo album explicitly records June 2–13, 2014 and dated calls: Santorini June 4; Istanbul June 6–7 overnight; Kusadasi June 8; Mykonos June 9; Athens June 10; Naples June 12. Piraeus is the port for Athens, and Civitavecchia is the port for Rome.",
+        "sources": [
+          {
+            "title": "Flickr travel diary: Mediterranean Cruise on Celebrity Reflection — June 2014",
+            "url": "https://api.flickr.com/photos/escriteur/albums/72157645178029754/with/14451670303/",
+            "note": "First-hand contemporary album explicitly lists dates and all ordered ports."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            11.7878,
+            42.0954
+          ],
+          [
+            13.7,
+            40
+          ],
+          [
+            15.55,
+            38.35
+          ],
+          [
+            15.6,
+            37.9
+          ],
+          [
+            16.7,
+            37.2
+          ],
+          [
+            20,
+            36
+          ],
+          [
+            23.1,
+            35.9
+          ],
+          [
+            25.4246,
+            36.4164
+          ],
+          [
+            25.3,
+            38.3
+          ],
+          [
+            25.7,
+            39.7
+          ],
+          [
+            26.14,
+            40
+          ],
+          [
+            26.38,
+            40.15
+          ],
+          [
+            26.65,
+            40.41
+          ],
+          [
+            27.1,
+            40.58
+          ],
+          [
+            28.3,
+            40.7
+          ],
+          [
+            28.9838,
+            41.0273
+          ],
+          [
+            28.3,
+            40.7
+          ],
+          [
+            27.1,
+            40.58
+          ],
+          [
+            26.65,
+            40.41
+          ],
+          [
+            26.38,
+            40.15
+          ],
+          [
+            26.14,
+            40
+          ],
+          [
+            25.7,
+            39.7
+          ],
+          [
+            26,
+            39.3
+          ],
+          [
+            26.2,
+            38.4
+          ],
+          [
+            26.7,
+            37.7
+          ],
+          [
+            27.2573,
+            37.8634
+          ],
+          [
+            25.329,
+            37.464
+          ],
+          [
+            23.6275,
+            37.9364
+          ],
+          [
+            23.5,
+            37.5
+          ],
+          [
+            23.4,
+            36.8
+          ],
+          [
+            22.9,
+            36.2
+          ],
+          [
+            21.6,
+            36.4
+          ],
+          [
+            20.3,
+            37.1
+          ],
+          [
+            17.5,
+            37.1
+          ],
+          [
+            15.6,
+            37.9
+          ],
+          [
+            15.55,
+            38.2
+          ],
+          [
+            15.4,
+            38.6
+          ],
+          [
+            14.2,
+            40.3
+          ],
+          [
+            14.2536,
+            40.8374
+          ],
+          [
+            11.7878,
+            42.0954
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "properties": {
+        "cruiseId": 14,
+        "ship": "Celebrity Summit",
+        "line": "Celebrity Cruises",
+        "region": "Southern Caribbean",
+        "year": 2015,
+        "originalDate": "2015-03-14",
+        "startDate": "2015-03-14",
+        "endDate": "2015-03-21",
+        "nights": 7,
+        "confidence": "confirmed",
+        "notes": "Exact date matched to a passenger review of the seven-night San Juan roundtrip. All five intermediate ports are listed in itinerary order. End date calculated from verified departure and duration.",
+        "sources": [
+          {
+            "title": "Cruiseline: Celebrity Summit — March 14, 2015",
+            "url": "https://cruiseline.com/ship/celebrity-summit/review/401906",
+            "note": "Exact departure, seven-night duration, San Juan roundtrip and ordered ports."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -66.1107,
+            18.4598
+          ],
+          [
+            -64.8836,
+            17.7147
+          ],
+          [
+            -62.7266,
+            17.2928
+          ],
+          [
+            -61.3893,
+            15.2994
+          ],
+          [
+            -61.7548,
+            12.0486
+          ],
+          [
+            -64.9235,
+            18.3356
+          ],
+          [
+            -66.1107,
+            18.4598
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "properties": {
+        "cruiseId": 15,
+        "ship": "Celebrity Silhouette",
+        "line": "Celebrity Cruises",
+        "region": "Scandinavia & Russia",
+        "year": 2015,
+        "originalDate": "2015-05-28",
+        "startDate": "2015-05-28",
+        "endDate": "2015-06-09",
+        "nights": 12,
+        "confidence": "confirmed",
+        "notes": "Exact 12-night Stockholm-to-Amsterdam sailing appears in the Celebrity 2015 Europe brochure, page 59, and a verified passenger review. Overnight stays in Stockholm, St. Petersburg and Copenhagen. Brochure day order: Stockholm May 28–29, Helsinki May 30, St. Petersburg May 31–June 1, Tallinn June 2, sea June 3, Warnemunde June 4, Fredericia June 5, Copenhagen June 6–7, sea June 8, Amsterdam June 9.",
+        "sources": [
+          {
+            "title": "Celebrity Cruises 2015 Europe Guide, page 59",
+            "url": "https://www.scribd.com/doc/246907520/Celebrity-Cruises-2015-Europa",
+            "note": "Archived official brochure contains exact departure date and day-by-day itinerary."
+          },
+          {
+            "title": "Cruiseline: Baltic Cruise on Celebrity Silhouette — May 28, 2015",
+            "url": "https://cruiseline.com/ship/celebrity-silhouette/review/405389",
+            "note": "Verified passenger review confirms May 28, twelve nights, Stockholm-to-Amsterdam and visits."
+          },
+          {
+            "title": "Fodor's: Scandinavia and St. Petersburg forum",
+            "url": "https://www.fodors.com/community/cruises/scandinavia-and-st-petersburg-1037670/",
+            "note": "February 2015 passenger planning post explicitly names the May 28 Stockholm–Amsterdam sailing and two-day St. Petersburg visit."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            18.0903,
+            59.3226
+          ],
+          [
+            19,
+            59.5
+          ],
+          [
+            20,
+            59.7
+          ],
+          [
+            23.5,
+            59.8
+          ],
+          [
+            24.9616,
+            60.1532
+          ],
+          [
+            25.4,
+            59.8
+          ],
+          [
+            28.4,
+            59.9
+          ],
+          [
+            29.5,
+            60
+          ],
+          [
+            30.189,
+            59.9414
+          ],
+          [
+            29.5,
+            60
+          ],
+          [
+            28.4,
+            59.9
+          ],
+          [
+            26.5,
+            59.7
+          ],
+          [
+            24.7644,
+            59.4495
+          ],
+          [
+            22,
+            59.25
+          ],
+          [
+            20.5,
+            58.5
+          ],
+          [
+            18.3,
+            56.5
+          ],
+          [
+            15,
+            55
+          ],
+          [
+            12.5,
+            54.4
+          ],
+          [
+            12.0937,
+            54.1769
+          ],
+          [
+            12.1,
+            54.5
+          ],
+          [
+            11.7,
+            54.55
+          ],
+          [
+            11.3,
+            54.6
+          ],
+          [
+            10.9,
+            54.7
+          ],
+          [
+            10.95,
+            55
+          ],
+          [
+            11.1,
+            55.3
+          ],
+          [
+            11,
+            55.6
+          ],
+          [
+            10.8,
+            55.85
+          ],
+          [
+            10.3,
+            55.85
+          ],
+          [
+            9.85,
+            55.7
+          ],
+          [
+            9.7533,
+            55.558
+          ],
+          [
+            9.85,
+            55.7
+          ],
+          [
+            10.3,
+            55.9
+          ],
+          [
+            11,
+            56
+          ],
+          [
+            11.6,
+            56.3
+          ],
+          [
+            12.25,
+            56.2
+          ],
+          [
+            12.65,
+            56
+          ],
+          [
+            12.65,
+            55.85
+          ],
+          [
+            12.606,
+            55.7082
+          ],
+          [
+            12.65,
+            56
+          ],
+          [
+            11.8,
+            56.5
+          ],
+          [
+            11,
+            57.2
+          ],
+          [
+            10.8,
+            57.8
+          ],
+          [
+            10,
+            58
+          ],
+          [
+            8,
+            57.5
+          ],
+          [
+            6.5,
+            55.5
+          ],
+          [
+            4.1,
+            53
+          ],
+          [
+            4.62,
+            52.47
+          ],
+          [
+            4.76,
+            52.43
+          ],
+          [
+            4.9215,
+            52.3778
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "properties": {
+        "cruiseId": 16,
+        "ship": "Celebrity Summit",
+        "line": "Celebrity Cruises",
+        "region": "Southern Caribbean",
+        "year": 2016,
+        "originalDate": "2016-03-19",
+        "startDate": "2016-03-19",
+        "endDate": "2016-03-26",
+        "nights": 7,
+        "confidence": "confirmed",
+        "notes": "Exact departure and seven-night San Juan roundtrip matched to verified passenger review. Port call sequence differs from the 2015 Summit cruise. Philipsburg on March 24 is independently supported by the 2016 port calendar. This was the first sailing after Summit's March 2016 drydock.",
+        "sources": [
+          {
+            "title": "Cruiseline: Celebrity Summit — March 19, 2016",
+            "url": "https://cruiseline.com/ship/celebrity-summit/review/419687",
+            "note": "Exact departure, duration, endpoints and ordered ports."
+          },
+          {
+            "title": "Crew Center: Philipsburg 2016 cruise ship port calendar",
+            "url": "https://crew-center.com/philipsburg-st-maarten-cruise-ship-port-calendar-2016",
+            "note": "Celebrity Summit listed March 24, 2016."
+          },
+          {
+            "title": "Cruise Industry News: Celebrity announces ship refresh for Infinity and Summit",
+            "url": "https://cruiseindustrynews.com/cruise-news/2015/10/celebrity-announces-ship-refresh-for-infinity-and-summit/",
+            "note": "Identifies March 19, 2016 as the beginning of post-refurbishment sailings."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -66.1107,
+            18.4598
+          ],
+          [
+            -59.6315,
+            13.1007
+          ],
+          [
+            -60.9931,
+            14.0101
+          ],
+          [
+            -61.8512,
+            17.1237
+          ],
+          [
+            -63.0457,
+            18.008
+          ],
+          [
+            -64.9235,
+            18.3356
+          ],
+          [
+            -66.1107,
+            18.4598
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "properties": {
+        "cruiseId": 17,
+        "ship": "Celebrity Silhouette",
+        "line": "Celebrity Cruises",
+        "region": "British Isles",
+        "year": 2016,
+        "originalDate": "2016-07-13",
+        "startDate": "2016-07-13",
+        "endDate": "2016-07-25",
+        "nights": 12,
+        "confidence": "confirmed",
+        "notes": "Exact match: 12-night British Isles & The Open, Amsterdam roundtrip. Verified passenger review supplies ordered ports including both Ayr and Greenock. Ayr call on July 16 is confirmed by a contemporary port announcement for The Open at Royal Troon. The return date is calculated from departure plus twelve nights.",
+        "sources": [
+          {
+            "title": "Cruiseline: Celebrity Silhouette — July 13, 2016",
+            "url": "https://cruiseline.com/ship/celebrity-silhouette/review/425905",
+            "note": "Exact departure, duration, roundtrip and all ordered ports."
+          },
+          {
+            "title": "Cruiseline: To maximize your experience, do your homework",
+            "url": "https://cruiseline.com/ship/celebrity-silhouette/review/425853",
+            "note": "Second verified review of July 13 sailing corroborates duration and most ports."
+          },
+          {
+            "title": "PortNews: Ayr and Troon receive record cruise calls in 2016",
+            "url": "https://en.portnews.ru/news/220079/",
+            "note": "Contemporary ABP announcement identifies Silhouette's July 16 Ayr call for The Open."
+          },
+          {
+            "title": "Cruise Critic: Great ship and cruise with a few inconsistencies",
+            "url": "https://www.cruisecritic.com/cruise/celebrity/celebrity-silhouette/reviews/544246",
+            "note": "Passenger explicitly states July 13 twelve-day Amsterdam British Isles roundtrip."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.9215,
+            52.3778
+          ],
+          [
+            4.76,
+            52.43
+          ],
+          [
+            4.62,
+            52.47
+          ],
+          [
+            3.8,
+            52.4
+          ],
+          [
+            2.2,
+            51.8
+          ],
+          [
+            1.6,
+            51.2
+          ],
+          [
+            1.1,
+            50.6
+          ],
+          [
+            -1.5,
+            50.1
+          ],
+          [
+            -3.5,
+            49.8
+          ],
+          [
+            -5.7,
+            49.8
+          ],
+          [
+            -6,
+            50.2
+          ],
+          [
+            -5.7,
+            51.5
+          ],
+          [
+            -5,
+            53.2
+          ],
+          [
+            -5.5,
+            54.2
+          ],
+          [
+            -5.8861,
+            54.6357
+          ],
+          [
+            -4.6404,
+            55.4678
+          ],
+          [
+            -4.95,
+            55.55
+          ],
+          [
+            -4.95,
+            55.85
+          ],
+          [
+            -4.9,
+            55.98
+          ],
+          [
+            -4.758,
+            55.9541
+          ],
+          [
+            -4.95,
+            55.85
+          ],
+          [
+            -5.2,
+            55.35
+          ],
+          [
+            -5.4,
+            54.7
+          ],
+          [
+            -4.6,
+            53.7
+          ],
+          [
+            -2.9983,
+            53.4054
+          ],
+          [
+            -6.1348,
+            53.2965
+          ],
+          [
+            -5.7,
+            52.6
+          ],
+          [
+            -6.2,
+            51.8
+          ],
+          [
+            -7.8,
+            51.55
+          ],
+          [
+            -8.2974,
+            51.8483
+          ],
+          [
+            -8,
+            51.4
+          ],
+          [
+            -6,
+            50
+          ],
+          [
+            -5.6,
+            49.7
+          ],
+          [
+            -2.5322,
+            49.4563
+          ],
+          [
+            -2.25,
+            49.8
+          ],
+          [
+            -1.6,
+            49.95
+          ],
+          [
+            -0.7,
+            49.8
+          ],
+          [
+            0.1197,
+            49.4815
+          ],
+          [
+            0.5,
+            50
+          ],
+          [
+            1.4,
+            50.7
+          ],
+          [
+            1.8,
+            51.4
+          ],
+          [
+            3.2,
+            52.1
+          ],
+          [
+            4.2,
+            52.65
+          ],
+          [
+            4.62,
+            52.47
+          ],
+          [
+            4.76,
+            52.43
+          ],
+          [
+            4.9215,
+            52.3778
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "properties": {
+        "cruiseId": 18,
+        "ship": "Carnival Sunshine",
+        "line": "Carnival Cruise Line",
+        "region": "Eastern Caribbean",
+        "year": 2017,
+        "originalDate": "2017-03-12",
+        "startDate": "2017-03-12",
+        "endDate": "2017-03-17",
+        "nights": 5,
+        "confidence": "confirmed",
+        "notes": "Exact match to official Carnival deployment announcement and verified sailing review: five-night Eastern Caribbean cruise from Port Canaveral to Amber Cove and Grand Turk. End date calculated from verified departure and duration.",
+        "sources": [
+          {
+            "title": "Carnival Cruise Line: Sunshine 2016–17 deployment announcement",
+            "url": "https://www.carnival-news.com/2015/03/16/carnival-sunshine-to-operate-unique-schedule-of-two-to-10-day-voyages-from-new-york-june-to-october-2016",
+            "note": "Official release explicitly names March 12, 2017 five-day Amber Cove/Grand Turk sailing from Port Canaveral."
+          },
+          {
+            "title": "Cruiseline: Carnival Sunshine — March 12, 2017",
+            "url": "https://cruiseline.com/ship/carnival-sunshine/review/442535",
+            "note": "Verified review confirms departure, duration and ordered ports."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -78.5,
+            26.3
+          ],
+          [
+            -75,
+            23.2
+          ],
+          [
+            -72.2,
+            20.7
+          ],
+          [
+            -70.744,
+            19.8331
+          ],
+          [
+            -71.1466,
+            21.4287
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "properties": {
+        "cruiseId": 19,
+        "ship": "Carnival Liberty",
+        "line": "Carnival Cruise Line",
+        "region": "Bahamas",
+        "year": 2017,
+        "originalDate": "2017-12-21",
+        "startDate": "2017-12-21",
+        "endDate": "2017-12-24",
+        "nights": 3,
+        "confidence": "confirmed",
+        "notes": "An exact-date passenger review identifies a three-night Bahamas sailing from Port Canaveral and lists Nassau. Return date is calculated from the published duration.",
+        "sources": [
+          {
+            "title": "Carnival Liberty — December 21, 2017 passenger review",
+            "url": "https://cruiseline.com/ship/carnival-liberty/review/460341",
+            "note": "Exact departure, three-night duration, Port Canaveral roundtrip and Nassau."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -79.4,
+            27
+          ],
+          [
+            -78.25,
+            26.4
+          ],
+          [
+            -77.3386,
+            25.0838
+          ],
+          [
+            -78.25,
+            26.4
+          ],
+          [
+            -79.4,
+            27
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "properties": {
+        "cruiseId": 20,
+        "ship": "Celebrity Reflection",
+        "line": "Celebrity Cruises",
+        "region": "Mediterranean Getaway",
+        "year": 2018,
+        "originalDate": "2018-08-15",
+        "startDate": "2018-08-15",
+        "endDate": "2018-08-21",
+        "nights": 6,
+        "confidence": "confirmed",
+        "notes": "Archived exact-date offer supplies the complete six-night itinerary. Every day had a port: La Spezia Aug 16, Villefranche Aug 17, Ajaccio Aug 18, Cagliari Aug 19 and Naples Aug 20.",
+        "sources": [
+          {
+            "title": "Archived Celebrity Mediterranean Getaway itinerary, August 15–21, 2018",
+            "url": "https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/",
+            "note": "Full day-by-day historical schedule and Reflection ship identification."
+          },
+          {
+            "title": "Celebrity 2018 Mediterranean offers",
+            "url": "https://www.cruisebay.com/uploads/cruise-specials/docs/celebrity-cruises-1312.pdf",
+            "note": "Promotional brochure separately identifies Reflection's six-night August 15, 2018 departure."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            11.7878,
+            42.0954
+          ],
+          [
+            9.8301,
+            44.1039
+          ],
+          [
+            7.3107,
+            43.7045
+          ],
+          [
+            7.7,
+            42.2
+          ],
+          [
+            8.7424,
+            41.919
+          ],
+          [
+            8.1,
+            41.8
+          ],
+          [
+            7.8,
+            40.7
+          ],
+          [
+            8.1,
+            39.5
+          ],
+          [
+            8.4,
+            38.7
+          ],
+          [
+            9.1,
+            38.8
+          ],
+          [
+            9.1108,
+            39.2101
+          ],
+          [
+            9.1,
+            38.8
+          ],
+          [
+            9.8,
+            38.7
+          ],
+          [
+            12,
+            39.2
+          ],
+          [
+            14.2536,
+            40.8374
+          ],
+          [
+            11.7878,
+            42.0954
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "properties": {
+        "cruiseId": 21,
+        "ship": "Norwegian Sky",
+        "line": "Norwegian Cruise Line",
+        "region": "Cuba & Bahamas",
+        "year": 2019,
+        "originalDate": "2019-06-03",
+        "startDate": "2019-06-03",
+        "endDate": "2019-06-07",
+        "nights": 4,
+        "confidence": "confirmed",
+        "notes": "Matched across historical port calendars: Miami June 3, overnight Havana June 4–5, Great Stirrup Cay June 6, Miami June 7. Contemporary coverage documents Sky passengers in Havana June 4. This was one of the final US-to-Cuba cruise visits as the June 5 restrictions took effect; the similarly named Norwegian Sun was diverted, so its cancellation should not be applied to this sailing. Great Stirrup Cay is the scheduled call, not independently confirmed by a passenger report.",
+        "sources": [
+          {
+            "title": "Port of Miami ship calendar, May–August 2019",
+            "url": "https://crew-center.com/port-miami-cruise-ship-schedule-may-august-2019",
+            "note": "Sky in Miami June 3 and June 7."
+          },
+          {
+            "title": "Havana ship calendar, January–June 2019",
+            "url": "https://crew-center.com/havana-cuba-cruise-ship-schedule-january-june-2019",
+            "note": "Sky scheduled Havana June 4, 07:00 through June 5, 06:00."
+          },
+          {
+            "title": "Great Stirrup Cay ship calendar 2019",
+            "url": "https://crew-center.com/great-stirrup-cay-bahamas-cruise-ship-schedule-2019",
+            "note": "Sky scheduled June 6, 08:00–17:00."
+          },
+          {
+            "title": "US cruises to Cuba banned: the end of an era",
+            "url": "https://oncubanews.com/en/cuba-usa/u-s-cruises-to-cuba-banned-the-end-of-an-era/",
+            "note": "Contemporary June 6 reporting and photographs identify Sky passengers ashore in Havana on June 4."
+          },
+          {
+            "title": "With Cuba calls suddenly banned, cruise lines make changes at sea",
+            "url": "https://www.travelweekly.com/Cruise-Travel/With-Cuba-calls-suddenly-banned-cruise-lines-make-changes-at-sea",
+            "note": "Specifically identifies Norwegian Sun, rather than Sky, as diverted from its June 5 Havana call."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.1765,
+            25.7783
+          ],
+          [
+            -82.3506,
+            23.1396
+          ],
+          [
+            -77.9086,
+            25.8267
+          ],
+          [
+            -80.1765,
+            25.7783
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 22,
+      "properties": {
+        "cruiseId": 22,
+        "ship": "Emerald Princess",
+        "line": "Princess Cruises",
+        "region": "Mediterranean & Adriatic",
+        "year": 2019,
+        "originalDate": "2019-08-03",
+        "startDate": "2019-08-03",
+        "endDate": "2019-08-10",
+        "nights": 7,
+        "confidence": "confirmed",
+        "notes": "Princess's original Europe 2019 brochure (printed page 20) explicitly lists August 3 for the seven-day Athens-to-Barcelona Mediterranean & Adriatic sailing and supplies the port order. Return date follows its seven-night duration. This route was also available as part of longer combinations; the seven-night departure is the direct match to the supplied date.",
+        "sources": [
+          {
+            "title": "Princess Europe 2019 brochure — Mediterranean & Adriatic, page 20",
+            "url": "https://www.princess.com/downloads/pdf/sin_brochures/2019/europe-2019.pdf",
+            "note": "Primary brochure: Emerald Princess Aug 3 departure, seven days, Athens–Santorini–Kotor–Messina–Naples–Barcelona."
+          },
+          {
+            "title": "Emerald Princess Mediterranean & Adriatic trip report, July 2019",
+            "url": "https://cameltravel.co.uk/emerald-princess-cruise/",
+            "note": "Same season's seven-night route and ports, useful corroboration but not the exact departure."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            23.6275,
+            37.9364
+          ],
+          [
+            23.9,
+            37.4
+          ],
+          [
+            25.4246,
+            36.4164
+          ],
+          [
+            23.2,
+            35.9
+          ],
+          [
+            21.3,
+            36.3
+          ],
+          [
+            19.9,
+            38
+          ],
+          [
+            19.2,
+            40
+          ],
+          [
+            18.6,
+            41.3
+          ],
+          [
+            18.4,
+            42.15
+          ],
+          [
+            18.52,
+            42.4
+          ],
+          [
+            18.7693,
+            42.4243
+          ],
+          [
+            18.52,
+            42.4
+          ],
+          [
+            18.4,
+            42.15
+          ],
+          [
+            18.8,
+            41
+          ],
+          [
+            19,
+            39.8
+          ],
+          [
+            18,
+            38.5
+          ],
+          [
+            16.3,
+            37.65
+          ],
+          [
+            15.6,
+            37.9
+          ],
+          [
+            15.5587,
+            38.1908
+          ],
+          [
+            15.55,
+            38.3
+          ],
+          [
+            15.1,
+            38.5
+          ],
+          [
+            14.3,
+            40.4
+          ],
+          [
+            14.2536,
+            40.8374
+          ],
+          [
+            14,
+            40.4
+          ],
+          [
+            11.5,
+            39.7
+          ],
+          [
+            10,
+            38.1
+          ],
+          [
+            8,
+            38.2
+          ],
+          [
+            5,
+            40
+          ],
+          [
+            3,
+            41
+          ],
+          [
+            2.1688,
+            41.344
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 23,
+      "properties": {
+        "cruiseId": 23,
+        "ship": "Carnival Magic",
+        "line": "Carnival Cruise Line",
+        "region": "Bahamas",
+        "year": 2021,
+        "originalDate": "2021-08-12",
+        "startDate": "2021-08-12",
+        "endDate": "2021-08-16",
+        "nights": 4,
+        "confidence": "confirmed",
+        "notes": "Two independent exact-date passenger reviews identify a four-night Port Canaveral roundtrip with Nassau and Half Moon Cay. Return date is calculated from the duration; another passenger's next sailing begins August 16. Precise port-day timing was not found. An isolated blog's August 15 end date conflicts with the two four-night reviews.",
+        "sources": [
+          {
+            "title": "Carnival Magic — First Cruise Back, August 12, 2021",
+            "url": "https://cruiseline.com/ship/carnival-magic/review/529973",
+            "note": "Exact departure, four nights, Port Canaveral, Nassau and Half Moon Cay."
+          },
+          {
+            "title": "Carnival Magic — Great Family Cruise, August 12, 2021",
+            "url": "https://cruiseline.com/ship/carnival-magic/review/542302",
+            "note": "Separate passenger corroborates exact departure, four nights and both stops."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -79.4,
+            27
+          ],
+          [
+            -78.25,
+            26.4
+          ],
+          [
+            -77.3386,
+            25.0838
+          ],
+          [
+            -75.95,
+            24.576
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 24,
+      "properties": {
+        "cruiseId": 24,
+        "ship": "Mardi Gras",
+        "line": "Carnival Cruise Line",
+        "region": "Eastern Caribbean & Bahamas",
+        "year": 2022,
+        "originalDate": "2022-03-12",
+        "startDate": "2022-03-12",
+        "endDate": "2022-03-19",
+        "nights": 7,
+        "confidence": "confirmed",
+        "notes": "The date matches an archived seven-night Eastern Caribbean itinerary. Nassau March 14, Amber Cove March 16 and Grand Turk March 17; Bahamas is only one part of the route. The modern ship's official name is Mardi Gras (the user's '2.0' distinguishes it from Carnival's original ship). Historical schedule, subject to any unrecorded operational changes.",
+        "sources": [
+          {
+            "title": "Mardi Gras March 12–19, 2022 archived itinerary",
+            "url": "https://www.icruise.com/itineraries/7-night-eastern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_3-12-2022.html",
+            "note": "Exact dates, duration and ordered port schedule."
+          },
+          {
+            "title": "Mardi Gras March 12, 2022 passenger review",
+            "url": "https://cruiseline.com/ship/mardi-gras/review/536637",
+            "note": "Exact-date sailing review corroborates Eastern Caribbean designation."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -79.4,
+            27
+          ],
+          [
+            -78.25,
+            26.4
+          ],
+          [
+            -77.3386,
+            25.0838
+          ],
+          [
+            -70.744,
+            19.8331
+          ],
+          [
+            -71.1466,
+            21.4287
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 25,
+      "properties": {
+        "cruiseId": 25,
+        "ship": "Regal Princess",
+        "line": "Princess Cruises",
+        "region": "Mediterranean",
+        "year": 2022,
+        "originalDate": "2022-06-16",
+        "startDate": "2022-06-11",
+        "endDate": "2022-06-18",
+        "nights": 7,
+        "confidence": "confirmed",
+        "notes": "You confirmed this was the seven-day Regal Princess cruise. The historical schedule containing your June 16 date matches the June 11–18, 2022 Barcelona-to-Civitavecchia (Rome) sailing, seven nights: Gibraltar June 13, Marseille June 15, Genoa June 16, Livorno June 17, and Civitavecchia June 18. June 16 was the Genoa port day. The archived longer itinerary includes this same first week; your confirmed duration identifies the seven-night voyage.",
+        "sources": [
+          {
+            "title": "Regal Princess June 11, 2022 archived Mediterranean itinerary",
+            "url": "https://www.icruise.com/itineraries/14-night-mediterranean-with-greek-isles-france-and-turkey-cruise_regal-princess_6-11-2022.html",
+            "note": "Historical schedule for June 11–18: Barcelona, Gibraltar, Marseille, Genoa, Livorno and Civitavecchia. Published as the first week of a longer itinerary; the owner confirms sailing the seven-day voyage."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            2.1688,
+            41.344
+          ],
+          [
+            2.5,
+            40.8
+          ],
+          [
+            1.5,
+            39.2
+          ],
+          [
+            0.2,
+            37.4
+          ],
+          [
+            -2.4,
+            36.1
+          ],
+          [
+            -4.8,
+            36
+          ],
+          [
+            -5.3589,
+            36.1405
+          ],
+          [
+            -4.8,
+            36
+          ],
+          [
+            -2.4,
+            36.1
+          ],
+          [
+            0.2,
+            37.4
+          ],
+          [
+            1.5,
+            39.2
+          ],
+          [
+            3.4,
+            41.2
+          ],
+          [
+            4.8,
+            42.4
+          ],
+          [
+            5.3392,
+            43.3393
+          ],
+          [
+            6.2,
+            42.7
+          ],
+          [
+            8.3,
+            43.2
+          ],
+          [
+            8.9177,
+            44.4071
+          ],
+          [
+            10.2998,
+            43.5512
+          ],
+          [
+            10.6,
+            43
+          ],
+          [
+            10.75,
+            42.7
+          ],
+          [
+            11.7878,
+            42.0954
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 26,
+      "properties": {
+        "cruiseId": 26,
+        "ship": "Norwegian Bliss",
+        "line": "Norwegian Cruise Line",
+        "region": "Western Caribbean",
+        "year": 2022,
+        "originalDate": "2022-12-31",
+        "startDate": "2022-12-31",
+        "endDate": "2023-01-07",
+        "nights": 7,
+        "confidence": "confirmed",
+        "notes": "Exact archived seven-night sailing crosses into 2023: Roatán Jan 2, Harvest Caye Jan 3, Costa Maya Jan 4, Cozumel Jan 5. The Bahamas are not on this route. Historical scheduled itinerary, with a same-departure passenger review.",
+        "sources": [
+          {
+            "title": "Norwegian Bliss December 31, 2022 archived itinerary",
+            "url": "https://www.icruise.com/itineraries/7-night-caribbean-harvest-caye-cozumel-and-roatan-cruise_norwegian-bliss_12-31-2022.html",
+            "note": "Exact dates, duration, Miami roundtrip and ordered stops."
+          },
+          {
+            "title": "Norwegian Bliss December 31, 2022 passenger review",
+            "url": "https://cruiseline.com/ship/norwegian-bliss/review/549720",
+            "note": "Same-departure Western Caribbean passenger review."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.1765,
+            25.7783
+          ],
+          [
+            -81,
+            24
+          ],
+          [
+            -83.5,
+            23.5
+          ],
+          [
+            -85.4,
+            22.1
+          ],
+          [
+            -86,
+            20
+          ],
+          [
+            -86.5375,
+            16.3174
+          ],
+          [
+            -88.4012,
+            16.4847
+          ],
+          [
+            -87.6958,
+            18.7332
+          ],
+          [
+            -86.9484,
+            20.5118
+          ],
+          [
+            -86.5,
+            21.3
+          ],
+          [
+            -85.5,
+            22.2
+          ],
+          [
+            -83.7,
+            23.8
+          ],
+          [
+            -81.3,
+            24.2
+          ],
+          [
+            -79.8,
+            24.6
+          ],
+          [
+            -80.1765,
+            25.7783
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 27,
+      "properties": {
+        "cruiseId": 27,
+        "ship": "Celebrity Solstice",
+        "line": "Celebrity Cruises",
+        "region": "Mexican Riviera & San Diego",
+        "year": 2023,
+        "originalDate": "2023-03-18",
+        "startDate": "2023-03-11",
+        "endDate": "2023-03-18",
+        "nights": 7,
+        "confidence": "likely",
+        "notes": "Your date is most likely the return date: the documented March 11–18 voyage matches your Cabo and Mazatlán memories, and also visited San Diego. Archived dates: Cabo March 13, Mazatlán March 14, San Diego March 17. A verified passenger review corroborates all three stops. The separate March 18 departure was marketed with Catalina Island and Cabo instead, making March 11–18 the stronger match. No Puerto Vallarta stop is supported for this sailing.",
+        "sources": [
+          {
+            "title": "Celebrity Solstice March 11–18, 2023 archived itinerary",
+            "url": "https://www.icruise.com/itineraries/7-night-mexican-riviera-cruise_celebrity-solstice_3-11-2023.html",
+            "note": "Exact return-date match and Cabo–Mazatlán–San Diego itinerary."
+          },
+          {
+            "title": "Verified Solstice March 11, 2023 passenger review",
+            "url": "https://cruiseline.com/ship/celebrity-solstice/review/553203",
+            "note": "Passenger lists Cabo San Lucas, Mazatlán and San Diego."
+          },
+          {
+            "title": "Archived Celebrity 2023 cruise offers",
+            "url": "https://blog.cruises-n-more.com/press-and-cruise-news/family-owned-and-operated-going-on-25-years-cruises-n-more-offers-respected-expertise-and-superior-deals-prices-amenities/",
+            "note": "March 18 departure advertised Catalina and Cabo, supporting interpretation of anchor as return date."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -118.277,
+            33.7441
+          ],
+          [
+            -119,
+            32
+          ],
+          [
+            -117.3,
+            29
+          ],
+          [
+            -115,
+            26
+          ],
+          [
+            -112.5,
+            24
+          ],
+          [
+            -110.8,
+            22.5
+          ],
+          [
+            -109.9126,
+            22.8808
+          ],
+          [
+            -106.4102,
+            23.186
+          ],
+          [
+            -108,
+            22.6
+          ],
+          [
+            -109.9,
+            22.4
+          ],
+          [
+            -112.5,
+            24
+          ],
+          [
+            -115,
+            26
+          ],
+          [
+            -117.3,
+            29
+          ],
+          [
+            -118.3,
+            31.6
+          ],
+          [
+            -117.1732,
+            32.7171
+          ],
+          [
+            -117.5,
+            32.9
+          ],
+          [
+            -118,
+            33.3
+          ],
+          [
+            -118.277,
+            33.7441
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 28,
+      "properties": {
+        "cruiseId": 28,
+        "ship": "Celebrity Millennium",
+        "line": "Celebrity Cruises",
+        "region": "Best of Japan & South Korea",
+        "year": 2024,
+        "originalDate": "2024-07-02",
+        "startDate": "2024-07-02",
+        "endDate": "2024-07-14",
+        "nights": 12,
+        "confidence": "confirmed",
+        "notes": "Exact twelve-night departure with an official corrected itinerary letter. Kobe July 4–5, Osaka July 5–6, Kochi July 7, Hiroshima July 8, Jeju July 10, Kagoshima July 11 and Shimizu July 13. The official change added Kochi and removed Nagasaki; map follows that revision. Kobe and Osaka are separate calls with overnight stays.",
+        "sources": [
+          {
+            "title": "Celebrity official July 2, 2024 itinerary correction",
+            "url": "https://www.celebritycruises.com/content/dam/celebrity/pdf/ML-7-2-24-12-nights-best-of-japan-cruises-Itinerary-Modification-Guest-Letter.pdf",
+            "note": "Primary correction adds Kochi July 7, moves Hiroshima to July 8 and Jeju to July 10, replaces Nagasaki with sea day."
+          },
+          {
+            "title": "Celebrity Millennium July 2–14, 2024 archived itinerary",
+            "url": "https://www.icruise.com/itineraries/12-night-best-of-japan-cruise_celebrity-millennium_7-2-2024.html",
+            "note": "Full corrected route, dates and overnight calls."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            139.6489,
+            35.4511
+          ],
+          [
+            139.8,
+            35
+          ],
+          [
+            139.8,
+            34.5
+          ],
+          [
+            138,
+            33.7
+          ],
+          [
+            135.8,
+            33.2
+          ],
+          [
+            135,
+            33.65
+          ],
+          [
+            134.8,
+            34.3
+          ],
+          [
+            135,
+            34.55
+          ],
+          [
+            135.1991,
+            34.682
+          ],
+          [
+            135.4282,
+            34.6546
+          ],
+          [
+            135,
+            34.35
+          ],
+          [
+            134.85,
+            33.8
+          ],
+          [
+            134.6,
+            33.35
+          ],
+          [
+            133.7,
+            33.1
+          ],
+          [
+            133.5707,
+            33.4987
+          ],
+          [
+            133.4,
+            33.15
+          ],
+          [
+            133.1,
+            32.65
+          ],
+          [
+            132.7,
+            32.5
+          ],
+          [
+            132.3,
+            32.9
+          ],
+          [
+            132.1,
+            33.35
+          ],
+          [
+            132.35,
+            33.9
+          ],
+          [
+            132.4648,
+            34.35
+          ],
+          [
+            132.3,
+            33.9
+          ],
+          [
+            131.6,
+            33.7
+          ],
+          [
+            131,
+            33.85
+          ],
+          [
+            130.95,
+            33.92
+          ],
+          [
+            130.85,
+            34
+          ],
+          [
+            129.6,
+            34.2
+          ],
+          [
+            128,
+            33.9
+          ],
+          [
+            126.5437,
+            33.5211
+          ],
+          [
+            126.85,
+            33.65
+          ],
+          [
+            127.1,
+            33.4
+          ],
+          [
+            127.1,
+            32.7
+          ],
+          [
+            129.8,
+            30.9
+          ],
+          [
+            130.7,
+            30.7
+          ],
+          [
+            130.7,
+            31.05
+          ],
+          [
+            130.62,
+            31.3
+          ],
+          [
+            130.5699,
+            31.5786
+          ],
+          [
+            130.62,
+            31.3
+          ],
+          [
+            130.7,
+            31.05
+          ],
+          [
+            130.7,
+            30.7
+          ],
+          [
+            131.6,
+            30.9
+          ],
+          [
+            132.5,
+            32
+          ],
+          [
+            135.8,
+            33
+          ],
+          [
+            138,
+            34
+          ],
+          [
+            138.5,
+            34.6
+          ],
+          [
+            138.5152,
+            35.0258
+          ],
+          [
+            138.6,
+            34.6
+          ],
+          [
+            138.9,
+            34.45
+          ],
+          [
+            139.3,
+            34.6
+          ],
+          [
+            139.75,
+            35
+          ],
+          [
+            139.6489,
+            35.4511
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 29,
+      "properties": {
+        "cruiseId": 29,
+        "ship": "Mardi Gras",
+        "line": "Carnival Cruise Line",
+        "region": "Southern Caribbean — Aruba & Curaçao",
+        "year": 2025,
+        "originalDate": "2025-06-07",
+        "startDate": "2025-06-07",
+        "endDate": "2025-06-15",
+        "nights": 8,
+        "confidence": "confirmed",
+        "notes": "Exact eight-night Port Canaveral roundtrip: Aruba June 10, Curaçao June 11 and Amber Cove June 13. Amber Cove replaced the originally planned Grand Turk call; the map uses the updated itinerary. Modern ship officially named Mardi Gras.",
+        "sources": [
+          {
+            "title": "Mardi Gras June 7–15, 2025 archived itinerary",
+            "url": "https://www.icruise.com/itineraries/8-night-southern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_6-7-2025.html",
+            "note": "Exact dates, eight nights and updated Aruba–Curaçao–Amber Cove route."
+          },
+          {
+            "title": "Carnival replaces Grand Turk calls on selected 2025 itineraries",
+            "url": "https://www.cruisehive.com/carnival-passes-up-caribbean-port-for-multiple-itineraries/170377",
+            "note": "Specifically identifies June 7 Mardi Gras sailing's substitution of Amber Cove for Grand Turk."
+          }
+        ],
+        "illustrative": true,
+        "geometryMeaning": "Schematic itinerary route, not a measured ship track or evidence of shore visits."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -80.6188,
+            28.4103
+          ],
+          [
+            -79,
+            27
+          ],
+          [
+            -75,
+            23.2
+          ],
+          [
+            -73.6,
+            20.6
+          ],
+          [
+            -74.1,
+            20
+          ],
+          [
+            -74.8,
+            19
+          ],
+          [
+            -74.8,
+            18
+          ],
+          [
+            -71.5,
+            15.5
+          ],
+          [
+            -70.0409,
+            12.5211
+          ],
+          [
+            -68.935,
+            12.109
+          ],
+          [
+            -67.4,
+            15.1
+          ],
+          [
+            -67.25,
+            18.7
+          ],
+          [
+            -68,
+            19.35
+          ],
+          [
+            -69.5,
+            20
+          ],
+          [
+            -70.744,
+            19.8331
+          ],
+          [
+            -72.2,
+            20.7
+          ],
+          [
+            -75,
+            23.2
+          ],
+          [
+            -78.5,
+            26.3
+          ],
+          [
+            -80.6188,
+            28.4103
+          ]
+        ]
+      }
+    }
+  ]
+}

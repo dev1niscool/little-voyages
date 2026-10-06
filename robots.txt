@@ -1,0 +1,24 @@
+# Little Voyages crawler preferences. See AI-USAGE.md for the full policy.
+# IMPORTANT: GitHub Pages serves this project at /little-voyages/.
+# Crawlers normally read https://dev1niscool.github.io/robots.txt, NOT this file
+# at /little-voyages/robots.txt. This project copy is an advisory template;
+# it does not activate origin-level exclusion on the current deployment.
+# If deployed at the host root in the future, update the paths accordingly.
+# These preferences are voluntary, not authentication or attack protection.
+# Owner-authorized AI work using supplied exports is covered by AI-USAGE.md.
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+Disallow: /little-voyages/
+
+# Ordinary web search, human browsing, and link-preview fetchers are welcome.
+# This crawl allowance does not grant permission for AI training or harvesting.
+User-agent: *
+Disallow:
