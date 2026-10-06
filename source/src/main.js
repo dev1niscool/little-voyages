@@ -103,6 +103,13 @@ function renderHeading() {
   heading.classList.toggle('is-selected',!!c);
   const mobileDetails=document.querySelector('#mobile-details');mobileDetails.hidden=!c;mobileDetails.innerHTML=c?`${esc(c.ship)}<span>${c.nights?`${c.nights} nights · `:''}View voyage ${icon('chevron')}</span>`:'';
   heading.innerHTML=c?`<span class="eyebrow">FOLLOW THE MEMORY</span><h2>${esc(c.region)}<span class="little-star">✧</span></h2><p>${c.ports.length?`${c.ports[0].name} ${icon('chevron')} ${c.ports.at(-1).name}`:'A port of possibility, a route to rediscover.'}</p>`:`<span class="eyebrow">${state.year?`A CHAPTER CALLED ${state.year}`:'2005 — 2025 · A PERSONAL VOYAGE COLLECTION'}</span><h2>${state.year?'Same sea.': 'A world of places.'}<br><em>${state.year?'New memories.':'A sea of memories.'}</em><span class="little-star">✧</span></h2><p>${state.year?`${visible.length} ${visible.length===1?'journey':'journeys'} from ${state.year}, waiting to be revisited.`:'Start at a port. Pick a ship. Follow the voyage.'}</p><div class="map-stats"><div><strong>${visible.length.toString().padStart(2,'0')}</strong><span>voyages</span></div><i></i><div><strong>${new Set(visible.map(c=>c.ship)).size.toString().padStart(2,'0')}</strong><span>ships</span></div><i></i><div><strong>${new Set(visible.map(c=>c.line)).size.toString().padStart(2,'0')}</strong><span>cruise lines</span></div></div>`;
+  if(c){
+    const close=document.createElement('button');
+    close.id='close-voyage';close.className='map-heading-close';close.type='button';
+    close.setAttribute('aria-label','Unselect voyage');close.title='Unselect voyage and keep this map view';close.innerHTML=icon('close');
+    close.addEventListener('click',()=>{unselectVoyage();document.querySelector('.atlas-map__svg').focus({preventScroll:true})});
+    heading.append(close);
+  }
   const shownLines=[...new Set(visible.map(c=>c.line))];
   document.querySelector('#map-legend').innerHTML=shownLines.map(line=>{const cruise=cruises.find(c=>c.line===line);return `<span><i style="background:${cruise.color}"></i>${esc(line.replace(' Cruise Line','').replace(' Cruises','').replace(' Line',''))}</span>`}).join('');
 }
@@ -118,7 +125,8 @@ function selectCruise(id,fromTour=false) {
   const c=cruises.find(c=>c.id===id);if(!c)return;
   if(!fromTour)stopTour();state.selected=id;selectedTab='itinerary';render();map.focus(c);
 }
-function cancelVoyage() {stopTour();state.selected=null;selectedTab='itinerary';render();map.reset()}
+function unselectVoyage() {stopTour();state.selected=null;selectedTab='itinerary';render()}
+function cancelVoyage() {unselectVoyage();map.reset()}
 function clearFilters() {stopTour();Object.assign(state,{year:null,query:'',line:'',selected:null});render();map.reset()}
 function selectYear(year) {stopTour();state.year=year;state.selected=null;render();map.reset();if(visible.length===1)map.focus(visible[0]);document.querySelector(`[data-year="${year}"]`)?.scrollIntoView({behavior:state.motion?'smooth':'instant',block:'nearest',inline:'nearest'})}
 function updateTourButton() {document.querySelector('#tour').innerHTML=`${icon(state.touring?'pause':'play')}<span>${state.touring?'Pause the journey':'Sail through time'}</span>`;document.querySelector('#tour').setAttribute('aria-pressed',state.touring)}

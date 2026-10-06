@@ -594,6 +594,16 @@ export function createCruiseMap(container, { onSelect = () => {}, onCancel = () 
       selectedId = data.some(cruise => sameId(cruise.id, selection)) ? selection : null;
       buildPorts();
       if (selectionChanged || !selectedId && playback) preparePlayback(selectedCruise());
+      if (selectionChanged && selectedId === null) {
+        // Deselecting holds the current camera, even halfway through a route zoom.
+        cameraToken += 1;
+        svg.interrupt();
+        cameraMoving = false;
+        cameraTarget = null;
+        focusedId = null;
+        closeChooser();
+        hideTooltip();
+      }
       renderRoutes();
       departureSignature = '';
       updateOverlays();

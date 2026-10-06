@@ -142,15 +142,70 @@ async function clickOut(page, touch = false) {
   else await page.mouse.click(point.x, point.y);
 }
 
-async function assertCanceled(page, label, year = null) {
+async function assertUnselected(page, label, year = null) {
   await page.waitForFunction(() => !new URL(location.href).searchParams.has('cruise'));
   assert.equal(await vessel(page).isVisible(), false, `${label}: sailing vessel is hidden`);
   assert.equal(await page.locator('.atlas-map__playback').isVisible(), false, `${label}: playback controls are hidden`);
   assert.equal(await page.locator('.atlas-map__chooser').isVisible(), false, `${label}: departure choices are closed`);
   assert.equal(await page.locator('.atlas-map__route.is-selected').count(), 0, `${label}: route selection is cleared`);
+  assert.equal(await page.locator('#map-heading.is-selected').count(), 0, `${label}: voyage heading is cleared`);
+  assert.equal(await page.locator('#mobile-details').isVisible(), false, `${label}: mobile voyage details are hidden`);
   assert.ok(await page.locator('.logbook-heading').isVisible(), `${label}: logbook returns`);
   assert.equal(new URL(page.url()).searchParams.get('year'), year === null ? null : String(year), `${label}: year filter is preserved`);
+}
+
+async function assertCanceled(page, label, year = null) {
+  await assertUnselected(page, label, year);
   await page.waitForFunction(() => Math.abs(Number(document.querySelector('.atlas-map__svg').dataset.zoom) - 1) < .001);
+}
+
+async function assertUnselectedInPlace(page, label, camera, year = null) {
+  await assertUnselected(page, label, year);
+  assert.equal(await page.locator('.atlas-map__geography').getAttribute('transform'), camera, `${label}: camera does not jump on close`);
+  await page.waitForTimeout(950);
+  assert.equal(await page.locator('.atlas-map__geography').getAttribute('transform'), camera, `${label}: camera remains fixed after pending animation time`);
+}
+
+async function clickAnotherVisibleRoute(page, previousId) {
+  const target = await page.evaluate(previous => {
+    for (const path of document.querySelectorAll('.atlas-map__route-hit')) {
+      if (Number(path.dataset.cruiseId) === previous) continue;
+      const matrix = path.getScreenCTM(), length = path.getTotalLength();
+      for (let index = 1; index < 200; index += 1) {
+        const point = path.getPointAtLength(length * index / 200).matrixTransform(matrix);
+        if (document.elementFromPoint(point.x, point.y)?.closest('.atlas-map__route-hit') === path) {
+          return { x: point.x, y: point.y, id: path.dataset.cruiseId };
+        }
+      }
+    }
+    return null;
+  }, previousId);
+  assert.ok(target, 'Another cruise remains available in the unchanged map view');
+  await page.mouse.click(target.x, target.y);
+  await page.waitForFunction(id => new URL(location.href).searchParams.get('cruise') === id, target.id);
+}
+
+async function checkHeadingCloseTouchTarget(page, width) {
+  const button = page.getByRole('button', { name: 'Unselect voyage', exact: true });
+  const box = await button.boundingBox();
+  assert.ok(box && box.width >= 44 && box.height >= 44, `${width}px heading close has a 44px touch target`);
+  assert.ok(box.x >= 0 && box.x + box.width <= width, `${width}px heading close stays in the viewport`);
+  assert.equal(await button.evaluate(element => {
+    const rect = element.getBoundingClientRect();
+    return element.contains(document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2));
+  }), true, `${width}px heading close is unobstructed`);
+}
+
+async function closeHeading(page, touch = false) {
+  // Capture at the click itself so an in-flight focus animation cannot advance
+  // between reading the camera and the user's close action.
+  const [camera] = await Promise.all([
+    page.evaluate(() => new Promise(resolve => document.addEventListener('click', () => {
+      resolve(document.querySelector('.atlas-map__geography').getAttribute('transform'));
+    }, { once: true, capture: true }))),
+    touch ? page.locator('#close-voyage').tap() : page.locator('#close-voyage').click(),
+  ]);
+  return camera;
 }
 
 async function touchPinch(page, client, onHold = async () => {}) {
@@ -263,9 +318,29 @@ try {
   await page.keyboard.press('Escape');
   await assertCanceled(page, 'Escape cancels filtered voyage', 2022);
   assert.equal(await page.locator('.atlas-map__route-hit').count(), 3, 'Cancel keeps filtered routes');
+  await page.locator('.cruise-card[data-cruise="24"]').click();
+  await page.locator('#zoom-out').click();
+  const headingPan = await blankMapPoint(page);
+  await page.mouse.move(headingPan.x, headingPan.y);
+  await page.mouse.down();
+  await page.mouse.move(headingPan.x - 35, headingPan.y + 20, { steps: 8 });
+  await page.mouse.up();
+  const pannedCamera = await page.locator('.atlas-map__geography').getAttribute('transform');
+  assert.ok(Number(await page.locator('.atlas-map__svg').getAttribute('data-zoom')) > 1, 'Heading close starts from a zoomed, panned map');
+  await closeHeading(page);
+  await assertUnselectedInPlace(page, 'Heading close after pan and zoom', pannedCamera, 2022);
+  await clickAnotherVisibleRoute(page, 24);
+  await page.keyboard.press('Escape');
+  await assertCanceled(page, 'Another visible cruise can be selected after heading close', 2022);
   await page.locator('#all-years').click();
   await checkDepartureAnchors(page, 'Cleared year filter');
   await page.locator('#motion').click();
+  await page.locator('.atlas-map__route-hit[data-cruise-id="8"]').press('Enter');
+  assert.match(await page.locator('.atlas-map__playback-status').textContent(), /Getting ready/, 'Heading close starts while camera focus is pending');
+  const earlyCamera = await closeHeading(page);
+  await assertUnselectedInPlace(page, 'Heading close during initial focus', earlyCamera);
+  await page.locator('#reset-map').click();
+  await page.waitForTimeout(900);
   await page.locator('.atlas-map__route-hit[data-cruise-id="8"]').press('Enter');
   assert.match(await page.locator('.atlas-map__playback-status').textContent(), /Getting ready/, 'Early cancel starts during the camera animation');
   await page.locator('.atlas-map__cancel').click();
@@ -317,11 +392,23 @@ try {
   const mobileDetailsBox = await phone.locator('#mobile-details').boundingBox();
   assert.ok(playbackBox.y + playbackBox.height <= mobileDetailsBox.y, 'Playback controls do not overlap phone voyage details');
   await phone.screenshot({ path: '/tmp/map-cancel-phone-320.png', fullPage: true });
+  await checkHeadingCloseTouchTarget(phone, 320);
+  const phone320Camera = await closeHeading(phone, true);
+  await assertUnselectedInPlace(phone, '320px phone heading close', phone320Camera);
+  await phone.screenshot({ path: '/tmp/map-heading-closed-phone-320.png', fullPage: true });
+  await phone.locator('.atlas-map__route-hit[data-cruise-id="26"]').press('Enter');
   await phone.locator('.atlas-map__cancel').tap();
   await assertCanceled(phone, 'Phone cancel button');
   await phone.locator('.brand').tap();
   await phone.setViewportSize({ width: 390, height: 844 });
   await phone.waitForTimeout(150);
+  await phone.locator('.atlas-map__route-hit[data-cruise-id="26"]').press('Enter');
+  await checkHeadingCloseTouchTarget(phone, 390);
+  await phone.screenshot({ path: '/tmp/map-heading-selected-phone-390.png', fullPage: true });
+  const phone390Camera = await closeHeading(phone, true);
+  await assertUnselectedInPlace(phone, '390px phone heading close', phone390Camera);
+  await phone.screenshot({ path: '/tmp/map-heading-closed-phone-390.png', fullPage: true });
+  await phone.locator('#reset-map').click();
   const client = await mobile.newCDPSession(phone);
   const beforePinch = await phone.locator('.atlas-map__geography').getAttribute('transform');
   await touchPinch(phone, client, () => checkDepartureAnchors(phone, 'During phone pinch'));
@@ -368,7 +455,7 @@ try {
   await clickOut(phone, true);
   await assertCanceled(phone, 'Phone background tap cancels active sailing');
   assert.deepEqual(errors, [], 'Browser runtime or console errors');
-  console.log('Map checks passed: geographic departure anchors, port grouping and dates, route clicks, zoom/pan/resize, native phone pinch, sailing and gesture pauses, complete round trip, background/cancel/Escape dismissal, early-animation cancellation, preserved year filters, and reduced motion.');
+  console.log('Map checks passed: geographic departure anchors, port grouping and dates, route clicks, zoom/pan/resize, native phone pinch, sailing and gesture pauses, complete round trip, background/cancel/Escape dismissal, heading close preserves camera and allows another cruise, early-animation cancellation, 320/390px close targets, preserved year filters, and reduced motion.');
 } finally {
   await browser.close();
 }

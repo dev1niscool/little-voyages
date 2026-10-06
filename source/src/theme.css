@@ -150,6 +150,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .map-heading.is-selected h2 { font-size: 25px; letter-spacing: -.7px; color: var(--ink); }
 .map-heading.is-selected>p { color: var(--muted); font-size: 10px; }
 .map-heading.is-selected>.eyebrow { color: var(--teal); }
+.map-heading.is-selected { display:grid; grid-template-columns:minmax(0,1fr) 44px; column-gap:12px; }
+.map-heading.is-selected>.eyebrow,.map-heading.is-selected>h2,.map-heading.is-selected>p { grid-column:1; min-width:0; }
+.map-heading-close { grid-column:2; grid-row:1 / span 3; align-self:start; display:grid; place-items:center; width:44px; height:44px; padding:0; border:0; border-radius:50%; background:var(--soft-panel); color:var(--ink); cursor:pointer; pointer-events:auto; }
+.map-heading-close:hover { background:var(--line); }
+.map-heading-close:focus-visible { outline:3px solid var(--teal); outline-offset:2px; }
+.map-heading-close .icon { width:20px; height:20px; }
 .map-corner { color: #658995; font-size: 7px; }
 .live-dot { background: #44b8ab; box-shadow: 0 0 0 4px #52c8ba1c; }
 .map-tools { background: var(--glass-panel); border-color: var(--border-glass); border-radius: 16px; box-shadow: var(--shadow); backdrop-filter: blur(15px); }
