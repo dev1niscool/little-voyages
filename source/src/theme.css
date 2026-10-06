@@ -142,7 +142,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .map-heading h2 em { background: linear-gradient(100deg,#078d90,#5085ca 60%,#9770c9); color: transparent; -webkit-background-clip: text; background-clip: text; }
 .map-heading>p { color: #547a84; font-size: 11px; }
 .little-star { color: #b299e5; animation: glass-star 7s ease-in-out infinite; }
-.map-stats { background: #ffffff69; border: 1px solid #ffffff82; display: inline-flex; padding: 10px 16px; margin-top: 18px; border-radius: 15px; box-shadow: inset 0 1px 0 #fff8; backdrop-filter: blur(8px); gap: 20px; }
+.map-stats { background: #ffffff69; border: 1px solid #ffffff82; display: inline-flex; padding: 10px 16px; margin-top: 0; border-radius: 15px; box-shadow: inset 0 1px 0 #fff8; backdrop-filter: blur(8px); gap: 20px; }
 .map-stats strong { color: #287c86; font-size: 24px; }
 .map-stats span { color: #5a7280; font-size: 10px; }
 .map-stats>i { background: #b2ccd36b; }
@@ -288,7 +288,6 @@ dialog p,.dialog-actions>a,dialog .map-credit { color: var(--muted); }
   .map-heading h2 { font-size:34px; }
   .map-heading>.eyebrow { font-size:8px; }
   .map-heading>p { font-size:10px; }
-  .map-stats { display:none; }
   .map-heading.is-selected { top:17px;left:17px; }
   .map-tools { right:15px;bottom:85px; }
   .map-tools button { width:34px;height:34px; }
