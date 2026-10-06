@@ -38,6 +38,20 @@ try {
     }));
     assert.ok(dimensions.actual <= dimensions.expected + 1, `${label}: horizontal page overflow`);
   };
+  const checkPassportCounts = async () => {
+    assert.equal(await page.locator('.stats-country-count').textContent(), '35');
+    assert.equal(await page.locator('.stats-territory-count').textContent(), '9');
+    assert.equal(await page.locator('.stats-country-item').count(), 35);
+    assert.equal(await page.locator('.stats-territory-item').count(), 9);
+  };
+  const expandPassportLists = async () => {
+    for (const selector of ['#stats-country-list', '#stats-territory-list']) {
+      if (!await page.locator(selector).evaluate(details => details.open)) {
+        await page.locator(`${selector} > summary`).click();
+      }
+      assert.equal(await page.locator(`${selector} > ul`).isVisible(), true);
+    }
+  };
 
   await page.goto(atlasUrl.href);
   await page.locator('.atlas-map__departure').first().waitFor();
@@ -51,8 +65,36 @@ try {
   await waitForView('statistics');
   assert.equal(new URL(page.url()).searchParams.get('view'), 'statistics');
   assert.deepEqual(await page.locator('[data-stats-count]').allTextContents(), [
-    '202', '55,200', '2.2', '4,848', '87', '44',
+    '202', '55,200', '2.2', '4,848', '87', '44', '35', '9',
   ]);
+  await checkPassportCounts();
+  const countryNames = await page.locator('.stats-country-item strong').allTextContents();
+  const specialNames = await page.locator('.stats-territory-item strong').allTextContents();
+  assert.equal(new Set([...countryNames, ...specialNames]).size, 44, 'Places appear in exactly one category');
+  assert.equal(countryNames.filter(name => name === 'United Kingdom').length, 1);
+  assert.equal(countryNames.includes('Scotland'), false);
+  assert.equal(countryNames.includes('Northern Ireland'), false);
+  assert.equal([...countryNames, ...specialNames].includes('Saint Martin'), false, 'Dutch port calls do not imply visiting French Saint Martin');
+  assert.deepEqual(specialNames, [
+    'Aruba', 'Cayman Islands', 'Curaçao', 'Gibraltar', 'Guernsey',
+    'Puerto Rico', 'Sint Maarten', 'Turks and Caicos Islands', 'U.S. Virgin Islands',
+  ]);
+  const statuses = await page.locator('.stats-territory-item').evaluateAll(items => Object.fromEntries(items.map(item => [
+    item.querySelector('strong').textContent,
+    item.querySelector('.stats-place-status').textContent,
+  ])));
+  assert.match(statuses.Aruba, /Kingdom of the Netherlands/);
+  assert.equal(statuses.Guernsey, 'Crown Dependency');
+  assert.equal(statuses['Cayman Islands'], 'British Overseas Territory');
+  assert.match(statuses['Puerto Rico'], /U\.S\. territory/);
+  for (const [selector, key] of [['#stats-country-list', 'Enter'], ['#stats-territory-list', 'Space']]) {
+    assert.equal(await page.locator(`${selector} > ul`).isVisible(), false);
+    await page.locator(`${selector} > summary`).press(key);
+    assert.equal(await page.locator(selector).evaluate(details => details.open), true);
+    assert.equal(await page.locator(`${selector} > ul`).isVisible(), true);
+    await page.locator(`${selector} > summary`).press(key);
+    assert.equal(await page.locator(selector).evaluate(details => details.open), false);
+  }
   await page.goBack();
   await waitForView('atlas');
   await page.goForward();
@@ -71,6 +113,8 @@ try {
   assert.equal(await page.locator('.atlas-map__departure').evaluateAll(markers => markers.reduce((sum, marker) => sum + Number(marker.dataset.portCount), 0)), 3);
   assert.equal(await page.locator('.atlas-map__departure').evaluateAll(markers => markers.reduce((sum, marker) => sum + Number(marker.dataset.count), 0)), 3);
   await page.locator('[data-view="statistics"]').click();
+  await waitForView('statistics');
+  await checkPassportCounts();
   await page.locator('.stats-longest-card').click();
   await waitForView('atlas');
   assert.equal(new URL(page.url()).searchParams.get('cruise'), '15');
@@ -85,20 +129,34 @@ try {
   assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), 'dark');
   assert.equal(await page.evaluate(() => localStorage.getItem('little-voyages-theme')), 'dark');
 
-  for (const width of [320, 390, 800, 1000, 1440]) {
-    await page.setViewportSize({ width, height: 844 });
-    await checkNoPageOverflow(`${width}px statistics`);
-    await page.locator('[data-view="atlas"]').click();
-    await waitForView('atlas');
-    await checkNoPageOverflow(`${width}px atlas`);
-    await page.locator('[data-view="statistics"]').click();
-    await waitForView('statistics');
+  await expandPassportLists();
+  for (const theme of ['dark', 'light']) {
+    if (await page.evaluate(() => document.documentElement.dataset.theme) !== theme) {
+      await page.locator('#theme-toggle').click();
+    }
+    for (const width of [320, 390, 800, 1000, 1440]) {
+      await page.setViewportSize({ width, height: 844 });
+      await checkNoPageOverflow(`${width}px ${theme} statistics with expanded place lists`);
+      const overflowingPlaces = await page.locator('.stats-country-item, .stats-territory-item').evaluateAll(items => items
+        .filter(item => item.scrollWidth > item.clientWidth + 1)
+        .map(item => item.querySelector('strong').textContent));
+      assert.deepEqual(overflowingPlaces, [], `${width}px ${theme}: destination row overflow`);
+      if (theme === 'dark') {
+        await page.locator('[data-view="atlas"]').click();
+        await waitForView('atlas');
+        await checkNoPageOverflow(`${width}px atlas`);
+        await page.locator('[data-view="statistics"]').click();
+        await waitForView('statistics');
+        await expandPassportLists();
+      }
+    }
   }
 
   const deepLink = new URL(atlasUrl);
   deepLink.search = '?view=statistics&year=2022';
   await page.goto(deepLink.href);
   await waitForView('statistics');
+  await checkPassportCounts();
   await page.locator('[data-view="atlas"]').click();
   assert.equal(await page.locator('.cruise-card').count(), 3);
   deepLink.search = '?cruise=3';
@@ -126,7 +184,7 @@ try {
   assert.equal(await systemPage.evaluate(() => document.documentElement.dataset.theme), 'dark');
 
   assert.deepEqual(browserErrors, [], 'Browser runtime or console errors');
-  console.log('Browser checks passed: navigation, statistics, unit conversions, map callbacks, deep links, dark mode, reduced motion, and 320–1440px layouts.');
+  console.log('Browser checks passed: navigation, statistics, country and territory lists, keyboard expansion, unit conversions, map callbacks, deep links, dark mode, reduced motion, and expanded 320–1440px layouts.');
 } finally {
   await browser.close();
 }

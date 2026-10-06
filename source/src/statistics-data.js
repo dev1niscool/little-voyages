@@ -1,3 +1,5 @@
+import { summarizeDestinations } from './destinations.js';
+
 // These are itinerary statistics, not a measurement of time aboard or ship tracks.
 export const EARTH_CIRCUMFERENCE_KM = 40_075.017;
 const MEAN_EARTH_RADIUS_KM = 6_371.0088;
@@ -10,6 +12,7 @@ export const statsMethodology = Object.freeze({
   earth: 'Earth equivalents divide the estimated distance by the equatorial circumference of 40,075.017 km. This is a distance comparison, not a claim that these voyages circled the globe.',
   ports: 'Port visits count recorded itinerary stops, including embarkation and one-way arrival ports. The starting port counts once for a round trip: its final return is excluded, while separate repeat calls such as Castaway Cay count again. Glacier Bay and other scenic cruising stops are counted separately. Port visits do not establish that you went ashore.',
   places: 'Places are distinct country and territory labels attached to recorded ports. Dependencies and territories are listed separately, so this is not a sovereign-country count. Counts inherit the atlas’s itinerary uncertainty.',
+  destinations: 'Countries and special places count distinct destinations in recorded cruise itineraries, including departure and one-way arrival ports and excluding scenic cruising. Countries are sovereign states; territories, Crown Dependencies and countries within the Kingdom of the Netherlands appear separately. A territory does not also count as a visit to its associated country. These records do not establish that you went ashore or that cruising was your only way of visiting a place. Counts inherit the atlas’s itinerary uncertainty; unfamiliar labels remain unclassified until reviewed.',
   years: 'Each trip belongs to the year of your original cruise record, including sailings that cross New Year. The collection’s span is the difference between its first and last recorded calendar years.',
 });
 
@@ -80,6 +83,7 @@ export function computeStatistics(input = []) {
   const regions = new Map();
   const ports = new Map();
   const places = new Set();
+  const destinationVisits = [];
   const starts = [];
   const ends = [];
   const durations = [];
@@ -135,6 +139,7 @@ export function computeStatistics(input = []) {
       ports.get(key).count += 1;
       portCalls += 1;
       if (normalized(port.country)) places.add(normalized(port.country));
+      destinationVisits.push({ port, cruiseId: cruise.id });
     }
     const startDate = validDate(cruise.startDate) ? cruise.startDate : cruise.originalDate;
     const endDate = validDate(cruise.endDate) ? cruise.endDate : cruise.originalDate;
@@ -162,6 +167,7 @@ export function computeStatistics(input = []) {
     missingRoutes: cruises.length - routesMeasured,
     uniquePorts: ports.size,
     placeCount: places.size,
+    ...summarizeDestinations(destinationVisits),
     portCalls,
     scenicStops,
     years: orderedYears,

@@ -64,6 +64,11 @@ test('empty selections have no fictional winners or invalid numeric totals', () 
   assert.deepEqual(stats.longestCruises, []);
   assert.deepEqual(stats.busiestYears, []);
   assert.deepEqual(stats.years, []);
+  assert.equal(stats.countryCount, 0);
+  assert.equal(stats.territoryCount, 0);
+  assert.deepEqual(stats.countries, []);
+  assert.deepEqual(stats.territories, []);
+  assert.deepEqual(stats.unclassifiedPlaces, []);
 });
 
 test('all 29 corrected voyages contribute to the live collection without changing their data', () => {
@@ -77,7 +82,74 @@ test('all 29 corrected voyages contribute to the live collection without changin
   assert.equal(stats.lineCount, 7);
   assert.equal(stats.scenicStops, 1);
   assert.equal(stats.spanYears, 20);
+  assert.equal(stats.countryCount, 35);
+  assert.equal(stats.territoryCount, 9);
+  assert.equal(stats.placeCount, stats.countryCount + stats.territoryCount);
+  assert.deepEqual(stats.unclassifiedPlaces, []);
+  assert.deepEqual(stats.territories.map(place => place.name), [
+    'Aruba', 'Cayman Islands', 'Curaçao', 'Gibraltar', 'Guernsey',
+    'Puerto Rico', 'Sint Maarten', 'Turks and Caicos Islands', 'U.S. Virgin Islands',
+  ]);
+  assert.deepEqual(stats.countries.find(place => place.name === 'United Kingdom').ports,
+    ['Ayr', 'Belfast', 'Glasgow (Greenock)', 'Liverpool'], 'Northern Ireland and Scotland are included once under the United Kingdom');
+  assert.deepEqual(stats.countries.find(place => place.name === 'South Korea').ports, ['Jeju']);
   assert.deepEqual(stats.busiestYears.map(row => row.year), [2022]);
   assert.deepEqual(stats.longestCruises.map(cruise => cruise.id), [15, 17, 28]);
   assert.deepEqual(cruises, before);
+});
+
+test('destination lists deduplicate calls while preserving direct port evidence and classifications', () => {
+  const fixture = [
+    { id: 10, ports: [
+      { name: 'Oranjestad', country: 'Aruba' },
+      { name: 'Willemstad', country: 'Curaçao' },
+      { name: 'Oranjestad', country: 'Aruba' },
+      { name: 'Harbor A', country: '  Bahamas  ' },
+      { name: 'Harbor B', country: 'BAHAMAS' },
+      { name: 'Scenic coast', country: 'France', scenic: true },
+      { name: 'Scenic strait', country: 'Japan', type: 'scenic' },
+      { name: 'Glacier Bay', country: 'Canada' },
+      { name: 'San Juan', country: 'Puerto Rico' },
+    ] },
+    { id: 2, ports: [
+      { name: 'San Juan', country: 'Puerto Rico' },
+      { name: 'Roadstead', country: 'Future place' },
+      { name: 'Other roadstead', country: 'FUTURE PLACE' },
+      { name: 'Unspecified stop' },
+      { name: 'Oranjestad', country: 'Aruba' },
+    ] },
+  ];
+  const original = structuredClone(fixture);
+  const stats = computeStatistics(fixture);
+  assert.deepEqual(stats.countries.map(place => place.name), ['Bahamas']);
+  assert.deepEqual(stats.countries[0].ports, ['Harbor A', 'Harbor B']);
+  assert.deepEqual(stats.territories.map(place => place.name), ['Aruba', 'Curaçao', 'Puerto Rico']);
+  assert.deepEqual(stats.territories.find(place => place.name === 'Aruba').cruiseIds, [2, 10]);
+  assert.deepEqual(stats.territories.find(place => place.name === 'Aruba').ports, ['Oranjestad']);
+  assert.deepEqual(stats.territories.find(place => place.name === 'Puerto Rico').ports, ['San Juan'], 'one-way arrival and departure are eligible calls');
+  assert.equal(stats.territories.find(place => place.name === 'Curaçao').status, 'Country within the Kingdom of the Netherlands');
+  assert.ok(stats.territories.every(place => place.sources.length > 0), 'special statuses have a source');
+  assert.deepEqual(stats.unclassifiedPlaces.map(place => place.name), ['Future place']);
+  assert.deepEqual(stats.unclassifiedPlaces[0].ports, ['Other roadstead', 'Roadstead']);
+  assert.equal(stats.placeCount, stats.countryCount + stats.territoryCount + stats.unclassifiedPlaces.length);
+  assert.equal(stats.scenicStops, 3);
+  assert.deepEqual(fixture, original);
+});
+
+test('year selections recalculate destinations without inferring visits to associated countries', () => {
+  const stats = computeStatistics(cruises.filter(cruise => cruise.year === 2025));
+  assert.equal(stats.cruiseCount, 1);
+  assert.deepEqual(stats.countries.map(place => place.name), ['Dominican Republic', 'United States']);
+  assert.deepEqual(stats.territories.map(place => place.name), ['Aruba', 'Curaçao']);
+  assert.equal(stats.countryCount, 2, 'a visit to Aruba or Curaçao does not also add the Netherlands');
+  assert.equal(stats.territoryCount, 2);
+  assert.deepEqual(stats.territories[0].cruiseIds, [29]);
+
+  const territoryOnly = computeStatistics([{ id: 1, ports: [
+    { name: 'St. Peter Port', country: 'Guernsey' },
+    { name: 'Gibraltar', country: 'Gibraltar' },
+    { name: 'Charlotte Amalie', country: 'U.S. Virgin Islands' },
+  ] }]);
+  assert.equal(territoryOnly.countryCount, 0, 'Crown Dependencies and territories do not add the UK or US');
+  assert.equal(territoryOnly.territoryCount, 3);
 });
