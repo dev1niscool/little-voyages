@@ -119,6 +119,40 @@ async function tapDeparture(page, name) {
   await page.touchscreen.tap(point.x, point.y);
 }
 
+async function blankMapPoint(page) {
+  await page.locator('#map').scrollIntoViewIfNeeded();
+  const point = await page.locator('.atlas-map__svg').evaluate(svg => {
+    const box = svg.getBoundingClientRect();
+    for (const y of [.45, .6, .3, .75, .9]) {
+      for (const x of [.6, .4, .8, .2, .5]) {
+        const point = { x: box.x + box.width * x, y: box.y + box.height * y };
+        const target = document.elementFromPoint(point.x, point.y);
+        if (target === svg || target?.matches('.atlas-map__sea')) return point;
+      }
+    }
+    return null;
+  });
+  assert.ok(point, 'An uncovered map background is available for clicking out');
+  return point;
+}
+
+async function clickOut(page, touch = false) {
+  const point = await blankMapPoint(page);
+  if (touch) await page.touchscreen.tap(point.x, point.y);
+  else await page.mouse.click(point.x, point.y);
+}
+
+async function assertCanceled(page, label, year = null) {
+  await page.waitForFunction(() => !new URL(location.href).searchParams.has('cruise'));
+  assert.equal(await vessel(page).isVisible(), false, `${label}: sailing vessel is hidden`);
+  assert.equal(await page.locator('.atlas-map__playback').isVisible(), false, `${label}: playback controls are hidden`);
+  assert.equal(await page.locator('.atlas-map__chooser').isVisible(), false, `${label}: departure choices are closed`);
+  assert.equal(await page.locator('.atlas-map__route.is-selected').count(), 0, `${label}: route selection is cleared`);
+  assert.ok(await page.locator('.logbook-heading').isVisible(), `${label}: logbook returns`);
+  assert.equal(new URL(page.url()).searchParams.get('year'), year === null ? null : String(year), `${label}: year filter is preserved`);
+  await page.waitForFunction(() => Math.abs(Number(document.querySelector('.atlas-map__svg').dataset.zoom) - 1) < .001);
+}
+
 async function touchPinch(page, client, onHold = async () => {}) {
   await page.locator('#map').scrollIntoViewIfNeeded();
   const box = await page.locator('.atlas-map__svg').boundingBox();
@@ -149,6 +183,11 @@ try {
   await checkDepartureAnchors(page, 'Initial world map');
   await page.waitForTimeout(250);
   await checkDepartureAnchors(page, 'Stationary world map');
+  await group(page, 'Port Canaveral').press('Enter');
+  assert.equal(await page.locator('.atlas-map__chooser').isVisible(), true, 'Departure chooser opens before clicking out');
+  await clickOut(page);
+  assert.equal(await page.locator('.atlas-map__chooser').isVisible(), false, 'Background click dismisses departure chooser');
+  await page.locator('#reset-map').click();
 
   for (const control of ['#zoom-in', '#zoom-in', '#zoom-out']) {
     await page.locator(control).click();
@@ -207,16 +246,46 @@ try {
   await page.waitForTimeout(300);
   assertFrozen(still, await sailingState(page), 'Reduced motion');
   await checkVesselOnRoute(page, 'Selected ship at departure');
+  assert.equal(await page.locator('.atlas-map__cancel').isEnabled(), true, 'Cancel remains available with motion off');
+  await page.getByRole('button', { name: 'Cancel voyage animation', exact: true }).click();
+  await assertCanceled(page, 'Reduced-motion cancel button');
 
   await page.locator('#reset-map').click();
   await clickRoute(page, 8);
   assert.equal(await page.locator('.detail-heading h1').textContent(), 'Oosterdam');
+  await clickOut(page);
+  await assertCanceled(page, 'Desktop background click');
   await page.locator('[data-year="2022"]').click();
   const cruises2022 = cruises.filter(cruise => cruise.year === 2022);
   await checkDepartureAnchors(page, '2022 filter', cruises2022);
   assert.equal(await page.locator('.atlas-map__route-hit').count(), 3, 'Year filter updates route hit targets');
+  await page.locator('.cruise-card[data-cruise="25"]').click();
+  await page.keyboard.press('Escape');
+  await assertCanceled(page, 'Escape cancels filtered voyage', 2022);
+  assert.equal(await page.locator('.atlas-map__route-hit').count(), 3, 'Cancel keeps filtered routes');
   await page.locator('#all-years').click();
   await checkDepartureAnchors(page, 'Cleared year filter');
+  await page.locator('#motion').click();
+  await page.locator('.atlas-map__route-hit[data-cruise-id="8"]').press('Enter');
+  assert.match(await page.locator('.atlas-map__playback-status').textContent(), /Getting ready/, 'Early cancel starts during the camera animation');
+  await page.locator('.atlas-map__cancel').click();
+  await assertCanceled(page, 'Cancel during initial camera animation');
+  await page.locator('[data-view="statistics"]').click();
+  await page.locator('#motion').click();
+  await page.locator('#motion').click();
+  await page.locator('[data-view="atlas"]').click();
+  await page.waitForTimeout(300);
+  await assertCanceled(page, 'Canceled voyage stays stopped after changing view and motion');
+  await clickRoute(page, 8);
+  await page.waitForFunction(() => Number(document.querySelector('.atlas-map__vessel')?.dataset.progress) > .01);
+  const dragStart = await blankMapPoint(page);
+  await page.mouse.move(dragStart.x, dragStart.y);
+  await page.mouse.down();
+  await page.mouse.move(dragStart.x - 55, dragStart.y + 25, { steps: 8 });
+  await page.mouse.up();
+  assert.equal(new URL(page.url()).searchParams.get('cruise'), '8', 'Dragging the map does not cancel a voyage');
+  await page.locator('.atlas-map__cancel').click();
+  await assertCanceled(page, 'Cancel during active sailing');
 
   const mobile = await browser.newContext({
     viewport: { width: 390, height: 844 }, deviceScaleFactor: 1,
@@ -242,6 +311,14 @@ try {
   await phone.locator('.atlas-map__voyage-option[data-cruise-id="26"]').tap();
   assert.equal(new URL(phone.url()).searchParams.get('cruise'), '26', 'Phone can scroll to and select the last Miami voyage');
   assert.equal(await phone.locator('.detail-heading h1').textContent(), 'Norwegian Bliss');
+  const cancelBox = await phone.locator('.atlas-map__cancel').boundingBox();
+  assert.ok(cancelBox.x >= 0 && cancelBox.x + cancelBox.width <= 320, 'Cancel button stays reachable at 320px');
+  const playbackBox = await phone.locator('.atlas-map__playback').boundingBox();
+  const mobileDetailsBox = await phone.locator('#mobile-details').boundingBox();
+  assert.ok(playbackBox.y + playbackBox.height <= mobileDetailsBox.y, 'Playback controls do not overlap phone voyage details');
+  await phone.screenshot({ path: '/tmp/map-cancel-phone-320.png', fullPage: true });
+  await phone.locator('.atlas-map__cancel').tap();
+  await assertCanceled(phone, 'Phone cancel button');
   await phone.locator('.brand').tap();
   await phone.setViewportSize({ width: 390, height: 844 });
   await phone.waitForTimeout(150);
@@ -286,8 +363,12 @@ try {
   await checkVesselOnRoute(phone, 'Completed round trip');
   await phone.waitForTimeout(600);
   assertFrozen(completed, await sailingState(phone), 'Completed voyage does not loop');
+  await phone.locator('.atlas-map__replay').tap();
+  await phone.waitForFunction(() => Number(document.querySelector('.atlas-map__vessel')?.dataset.progress) > .01);
+  await clickOut(phone, true);
+  await assertCanceled(phone, 'Phone background tap cancels active sailing');
   assert.deepEqual(errors, [], 'Browser runtime or console errors');
-  console.log('Map checks passed: 15 departure ports with exact geographic cluster anchors, port grouping and dates, route clicks, zoom/pan/resize, native phone pinch, geographic sailing, gesture/hidden-view pause, one complete round trip, filters, and reduced motion.');
+  console.log('Map checks passed: geographic departure anchors, port grouping and dates, route clicks, zoom/pan/resize, native phone pinch, sailing and gesture pauses, complete round trip, background/cancel/Escape dismissal, early-animation cancellation, preserved year filters, and reduced motion.');
 } finally {
   await browser.close();
 }

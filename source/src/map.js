@@ -53,10 +53,10 @@ export function voyagePath(cruise) {
 }
 
 /** Geographic markers stay fixed to their coordinates; only the selected vessel sails. */
-export function createCruiseMap(container, { onSelect = () => {}, onViewChange = () => {}, onInteract = () => {} } = {}) {
+export function createCruiseMap(container, { onSelect = () => {}, onCancel = () => {}, onViewChange = () => {}, onInteract = () => {} } = {}) {
   const instanceId = `cruise-map-${Math.random().toString(36).slice(2, 8)}`;
   const root = d3.select(container).classed('atlas-map', true);
-  const svg = root.append('svg').attr('class', 'atlas-map__svg').attr('role', 'group')
+  const svg = root.append('svg').attr('class', 'atlas-map__svg').attr('role', 'group').attr('tabindex', -1)
     .attr('aria-label', 'Cruise map. Choose a departure harbor or a route to explore a voyage. Drag or pinch to explore.');
   const sea = svg.append('rect').attr('class', 'atlas-map__sea').attr('fill', '#dceff0');
   const geography = svg.append('g').attr('class', 'atlas-map__geography');
@@ -87,6 +87,7 @@ export function createCruiseMap(container, { onSelect = () => {}, onViewChange =
   const playbackStatus = playbackCopy.append('span').attr('class', 'atlas-map__playback-status');
   playbackCopy.append('div').attr('class', 'atlas-map__progress').append('i');
   playbackControl.append('button').attr('type', 'button').attr('class', 'atlas-map__replay').attr('aria-label', 'Replay voyage route').html('<span aria-hidden="true">↻</span> Replay').on('click', replay);
+  playbackControl.append('button').attr('type', 'button').attr('class', 'atlas-map__cancel').attr('aria-label', 'Cancel voyage animation').attr('title', 'Close voyage and return to the map').html('<span aria-hidden="true">×</span>').on('click', () => dismissVoyage(true));
   const compass = root.append('div').attr('class', 'atlas-map__compass').attr('aria-hidden', 'true');
   compass.html('<span>N</span><svg viewBox="0 0 40 48"><path d="M20 5 28 35 20 30 12 35Z" fill="#678c8a"/><path d="M20 5 20 30 12 35Z" fill="#f9fbf5"/><circle cx="20" cy="25" r="17" fill="none" stroke="#719593" stroke-width=".6"/></svg>');
 
@@ -127,6 +128,26 @@ export function createCruiseMap(container, { onSelect = () => {}, onViewChange =
       }
     });
   svg.call(zoom).on('dblclick.zoom', null);
+  // Treat a deliberate background tap as dismissal, never the end of a drag or pinch.
+  const pointers = new Map();
+  let movedPointer = false;
+  svg.on('pointerdown.dismiss', event => {
+    if (!pointers.size) movedPointer = false;
+    pointers.set(event.pointerId, [event.clientX, event.clientY]);
+    if (pointers.size > 1) movedPointer = true;
+  }).on('pointermove.dismiss', event => {
+    const start = pointers.get(event.pointerId);
+    if (start && Math.hypot(event.clientX - start[0], event.clientY - start[1]) > 5) movedPointer = true;
+  }).on('click.dismiss', event => {
+    if (event.defaultPrevented || movedPointer || event.target.closest('[role="button"]')) return;
+    dismissVoyage();
+  });
+  const releasePointer = event => {
+    pointers.delete(event.pointerId);
+    if (event.type === 'pointercancel') movedPointer = true;
+  };
+  window.addEventListener('pointerup', releasePointer);
+  window.addEventListener('pointercancel', releasePointer);
   root.classed('is-still', !motion);
 
   function color(cruise) { return cruise.color || '#358f97'; }
@@ -289,6 +310,13 @@ export function createCruiseMap(container, { onSelect = () => {}, onViewChange =
       .style('top', `${position[1] > 115 ? position[1] - 31 : position[1] + 114}px`).classed('is-visible', true);
   }
   function hideTooltip() { tooltip.classed('is-visible', false); routes.selectAll('.atlas-map__route').classed('is-hovered', false); }
+  function dismissVoyage(restoreFocus = false) {
+    onInteract();
+    closeChooser();
+    hideTooltip();
+    if (selectedId !== null) onCancel();
+    if (restoreFocus) svg.node().focus({ preventScroll: true });
+  }
   function chooseCruise(cruise) {
     closeChooser();
     hideTooltip();
@@ -435,7 +463,7 @@ export function createCruiseMap(container, { onSelect = () => {}, onViewChange =
     playbackControl.attr('data-progress', playback.progress);
     playbackControl.select('.atlas-map__progress i').style('transform', `scaleX(${playback.progress})`);
     playbackStatus.text(!motion ? 'At departure · motion off' : playback.progress >= 1 ? 'Voyage complete. What a trip!' : cameraMoving || playback.pending ? 'Getting ready to set sail…' : gestureActive ? 'Paused while you explore' : !active || document.hidden ? 'Voyage paused' : `Sailing the route · ${Math.round(playback.progress * 100)}%`);
-    playbackControl.select('button').attr('disabled', !motion ? true : null).attr('title', !motion ? 'Turn on Motion to animate this voyage' : 'Sail this route again');
+    playbackControl.select('.atlas-map__replay').attr('disabled', !motion ? true : null).attr('title', !motion ? 'Turn on Motion to animate this voyage' : 'Sail this route again');
   }
   function canSail() { return playback && playback.progress < 1 && !playback.pending && motion && active && !document.hidden && !gestureActive && !cameraMoving && !chooserState && !destroyed; }
   function animate(time) {
@@ -485,7 +513,8 @@ export function createCruiseMap(container, { onSelect = () => {}, onViewChange =
     const bounds = d3.extent(projected, point => point[0]), vertical = d3.extent(projected, point => point[1]);
     const heading = protectedBoxes('.map-heading')[0];
     const padTop = Math.min(height * .43, Math.max(72, (heading?.bottom || 0) + 26));
-    const padBottom = width < 600 ? 122 : 82;
+    const playbackBox = protectedBoxes('.atlas-map__playback')[0];
+    const padBottom = Math.max(width < 600 ? 122 : 82, playbackBox ? height - playbackBox.top + 12 : 0);
     const padX = width < 600 ? 43 : 80;
     const rightSpace = dock && width >= 700 ? 330 : width < 600 ? 76 : padX;
     const bottomSpace = dock && width < 700 ? Math.min(height * .47, 220) : padBottom;
@@ -603,7 +632,9 @@ export function createCruiseMap(container, { onSelect = () => {}, onViewChange =
       controller.abort(); resizeObserver.disconnect();
       cancelAnimationFrame(resizeFrame); cancelAnimationFrame(animationFrame);
       document.removeEventListener('visibilitychange', visibilityChange);
-      svg.interrupt().on('.zoom', null);
+      window.removeEventListener('pointerup', releasePointer);
+      window.removeEventListener('pointercancel', releasePointer);
+      svg.interrupt().on('.zoom', null).on('.dismiss', null);
       svg.remove(); tooltip.remove(); compass.remove(); chooser.remove(); playbackControl.remove();
     },
   };
