@@ -1,0 +1,358 @@
+[
+  {
+    "id": 19,
+    "originalDate": "2017-12-21",
+    "ship": "Carnival Liberty",
+    "company": "Carnival Cruise Line",
+    "destination": "Bahamas",
+    "startDate": "2017-12-21",
+    "endDate": "2017-12-24",
+    "nights": 3,
+    "ports": [
+      "Port Canaveral",
+      "Nassau",
+      "Port Canaveral"
+    ],
+    "confidence": "confirmed",
+    "notes": "An exact-date passenger review identifies a three-night Bahamas sailing from Port Canaveral and lists Nassau. Return date is calculated from the published duration.",
+    "sources": [
+      {
+        "title": "Carnival Liberty — December 21, 2017 passenger review",
+        "url": "https://cruiseline.com/ship/carnival-liberty/review/460341",
+        "note": "Exact departure, three-night duration, Port Canaveral roundtrip and Nassau."
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "originalDate": "2018-08-15",
+    "ship": "Celebrity Reflection",
+    "company": "Celebrity Cruises",
+    "destination": "Mediterranean Getaway",
+    "startDate": "2018-08-15",
+    "endDate": "2018-08-21",
+    "nights": 6,
+    "ports": [
+      "Civitavecchia",
+      "La Spezia",
+      "Villefranche-sur-Mer",
+      "Ajaccio",
+      "Cagliari",
+      "Naples",
+      "Civitavecchia"
+    ],
+    "confidence": "confirmed",
+    "notes": "Archived exact-date offer supplies the complete six-night itinerary. Every day had a port: La Spezia Aug 16, Villefranche Aug 17, Ajaccio Aug 18, Cagliari Aug 19 and Naples Aug 20.",
+    "sources": [
+      {
+        "title": "Archived Celebrity Mediterranean Getaway itinerary, August 15–21, 2018",
+        "url": "https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/",
+        "note": "Full day-by-day historical schedule and Reflection ship identification."
+      },
+      {
+        "title": "Celebrity 2018 Mediterranean offers",
+        "url": "https://www.cruisebay.com/uploads/cruise-specials/docs/celebrity-cruises-1312.pdf",
+        "note": "Promotional brochure separately identifies Reflection's six-night August 15, 2018 departure."
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "originalDate": "2019-06-03",
+    "ship": "Norwegian Sky",
+    "company": "Norwegian Cruise Line",
+    "destination": "Cuba & Bahamas",
+    "startDate": "2019-06-03",
+    "endDate": "2019-06-07",
+    "nights": 4,
+    "ports": [
+      "Miami",
+      "Havana",
+      "Great Stirrup Cay",
+      "Miami"
+    ],
+    "confidence": "confirmed",
+    "notes": "Matched across historical port calendars: Miami June 3, overnight Havana June 4–5, Great Stirrup Cay June 6, Miami June 7. Contemporary coverage documents Sky passengers in Havana June 4. This was one of the final US-to-Cuba cruise visits as the June 5 restrictions took effect; the similarly named Norwegian Sun was diverted, so its cancellation should not be applied to this sailing. Great Stirrup Cay is the scheduled call, not independently confirmed by a passenger report.",
+    "sources": [
+      {
+        "title": "Port of Miami ship calendar, May–August 2019",
+        "url": "https://crew-center.com/port-miami-cruise-ship-schedule-may-august-2019",
+        "note": "Sky in Miami June 3 and June 7."
+      },
+      {
+        "title": "Havana ship calendar, January–June 2019",
+        "url": "https://crew-center.com/havana-cuba-cruise-ship-schedule-january-june-2019",
+        "note": "Sky scheduled Havana June 4, 07:00 through June 5, 06:00."
+      },
+      {
+        "title": "Great Stirrup Cay ship calendar 2019",
+        "url": "https://crew-center.com/great-stirrup-cay-bahamas-cruise-ship-schedule-2019",
+        "note": "Sky scheduled June 6, 08:00–17:00."
+      },
+      {
+        "title": "US cruises to Cuba banned: the end of an era",
+        "url": "https://oncubanews.com/en/cuba-usa/u-s-cruises-to-cuba-banned-the-end-of-an-era/",
+        "note": "Contemporary June 6 reporting and photographs identify Sky passengers ashore in Havana on June 4."
+      },
+      {
+        "title": "With Cuba calls suddenly banned, cruise lines make changes at sea",
+        "url": "https://www.travelweekly.com/Cruise-Travel/With-Cuba-calls-suddenly-banned-cruise-lines-make-changes-at-sea",
+        "note": "Specifically identifies Norwegian Sun, rather than Sky, as diverted from its June 5 Havana call."
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "originalDate": "2019-08-03",
+    "ship": "Emerald Princess",
+    "company": "Princess Cruises",
+    "destination": "Mediterranean & Adriatic",
+    "startDate": "2019-08-03",
+    "endDate": "2019-08-10",
+    "nights": 7,
+    "ports": [
+      "Piraeus",
+      "Santorini",
+      "Kotor",
+      "Messina",
+      "Naples",
+      "Barcelona"
+    ],
+    "confidence": "confirmed",
+    "notes": "Princess's original Europe 2019 brochure (printed page 20) explicitly lists August 3 for the seven-day Athens-to-Barcelona Mediterranean & Adriatic sailing and supplies the port order. Return date follows its seven-night duration. This route was also available as part of longer combinations; the seven-night departure is the direct match to the supplied date.",
+    "sources": [
+      {
+        "title": "Princess Europe 2019 brochure — Mediterranean & Adriatic, page 20",
+        "url": "https://www.princess.com/downloads/pdf/sin_brochures/2019/europe-2019.pdf",
+        "note": "Primary brochure: Emerald Princess Aug 3 departure, seven days, Athens–Santorini–Kotor–Messina–Naples–Barcelona."
+      },
+      {
+        "title": "Emerald Princess Mediterranean & Adriatic trip report, July 2019",
+        "url": "https://cameltravel.co.uk/emerald-princess-cruise/",
+        "note": "Same season's seven-night route and ports, useful corroboration but not the exact departure."
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "originalDate": "2021-08-12",
+    "ship": "Carnival Magic",
+    "company": "Carnival Cruise Line",
+    "destination": "Bahamas",
+    "startDate": "2021-08-12",
+    "endDate": "2021-08-16",
+    "nights": 4,
+    "ports": [
+      "Port Canaveral",
+      "Nassau",
+      "Half Moon Cay",
+      "Port Canaveral"
+    ],
+    "confidence": "confirmed",
+    "notes": "Two independent exact-date passenger reviews identify a four-night Port Canaveral roundtrip with Nassau and Half Moon Cay. Return date is calculated from the duration; another passenger's next sailing begins August 16. Precise port-day timing was not found. An isolated blog's August 15 end date conflicts with the two four-night reviews.",
+    "sources": [
+      {
+        "title": "Carnival Magic — First Cruise Back, August 12, 2021",
+        "url": "https://cruiseline.com/ship/carnival-magic/review/529973",
+        "note": "Exact departure, four nights, Port Canaveral, Nassau and Half Moon Cay."
+      },
+      {
+        "title": "Carnival Magic — Great Family Cruise, August 12, 2021",
+        "url": "https://cruiseline.com/ship/carnival-magic/review/542302",
+        "note": "Separate passenger corroborates exact departure, four nights and both stops."
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "originalDate": "2022-03-12",
+    "ship": "Mardi Gras",
+    "company": "Carnival Cruise Line",
+    "destination": "Eastern Caribbean & Bahamas",
+    "startDate": "2022-03-12",
+    "endDate": "2022-03-19",
+    "nights": 7,
+    "ports": [
+      "Port Canaveral",
+      "Nassau",
+      "Amber Cove",
+      "Grand Turk",
+      "Port Canaveral"
+    ],
+    "confidence": "confirmed",
+    "notes": "The date matches an archived seven-night Eastern Caribbean itinerary. Nassau March 14, Amber Cove March 16 and Grand Turk March 17; Bahamas is only one part of the route. The modern ship's official name is Mardi Gras (the user's '2.0' distinguishes it from Carnival's original ship). Historical schedule, subject to any unrecorded operational changes.",
+    "sources": [
+      {
+        "title": "Mardi Gras March 12–19, 2022 archived itinerary",
+        "url": "https://www.icruise.com/itineraries/7-night-eastern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_3-12-2022.html",
+        "note": "Exact dates, duration and ordered port schedule."
+      },
+      {
+        "title": "Mardi Gras March 12, 2022 passenger review",
+        "url": "https://cruiseline.com/ship/mardi-gras/review/536637",
+        "note": "Exact-date sailing review corroborates Eastern Caribbean designation."
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "originalDate": "2022-06-16",
+    "ship": "Regal Princess",
+    "company": "Princess Cruises",
+    "destination": "Mediterranean",
+    "startDate": "2022-06-11",
+    "endDate": "2022-06-18",
+    "nights": 7,
+    "ports": [
+      "Barcelona",
+      "Gibraltar",
+      "Marseille",
+      "Genoa",
+      "Livorno",
+      "Civitavecchia"
+    ],
+    "confidence": "confirmed",
+    "notes": "You confirmed this was the seven-day Regal Princess cruise. The historical schedule containing your June 16 date matches the June 11–18, 2022 Barcelona-to-Civitavecchia (Rome) sailing, seven nights: Gibraltar June 13, Marseille June 15, Genoa June 16, Livorno June 17, and Civitavecchia June 18. June 16 was the Genoa port day. The archived longer itinerary includes this same first week; your confirmed duration identifies the seven-night voyage.",
+    "sources": [
+      {
+        "title": "Regal Princess June 11, 2022 archived Mediterranean itinerary",
+        "url": "https://www.icruise.com/itineraries/14-night-mediterranean-with-greek-isles-france-and-turkey-cruise_regal-princess_6-11-2022.html",
+        "note": "Historical schedule for June 11–18: Barcelona, Gibraltar, Marseille, Genoa, Livorno and Civitavecchia. Published as the first week of a longer itinerary; the owner confirms sailing the seven-day voyage."
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "originalDate": "2022-12-31",
+    "ship": "Norwegian Bliss",
+    "company": "Norwegian Cruise Line",
+    "destination": "Western Caribbean",
+    "startDate": "2022-12-31",
+    "endDate": "2023-01-07",
+    "nights": 7,
+    "ports": [
+      "Miami",
+      "Roatán",
+      "Harvest Caye",
+      "Costa Maya",
+      "Cozumel",
+      "Miami"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact archived seven-night sailing crosses into 2023: Roatán Jan 2, Harvest Caye Jan 3, Costa Maya Jan 4, Cozumel Jan 5. The Bahamas are not on this route. Historical scheduled itinerary, with a same-departure passenger review.",
+    "sources": [
+      {
+        "title": "Norwegian Bliss December 31, 2022 archived itinerary",
+        "url": "https://www.icruise.com/itineraries/7-night-caribbean-harvest-caye-cozumel-and-roatan-cruise_norwegian-bliss_12-31-2022.html",
+        "note": "Exact dates, duration, Miami roundtrip and ordered stops."
+      },
+      {
+        "title": "Norwegian Bliss December 31, 2022 passenger review",
+        "url": "https://cruiseline.com/ship/norwegian-bliss/review/549720",
+        "note": "Same-departure Western Caribbean passenger review."
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "originalDate": "2023-03-18",
+    "ship": "Celebrity Solstice",
+    "company": "Celebrity Cruises",
+    "destination": "Mexican Riviera & San Diego",
+    "startDate": "2023-03-11",
+    "endDate": "2023-03-18",
+    "nights": 7,
+    "ports": [
+      "Los Angeles",
+      "Cabo San Lucas",
+      "Mazatlán",
+      "San Diego",
+      "Los Angeles"
+    ],
+    "confidence": "likely",
+    "notes": "Your date is most likely the return date: the documented March 11–18 voyage matches your Cabo and Mazatlán memories, and also visited San Diego. Archived dates: Cabo March 13, Mazatlán March 14, San Diego March 17. A verified passenger review corroborates all three stops. The separate March 18 departure was marketed with Catalina Island and Cabo instead, making March 11–18 the stronger match. No Puerto Vallarta stop is supported for this sailing.",
+    "sources": [
+      {
+        "title": "Celebrity Solstice March 11–18, 2023 archived itinerary",
+        "url": "https://www.icruise.com/itineraries/7-night-mexican-riviera-cruise_celebrity-solstice_3-11-2023.html",
+        "note": "Exact return-date match and Cabo–Mazatlán–San Diego itinerary."
+      },
+      {
+        "title": "Verified Solstice March 11, 2023 passenger review",
+        "url": "https://cruiseline.com/ship/celebrity-solstice/review/553203",
+        "note": "Passenger lists Cabo San Lucas, Mazatlán and San Diego."
+      },
+      {
+        "title": "Archived Celebrity 2023 cruise offers",
+        "url": "https://blog.cruises-n-more.com/press-and-cruise-news/family-owned-and-operated-going-on-25-years-cruises-n-more-offers-respected-expertise-and-superior-deals-prices-amenities/",
+        "note": "March 18 departure advertised Catalina and Cabo, supporting interpretation of anchor as return date."
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "originalDate": "2024-07-02",
+    "ship": "Celebrity Millennium",
+    "company": "Celebrity Cruises",
+    "destination": "Best of Japan & South Korea",
+    "startDate": "2024-07-02",
+    "endDate": "2024-07-14",
+    "nights": 12,
+    "ports": [
+      "Yokohama",
+      "Kobe",
+      "Osaka",
+      "Kochi",
+      "Hiroshima",
+      "Jeju",
+      "Kagoshima",
+      "Shimizu",
+      "Yokohama"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact twelve-night departure with an official corrected itinerary letter. Kobe July 4–5, Osaka July 5–6, Kochi July 7, Hiroshima July 8, Jeju July 10, Kagoshima July 11 and Shimizu July 13. The official change added Kochi and removed Nagasaki; map follows that revision. Kobe and Osaka are separate calls with overnight stays.",
+    "sources": [
+      {
+        "title": "Celebrity official July 2, 2024 itinerary correction",
+        "url": "https://www.celebritycruises.com/content/dam/celebrity/pdf/ML-7-2-24-12-nights-best-of-japan-cruises-Itinerary-Modification-Guest-Letter.pdf",
+        "note": "Primary correction adds Kochi July 7, moves Hiroshima to July 8 and Jeju to July 10, replaces Nagasaki with sea day."
+      },
+      {
+        "title": "Celebrity Millennium July 2–14, 2024 archived itinerary",
+        "url": "https://www.icruise.com/itineraries/12-night-best-of-japan-cruise_celebrity-millennium_7-2-2024.html",
+        "note": "Full corrected route, dates and overnight calls."
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "originalDate": "2025-06-07",
+    "ship": "Mardi Gras",
+    "company": "Carnival Cruise Line",
+    "destination": "Southern Caribbean — Aruba & Curaçao",
+    "startDate": "2025-06-07",
+    "endDate": "2025-06-15",
+    "nights": 8,
+    "ports": [
+      "Port Canaveral",
+      "Oranjestad",
+      "Willemstad",
+      "Amber Cove",
+      "Port Canaveral"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact eight-night Port Canaveral roundtrip: Aruba June 10, Curaçao June 11 and Amber Cove June 13. Amber Cove replaced the originally planned Grand Turk call; the map uses the updated itinerary. Modern ship officially named Mardi Gras.",
+    "sources": [
+      {
+        "title": "Mardi Gras June 7–15, 2025 archived itinerary",
+        "url": "https://www.icruise.com/itineraries/8-night-southern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_6-7-2025.html",
+        "note": "Exact dates, eight nights and updated Aruba–Curaçao–Amber Cove route."
+      },
+      {
+        "title": "Carnival replaces Grand Turk calls on selected 2025 itineraries",
+        "url": "https://www.cruisehive.com/carnival-passes-up-caribbean-port-for-multiple-itineraries/170377",
+        "note": "Specifically identifies June 7 Mardi Gras sailing's substitution of Amber Cove for Grand Turk."
+      }
+    ]
+  }
+]

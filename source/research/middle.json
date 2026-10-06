@@ -1,0 +1,317 @@
+[
+  {
+    "id": 10,
+    "originalDate": "2013-06-07",
+    "ship": "Carnival Sunshine",
+    "company": "Carnival Cruise Line",
+    "region": "Mediterranean",
+    "startDate": "2013-06-07",
+    "endDate": "2013-06-16",
+    "nights": 9,
+    "ports": [
+      "Barcelona, Spain",
+      "Marseille, France",
+      "Livorno, Italy",
+      "Civitavecchia, Italy",
+      "Naples, Italy",
+      "Messina, Italy",
+      "Dubrovnik, Croatia",
+      "Venice, Italy"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact sailing match in a contemporary passenger review: 9-night Italy & Adriatic cruise from Barcelona to Venice. Port sequence follows the sailing review; the end date is calculated from the verified departure and nine-night duration. This was Sunshine's first Mediterranean season after the conversion from Carnival Destiny.",
+    "sources": [
+      {
+        "title": "Cruiseline: Carnival Sunshine, June 7, 2013 — 9 Night Italy & Adriatic",
+        "url": "https://cruiseline.com/ship/carnival-sunshine/review/381014",
+        "note": "Exact departure, nine nights, endpoints and ordered ports."
+      },
+      {
+        "title": "Travel Weekly: Carnival Sunshine metamorphosis was ambitious and complicated",
+        "url": "https://www.travelweekly.com/Cruise-Travel/Carnival-Sunshine-metamorphosis-was-ambitious-and-complicated",
+        "note": "Contemporary June 2013 account corroborates the June 7 sailing and first-season refurbishment context."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "originalDate": "2013-12-28",
+    "ship": "Carnival Elation",
+    "company": "Carnival Cruise Line",
+    "region": "Western Caribbean",
+    "startDate": "2013-12-28",
+    "endDate": "2014-01-02",
+    "nights": 5,
+    "ports": [
+      "New Orleans, Louisiana",
+      "Progreso, Mexico",
+      "Cozumel, Mexico",
+      "New Orleans, Louisiana"
+    ],
+    "confidence": "likely",
+    "notes": "Seasonal reconstruction, not an independently verified exact sailing. Elation was based in New Orleans on four- and five-night Mexico cruises in December 2013. The five-night Progreso/Cozumel itinerary and next four-night departure on January 2, 2014 support a December 28–January 2 sailing. Port order and the assumption that the supplied date is embarkation need confirmation; December 28 could instead be disembarkation from the preceding five-night cruise.",
+    "sources": [
+      {
+        "title": "New Orleans tourism: December 2013 / January 2014 industry update",
+        "url": "https://www.neworleans.com/articles/post/whats-new-in-new-orleans-hospitality-industry-december-2013january-2014/",
+        "note": "Contemporary confirmation of Elation's year-round New Orleans homeport."
+      },
+      {
+        "title": "Carnival Cruise Lines 2014 brochure",
+        "url": "https://www.slideshare.net/slideshow/carnival-cruise-lines-2014/28593553",
+        "note": "Period brochure shows the five-night New Orleans–Progreso–Cozumel itinerary and January 2, 2014 four-night departure. Does not directly verify December 28, 2013."
+      },
+      {
+        "title": "Cruise with Jill: New Orleans cruise port, December 4, 2013",
+        "url": "https://cruisewithjill.wordpress.com/",
+        "note": "Contemporary post describes Elation's four-night Cozumel and five-night Western Caribbean cruises."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "originalDate": "2014-03-15",
+    "ship": "Allure of the Seas",
+    "company": "Royal Caribbean International",
+    "region": "Eastern Caribbean",
+    "startDate": "2014-03-16",
+    "endDate": "2014-03-23",
+    "nights": 7,
+    "ports": [
+      "Fort Lauderdale, Florida",
+      "Nassau, Bahamas",
+      "Charlotte Amalie, St. Thomas",
+      "Philipsburg, St. Maarten",
+      "Fort Lauderdale, Florida"
+    ],
+    "confidence": "likely",
+    "notes": "Likely one-day date correction: a passenger review explicitly identifies the March 16–23, 2014 Eastern Caribbean sailing. The supplied March 15 is the day before departure. That season's Eastern route was Fort Lauderdale–Nassau–St. Thomas–St. Maarten; the date-to-user-trip match remains an inference. The March 9 sailing containing March 15 was Western Caribbean, so it conflicts with the supplied destination.",
+    "sources": [
+      {
+        "title": "Cruise Critic: Alluring cruise — March 16–23, 2014",
+        "url": "https://www.cruisecritic.com/cruise/royal-caribbean/allure-of-the-seas/reviews/253085",
+        "note": "Passenger explicitly gives March 16–23 and Eastern Caribbean."
+      },
+      {
+        "title": "Royal Caribbean: Allure inaugural-season itinerary announcement",
+        "url": "https://www.royalcaribbeanpresscenter.com/download-press-kit/35/",
+        "note": "Historical Fort Lauderdale Eastern route via Nassau, Charlotte Amalie and Philipsburg; route pattern, not exact 2014 sailing verification."
+      },
+      {
+        "title": "Cruiseline: Allure March 9, 2014 Western Caribbean",
+        "url": "https://cruiseline.com/ship/allure-of-the-seas/review/386483",
+        "note": "Confirms the preceding sailing was Western, supporting the one-day date discrepancy rather than an Eastern voyage on March 15."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "originalDate": "2014-06-02",
+    "ship": "Celebrity Reflection",
+    "company": "Celebrity Cruises",
+    "region": "Eastern Mediterranean",
+    "startDate": "2014-06-02",
+    "endDate": "2014-06-13",
+    "nights": 11,
+    "ports": [
+      "Civitavecchia, Italy",
+      "Santorini, Greece",
+      "Istanbul, Turkey",
+      "Kusadasi, Turkey",
+      "Mykonos, Greece",
+      "Piraeus, Greece",
+      "Naples, Italy",
+      "Civitavecchia, Italy"
+    ],
+    "confidence": "confirmed",
+    "notes": "Contemporary passenger photo album explicitly records June 2–13, 2014 and dated calls: Santorini June 4; Istanbul June 6–7 overnight; Kusadasi June 8; Mykonos June 9; Athens June 10; Naples June 12. Piraeus is the port for Athens, and Civitavecchia is the port for Rome.",
+    "sources": [
+      {
+        "title": "Flickr travel diary: Mediterranean Cruise on Celebrity Reflection — June 2014",
+        "url": "https://api.flickr.com/photos/escriteur/albums/72157645178029754/with/14451670303/",
+        "note": "First-hand contemporary album explicitly lists dates and all ordered ports."
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "originalDate": "2015-03-14",
+    "ship": "Celebrity Summit",
+    "company": "Celebrity Cruises",
+    "region": "Southern Caribbean",
+    "startDate": "2015-03-14",
+    "endDate": "2015-03-21",
+    "nights": 7,
+    "ports": [
+      "San Juan, Puerto Rico",
+      "Frederiksted, St. Croix",
+      "Basseterre, St. Kitts",
+      "Roseau, Dominica",
+      "St. George's, Grenada",
+      "Charlotte Amalie, St. Thomas",
+      "San Juan, Puerto Rico"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact date matched to a passenger review of the seven-night San Juan roundtrip. All five intermediate ports are listed in itinerary order. End date calculated from verified departure and duration.",
+    "sources": [
+      {
+        "title": "Cruiseline: Celebrity Summit — March 14, 2015",
+        "url": "https://cruiseline.com/ship/celebrity-summit/review/401906",
+        "note": "Exact departure, seven-night duration, San Juan roundtrip and ordered ports."
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "originalDate": "2015-05-28",
+    "ship": "Celebrity Silhouette",
+    "company": "Celebrity Cruises",
+    "region": "Scandinavia & Russia",
+    "startDate": "2015-05-28",
+    "endDate": "2015-06-09",
+    "nights": 12,
+    "ports": [
+      "Stockholm, Sweden",
+      "Helsinki, Finland",
+      "St. Petersburg, Russia",
+      "Tallinn, Estonia",
+      "Warnemunde, Germany",
+      "Fredericia, Denmark",
+      "Copenhagen, Denmark",
+      "Amsterdam, Netherlands"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact 12-night Stockholm-to-Amsterdam sailing appears in the Celebrity 2015 Europe brochure, page 59, and a verified passenger review. Overnight stays in Stockholm, St. Petersburg and Copenhagen. Brochure day order: Stockholm May 28–29, Helsinki May 30, St. Petersburg May 31–June 1, Tallinn June 2, sea June 3, Warnemunde June 4, Fredericia June 5, Copenhagen June 6–7, sea June 8, Amsterdam June 9.",
+    "sources": [
+      {
+        "title": "Celebrity Cruises 2015 Europe Guide, page 59",
+        "url": "https://www.scribd.com/doc/246907520/Celebrity-Cruises-2015-Europa",
+        "note": "Archived official brochure contains exact departure date and day-by-day itinerary."
+      },
+      {
+        "title": "Cruiseline: Baltic Cruise on Celebrity Silhouette — May 28, 2015",
+        "url": "https://cruiseline.com/ship/celebrity-silhouette/review/405389",
+        "note": "Verified passenger review confirms May 28, twelve nights, Stockholm-to-Amsterdam and visits."
+      },
+      {
+        "title": "Fodor's: Scandinavia and St. Petersburg forum",
+        "url": "https://www.fodors.com/community/cruises/scandinavia-and-st-petersburg-1037670/",
+        "note": "February 2015 passenger planning post explicitly names the May 28 Stockholm–Amsterdam sailing and two-day St. Petersburg visit."
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "originalDate": "2016-03-19",
+    "ship": "Celebrity Summit",
+    "company": "Celebrity Cruises",
+    "region": "Southern Caribbean",
+    "startDate": "2016-03-19",
+    "endDate": "2016-03-26",
+    "nights": 7,
+    "ports": [
+      "San Juan, Puerto Rico",
+      "Bridgetown, Barbados",
+      "Castries, St. Lucia",
+      "St. John's, Antigua",
+      "Philipsburg, St. Maarten",
+      "Charlotte Amalie, St. Thomas",
+      "San Juan, Puerto Rico"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact departure and seven-night San Juan roundtrip matched to verified passenger review. Port call sequence differs from the 2015 Summit cruise. Philipsburg on March 24 is independently supported by the 2016 port calendar. This was the first sailing after Summit's March 2016 drydock.",
+    "sources": [
+      {
+        "title": "Cruiseline: Celebrity Summit — March 19, 2016",
+        "url": "https://cruiseline.com/ship/celebrity-summit/review/419687",
+        "note": "Exact departure, duration, endpoints and ordered ports."
+      },
+      {
+        "title": "Crew Center: Philipsburg 2016 cruise ship port calendar",
+        "url": "https://crew-center.com/philipsburg-st-maarten-cruise-ship-port-calendar-2016",
+        "note": "Celebrity Summit listed March 24, 2016."
+      },
+      {
+        "title": "Cruise Industry News: Celebrity announces ship refresh for Infinity and Summit",
+        "url": "https://cruiseindustrynews.com/cruise-news/2015/10/celebrity-announces-ship-refresh-for-infinity-and-summit/",
+        "note": "Identifies March 19, 2016 as the beginning of post-refurbishment sailings."
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "originalDate": "2016-07-13",
+    "ship": "Celebrity Silhouette",
+    "company": "Celebrity Cruises",
+    "region": "British Isles",
+    "startDate": "2016-07-13",
+    "endDate": "2016-07-25",
+    "nights": 12,
+    "ports": [
+      "Amsterdam, Netherlands",
+      "Belfast, Northern Ireland",
+      "Ayr, Scotland",
+      "Greenock, Scotland",
+      "Liverpool, England",
+      "Dun Laoghaire, Ireland",
+      "Cobh, Ireland",
+      "St. Peter Port, Guernsey",
+      "Le Havre, France",
+      "Amsterdam, Netherlands"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact match: 12-night British Isles & The Open, Amsterdam roundtrip. Verified passenger review supplies ordered ports including both Ayr and Greenock. Ayr call on July 16 is confirmed by a contemporary port announcement for The Open at Royal Troon. The return date is calculated from departure plus twelve nights.",
+    "sources": [
+      {
+        "title": "Cruiseline: Celebrity Silhouette — July 13, 2016",
+        "url": "https://cruiseline.com/ship/celebrity-silhouette/review/425905",
+        "note": "Exact departure, duration, roundtrip and all ordered ports."
+      },
+      {
+        "title": "Cruiseline: To maximize your experience, do your homework",
+        "url": "https://cruiseline.com/ship/celebrity-silhouette/review/425853",
+        "note": "Second verified review of July 13 sailing corroborates duration and most ports."
+      },
+      {
+        "title": "PortNews: Ayr and Troon receive record cruise calls in 2016",
+        "url": "https://en.portnews.ru/news/220079/",
+        "note": "Contemporary ABP announcement identifies Silhouette's July 16 Ayr call for The Open."
+      },
+      {
+        "title": "Cruise Critic: Great ship and cruise with a few inconsistencies",
+        "url": "https://www.cruisecritic.com/cruise/celebrity/celebrity-silhouette/reviews/544246",
+        "note": "Passenger explicitly states July 13 twelve-day Amsterdam British Isles roundtrip."
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "originalDate": "2017-03-12",
+    "ship": "Carnival Sunshine",
+    "company": "Carnival Cruise Line",
+    "region": "Eastern Caribbean",
+    "startDate": "2017-03-12",
+    "endDate": "2017-03-17",
+    "nights": 5,
+    "ports": [
+      "Port Canaveral, Florida",
+      "Amber Cove, Dominican Republic",
+      "Grand Turk, Turks and Caicos",
+      "Port Canaveral, Florida"
+    ],
+    "confidence": "confirmed",
+    "notes": "Exact match to official Carnival deployment announcement and verified sailing review: five-night Eastern Caribbean cruise from Port Canaveral to Amber Cove and Grand Turk. End date calculated from verified departure and duration.",
+    "sources": [
+      {
+        "title": "Carnival Cruise Line: Sunshine 2016–17 deployment announcement",
+        "url": "https://www.carnival-news.com/2015/03/16/carnival-sunshine-to-operate-unique-schedule-of-two-to-10-day-voyages-from-new-york-june-to-october-2016",
+        "note": "Official release explicitly names March 12, 2017 five-day Amber Cove/Grand Turk sailing from Port Canaveral."
+      },
+      {
+        "title": "Cruiseline: Carnival Sunshine — March 12, 2017",
+        "url": "https://cruiseline.com/ship/carnival-sunshine/review/442535",
+        "note": "Verified review confirms departure, duration and ordered ports."
+      }
+    ]
+  }
+]

@@ -1,0 +1,284 @@
+.statistics-page { --stats-deep: #264c64; --stats-secondary: #66788b; --stats-card: var(--glass-panel, #ffffffb8); --stats-outline: var(--border-glass, #ffffffcf); color: var(--ink); min-height: calc(100dvh - 88px); padding: 44px 40px 0; }
+.statistics-page[hidden] { display: none; }
+.stats-content { width: min(1320px, 100%); margin: 0 auto; }
+.stats-intro { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 4px 32px; }
+.stats-eyebrow { font: 700 9px/1.5 'DM Sans', sans-serif; letter-spacing: 1.7px; color: var(--stats-secondary); display: block; }
+.stats-intro > div > .stats-eyebrow { display: flex; align-items: center; gap: 9px; color: #487c8b; font-size: 10px; }
+.stats-live-dot { height: 6px; width: 6px; border-radius: 50%; background: #1ca6a2; box-shadow: 0 0 0 4px #20b0a315; }
+.stats-intro h1 { position: relative; font: 400 clamp(34px, 3.2vw, 47px)/1.17 var(--serif); letter-spacing: -1.6px; margin: 14px 0 12px; width: fit-content; }
+.stats-intro h1 em { font-weight: 400; color: #8271bf; }
+.stats-intro p { font-size: 12px; line-height: 1.65; margin: 0; color: var(--stats-secondary); }
+.stats-title-break { display: none; }
+.stats-sparkle { width: 28px; height: 28px; color: #d3a469; }
+.stats-intro h1 > .stats-sparkle { position: absolute; right: -43px; top: -5px; transform: rotate(16deg); animation: stats-twinkle 6s ease-in-out infinite; }
+.stats-collection-stamp { display: flex; align-items: center; gap: 12px; padding: 13px 18px; border-radius: 16px; background: var(--stats-card); border: 1px solid var(--stats-outline); box-shadow: 0 8px 18px #50618e05; transform: rotate(3deg); flex: none; }
+.stats-collection-stamp > .stats-icon { width: 31px; height: 31px; color: #8d80ba; }
+.stats-collection-stamp > span { font-size: 7px; font-weight: 600; letter-spacing: 1.3px; color: var(--stats-secondary); }
+.stats-collection-stamp strong { display: block; font: 400 23px/1.2 var(--serif); letter-spacing: .7px; color: var(--ink); margin-top: 5px; }
+.stats-card { position: relative; border-radius: 25px; padding: 27px; background: var(--stats-card); border: 1px solid var(--stats-outline); box-shadow: 0 12px 28px #555f9310, inset 0 1px 0 #ffffff4d; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); min-width: 0; }
+.stats-hero-grid { display: grid; grid-template-columns: 1.19fr 1.05fr .86fr; gap: 18px; }
+.stats-hero-grid > .stats-card { min-height: 304px; overflow: hidden; }
+.stats-number { font-variant-numeric: tabular-nums; }
+.stats-nights-card { background: radial-gradient(ellipse at 84% 90%, #28aab4 0%, transparent 64%), linear-gradient(125deg, #166c82 0%, #137f8d 48%, #3499a8 100%); color: #fffdf7; border-color: #3ea4b49c; }
+.stats-nights-card > .stats-eyebrow { color: #c2eae9; position: relative; z-index: 2; font-size: 8px; }
+.stats-nights-number { position: relative; display: flex; flex-direction: column; z-index: 2; margin-top: 13px; }
+.stats-nights-number > .stats-number { font: 400 77px/1 var(--serif); letter-spacing: -4px; }
+.stats-nights-number > span:last-child { font-size: 17px; font-weight: 500; margin-top: 5px; letter-spacing: -.3px; }
+.stats-nights-card > p { position: relative; z-index: 2; margin: 15px 0 0; color: #e2f6f4; font-size: 11px; line-height: 1.8; }
+.stats-nights-card > p strong { color: #fff; font-weight: 600; }
+.stats-card-note { position: absolute; left: 27px; right: 20px; bottom: 19px; font-size: 8px; line-height: 1.5; color: var(--stats-secondary); }
+.stats-nights-card > .stats-card-note { z-index: 2; color: #ceefed; font-size: 7px; }
+.stats-ship-scene { position: absolute; width: 248px; height: auto; bottom: 18px; right: -52px; pointer-events: none; }
+.stats-bobbing-ship { transform-origin: 202px 124px; animation: stats-bob 5s ease-in-out infinite; }
+.stats-little-whale { animation: stats-bob 5.4s -.8s ease-in-out infinite; transform-origin: 65px 117px; }
+.stats-distance-card { background: radial-gradient(ellipse at 85% 0, #d7cdf94f, transparent 75%), linear-gradient(145deg, #f6f3ffdb, #f3edffb3); }
+.stats-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.stats-icon-tile { display: grid; place-items: center; width: 34px; height: 34px; color: #8a75b9; background: #aa8fda17; border: 1px solid #a88bc01f; border-radius: 11px; flex: none; }
+.stats-icon { width: 20px; height: 20px; flex: none; }
+.stats-unit { display: flex; align-items: center; position: relative; background: #ffffff70; border: 1px solid #b8a5d626; border-radius: 24px; }
+.stats-unit select { appearance: none; background: transparent; border: 0; padding: 7px 24px 7px 12px; border-radius: 24px; font-size: 10px; color: #655a82; max-width: 135px; cursor: pointer; }
+.stats-unit > .stats-icon { position: absolute; right: 8px; width: 10px; height: 10px; pointer-events: none; color: #8a77ac; }
+.stats-distance-card > .stats-eyebrow { font-size: 8px; color: #8b77ab; }
+.stats-distance-number { display: flex; align-items: baseline; gap: 6px; margin-top: 9px; }
+.stats-distance-number > span:first-child { font: 400 28px var(--serif); color: #a496ba; }
+.stats-distance-value { font: 400 clamp(39px, 3.4vw, 53px)/1.1 var(--serif); letter-spacing: -2px; color: #6a5997; }
+.stats-distance-card h2 { font-size: 16px; font-weight: 500; margin: 4px 0 10px; color: #74628d; }
+.stats-distance-card > p { font-size: 10px; line-height: 1.7; color: #847391; margin: 0; position: relative; z-index: 1; }
+.stats-distance-route { position: absolute; width: 82%; right: -7px; bottom: 18px; color: #a58fc4; opacity: .65; transform: rotate(-5deg); }
+.stats-distance-route svg { width: 100%; }
+.stats-distance-card > .stats-card-note { color: #8c799e; }
+.stats-earth-card { text-align: center; background: radial-gradient(ellipse at 50% 30%, #fff0e880, transparent 85%), linear-gradient(150deg, #fff8eedb, #fceeeeb3); padding-top: 27px; }
+.stats-earth-card > .stats-eyebrow { font-size: 7px; color: #a17d81; letter-spacing: 1.4px; }
+.stats-globe-scene { display: block; width: 191px; height: 160px; margin: -3px auto -17px; }
+.stats-earth-total { font: 400 49px/1.05 var(--serif); color: #966c83; letter-spacing: -1.5px; }
+.stats-earth-total > span:last-child { font-size: 30px; }
+.stats-earth-card h2 { font-size: 15px; font-weight: 500; color: #86657c; margin: 4px 0 7px; }
+.stats-earth-card > p { color: #987a88; font-size: 9px; line-height: 1.6; margin: 0; }
+.stats-orbit-boat { animation: stats-orbit-bob 7s ease-in-out infinite; transform-origin: 197px 59px; }
+.stats-fleet-ribbon { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px 30px; margin: 24px 0; padding: 7px 0; }
+.stats-fleet-ribbon > div { display: flex; align-items: center; gap: 9px; color: var(--stats-secondary); font-size: 11px; }
+.stats-fleet-ribbon strong { color: var(--ink); font-weight: 700; }
+.stats-fleet-ribbon .stats-icon { width: 17px; height: 17px; color: #9488b8; }
+.stats-ribbon-dot { width: 3px; height: 3px; border-radius: 50%; background: #a8b3c1; }
+.stats-small-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 25px; }
+.stats-small-card { display: flex; align-items: flex-start; gap: 14px; padding: 22px 23px; overflow: hidden; }
+.stats-small-card .stats-icon-tile { width: 32px; height: 32px; margin-top: 3px; border-radius: 10px; }
+.stats-small-card .stats-number { font: 400 36px/1.1 var(--serif); letter-spacing: -1px; color: var(--ink); position: relative; z-index: 1; }
+.stats-small-card h2 { font-size: 12px; font-weight: 600; margin: 5px 0 6px; position: relative; z-index: 1; }
+.stats-small-card p { font-size: 9px; line-height: 1.7; margin: 0; color: var(--stats-secondary); position: relative; z-index: 1; }
+.stats-hours-card .stats-icon-tile { background: #edc77921; color: #b79849; border-color: #e6b4671c; }
+.stats-ports-card .stats-icon-tile { background: #57bfb121; color: #3b998c; border-color: #54b3a21c; }
+.stats-places-card .stats-icon-tile { background: #d39cc021; color: #b78cac; border-color: #c294b21c; }
+.stats-sun-scene { position: absolute; width: 74px; right: 12px; top: 4px; transform: rotate(12deg); opacity: .65; }
+.stats-sun-rays { transform-origin: 50px 50px; animation: stats-sun-turn 60s linear infinite; }
+.stats-small-sparkle { width: 35px; height: 35px; position: absolute; right: 23px; top: 20px; color: #9acbc6; transform: rotate(-12deg); opacity: .6; }
+.stats-passport-doodle { position: absolute; width: 47px; height: 55px; display: grid; place-items: center; right: 23px; top: 17px; border: 1px solid #ba94b348; border-radius: 7px; color: #c9a9c5; transform: rotate(14deg); }
+.stats-passport-doodle .stats-icon { height: 26px; width: 26px; }
+.stats-insights-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.stats-section-heading h2 { font: 400 27px/1.2 var(--serif); margin: 7px 0 0; letter-spacing: -.5px; }
+.stats-section-heading p { color: var(--stats-secondary); font-size: 10px; line-height: 1.7; margin: 9px 0 0; }
+.stats-section-heading .stats-eyebrow { font-size: 8px; letter-spacing: 1.3px; }
+.stats-years-card { grid-column: span 8; padding: 28px 30px 24px; }
+.stats-chart-key { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 28px 0 17px; font-size: 9px; color: var(--stats-secondary); }
+.stats-chart-key > span:first-child { display: flex; align-items: center; gap: 6px; }
+.stats-chart-key i { height: 6px; width: 6px; display: block; border-radius: 2px; background: #69bebd; }
+.stats-year-chart { display: flex; gap: 6px; align-items: stretch; min-width: 0; padding: 4px 2px; }
+.stats-year-column { display: flex; flex: 1; flex-direction: column; align-items: center; min-width: 0; padding: 0; border-radius: 6px; position: relative; }
+.stats-bar-space { height: 109px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 100%; padding-top: 19px; border-bottom: 1px solid #bac6ce26; }
+.stats-year-value { font-size: 9px; font-weight: 600; color: var(--stats-secondary); margin-bottom: 5px; }
+.stats-year-bar { height: var(--bar-height); background: linear-gradient(to top, color-mix(in srgb, var(--bar-color) 70%, transparent), var(--bar-color)); display: block; width: min(21px, 82%); border-radius: 5px 5px 2px 2px; transition: filter .2s, transform .2s; min-height: 2px; }
+.stats-empty-year { opacity: .4; }
+.stats-empty-year .stats-year-bar { background: #9badb8; }
+.stats-year-column:not(:disabled):hover .stats-year-bar { filter: saturate(1.6); transform: translateY(-3px); }
+.stats-year-column:not(:disabled):hover .stats-year-label { color: #7d64ba; }
+.stats-year-label { margin-top: 11px; font-size: 9px; color: var(--stats-secondary); }
+.stats-chart-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--stats-secondary); font-size: 8px; margin-top: 16px; }
+.stats-chart-footer p { display: flex; align-items: center; gap: 6px; text-align: center; margin: 0; }
+.stats-chart-footer .stats-icon { width: 12px; height: 12px; color: #ab97c3; }
+.stats-lines-card { grid-column: span 4; padding: 27px 27px 20px; }
+.stats-lines-card .stats-section-heading h2 { font-size: 25px; }
+.stats-line-list { display: flex; flex-direction: column; gap: 12px; margin-top: 23px; }
+.stats-line-name { display: flex; justify-content: space-between; gap: 8px; font-size: 10px; margin-bottom: 5px; color: var(--stats-secondary); }
+.stats-line-name strong { font-size: 10px; font-weight: 600; color: var(--ink); }
+.stats-line-track { border-radius: 3px; height: 5px; background: #a9b2ca17; overflow: hidden; }
+.stats-line-track > span { display: block; height: 100%; background: var(--line-shade); border-radius: 3px; }
+.stats-panel-footnote { font-size: 9px; line-height: 1.7; margin: 18px 0 0; color: var(--stats-secondary); }
+.stats-return-card { grid-column: span 5; padding: 29px; }
+.stats-top-ports { margin: 22px 0 0; padding: 0; list-style: none; }
+.stats-top-ports li { display: flex; align-items: center; gap: 13px; padding: 11px 0; border-bottom: 1px solid #adb5c321; }
+.stats-top-ports li:first-child { padding-top: 0; }
+.stats-top-ports li:last-child { border-bottom: 0; padding-bottom: 0; }
+.stats-port-rank { width: 31px; height: 31px; flex: none; display: grid; place-items: center; border-radius: 11px; font: 400 15px var(--serif); background: #a997d515; color: #9c8bac; }
+.stats-top-ports li:first-child .stats-port-rank { background: #e5c47722; color: #ad9356; }
+.stats-port-name { display: flex; flex-direction: column; gap: 3px; }
+.stats-port-name strong { font-size: 11px; font-weight: 500; }
+.stats-port-name small { font-size: 8px; color: var(--stats-secondary); }
+.stats-port-count { margin-left: auto; display: flex; align-items: baseline; gap: 5px; font: 400 21px var(--serif); color: var(--ink); }
+.stats-port-count small { font: 400 8px 'DM Sans', sans-serif; color: var(--stats-secondary); }
+.stats-highlights { grid-column: span 7; padding: 9px 0 0; min-width: 0; }
+.stats-highlights > .stats-section-heading { padding: 0 8px 17px; }
+.stats-highlights > .stats-section-heading h2 { font-size: 25px; }
+.stats-voyage-card { width: 100%; display: flex; align-items: center; text-align: left; padding: 24px 21px; gap: 15px; border-radius: 21px; margin-bottom: 15px; transition: transform .2s, box-shadow .2s; }
+.stats-voyage-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px #71739716, inset 0 1px 0 #fff5; }
+.stats-longest-card { background: linear-gradient(115deg, #f3eafaac, #faf5ffd6); }
+.stats-farthest-card { background: linear-gradient(115deg, #e3f3f0ac, #f2f8f8d6); }
+.stats-voyage-icon { width: 39px; height: 39px; flex: none; display: grid; place-items: center; border-radius: 13px; background: #b491d71c; color: #a18bbb; }
+.stats-farthest-card .stats-voyage-icon { background: #78b1b31c; color: #6c9c9e; }
+.stats-voyage-icon > .stats-icon { width: 22px; height: 22px; }
+.stats-voyage-copy { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+.stats-voyage-copy .stats-eyebrow { font-size: 7px; letter-spacing: 1px; color: #927fa1; }
+.stats-farthest-card .stats-voyage-copy .stats-eyebrow { color: #739898; }
+.stats-voyage-copy > strong { font: 400 22px/1.13 var(--serif); letter-spacing: -.5px; }
+.stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 9px; color: var(--stats-secondary); }
+.stats-voyage-copy small { font-size: 8px; line-height: 1.5; color: var(--stats-secondary); }
+.stats-voyage-metric { flex: none; font: 400 34px/1 var(--serif); text-align: center; color: #8b75a4; letter-spacing: -1px; }
+.stats-voyage-metric > small { display: block; font: 400 9px 'DM Sans', sans-serif; margin-top: 6px; letter-spacing: 0; color: var(--stats-secondary); }
+.stats-farthest-metric { font-size: 24px; color: #638e91; }
+.stats-voyage-arrow { display: grid; place-items: center; color: #aaa1b6; }
+.stats-voyage-arrow > .stats-icon { width: 17px; height: 17px; }
+.stats-memory-note { display: flex; justify-content: center; align-items: center; gap: 19px; margin-top: 19px; }
+.stats-memory-note > .stats-sparkle { width: 22px; color: #cbb592; }
+.stats-memory-note > p { margin: 0; text-align: center; font: 400 15px/1.6 var(--serif); color: #9f98a8; }
+.stats-memory-note em { color: #8f8aa0; }
+.stats-memory-note > .stats-icon { width: 29px; height: 29px; color: #a3b9be; transform: rotate(8deg); }
+.stats-methodology { margin-top: 29px; border: 1px solid var(--stats-outline); border-radius: 17px; background: var(--stats-card); font-size: 11px; color: var(--stats-secondary); }
+.stats-methodology summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; cursor: pointer; list-style: none; border-radius: 17px; }
+.stats-methodology summary::-webkit-details-marker { display: none; }
+.stats-methodology summary > span { display: flex; align-items: center; gap: 9px; }
+.stats-methodology summary > span:first-child { font-weight: 500; color: var(--ink); }
+.stats-methodology summary > span:last-child { font-size: 9px; }
+.stats-methodology summary .stats-icon { width: 15px; height: 15px; color: #a699b9; }
+.stats-methodology summary > span:last-child .stats-icon { width: 12px; height: 12px; transition: transform .2s; }
+.stats-methodology[open] summary > span:last-child .stats-icon { transform: rotate(180deg); }
+.stats-methodology summary:focus-visible { outline: 3px solid #af8bc9; outline-offset: 4px; }
+.stats-methodology-body { padding: 1px 22px 19px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px 26px; }
+.stats-methodology-body p { font-size: 10px; line-height: 1.85; margin: 8px 0; }
+.stats-methodology-body strong { color: var(--ink); font-weight: 600; }
+.stats-footer { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 29px 0 31px; color: #9d9aab; }
+.stats-footer > span { font-size: 7px; letter-spacing: 1.6px; }
+.stats-footer > .stats-icon { width: 21px; height: 21px; color: #94b4bb; }
+.stats-footer > p { font: italic 13px var(--serif); margin: 0; }
+html[data-theme="dark"] .statistics-page { --stats-secondary: #adb8cf; }
+html[data-theme="dark"] .stats-intro > div > .stats-eyebrow { color: #8acecf; }
+html[data-theme="dark"] .stats-intro h1 em { color: #bbacf2; }
+html[data-theme="dark"] .stats-distance-card { background: radial-gradient(ellipse at 85% 0, #53477760, transparent 75%), linear-gradient(145deg, #28283fc9, #30263fd1); }
+html[data-theme="dark"] .stats-distance-card > .stats-eyebrow { color: #c1afd8; }
+html[data-theme="dark"] .stats-distance-value { color: #d2c2f3; }
+html[data-theme="dark"] .stats-distance-card h2 { color: #c2b4d9; }
+html[data-theme="dark"] .stats-distance-card > p, html[data-theme="dark"] .stats-distance-card > .stats-card-note { color: #b6a8c9; }
+html[data-theme="dark"] .stats-unit { background: #1b1f324f; border-color: #bca4d421; }
+html[data-theme="dark"] .stats-unit select { color: #d6cce9; }
+html[data-theme="dark"] .stats-unit select option { background: #28273b; }
+html[data-theme="dark"] .stats-earth-card { background: radial-gradient(ellipse at 50% 30%, #77436b2b, transparent 85%), linear-gradient(150deg, #30273dce, #302c40e3); }
+html[data-theme="dark"] .stats-earth-card > .stats-eyebrow { color: #d0abba; }
+html[data-theme="dark"] .stats-earth-total { color: #e3b4c8; }
+html[data-theme="dark"] .stats-earth-card h2 { color: #d2b3c6; }
+html[data-theme="dark"] .stats-earth-card > p { color: #bba2b4; }
+html[data-theme="dark"] .stats-longest-card { background: linear-gradient(115deg, #392e4eb5, #29283fe0); }
+html[data-theme="dark"] .stats-farthest-card { background: linear-gradient(115deg, #204248b5, #23363fe0); }
+html[data-theme="dark"] .stats-voyage-copy .stats-eyebrow { color: #c2accf; }
+html[data-theme="dark"] .stats-farthest-card .stats-voyage-copy .stats-eyebrow { color: #8bc6c4; }
+html[data-theme="dark"] .stats-voyage-metric { color: #c6a8e5; }
+html[data-theme="dark"] .stats-farthest-metric { color: #91c6c5; }
+html[data-theme="dark"] .stats-memory-note p, html[data-theme="dark"] .stats-memory-note em { color: #a99cbc; }
+@keyframes stats-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-5px) rotate(2deg); } }
+@keyframes stats-orbit-bob { 0%, 100% { transform: translate(0, 0) rotate(-4deg); } 50% { transform: translate(-9px, 4px) rotate(5deg); } }
+@keyframes stats-twinkle { 0%, 100% { opacity: .65; transform: scale(.9) rotate(16deg); } 50% { opacity: 1; transform: scale(1.08) rotate(35deg); } }
+@keyframes stats-sun-turn { to { transform: rotate(360deg); } }
+body.still-seas .statistics-page *, body.still-seas .statistics-page *::before, body.still-seas .statistics-page *::after { animation: none !important; transition: none !important; }
+@media (min-width: 1600px) { .statistics-page { padding-top: 55px; } .stats-hero-grid > .stats-card { min-height: 330px; } .stats-nights-number > .stats-number { font-size: 88px; } .stats-ship-scene { width: 280px; bottom: 18px; } .stats-distance-value { font-size: 60px; } .stats-distance-card h2 { font-size: 19px; } .stats-earth-card { padding-top: 30px; } .stats-globe-scene { width: 211px; height: 176px; } .stats-earth-total { font-size: 55px; } }
+@media (max-width: 1100px) { .statistics-page { padding: 34px 26px 0; } .stats-intro h1 { font-size: 37px; } .stats-intro h1 > .stats-sparkle { right: -29px; width: 22px; } .stats-collection-stamp { padding: 11px 13px; gap: 9px; } .stats-collection-stamp strong { font-size: 21px; } .stats-collection-stamp > .stats-icon { width: 25px; } .stats-hero-grid { gap: 14px; grid-template-columns: 1.15fr 1.08fr .87fr; } .stats-hero-grid > .stats-card { padding: 22px; min-height: 290px; } .stats-nights-number > .stats-number { font-size: 69px; } .stats-nights-number > span:last-child { font-size: 15px; } .stats-nights-card > p { font-size: 10px; } .stats-nights-card > .stats-card-note { font-size: 6.5px; left: 22px; } .stats-ship-scene { width: 215px; right: -55px; bottom: 20px; } .stats-distance-value { font-size: 42px; } .stats-distance-card h2 { font-size: 14px; } .stats-distance-card > .stats-eyebrow { letter-spacing: 1.2px; font-size: 7px; } .stats-card-note { left: 22px; font-size: 7px; } .stats-globe-scene { width: 172px; height: 147px; margin-top: 3px; } .stats-earth-total { font-size: 43px; } .stats-earth-card h2 { font-size: 13px; } .stats-earth-card > .stats-eyebrow { font-size: 6px; letter-spacing: 1px; } .stats-fleet-ribbon { gap: 16px 19px; } .stats-fleet-ribbon > div { font-size: 10px; gap: 6px; } .stats-small-grid { gap: 14px; } .stats-small-card { padding: 21px 17px; gap: 10px; } .stats-small-card h2 { font-size: 11px; } .stats-small-card p { font-size: 8px; } .stats-sun-scene { width: 52px; right: 9px; top: 9px; } .stats-small-sparkle { right: 15px; width: 25px; } .stats-passport-doodle { right: 17px; width: 35px; height: 44px; } .stats-insights-grid { gap: 18px; } .stats-years-card { padding: 27px 23px 21px; } .stats-years-card .stats-section-heading h2 { font-size: 25px; } .stats-lines-card { padding: 27px 23px 20px; } .stats-lines-card .stats-section-heading h2 { font-size: 23px; } .stats-lines-card .stats-section-heading .stats-eyebrow { font-size: 7px; } .stats-year-chart { gap: 4px; } .stats-chart-key { font-size: 8px; } .stats-chart-footer { font-size: 7px; } .stats-return-card { padding: 27px 23px; } .stats-highlights .stats-section-heading .stats-eyebrow { font-size: 7px; } .stats-highlights > .stats-section-heading h2 { font-size: 23px; } .stats-voyage-card { padding: 23px 16px; gap: 11px; } .stats-voyage-icon { display: none; } .stats-voyage-copy > strong { font-size: 21px; } .stats-voyage-copy small { font-size: 7px; } .stats-voyage-copy .stats-eyebrow { font-size: 6px; } .stats-voyage-arrow { display: none; } }
+@media (max-width: 800px) { .statistics-page { padding: 31px 21px 0; } .stats-intro { padding-bottom: 26px; gap: 18px; } .stats-intro h1 { font-size: 35px; margin-top: 12px; } .stats-title-break { display: block; } .stats-intro h1 > .stats-sparkle { top: 8px; right: 18px; width: 24px; } .stats-intro p { font-size: 10px; max-width: 310px; } .stats-intro > div > .stats-eyebrow { font-size: 8px; } .stats-collection-stamp { transform: rotate(4deg); margin-right: 5px; flex-direction: column; text-align: center; gap: 7px; padding: 13px 17px; } .stats-collection-stamp strong { font-size: 20px; } .stats-collection-stamp > span { font-size: 6px; } .stats-collection-stamp > .stats-icon { width: 27px; height: 27px; } .stats-hero-grid { grid-template-columns: 1fr 1fr; gap: 15px; } .stats-hero-grid > .stats-card { min-height: 270px; } .stats-hero-grid > .stats-earth-card { grid-column: 1 / -1; min-height: 145px; display: grid; grid-template-columns: 1fr 170px; grid-template-rows: auto auto auto auto; text-align: left; padding: 23px 27px; } .stats-earth-card > .stats-eyebrow { grid-column: 1; font-size: 7px; } .stats-earth-card > .stats-globe-scene { grid-column: 2; grid-row: 1 / 5; width: 190px; height: 160px; margin: -29px 0 -14px; align-self: center; justify-self: end; } .stats-earth-total { grid-column: 1; margin-top: 7px; font-size: 43px; } .stats-earth-card h2 { grid-column: 1; font-size: 15px; margin-top: 3px; margin-bottom: 4px; } .stats-earth-card > p { grid-column: 1; font-size: 9px; } .stats-earth-card > p br { display: none; } .stats-nights-number > .stats-number { font-size: 72px; } .stats-distance-value { font-size: 47px; } .stats-ship-scene { bottom: 19px; width: 215px; } .stats-fleet-ribbon { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 20px 0; } .stats-ribbon-dot { display: none; } .stats-fleet-ribbon > div { flex-direction: column; gap: 5px; font-size: 8px; text-align: center; } .stats-fleet-ribbon .stats-icon { width: 19px; height: 19px; } .stats-fleet-ribbon strong { font-size: 10px; } .stats-small-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; } .stats-small-card { display: block; padding: 18px 15px; border-radius: 20px; } .stats-small-card .stats-icon-tile { width: 28px; height: 28px; margin: 0 0 12px; border-radius: 9px; } .stats-small-card .stats-icon-tile > .stats-icon { width: 16px; height: 16px; } .stats-small-card .stats-number { font-size: 31px; } .stats-small-card h2 { font-size: 10px; line-height: 1.4; } .stats-small-card p { font-size: 8px; } .stats-sun-scene { width: 44px; right: 6px; top: 13px; } .stats-small-sparkle { width: 24px; top: 20px; right: 15px; } .stats-passport-doodle { width: 28px; height: 36px; top: 15px; right: 15px; } .stats-passport-doodle .stats-icon { width: 18px; height: 18px; } .stats-years-card { grid-column: span 12; } .stats-lines-card { grid-column: span 5; } .stats-return-card { grid-column: span 7; grid-row: 2; } .stats-lines-card .stats-section-heading h2 { font-size: 23px; } .stats-lines-card .stats-section-heading .stats-eyebrow { font-size: 6px; } .stats-lines-card, .stats-return-card { padding: 25px 22px; } .stats-return-card .stats-section-heading .stats-eyebrow { font-size: 7px; } .stats-return-card .stats-section-heading h2 { font-size: 25px; } .stats-return-card .stats-section-heading p { font-size: 9px; } .stats-top-ports li { gap: 10px; } .stats-port-name strong { font-size: 10px; } .stats-port-name small { font-size: 7px; } .stats-port-rank { width: 26px; height: 29px; font-size: 13px; } .stats-port-count { font-size: 19px; } .stats-port-count small { font-size: 7px; } .stats-highlights { grid-column: span 12; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; } .stats-highlights > .stats-section-heading { grid-column: 1 / -1; padding: 4px 4px 0; } .stats-voyage-card { margin: 0; padding: 22px; display: grid; grid-template-columns: 1fr; gap: 15px; } .stats-voyage-copy { align-self: start; gap: 7px; } .stats-voyage-metric { text-align: left; display: flex; align-items: baseline; gap: 6px; } .stats-voyage-metric > small { margin: 0; } .stats-voyage-copy small { font-size: 8px; } .stats-voyage-copy .stats-eyebrow { font-size: 6px; } .stats-farthest-metric { font-size: 30px; } .stats-memory-note { grid-column: 1 / -1; margin: 6px 0 2px; } .stats-methodology { margin-top: 25px; } .stats-footer { gap: 14px; } .stats-footer > span { font-size: 6px; } .stats-footer > p { font-size: 11px; } }
+@media (max-width: 500px) { .statistics-page { padding: 26px 16px 0; } .stats-intro { gap: 5px; padding: 0 3px 24px; } .stats-intro h1 { font-size: 31px; line-height: 1.15; letter-spacing: -1.1px; margin: 13px 0 11px; } .stats-intro h1 > .stats-sparkle { width: 20px; top: 5px; right: 18px; } .stats-intro p { font-size: 9px; max-width: 245px; } .stats-intro > div > .stats-eyebrow { font-size: 7px; letter-spacing: 1.4px; } .stats-collection-stamp { padding: 12px 9px; border-radius: 13px; margin: 0 0 18px 6px; } .stats-collection-stamp > .stats-icon { width: 26px; height: 26px; } .stats-collection-stamp > span { font-size: 4.8px; letter-spacing: .7px; } .stats-collection-stamp strong { font-size: 15px; letter-spacing: 0; } .stats-hero-grid { gap: 13px; } .stats-hero-grid > .stats-card { border-radius: 22px; } .stats-hero-grid > .stats-nights-card { grid-column: 1 / -1; min-height: 267px; padding: 25px; } .stats-nights-number { margin-top: 12px; } .stats-nights-number > .stats-number { font-size: 84px; } .stats-nights-number > span:last-child { font-size: 17px; } .stats-nights-card > p { font-size: 10px; line-height: 1.8; margin-top: 12px; } .stats-nights-card > .stats-card-note { left: 25px; bottom: 17px; font-size: 7px; } .stats-ship-scene { width: 266px; right: -69px; bottom: 20px; } .stats-hero-grid > .stats-distance-card { grid-column: 1; padding: 18px 17px; min-height: 238px; } .stats-card-top { margin-bottom: 14px; } .stats-distance-card .stats-icon-tile { display: none; } .stats-unit { margin-left: auto; } .stats-unit select { font-size: 9px; padding: 6px 19px 6px 9px; max-width: 123px; } .stats-unit > .stats-icon { right: 6px; } .stats-distance-card > .stats-eyebrow { font-size: 6px; line-height: 1.8; letter-spacing: .8px; } .stats-distance-number { gap: 3px; margin-top: 10px; } .stats-distance-number > span:first-child { font-size: 18px; } .stats-distance-value { font-size: clamp(29px, 8.3vw, 39px); letter-spacing: -1.8px; } .stats-distance-card h2 { font-size: 11px; line-height: 1.35; margin: 5px 0 9px; } .stats-distance-card > p { font-size: 8px; } .stats-distance-route { bottom: 29px; width: 99%; } .stats-distance-card > .stats-card-note { left: 17px; right: 15px; bottom: 13px; font-size: 6px; line-height: 1.7; } .stats-hero-grid > .stats-earth-card { display: flex; flex-direction: column; grid-column: 2; min-height: 238px; padding: 19px 12px; text-align: center; } .stats-earth-card > .stats-eyebrow { font-size: 5px; letter-spacing: .9px; line-height: 1.8; } .stats-earth-card > .stats-globe-scene { width: 145px; height: 121px; margin: -6px -13px -13px; align-self: center; } .stats-earth-total { font-size: 37px; margin-top: 0; } .stats-earth-total > span:last-child { font-size: 22px; } .stats-earth-card h2 { font-size: 11px; margin: 5px 0 7px; } .stats-earth-card > p { font-size: 7px; line-height: 1.6; } .stats-fleet-ribbon { gap: 9px; margin: 18px 0; padding: 5px 0; } .stats-fleet-ribbon > div { font-size: 7px; } .stats-fleet-ribbon strong { font-size: 9px; } .stats-fleet-ribbon .stats-icon { width: 17px; height: 17px; } .stats-small-grid { gap: 8px; margin-bottom: 17px; } .stats-small-card { border-radius: 16px; padding: 15px 11px; } .stats-small-card .stats-icon-tile { margin-bottom: 10px; } .stats-small-card .stats-number { font-size: 28px; letter-spacing: -.8px; } .stats-small-card h2 { font-size: 9px; margin-top: 4px; margin-bottom: 7px; line-height: 1.4; } .stats-small-card p { font-size: 7px; line-height: 1.65; } .stats-sun-scene { width: 28px; right: 5px; top: 15px; } .stats-small-sparkle { width: 17px; right: 10px; top: 17px; } .stats-passport-doodle { width: 19px; height: 26px; right: 10px; top: 14px; border-radius: 4px; } .stats-passport-doodle .stats-icon { width: 13px; height: 13px; } .stats-insights-grid { gap: 17px; } .stats-years-card { padding: 24px 20px 20px; border-radius: 22px; } .stats-section-heading .stats-eyebrow { font-size: 6px; letter-spacing: 1.2px; } .stats-section-heading h2, .stats-years-card .stats-section-heading h2 { font-size: 26px; margin-top: 8px; } .stats-section-heading p { font-size: 9px; } .stats-chart-key { font-size: 7px; margin: 20px 0 13px; } .stats-year-chart { overflow-x: auto; padding: 4px 2px 8px; gap: 5px; scrollbar-width: thin; scrollbar-color: #bfb7cf80 transparent; } .stats-year-column { min-width: 15px; } .stats-bar-space { height: 95px; padding-top: 18px; } .stats-year-bar { max-width: 13px; border-radius: 4px 4px 2px 2px; } .stats-year-label { font-size: 8px; margin-top: 9px; } .stats-year-value { font-size: 8px; } .stats-chart-footer { font-size: 6px; margin-top: 12px; gap: 8px; } .stats-chart-footer p { gap: 4px; font-size: 7px; line-height: 1.5; } .stats-chart-footer .stats-icon { width: 10px; height: 10px; } .stats-lines-card { grid-column: 1 / -1; grid-row: auto; padding: 24px; border-radius: 22px; } .stats-lines-card .stats-section-heading h2 { font-size: 26px; } .stats-lines-card .stats-section-heading .stats-eyebrow { font-size: 7px; } .stats-line-list { gap: 14px; margin-top: 22px; } .stats-line-name, .stats-line-name strong { font-size: 11px; } .stats-line-track { height: 6px; } .stats-panel-footnote { font-size: 9px; } .stats-return-card { grid-column: 1 / -1; grid-row: auto; padding: 24px; border-radius: 22px; } .stats-return-card .stats-section-heading h2 { font-size: 27px; } .stats-top-ports { margin-top: 23px; } .stats-top-ports li { padding: 12px 0; gap: 13px; } .stats-port-rank { width: 31px; height: 32px; font-size: 15px; } .stats-port-name strong { font-size: 12px; } .stats-port-name small { font-size: 8px; } .stats-port-count { font-size: 23px; } .stats-port-count small { font-size: 8px; } .stats-highlights { grid-template-columns: 1fr; gap: 13px; } .stats-highlights > .stats-section-heading { padding: 5px 7px; } .stats-highlights > .stats-section-heading h2 { font-size: 24px; } .stats-highlights .stats-section-heading .stats-eyebrow { font-size: 6px; } .stats-voyage-card { display: flex; padding: 23px; gap: 15px; } .stats-voyage-copy > strong { font-size: 23px; } .stats-voyage-copy .stats-eyebrow { font-size: 6px; line-height: 1.6; } .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 9px; } .stats-voyage-copy small { font-size: 7px; } .stats-voyage-metric { display: block; text-align: center; font-size: 34px; } .stats-voyage-metric > small { margin-top: 6px; font-size: 8px; } .stats-farthest-metric { font-size: 24px; } .stats-memory-note { margin: 12px 0 2px; gap: 13px; } .stats-memory-note > p { font-size: 14px; } .stats-methodology { margin-top: 24px; } .stats-methodology summary { padding: 17px; font-size: 10px; } .stats-methodology summary > span:last-child { font-size: 0; } .stats-methodology summary > span:last-child > .stats-icon { font-size: 10px; } .stats-methodology-body { padding: 0 18px 17px; grid-template-columns: 1fr; gap: 0; } .stats-methodology-body p { font-size: 10px; } .stats-footer { flex-wrap: wrap; padding: 25px 0 27px; gap: 7px 12px; } .stats-footer > span { font-size: 6px; } .stats-footer > .stats-icon { width: 19px; height: 19px; } .stats-footer > p { width: 100%; text-align: center; font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { .statistics-page *, .statistics-page *::before, .statistics-page *::after { animation: none !important; transition: none !important; } }
+
+/* Keep the little details legible, even when the collection gets wonderfully big. */
+.stats-intro p { font-size: 13px; }
+.stats-nights-card > p { font-size: 12px; }
+.stats-card-note, .stats-nights-card > .stats-card-note { font-size: 9px; }
+.stats-distance-card > .stats-eyebrow { color: #74608d; }
+.stats-distance-card > p { font-size: 11px; color: #756383; }
+.stats-distance-card > .stats-card-note { color: #756383; }
+.stats-earth-card > .stats-eyebrow { color: #876372; }
+.stats-earth-card > p { font-size: 10px; color: #806071; }
+.stats-fleet-ribbon > div { font-size: 12px; }
+.stats-small-card h2 { font-size: 13px; }
+.stats-small-card p { font-size: 10px; }
+.stats-section-heading p { font-size: 11px; }
+.stats-chart-key { font-size: 10px; }
+.stats-chart-footer { font-size: 9px; }
+.stats-bar-space { padding-top: 0; }
+.stats-year-bar { flex-shrink: 0; }
+.stats-line-name, .stats-line-name strong { font-size: 11px; }
+.stats-panel-footnote { font-size: 10px; }
+.stats-port-name strong { font-size: 12px; }
+.stats-port-name small, .stats-port-count small { font-size: 10px; }
+.stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 11px; }
+.stats-voyage-copy small { font-size: 10px; }
+.stats-methodology summary { font-size: 12px; }
+.stats-methodology summary > span:last-child { font-size: 10px; }
+.stats-methodology-body p { font-size: 12px; }
+@media (min-width: 1101px) { .stats-hero-grid > .stats-card { min-height: 320px; } .stats-nights-card > p { max-width: 260px; } }
+@media (max-width: 1100px) and (min-width: 801px) { .stats-nights-card > p { font-size: 10px; } .stats-card-note, .stats-nights-card > .stats-card-note { font-size: 8px; } .stats-distance-card > p { font-size: 10px; } .stats-earth-card > p { font-size: 9px; } .stats-fleet-ribbon > div { font-size: 11px; } .stats-small-card h2 { font-size: 12px; } .stats-small-card p { font-size: 9px; } .stats-chart-key { font-size: 9px; } .stats-chart-footer { font-size: 8px; } .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 10px; } .stats-voyage-copy small { font-size: 9px; } }
+@media (max-width: 800px) { .stats-intro p { font-size: 12px; } .stats-card-note, .stats-nights-card > .stats-card-note { font-size: 8px; } .stats-nights-card > p { font-size: 11px; } .stats-fleet-ribbon > div { font-size: 9px; } .stats-small-card h2 { font-size: 12px; } .stats-small-card p { font-size: 9px; } .stats-chart-key { font-size: 9px; } .stats-chart-footer { font-size: 8px; } .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 10px; } .stats-voyage-copy small { font-size: 9px; } .stats-port-name small, .stats-port-count small { font-size: 9px; } }
+@media (max-width: 500px) {
+  .stats-intro p { font-size: 10px; }
+  .stats-hero-grid > .stats-nights-card { min-height: 291px; }
+  .stats-nights-card > p { font-size: 11px; max-width: 228px; }
+  .stats-ship-scene { width: 218px; bottom: 11px; right: -49px; }
+  .stats-ship-scene .stats-little-whale { display: none; }
+  .stats-nights-card > .stats-card-note { max-width: 210px; bottom: 18px; font-size: 8px; }
+  .stats-hero-grid > .stats-distance-card, .stats-hero-grid > .stats-earth-card { min-height: 254px; }
+  .stats-distance-card > p { font-size: 9px; }
+  .stats-distance-card > .stats-card-note { font-size: 8px; }
+  .stats-distance-route { bottom: 43px; opacity: .4; }
+  .stats-earth-card > p { font-size: 9px; }
+  .stats-earth-card > .stats-globe-scene { margin-top: 0; }
+  .stats-fleet-ribbon > div { font-size: 8px; }
+  .stats-small-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stats-small-card { padding: 19px; border-radius: 20px; }
+  .stats-hours-card { grid-column: 1 / -1; display: flex; align-items: center; gap: 15px; }
+  .stats-hours-card .stats-icon-tile { margin: 0; width: 35px; height: 35px; }
+  .stats-hours-card p { max-width: 175px; }
+  .stats-small-card .stats-number { font-size: 36px; }
+  .stats-small-card h2 { font-size: 12px; margin: 5px 0; }
+  .stats-small-card p { font-size: 10px; }
+  .stats-sun-scene { width: 67px; top: 23px; right: 10px; }
+  .stats-small-sparkle { width: 28px; top: 18px; right: 17px; }
+  .stats-passport-doodle { width: 27px; height: 35px; top: 17px; right: 17px; }
+  .stats-passport-doodle .stats-icon { width: 19px; height: 19px; }
+  .stats-section-heading p, .stats-return-card .stats-section-heading p { font-size: 11px; }
+  .stats-chart-key { font-size: 8px; }
+  .stats-bar-space { height: 109px; padding-top: 0; }
+  .stats-chart-key > span:last-child { text-align: right; max-width: 104px; line-height: 1.5; }
+  .stats-chart-footer { font-size: 7px; }
+  .stats-chart-footer p { font-size: 8px; }
+  .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 10px; }
+  .stats-voyage-copy small { font-size: 9px; }
+  .stats-voyage-copy > strong { font-size: 22px; }
+  .stats-voyage-metric { font-size: 31px; }
+  .stats-farthest-metric { font-size: 22px; }
+  .stats-methodology summary { font-size: 11px; }
+  .stats-methodology summary > span:last-child { font-size: 0; }
+  .stats-methodology-body p { font-size: 11px; }
+}
+@media (max-width: 360px) {
+  .stats-nights-card > p { max-width: 195px; font-size: 10px; }
+  .stats-ship-scene { width: 190px; right: -54px; bottom: 16px; }
+  .stats-distance-value { font-size: 28px; }
+  .stats-distance-card > p { font-size: 8px; }
+  .stats-distance-card > .stats-card-note { font-size: 7px; }
+  .stats-earth-card > p { font-size: 8px; }
+  .stats-sun-scene { width: 49px; top: 23px; right: 8px; }
+  .stats-hours-card p { max-width: 144px; }
+  .stats-small-card { padding: 16px; }
+  .stats-small-card h2 { font-size: 11px; }
+  .stats-small-card p { font-size: 9px; }
+  .stats-small-card .stats-number { font-size: 33px; }
+  .stats-voyage-card { padding: 20px; gap: 11px; }
+  .stats-voyage-copy > strong { font-size: 20px; }
+  .stats-voyage-copy > span:not(.stats-eyebrow) { font-size: 9px; }
+  .stats-voyage-copy small { font-size: 8px; }
+  .stats-voyage-metric { font-size: 29px; }
+  .stats-farthest-metric { font-size: 21px; }
+}

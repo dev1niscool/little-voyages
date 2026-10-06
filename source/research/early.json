@@ -1,0 +1,313 @@
+[
+  {
+    "id": 1,
+    "originalDate": "2005-05-19",
+    "ship": "Disney Wonder",
+    "line": "Disney Cruise Line",
+    "region": "Bahamas",
+    "startDate": "2005-05-19",
+    "endDate": "2005-05-22",
+    "nights": 3,
+    "ports": [
+      "Port Canaveral",
+      "Nassau",
+      "Castaway Cay",
+      "Port Canaveral"
+    ],
+    "confidence": "confirmed",
+    "notes": "A contemporary roll call confirms the May 19, 2005 three-night Wonder departure. The port sequence is the published 2005 three-night schedule; individual weather-related changes have not been verified.",
+    "sources": [
+      {
+        "title": "DISboards: May 19, 2005 3 day Wonder",
+        "url": "https://www.disboards.com/threads/may-19-2005-3-day-wonder-anyone.632193/",
+        "note": "Contemporary passenger roll call confirms ship, departure date, and three-night duration."
+      },
+      {
+        "title": "AllEars: Magical Disney Cruise Guide (2005/2006)",
+        "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+        "note": "Section 2.1 gives Thursday Port Canaveral, Friday Nassau, Saturday Castaway Cay, Sunday Port Canaveral."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "originalDate": "2007-02-03",
+    "ship": "Disney Magic",
+    "line": "Disney Cruise Line",
+    "region": "Eastern Caribbean",
+    "startDate": "2007-02-03",
+    "endDate": "2007-02-10",
+    "nights": 7,
+    "ports": [
+      "Port Canaveral",
+      "Philipsburg",
+      "St. Thomas",
+      "Castaway Cay",
+      "Port Canaveral"
+    ],
+    "confidence": "likely",
+    "notes": "A contemporary passenger post explicitly calls February 3, 2007 an Eastern sailing. The seven-night route is reconstructed from Disney's established Eastern itinerary and a January 6, 2007 sailing record. Exact daily calls for this departure remain unverified.",
+    "sources": [
+      {
+        "title": "DISboards: October 21st 2006 cruise discussion",
+        "url": "https://www.disboards.com/threads/october-21st-2006.1059529/",
+        "note": "Post 18, dated March 27, 2006, says the passenger rebooked the same cabin for the February 3, 2007 Eastern sailing."
+      },
+      {
+        "title": "Cruisemans: Disney Magic January 6, 2007",
+        "url": "https://cruisemans.com/%40namber/m2v6ac46zzwa6mcn",
+        "note": "Nearby 2007 seven-night Eastern sailing from Port Canaveral lists St. Maarten, St. Thomas and Castaway Cay."
+      },
+      {
+        "title": "AllEars: Magical Disney Cruise Guide",
+        "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+        "note": "Historical established Eastern sequence: Port Canaveral, St. Maarten, St. Thomas, Castaway Cay, Port Canaveral."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "originalDate": "2008-08-10",
+    "ship": "Disney Wonder",
+    "line": "Disney Cruise Line",
+    "originalRegion": "Bahamas",
+    "region": "Bahamas",
+    "startDate": "2008-08-10",
+    "endDate": "2008-08-14",
+    "nights": 4,
+    "ports": [
+      "Port Canaveral",
+      "Castaway Cay",
+      "Nassau",
+      "Castaway Cay",
+      "Port Canaveral"
+    ],
+    "confidence": "confirmed",
+    "notes": "You clarified that this was Disney Wonder in the Bahamas. A contemporary roll call identifies the August 10, 2008 four-night Wonder sailing. Disney’s published summer 2008 schedule confirms the double visit to Castaway Cay: depart Port Canaveral Sunday August 10, Castaway Cay Monday August 11, Nassau Tuesday August 12, Castaway Cay Wednesday August 13, and return Thursday August 14. The itinerary is the historical published schedule; any unrecorded operational changes have not been independently verified.",
+    "sources": [
+      {
+        "title": "DISboards: Wonder Aug. 10, 2008 — 4 Night",
+        "url": "https://www.disboards.com/threads/wonder-aug-10-2008-4-night.1849941/",
+        "note": "Contemporary passenger roll call identifies Disney Wonder’s August 10, 2008 four-night sailing."
+      },
+      {
+        "title": "Cruise Industry News: Disney Cruise Line announces future itineraries",
+        "url": "https://cruiseindustrynews.com/cruise-news/2007/12/12407-disney-cruise-line-announces-future-itineraries/",
+        "note": "Contemporary announcement: four-night Wonder sailings May 11–August 24, 2008 follow Port Canaveral, Castaway Cay, Nassau, Castaway Cay, Port Canaveral."
+      },
+      {
+        "title": "DISboards: 4-night double-dip schedule",
+        "url": "https://www.disboards.com/threads/4-night-dd-question.1343251/",
+        "note": "Reproduces the summer 2008 departure list, including August 10, and the Sunday-to-Thursday port order."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "originalDate": "2009-03-15",
+    "ship": "Carnival Triumph",
+    "line": "Carnival Cruise Line",
+    "region": "Eastern Caribbean",
+    "startDate": "2009-03-15",
+    "endDate": "2009-03-22",
+    "nights": 7,
+    "ports": [
+      "Miami",
+      "San Juan",
+      "St. Thomas",
+      "Philipsburg",
+      "Miami"
+    ],
+    "confidence": "likely",
+    "notes": "Likely seven-night Miami roundtrip, treating the supplied Sunday date as departure. The route is reconstructed from contemporary Triumph Eastern Caribbean sailings; a source for the exact March 15 departure was not located. Dates and stop order should be treated as provisional.",
+    "sources": [
+      {
+        "title": "Cruiseline: Carnival Triumph April 26, 2009 passenger review",
+        "url": "https://cruiseline.com/ship/carnival-triumph/review/314186",
+        "note": "Nearby seasonal sailing confirms seven-night Eastern Miami roundtrip and San Juan, St. Thomas, St. Maarten ports, not the exact March date."
+      },
+      {
+        "title": "Cruise Critic: Just off the Triumph, April 2009",
+        "url": "https://boards.cruisecritic.com/topic/922849-just-off-the-triumph-it-was-great",
+        "note": "Contemporary account of April 12 sailing corroborates the seasonal Eastern operation."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "originalDate": "2009-08-08",
+    "ship": "Carnival Fascination",
+    "line": "Carnival Cruise Line",
+    "region": "Bahamas",
+    "startDate": "2009-08-08",
+    "endDate": "2009-08-13",
+    "nights": 5,
+    "ports": [
+      "Jacksonville",
+      "Nassau",
+      "Half Moon Cay",
+      "Jacksonville"
+    ],
+    "confidence": "likely",
+    "notes": "The supplied Saturday date fits Carnival's official 2009 five-night Saturday schedule from Jacksonville to Nassau and Half Moon Cay. Stop order is reconstructed from a near-period advertised itinerary; the exact August 8 departure has not been independently located.",
+    "sources": [
+      {
+        "title": "Carnival: Fascination refurbishment and operating schedule, August 2009",
+        "url": "https://www.carnival-news.com/2009/08/28/reservations-open-today-on-98-new-balcony-staterooms-added-during-carnival-fascinations-multimillion-dollar-refurb",
+        "note": "Official contemporary source: Saturday five-night sailings from Jacksonville visit Half Moon Cay and Nassau; other weekday departures use different itineraries."
+      },
+      {
+        "title": "Owen Family Newsletter, Summer 2009",
+        "url": "https://www.owenfuneralhome.com/download/97998/OwenFamilyNewsletter-2009Summer.pdf",
+        "note": "Advertisement for a February 2010 Saturday Fascination departure provides day order: Jacksonville, sea, Nassau, Half Moon Cay, sea, Jacksonville; supports the reconstruction rather than exact August calls."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "originalDate": "2010-01-23",
+    "ship": "Carnival Liberty",
+    "line": "Carnival Cruise Line",
+    "region": "Eastern Caribbean",
+    "startDate": "2010-01-23",
+    "endDate": "2010-01-30",
+    "nights": 7,
+    "ports": [
+      "Miami",
+      "Half Moon Cay",
+      "St. Thomas",
+      "San Juan",
+      "Grand Turk",
+      "Miami"
+    ],
+    "confidence": "likely",
+    "notes": "A contemporary fare bulletin confirms January 23, 2010, seven nights from Miami, labeled Exotic Eastern Caribbean. Port order is reconstructed from the itinerary introduced in April 2009 and continued in 2010. Exact daily calls for this January departure have not been found.",
+    "sources": [
+      {
+        "title": "Military Cruise Deals: archived 2009 fare bulletin",
+        "url": "https://militarycruisedeals.blogspot.com/2009/",
+        "note": "Lists CARNIVAL LIBERTY 1/23/2010 7 MIA EXOTIC EASTERN CARIB, directly supporting date, duration, homeport and route name."
+      },
+      {
+        "title": "Cruise Critic: Liberty's new Eastern route, April 25–May 2, 2009",
+        "url": "https://boards.cruisecritic.com/showthread.php?t=988736",
+        "note": "Gives route order Miami, Half Moon Cay, sea, St. Thomas, San Juan, Grand Turk, sea, Miami for the same Exotic Eastern program."
+      },
+      {
+        "title": "Cruise Critic: Two Sisters Enjoying Liberty, May 2010",
+        "url": "https://www.cruisecritic.com/cruise/carnival/carnival-liberty/reviews/68074",
+        "note": "2010 passenger account corroborates continued Half Moon Cay Eastern itinerary."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "originalDate": "2011-01-15",
+    "ship": "Carnival Freedom",
+    "line": "Carnival Cruise Line",
+    "region": "Western Caribbean",
+    "startDate": "2011-01-15",
+    "endDate": "2011-01-23",
+    "nights": 8,
+    "ports": [
+      "Fort Lauderdale",
+      "Cozumel",
+      "Puerto Limón",
+      "Colón",
+      "Fort Lauderdale"
+    ],
+    "confidence": "confirmed",
+    "notes": "A contemporary advertisement confirms the January 15–23, 2011 eight-night sailing from Fort Lauderdale to Cozumel, Limón and Colón. This was an Exotic Western Caribbean itinerary reaching Costa Rica and Panama; it does not imply the ship transited the Panama Canal.",
+    "sources": [
+      {
+        "title": "Groomer to Groomer, October 2010: Pet Pro Cruise",
+        "url": "https://www.groomertogroomer.com/ebooks/GTG_Oct%202010_w_links.pdf",
+        "note": "Page 49 explicitly advertises January 15–23, 2011 on Carnival Freedom, nine days/eight nights, Fort Lauderdale with Cozumel, Limon, Colon."
+      },
+      {
+        "title": "Port Everglades photograph, January 15, 2011",
+        "url": "https://www.flickr.com/photos/captainmartini/5467735599",
+        "note": "Dated ship photograph independently places Carnival Freedom in Port Everglades on January 15, 2011."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "originalDate": "2011-06-05",
+    "ship": "Oosterdam",
+    "line": "Holland America Line",
+    "region": "Alaska",
+    "startDate": "2011-06-05",
+    "endDate": "2011-06-12",
+    "nights": 7,
+    "ports": [
+      "Seattle",
+      "Glacier Bay",
+      "Juneau",
+      "Sitka",
+      "Ketchikan",
+      "Victoria",
+      "Seattle"
+    ],
+    "confidence": "confirmed",
+    "notes": "Holland America's 2011 brochure lists the June 5 seven-day Explorer departure from Seattle, and the Southern Medical Association lists June 5–12 on Oosterdam. The seasonal schedule included Glacier Bay; ordered calls are corroborated by a May 22, 2011 passenger diary. Glacier Bay is scenic cruising, not a disembarkation port. Actual day-specific deviations have not been checked.",
+    "sources": [
+      {
+        "title": "Holland America: The Americas 2011–2012 brochure",
+        "url": "https://www.rejsy.pl/sites/default/files/armator_files/HAL_AM11_Ebrochure_TA.pdf",
+        "note": "Alaska section lists Oosterdam 7-day Explorer from Seattle departures including June 5, 2011, and regional calls."
+      },
+      {
+        "title": "Southern Medical Association 2011 calendar",
+        "url": "https://sma.org/wp-content/uploads/2012/02/2011-yearbook2.pdf",
+        "note": "Page 63 lists June 5–12 seven-day Alaska cruise aboard Oosterdam."
+      },
+      {
+        "title": "Cruise Critic: Oosterdam Alaska, May 2011",
+        "url": "https://www.cruisecritic.com/cruise/holland-america/oosterdam/reviews/85183",
+        "note": "Nearby May 22 departure diary establishes Tuesday Glacier Bay, Wednesday Juneau, then Sitka, Ketchikan and Victoria on this seasonal itinerary."
+      },
+      {
+        "title": "2011 Seattle cruises to Alaska: Holland America Line",
+        "url": "https://eriktomrenwrites.com/2011-seattle-cruises-alaska-holland-america-line/",
+        "note": "Distinguishes Oosterdam's Glacier Bay route from Westerdam's Hubbard Glacier route in 2011."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "originalDate": "2012-02-19",
+    "ship": "Carnival Magic",
+    "line": "Carnival Cruise Line",
+    "region": "Western Caribbean",
+    "startDate": "2012-02-19",
+    "endDate": "2012-02-26",
+    "nights": 7,
+    "ports": [
+      "Galveston",
+      "Montego Bay",
+      "George Town",
+      "Cozumel",
+      "Galveston"
+    ],
+    "confidence": "likely",
+    "notes": "Likely seven-night Galveston roundtrip, treating the supplied Sunday date as departure. Carnival's official 2011 deployment announcement and nearby February/March 2012 accounts identify its Western route as Montego Bay, Grand Cayman and Cozumel. Exact February 19–26 documentation was not located; dates and order are reconstructed.",
+    "sources": [
+      {
+        "title": "Carnival: Magic's Galveston deployment announcement",
+        "url": "https://www.carnival-news.com/2010/06/23/carnival-magic-to-operate-seven-day-cruises-from-galveston-to-be-ports-largest-ship",
+        "note": "Official source identifies seven-day Western Caribbean route from Galveston to Montego Bay, Grand Cayman and Cozumel beginning November 2011."
+      },
+      {
+        "title": "Cajun Radio: Carnival Magic February 5–12, 2012 cruise",
+        "url": "https://cajunradio.com/cruise-the-caribbean-with-damon-troy-on-new-carnival-magic/",
+        "note": "Nearby February 2012 seven-day departure from Galveston calls Jamaica, Grand Cayman and Cozumel."
+      },
+      {
+        "title": "Ray's Cruise and Travel Blog: Carnival Magic March 2012",
+        "url": "https://snoozemanscruiseblog.blogspot.com/2012/03/carnival-magic.html",
+        "note": "Nearby March 4 sailing account corroborates ordered Galveston, Montego Bay, Grand Cayman, Cozumel route; not the exact February departure."
+      }
+    ]
+  }
+]
