@@ -114,6 +114,14 @@ try {
     assert.ok(cruise.ports.length > 1 && cruise.route.length > 1);
     assert.ok(cruise.notes.length > 0 && cruise.sources.length > 0);
     assert.match(cruise.confidence, /^(confirmed|likely|unresolved)$/);
+    assert.ok(cruise.dailyItinerary, `Voyage ${cruise.id} downloads its daily itinerary`);
+    assert.equal(cruise.dailyItinerary.days.length, cruise.nights + 1);
+    assert.ok(cruise.dailyItinerary.sources.length > 0);
+    for (const [index, day] of cruise.dailyItinerary.days.entries()) {
+      assert.equal(day.day, index + 1);
+      assert.equal(day.date, new Date(Date.parse(cruise.startDate) + index * 86_400_000).toISOString().slice(0, 10));
+      if (day.type === 'sea') assert.ok(!('portIndices' in day), 'Sea days do not become invented map points');
+    }
   }
   assert.equal(statistics.statistics.cruiseCount, 29);
   assert.equal(statistics.statistics.totalNights, 202);
@@ -215,6 +223,8 @@ try {
   assert.match(guide, /Villefranche/);
   assert.match(guide, /approximately twice/);
   assert.match(guide, /non-cruise visits/i);
+  assert.match(guide, /dailyItinerary/);
+  assert.match(guide, /sea day/i);
   assert.match(guide, /UN non-member observer State/);
   assert.match(guide, /Special Administrative Region of China/);
   assert.ok(guide.includes(nonCruiseVisits.countNote), 'The guide and JSON explain the same country-count convention');

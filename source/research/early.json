@@ -27,7 +27,53 @@
         "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
         "note": "Section 2.1 gives Thursday Port Canaveral, Friday Nassau, Saturday Castaway Cay, Sunday Port Canaveral."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The published 2005 three-night Wonder schedule has a port on every calendar day and no full sea day.",
+      "sources": [
+        {
+          "title": "AllEars: Magical Disney Cruise Guide, August 2005",
+          "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+          "note": "Section 2.1, printed page 5: Thursday Port Canaveral, Friday Nassau, Saturday Castaway Cay, Sunday Port Canaveral."
+        },
+        {
+          "title": "DISboards: May 19, 2005 3 day Wonder",
+          "url": "https://www.disboards.com/threads/may-19-2005-3-day-wonder-anyone.632193/",
+          "note": "Contemporary passenger roll call confirms ship, departure date, and three-night duration."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 2,
@@ -63,7 +109,77 @@
         "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
         "note": "Historical established Eastern sequence: Port Canaveral, St. Maarten, St. Thomas, Castaway Cay, Port Canaveral."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Reconstructed from the established Eastern Caribbean schedule and a January 2007 sailing on the same route. Full sea days fall on days 2, 3 and 6; an exact February 3 daily schedule has not been located.",
+      "sources": [
+        {
+          "title": "AllEars: Magical Disney Cruise Guide, Eastern itinerary",
+          "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+          "note": "Section 2.1, printed page 5: Saturday departure; Sunday and Monday at sea; Tuesday St. Maarten; Wednesday St. Thomas; Thursday at sea; Friday Castaway Cay; Saturday return."
+        },
+        {
+          "title": "Cruisemans: Disney Magic January 6, 2007",
+          "url": "https://cruisemans.com/%40namber/m2v6ac46zzwa6mcn",
+          "note": "Nearby seven-night Eastern sailing supports the same route and early sea-day placement; it is not the February 3 departure."
+        },
+        {
+          "title": "DISboards: October 21st 2006 cruise discussion",
+          "url": "https://www.disboards.com/threads/october-21st-2006.1059529/",
+          "note": "Post 18, dated March 27, 2006, says the passenger rebooked the same cabin for the February 3, 2007 Eastern sailing."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "sea"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 6,
+          "type": "sea"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 3,
@@ -100,7 +216,60 @@
         "url": "https://www.disboards.com/threads/4-night-dd-question.1343251/",
         "note": "Reproduces the summer 2008 departure list, including August 10, and the Sunday-to-Thursday port order."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Disney’s published summer 2008 double-Castaway-Cay schedule applies to the August 10 departure. There are no full sea days on this four-night itinerary.",
+      "sources": [
+        {
+          "title": "Cruise Industry News: Disney announces summer 2008 itineraries",
+          "url": "https://cruiseindustrynews.com/cruise-news/2007/12/12407-disney-cruise-line-announces-future-itineraries/",
+          "note": "The December 2007 announcement gives Sunday Port Canaveral, Monday Castaway Cay, Tuesday Nassau, Wednesday Castaway Cay, Thursday return for every four-night sailing May 11–August 24, 2008."
+        },
+        {
+          "title": "DISboards: Wonder Aug. 10, 2008 — 4 Night",
+          "url": "https://www.disboards.com/threads/wonder-aug-10-2008-4-night.1849941/",
+          "note": "Contemporary passenger roll call identifies Disney Wonder’s August 10, 2008 four-night sailing."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 4,
@@ -131,7 +300,77 @@
         "url": "https://boards.cruisecritic.com/topic/922849-just-off-the-triumph-it-was-great",
         "note": "Contemporary account of April 12 sailing corroborates the seasonal Eastern operation."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Day placement follows Triumph’s historical seven-night Miami Eastern route: one sea day before San Juan and two after St. Maarten. Nearby April 2009 accounts support the ports; the exact March 15 daily schedule remains unverified.",
+      "sources": [
+        {
+          "title": "Carnival Triumph historical itinerary table",
+          "url": "https://fr.wikipedia.org/wiki/Carnival_Sunrise#Itin%C3%A9raire",
+          "note": "The retained Triumph-era Miami route table places San Juan on day 3, St. Thomas on day 4, St. Maarten on day 5, and sea days on days 2, 6 and 7. This undated secondary table supports a reconstruction, not a confirmed March 2009 schedule."
+        },
+        {
+          "title": "Cruiseline: Carnival Triumph April 26, 2009 passenger review",
+          "url": "https://cruiseline.com/ship/carnival-triumph/review/314186",
+          "note": "Nearby seasonal sailing confirms seven-night Eastern Miami roundtrip and San Juan, St. Thomas, St. Maarten ports, not the exact March date."
+        },
+        {
+          "title": "Cruise Critic: Just off the Triumph, April 2009",
+          "url": "https://boards.cruisecritic.com/topic/922849-just-off-the-triumph-it-was-great",
+          "note": "Contemporary account of April 12 sailing corroborates the seasonal Eastern operation."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 6,
+          "type": "sea"
+        },
+        {
+          "day": 7,
+          "type": "sea"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 5,
@@ -161,7 +400,61 @@
         "url": "https://www.owenfuneralhome.com/download/97998/OwenFamilyNewsletter-2009Summer.pdf",
         "note": "Advertisement for a February 2010 Saturday Fascination departure provides day order: Jacksonville, sea, Nassau, Half Moon Cay, sea, Jacksonville; supports the reconstruction rather than exact August calls."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The two sea days are reconstructed from a near-period advertised Saturday Fascination itinerary: days 2 and 5. Carnival’s 2009 operating announcement confirms this five-night Nassau/Half Moon Cay program, but not the exact August 8 day order.",
+      "sources": [
+        {
+          "title": "Owen Family Newsletter, Summer 2009",
+          "url": "https://www.owenfuneralhome.com/download/97998/OwenFamilyNewsletter-2009Summer.pdf",
+          "note": "Printed page 2 advertises a February 2010 trip with Jacksonville embarkation, sea, Nassau, Half Moon Cay, sea, Jacksonville. Land travel days before and after the cruise are excluded."
+        },
+        {
+          "title": "Carnival: Fascination refurbishment and operating schedule, August 2009",
+          "url": "https://www.carnival-news.com/2009/08/28/reservations-open-today-on-98-new-balcony-staterooms-added-during-carnival-fascinations-multimillion-dollar-refurb",
+          "note": "Official contemporary source: Saturday five-night sailings from Jacksonville visit Half Moon Cay and Nassau; other weekday departures use different itineraries."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "sea"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 6,
@@ -198,7 +491,80 @@
         "url": "https://www.cruisecritic.com/cruise/carnival/carnival-liberty/reviews/68074",
         "note": "2010 passenger account corroborates continued Half Moon Cay Eastern itinerary."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Full sea days fall on days 3 and 7 in the Exotic Eastern itinerary introduced in April 2009. The January 23, 2010 departure is documented, while its daily positions are reconstructed from the matching route.",
+      "sources": [
+        {
+          "title": "Cruise Critic: Liberty’s new Eastern route, April 25–May 2, 2009",
+          "url": "https://boards.cruisecritic.com/topic/939147-carnival-liberty-new-eastern-caribbean-route-review-april-25-may2/",
+          "note": "The contemporary first-sailing review explicitly gives Miami, Half Moon Cay, sea, St. Thomas, San Juan, Grand Turk, sea, Miami."
+        },
+        {
+          "title": "Military Cruise Deals: archived 2009 fare bulletin",
+          "url": "https://militarycruisedeals.blogspot.com/2009/",
+          "note": "Lists CARNIVAL LIBERTY 1/23/2010 7 MIA EXOTIC EASTERN CARIB, directly supporting date, duration, homeport and route name."
+        },
+        {
+          "title": "Cruise Critic: Two Sisters Enjoying Liberty, May 2010",
+          "url": "https://www.cruisecritic.com/cruise/carnival/carnival-liberty/reviews/68074",
+          "note": "2010 passenger account corroborates continued Half Moon Cay Eastern itinerary."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 3,
+          "type": "sea"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        },
+        {
+          "day": 7,
+          "type": "sea"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 7,
@@ -229,7 +595,76 @@
         "url": "https://www.flickr.com/photos/captainmartini/5467735599",
         "note": "Dated ship photograph independently places Carnival Freedom in Port Everglades on January 15, 2011."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Carnival’s 2011/2012 brochure lists the January 15 departure with full sea days on days 2, 4, 7 and 8. Colón is a port call; the schedule does not include a ship transit of the Panama Canal.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Lines: 2011/2012 German brochure, pages 44–45",
+          "url": "https://de.scribd.com/doc/44541934/Kreuzfahrten-von-Carnival-Cruise-Lines-Deutschland-auf-einen-Blick-SAISON-2011-2012",
+          "note": "The eight-night Exotic Western table lists Saturday Fort Lauderdale, Sunday sea, Monday Cozumel, Tuesday sea, Wednesday Limón, Thursday Colón, Friday and Saturday sea, Sunday return. January 15, 2011 is listed without an itinerary-change marker."
+        },
+        {
+          "title": "Groomer to Groomer, October 2010: Pet Pro Cruise",
+          "url": "https://www.groomertogroomer.com/ebooks/GTG_Oct%202010_w_links.pdf",
+          "note": "Page 49 explicitly advertises January 15–23, 2011 on Carnival Freedom, nine days/eight nights, Fort Lauderdale with Cozumel, Limon, Colon."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "sea"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 7,
+          "type": "sea"
+        },
+        {
+          "day": 8,
+          "type": "sea"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 8,
@@ -272,7 +707,84 @@
         "url": "https://eriktomrenwrites.com/2011-seattle-cruises-alaska-holland-america-line/",
         "note": "Distinguishes Oosterdam's Glacier Bay route from Westerdam's Hubbard Glacier route in 2011."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Reconstructed from the June 12, 2011 published itinerary and May 22 passenger diary for the same seasonal route. Monday is a full sea day; Tuesday in Glacier Bay is scenic cruising and is kept separate.",
+      "sources": [
+        {
+          "title": "SSQQ Travel: archived June 2011 Oosterdam itinerary",
+          "url": "https://www.ssqq.com/travel/travelfees.htm",
+          "note": "The April 20, 2011 travel quote lists June 12 Seattle; June 13 at sea; June 14 Glacier Bay; June 15 Juneau; June 16 Sitka; June 17 Ketchikan; June 18 Victoria; June 19 Seattle. This is the departure one week after the recorded voyage."
+        },
+        {
+          "title": "Cruise Critic: Oosterdam Alaska, May 2011",
+          "url": "https://www.cruisecritic.com/cruise/holland-america/oosterdam/reviews/85183",
+          "note": "The May 22 sailing diary independently places Glacier Bay on Tuesday, Juneau on Wednesday, then Sitka, Ketchikan and Victoria."
+        },
+        {
+          "title": "Holland America: The Americas 2011–2012 brochure",
+          "url": "https://www.rejsy.pl/sites/default/files/armator_files/HAL_AM11_Ebrochure_TA.pdf",
+          "note": "Alaska section lists Oosterdam 7-day Explorer from Seattle departures including June 5, 2011, and regional calls."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "scenic",
+          "portIndices": [
+            1
+          ],
+          "note": "Scenic cruising in Glacier Bay; no disembarkation."
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 9,
@@ -308,6 +820,71 @@
         "url": "https://snoozemanscruiseblog.blogspot.com/2012/03/carnival-magic.html",
         "note": "Nearby March 4 sailing account corroborates ordered Galveston, Montego Bay, Grand Cayman, Cozumel route; not the exact February departure."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Newly located Carnival 2011/2012 brochure evidence lists the February 19, 2012 departure and published daily schedule. Full sea days are days 2, 3 and 7.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Lines: 2011/2012 German brochure, pages 60–61",
+          "url": "https://de.scribd.com/doc/44541934/Kreuzfahrten-von-Carnival-Cruise-Lines-Deutschland-auf-einen-Blick-SAISON-2011-2012",
+          "note": "The Galveston Western table gives Sunday embarkation; Monday and Tuesday sea; Wednesday Montego Bay; Thursday Grand Cayman; Friday Cozumel; Saturday sea; Sunday return. Carnival Magic February 19, 2012 appears without the reverse-order marker applied to some nearby dates."
+        },
+        {
+          "title": "Ray’s Cruise and Travel Blog: Carnival Magic, March 4, 2012",
+          "url": "https://snoozemanscruiseblog.blogspot.com/2012/03/carnival-magic.html",
+          "note": "Nearby sailing diary corroborates full sea days 2, 3 and 7 and the Wednesday-to-Friday port sequence."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "sea"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 7,
+          "type": "sea"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        }
+      ]
+    }
   }
 ]

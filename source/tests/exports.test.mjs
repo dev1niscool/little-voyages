@@ -28,6 +28,27 @@ test('logbook preserves every cruise field, confidence caveat, and source withou
   assert.deepEqual(cruises, original);
 });
 
+test('daily itineraries survive the full logbook with their separate calendar and source evidence', () => {
+  const logbook = parse(EXPORT_FILES.logbook);
+  for (const cruise of logbook.cruises) {
+    const original = cruises.find(record => record.id === cruise.id);
+    assert.deepEqual(cruise.dailyItinerary, original.dailyItinerary);
+    assert.ok(cruise.dailyItinerary, `Voyage ${cruise.id} has its daily schedule in the download`);
+    assert.equal(cruise.dailyItinerary.days.length, cruise.nights + 1);
+    assert.ok(cruise.dailyItinerary.sources.length > 0);
+    assert.deepEqual(cruise.ports, original.ports, 'Calendar days do not replace or duplicate geographic port calls');
+    assert.deepEqual(cruise.route, original.route, 'A sea day does not introduce an invented route coordinate');
+  }
+  const guide = contents(EXPORT_FILES.guide);
+  assert.match(guide, /dailyItinerary/);
+  assert.match(guide, /sea day/i);
+  for (const cruise of cruises) {
+    for (const source of cruise.dailyItinerary.sources) {
+      assert.ok(guide.includes(source.url), `Voyage ${cruise.id} retains the daily schedule source in the readable handoff`);
+    }
+  }
+});
+
 test('statistics preserve the full calculation, methodology, and territorial evidence', () => {
   const exported = parse(EXPORT_FILES.statistics);
   assert.equal(exported.schemaVersion, 1);

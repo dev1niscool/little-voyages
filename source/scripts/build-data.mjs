@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizeDailyItinerary } from '../src/itinerary.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const records = [
@@ -382,7 +383,7 @@ const cruises = records.map(([originalDate, ship, line, originalRegion, anchor],
   const id = index + 1;
   const researched = evidence.find(item => item.id === id) || {};
   const ports = (researched.ports || []).filter(port => typeof port === 'string' ? !/^(at )?sea( day)?$/i.test(port) : !/^(at )?sea( day)?$/i.test(port.name)).map(normalizePort);
-  return {
+  const cruise = {
     id,
     originalDate,
     startDate: researched.startDate ?? null,
@@ -403,6 +404,8 @@ const cruises = records.map(([originalDate, ship, line, originalRegion, anchor],
     ...(ports.length ? { route: researched.route || schematicRoute(ports) } : {}),
     ...(researched.candidateStartDate ? { candidateStartDate: researched.candidateStartDate, candidateEndDate: researched.candidateEndDate, candidateNights: researched.candidateNights } : {}),
   };
+  const dailyItinerary = normalizeDailyItinerary(cruise, researched.dailyItinerary);
+  return dailyItinerary ? { ...cruise, dailyItinerary } : cruise;
 });
 
 const data = JSON.stringify(cruises, null, 2);

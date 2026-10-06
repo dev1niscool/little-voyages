@@ -31,7 +31,99 @@
         "url": "https://www.travelweekly.com/Cruise-Travel/Carnival-Sunshine-metamorphosis-was-ambitious-and-complicated",
         "note": "Contemporary June 2013 account corroborates the June 7 sailing and first-season refurbishment context."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The June 2013 passenger account confirms one sea day, and the archived sailing listing includes an overnight in Venice. Day 7 is a reconstruction of the sea-day placement between Messina and Dubrovnik; the exact daily schedule has not been independently recovered.",
+      "sources": [
+        {
+          "title": "Family Travel Gurus: Carnival Sunshine review, June 2013",
+          "url": "https://familytravelgurus.com/carnival-sunshine-review-june-2013/",
+          "note": "Nine-night Barcelona-to-Venice passenger account confirms all ordered ports and exactly one sea day."
+        },
+        {
+          "title": "ARKS Travel Agency: archived 2013 Carnival departures",
+          "url": "https://arkstravelagency.weebly.com/cruises.html",
+          "note": "The June 7 nine-night itinerary lists Venice twice, supporting the final overnight stay."
+        },
+        {
+          "title": "Cruiseline: Carnival Sunshine, June 7, 2013 — 9 Night Italy & Adriatic",
+          "url": "https://cruiseline.com/ship/carnival-sunshine/review/381014",
+          "note": "Exact departure, nine nights, endpoints and ordered ports."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        },
+        {
+          "day": 7,
+          "type": "sea"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ]
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "note": "Overnight in Venice."
+        },
+        {
+          "day": 10,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "note": "Disembarkation after the overnight in Venice."
+        }
+      ]
+    }
   },
   {
     "id": 11,
@@ -66,7 +158,56 @@
         "url": "https://cruisewithjill.wordpress.com/",
         "note": "Contemporary post describes Elation's four-night Cozumel and five-night Western Caribbean cruises."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The period Carnival brochure supplies the five-night New Orleans pattern, with sea days on Days 2 and 5. The date-to-sailing match and port order retain the uncertainty described in the voyage notes.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Lines 2014 brochure: five-day Western Caribbean from New Orleans",
+          "url": "https://www.slideshare.net/slideshow/carnival-cruise-lines-2014/28593553",
+          "note": "Published day order is New Orleans, sea, Progreso, Cozumel, sea, New Orleans; this is a period route pattern rather than an exact December 28 sailing record."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "sea"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 12,
@@ -102,7 +243,72 @@
         "url": "https://cruiseline.com/ship/allure-of-the-seas/review/386483",
         "note": "Confirms the preceding sailing was Western, supporting the one-day date discrepancy rather than an Eastern voyage on March 15."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The contemporary Allure Eastern Caribbean Cruise Compass sequence places sea days on Days 3, 6 and 7. This follows the period route pattern; the voyage still uses the likely March 16 departure described in its notes.",
+      "sources": [
+        {
+          "title": "DISboards: Allure Eastern Caribbean Cruise Compass sequence, 2013–14",
+          "url": "https://www.disboards.com/threads/the-allure-of-the-seas-review-eastern-caribbean-august-2013.3267193/page-2",
+          "note": "Passenger transcription identifies Nassau Day 2, sea Day 3, St. Thomas Day 4, St. Maarten Day 5 and sea Days 6–7, with February 2014 compasses for the latter days."
+        },
+        {
+          "title": "Cruise Critic: Alluring cruise — March 16–23, 2014",
+          "url": "https://www.cruisecritic.com/cruise/royal-caribbean/allure-of-the-seas/reviews/253085",
+          "note": "Passenger explicitly gives March 16–23 and Eastern Caribbean."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 3,
+          "type": "sea"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 6,
+          "type": "sea"
+        },
+        {
+          "day": 7,
+          "type": "sea"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 13,
@@ -131,7 +337,97 @@
         "url": "https://api.flickr.com/photos/escriteur/albums/72157645178029754/with/14451670303/",
         "note": "First-hand contemporary album explicitly lists dates and all ordered ports."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The contemporary photo diary dates every port call, including the two-day Istanbul stay; the three intervening sailing days are June 3, June 5 and June 11.",
+      "sources": [
+        {
+          "title": "Flickr travel diary: Mediterranean Cruise on Celebrity Reflection — June 2014",
+          "url": "https://api.flickr.com/photos/escriteur/albums/72157645178029754/with/14451670303/",
+          "note": "First-hand contemporary album explicitly lists dates and all ordered ports."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "sea"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Overnight in Istanbul."
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Second day of the Istanbul overnight stay."
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        },
+        {
+          "day": 10,
+          "type": "sea"
+        },
+        {
+          "day": 11,
+          "type": "port",
+          "portIndices": [
+            6
+          ]
+        },
+        {
+          "day": 12,
+          "type": "port",
+          "portIndices": [
+            7
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 14,
@@ -159,7 +455,78 @@
         "url": "https://cruiseline.com/ship/celebrity-summit/review/401906",
         "note": "Exact departure, seven-night duration, San Juan roundtrip and ordered ports."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The archived official 2015 brochure includes the March 14 departure and its full day order, including a sea day between Grenada and St. Thomas.",
+      "sources": [
+        {
+          "title": "Celebrity Cruises 2015 brochure: Southern Caribbean, page 52",
+          "url": "https://doczz.net/doc/6035429/sehenswert---bei-rcl-cruises-ltd.",
+          "note": "Archived official brochure lists March 14, 2015 and Days 1–8, with sea on Day 6."
+        },
+        {
+          "title": "Cruiseline: Celebrity Summit — March 14, 2015",
+          "url": "https://cruiseline.com/ship/celebrity-summit/review/401906",
+          "note": "Exact departure, seven-night duration, San Juan roundtrip and ordered ports."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        },
+        {
+          "day": 6,
+          "type": "sea"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 15,
@@ -198,7 +565,111 @@
         "url": "https://www.fodors.com/community/cruises/scandinavia-and-st-petersburg-1037670/",
         "note": "February 2015 passenger planning post explicitly names the May 28 Stockholm–Amsterdam sailing and two-day St. Petersburg visit."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The official 2015 Europe Guide gives the complete May 28 day-by-day itinerary, including sea Days 7 and 12 and overnight stays in Stockholm, St. Petersburg and Copenhagen.",
+      "sources": [
+        {
+          "title": "Celebrity Cruises 2015 Europe Guide, page 59",
+          "url": "https://www.scribd.com/doc/246907520/Celebrity-Cruises-2015-Europa",
+          "note": "Archived official brochure contains exact departure date and day-by-day itinerary."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "note": "Overnight in Stockholm after embarkation."
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "note": "Second day of the Stockholm overnight stay."
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Overnight in St. Petersburg."
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Second day of the St. Petersburg overnight stay."
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 7,
+          "type": "sea"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        },
+        {
+          "day": 10,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "note": "Overnight in Copenhagen."
+        },
+        {
+          "day": 11,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "note": "Second day of the Copenhagen overnight stay."
+        },
+        {
+          "day": 12,
+          "type": "sea"
+        },
+        {
+          "day": 13,
+          "type": "port",
+          "portIndices": [
+            7
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 16,
@@ -236,7 +707,78 @@
         "url": "https://cruiseindustrynews.com/cruise-news/2015/10/celebrity-announces-ship-refresh-for-infinity-and-summit/",
         "note": "Identifies March 19, 2016 as the beginning of post-refurbishment sailings."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The official 2016–17 brochure lists the March 19, 2016 departure and the complete sequence, beginning with a sea day before Barbados.",
+      "sources": [
+        {
+          "title": "Celebrity Cruises 2016–17 worldwide brochure, page 37",
+          "url": "https://doczz.net/doc/558975/luxury-cruises---celebrity-cruises",
+          "note": "The March 19 Summit departure follows San Juan, sea, Barbados, St. Lucia, Antigua, St. Maarten, St. Thomas and San Juan."
+        },
+        {
+          "title": "Crew Center: Philipsburg 2016 cruise ship port calendar",
+          "url": "https://crew-center.com/philipsburg-st-maarten-cruise-ship-port-calendar-2016",
+          "note": "Celebrity Summit listed March 24, 2016."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ]
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 17,
@@ -282,7 +824,142 @@
         "url": "https://www.cruisecritic.com/cruise/celebrity/celebrity-silhouette/reviews/544246",
         "note": "Passenger explicitly states July 13 twelve-day Amsterdam British Isles roundtrip."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Historical port calendars and the exact-sailing passenger review establish the day order. Liverpool spans July 18–19 as an overnight stay; the sea days are July 14 and July 24.",
+      "sources": [
+        {
+          "title": "Cruiseline: Celebrity Silhouette — July 13, 2016",
+          "url": "https://cruiseline.com/ship/celebrity-silhouette/review/425905",
+          "note": "Exact departure, duration, roundtrip and all ordered ports."
+        },
+        {
+          "title": "Belfast Harbour 2016 schedule, archived by NI Ferry",
+          "url": "https://www.niferry.co.uk/downloads/Belfast%20Cruise%20Schedule%202016.pdf",
+          "note": "Lists Celebrity Silhouette at Belfast on July 15."
+        },
+        {
+          "title": "PortNews: Ayr and Troon receive record cruise calls in 2016",
+          "url": "https://en.portnews.ru/news/220079/",
+          "note": "Contemporary ABP announcement identifies Silhouette's July 16 Ayr call for The Open."
+        },
+        {
+          "title": "Crew Center: Liverpool 2016 port calendar",
+          "url": "https://crew-center.com/liverpool-england-cruise-ship-port-calendar-2016",
+          "note": "Records arrival July 18 and departure July 19, confirming the overnight in Liverpool."
+        },
+        {
+          "title": "Crew Center: Dublin 2016 port calendar",
+          "url": "https://crew-center.com/dublin-ireland-cruise-ship-port-calendar-2016",
+          "note": "Lists the Dublin-area call on July 20."
+        },
+        {
+          "title": "data.gg: historical Guernsey cruise sailings",
+          "url": "https://data.gg/Developers/Sailings/Cruises/View",
+          "note": "Lists Celebrity Silhouette in Guernsey on July 22, arriving from Cork and sailing to Le Havre."
+        },
+        {
+          "title": "Crew Center: Le Havre 2016 port calendar",
+          "url": "https://crew-center.com/le-havre-france-cruise-ship-port-calendar-2016",
+          "note": "Lists Celebrity Silhouette at Le Havre on July 23."
+        },
+        {
+          "title": "Crew Center: Amsterdam 2016 port calendar",
+          "url": "https://crew-center.com/amsterdam-holland-cruise-ship-port-calendar-2016",
+          "note": "Records the July 13 departure and July 25 return."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "note": "Overnight in Liverpool."
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "note": "Second day of the Liverpool overnight stay."
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            5
+          ]
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            6
+          ]
+        },
+        {
+          "day": 10,
+          "type": "port",
+          "portIndices": [
+            7
+          ]
+        },
+        {
+          "day": 11,
+          "type": "port",
+          "portIndices": [
+            8
+          ]
+        },
+        {
+          "day": 12,
+          "type": "sea"
+        },
+        {
+          "day": 13,
+          "type": "port",
+          "portIndices": [
+            9
+          ]
+        }
+      ]
+    }
   },
   {
     "id": 18,
@@ -312,6 +989,65 @@
         "url": "https://cruiseline.com/ship/carnival-sunshine/review/442535",
         "note": "Verified review confirms departure, duration and ordered ports."
       }
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The official deployment announcement and dated port calendars place Amber Cove on March 14 and Grand Turk on March 15, with sea days on March 13 and March 16.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Line: Sunshine 2016–17 deployment announcement",
+          "url": "https://www.carnival-news.com/2015/03/16/carnival-sunshine-to-operate-unique-schedule-of-two-to-10-day-voyages-from-new-york-june-to-october-2016",
+          "note": "Official release explicitly names March 12, 2017 five-day Amber Cove/Grand Turk sailing from Port Canaveral."
+        },
+        {
+          "title": "Crew Center: Amber Cove 2017 port calendar",
+          "url": "https://crew-center.com/amber-cove-cruise-ship-schedule-2017",
+          "note": "Lists Carnival Sunshine at Amber Cove on March 14, 2017."
+        },
+        {
+          "title": "Crew Center: Grand Turk 2017 port calendar",
+          "url": "https://crew-center.com/grand-turk-turks-and-caicos-cruise-ship-schedule-2017",
+          "note": "Lists Carnival Sunshine at Grand Turk on March 15, 2017."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ]
+        },
+        {
+          "day": 2,
+          "type": "sea"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ]
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ]
+        },
+        {
+          "day": 5,
+          "type": "sea"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ]
+        }
+      ]
+    }
   }
 ]

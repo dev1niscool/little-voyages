@@ -77,6 +77,29 @@ export function itineraryRows(records) {
   });
 }
 
+function readableDailyItinerary(cruise) {
+  const itinerary = cruise.dailyItinerary;
+  if (!itinerary?.days?.length) return 'Day-by-day schedule: not recorded.';
+  const days = itinerary.days.map(day => {
+    const ports = (day.portIndices || []).map(index => cruise.ports[index])
+      .filter(Boolean).map(port => `${port.name} (${port.country})`).join(' → ');
+    const activity = day.type === 'sea' ? 'At sea'
+      : day.type === 'unknown' ? 'Schedule unresolved'
+        : day.type === 'scenic' ? `Scenic cruising${ports ? ` — ${ports}` : ''}`
+          : ports || 'Port call';
+    return `- **Day ${day.day} · ${day.date ?? 'date unknown'}:** ${activity}.${day.note ? ` ${day.note}` : ''}`;
+  }).join('\n');
+  const sources = (itinerary.sources || []).map((source, index) =>
+    `${index + 1}. **${source.title}**\n   <${source.url}>${source.note ? `\n   ${source.note}` : ''}`).join('\n\n');
+  return `#### Day-by-day schedule
+
+Schedule confidence: ${itinerary.confidence}.${itinerary.note ? ` ${itinerary.note}` : ''}
+
+${days}
+
+${sources ? `Schedule sources:\n\n${sources}` : 'No separate schedule sources recorded.'}`;
+}
+
 function readableGuide(records, statistics, metadata, visits, personalVisitsSha256) {
   const definitions = Object.entries(statsMethodology).map(([key, description]) => `- **${key}:** ${description}`).join('\n');
   const places = [...statistics.countries, ...statistics.territories, ...statistics.unclassifiedPlaces]
@@ -92,6 +115,10 @@ function readableGuide(records, statistics, metadata, visits, personalVisitsSha2
 - Cruise line: ${cruise.line}.
 - Original ship label: ${cruise.originalShip ?? cruise.ship}; original destination label: ${cruise.originalRegion}.
 - Ordered itinerary: ${cruise.ports.map(port => `${port.name} (${port.country})`).join(' → ') || 'unresolved'}.
+
+${readableDailyItinerary(cruise)}
+
+#### Voyage notes and sources
 
 ${cruise.notes}
 
@@ -113,12 +140,12 @@ For an owner-authorized AI task, provide the complete ZIP, or provide this guide
 
 | File | Contents |
 | --- | --- |
-| ${EXPORT_FILES.logbook} | Metadata plus every field of every cruise, including original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance; separate owner-confirmed shore excursions and owner-reported non-cruise visits. |
+| ${EXPORT_FILES.logbook} | Metadata plus every field of every cruise, including day-by-day schedules with sea days, original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance; separate owner-confirmed shore excursions and owner-reported non-cruise visits. |
 | ${EXPORT_FILES.statistics} | The full statistics calculation, definitions, current destination classifications, associated cruise IDs and ports, classification evidence URLs, and separately preserved personal visits. |
 | ${EXPORT_FILES.cruises} | One row per cruise with dates, duration, labels, notes, and source references. |
-| ${EXPORT_FILES.ports} | One row per ordered itinerary entry, including scenic stops and final round-trip returns. |
+| ${EXPORT_FILES.ports} | One row per ordered port or scenic entry, including final round-trip returns. Sea days are in the logbook JSON and guide, not this port table. |
 | ${EXPORT_FILES.routes} | GeoJSON FeatureCollection with one illustrative LineString per known route; unknown routes use null geometry. |
-| ${EXPORT_FILES.guide} | This dictionary, interpretation notes, destination list, and readable research sources for every cruise. |
+| ${EXPORT_FILES.guide} | This dictionary, interpretation notes, destination list, and readable day-by-day schedules and research sources for every cruise. |
 | ${EXPORT_FILES.complete} | All six files above in one ZIP. |
 
 Files are UTF-8. JSON uses null for unavailable values, not a guessed zero or date. Dates are calendar dates in YYYY-MM-DD format; they do not specify a time or timezone. This is a deterministic collection snapshot, not a live itinerary service. No current-time timestamp is added during a rebuild.
@@ -145,7 +172,15 @@ The top-level object contains \`schemaVersion\`, \`title\`, \`siteUrl\`, \`scope
 | originalShip | Original ship wording, when retained separately from the normalized ship label. Absence means no separate label was needed. |
 | originalRegion | Original destination wording retained by the data normalization. |
 | year | Year of the original personal record; a cruise crossing New Year stays in this year. |
-| ports | Ordered entries with name, country (a country or territory label), lat, and lon. Repeated calls and final returns are retained. Optional scenic/type fields are retained if present. No call dates or day numbers are inferred. |
+| ports | Ordered entries with name, country (a country or territory label), lat, and lon. Repeated calls and final returns are retained. Optional scenic/type fields are retained if present. Array positions describe recorded calls, not day numbers; see dailyItinerary for the daily schedule. |
+| dailyItinerary | Day-by-day schedule with its own confidence, note, sources, and days; sea days do not become ports or route points. |
+| dailyItinerary.confidence | confirmed, likely, or unresolved for the day-by-day reconstruction, separately from the cruise's overall historical-match confidence. |
+| dailyItinerary.note / sources | Schedule explanation and evidence, with source title, exact url, and relevance note. Read these before treating a reconstructed daily schedule as certain. |
+| dailyItinerary.days | One entry for each calendar day from departure through arrival, numbered 1 through nights + 1. |
+| dailyItinerary.days[].day / date | One-based cruise day and its YYYY-MM-DD calendar date, calculated from startDate plus day minus 1. These dates inherit the sailing-date and schedule confidence; no arrival/departure times or timezone are supplied. |
+| dailyItinerary.days[].type | port, sea, scenic, or unknown. Sea means an at-sea day; scenic means scenic cruising, not an ordinary port call. Unknown preserves an unresolved day instead of guessing its activity. |
+| dailyItinerary.days[].portIndices | Zero-based references into this cruise's ports array, used only for port/scenic days. An overnight stay can repeat the same index on consecutive days; multiple indices on one day describe multiple calls or scenic locations that day. Neither case adds entries to the ports array. |
+| dailyItinerary.days[].note | Optional explanation of that day's activity or uncertainty. |
 | route | Illustrative route points in [longitude, latitude] order. Intermediate points may be offshore waypoints, not port calls. |
 | anchor | [longitude, latitude] presentation anchor retained from the atlas data; not an actual vessel location or recorded visit. |
 | confidence | confirmed, likely, or unresolved; these describe the historical itinerary match, not independent proof of every actual visit. |
@@ -203,7 +238,7 @@ The CSV and GeoJSON files cover recorded cruises only. Confirmed shore excursion
 
 Cruise CSV columns use the corresponding dictionary fields in snake_case, plus \`port_entry_count\` (all itinerary entries), \`route_point_count\` (ports and illustrative waypoints), and \`sources_json\`. The CSV does not duplicate full geometry; use the logbook or GeoJSON for coordinates.
 
-The ports CSV joins on \`cruise_id\`. \`port_sequence\` starts at 1 and means position in the recorded itinerary, not a cruise day or dated call. \`cruise_start_date\` and \`cruise_end_date\` describe the whole voyage. \`stop_kind\` identifies departure, port call, arrival, round-trip return, or scenic cruising. \`is_final_roundtrip_return\` marks the repeated endpoint. \`included_in_port_statistics\` excludes that repeated endpoint and scenic cruising; other repeated calls stay counted. \`destination_type\` and \`destination_status\` describe the current country/territory classification. \`cruise_confidence\` applies to the researched voyage, not independent validation of that particular stop.
+The ports CSV joins on \`cruise_id\`. \`port_sequence\` starts at 1 and means position in the recorded itinerary, not a cruise day or dated call. It is a port/scenic-stop table, not a complete daily schedule: use \`dailyItinerary\` in the logbook JSON or the readable schedules in this guide for sea days, overnight stays, daily dates, and schedule confidence. \`cruise_start_date\` and \`cruise_end_date\` describe the whole voyage. \`stop_kind\` identifies departure, port call, arrival, round-trip return, or scenic cruising. \`is_final_roundtrip_return\` marks the repeated endpoint. \`included_in_port_statistics\` excludes that repeated endpoint and scenic cruising; other repeated calls stay counted. \`destination_type\` and \`destination_status\` describe the current country/territory classification. \`cruise_confidence\` applies to the researched voyage, not independent validation of that particular stop.
 
 GeoJSON follows longitude, latitude order in decimal degrees on WGS 84 (RFC 7946). Feature IDs equal cruise IDs. Feature properties retain the cruise labels, dates, confidence, notes, and source references, and explicitly mark the geometry as illustrative. LineString points are not timed measurements. A line passing a coast or country does not establish a visit. No navigational precision or actual sailing track is claimed.
 
@@ -233,7 +268,8 @@ export function buildExportFiles(records = cruises, visits = records === cruises
     coordinates: 'WGS 84 decimal degrees; route and anchor arrays are [longitude, latitude]. Port objects use explicit lon and lat fields.',
     precision,
     provenance: 'Original records combined with historical itinerary research and owner corrections. All research notes, confidence labels, and source references are preserved in each cruise.',
-    dates: 'Original dates may describe departure, arrival, or a day during the trip. Researched dates inherit the confidence and caveats of their record. No per-port dates or times are inferred.',
+    dates: 'Original dates may describe departure, arrival, or a day during the trip. Researched dates inherit the confidence and caveats of their record. Daily itinerary dates are calculated from startDate and the one-based cruise day; read dailyItinerary confidence, notes, and sources before treating a daily assignment as certain. No arrival/departure times or timezones are supplied.',
+    dailyItineraries: 'Each dailyItinerary distinguishes port, sea, scenic, and unknown days. Port/scenic days reference the existing ports array through zero-based portIndices. Overnight stays can repeat an index on consecutive days, and multiple calls can share a day. Sea days add no port calls, route coordinates, nights, or mileage to the existing statistics. The ports CSV remains a port/scenic-stop table; complete daily schedules are in the logbook JSON and guide.',
     personalVisits: 'The separate personalVisits object records owner-confirmed shore excursions and owner-reported non-cruise destinations, with approximate visit counts when supplied. Empty cruiseIds mean no specific sailing is confirmed for that visit. Optional candidateCruiseIds and candidatePort describe possible sailing associations, not uncertainty about the visit itself. These records add no invented ports, cruises, routes, nights, or sailing miles.',
   };
   const columns = ['cruise_id', 'year', 'original_date', 'start_date', 'end_date', 'nights', 'ship', 'original_ship', 'line', 'region', 'original_region', 'confidence', 'port_entry_count', 'route_point_count', 'notes', 'sources_json'];

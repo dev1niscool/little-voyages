@@ -7,7 +7,7 @@ An illustrated, interactive atlas of 29 personal cruises, from 2005 to 2025.
 - Ships anchored to actual departure coordinates, with grouped harbors and a ship/date picker
 - Clickable routes, port labels, and a single animated pass through a selected itinerary, with replay
 - Year timeline, ship/port search, cruise-line filter, and chronological playback
-- Dates, duration, itinerary, historical research notes, and source links for every voyage
+- Dates, duration, day-by-day itineraries with sea days, historical research notes, and source links for every voyage
 - A statistics page with cruise duration, estimated sailing distance, Earth-distance equivalents, repeat ports, cruise-line breakdowns, and clickable year charts
 - Colorful glass panels, a persistent light/dark switch, and animated SVG sea creatures
 - Responsive desktop and mobile layout; keyboard ship controls and reduced-motion support
@@ -45,12 +45,12 @@ The atlas lives in its own repository, [`dev1niscool/little-voyages`](https://gi
 
 The About panel offers a complete ZIP plus six individual exports from `public/downloads/`. `scripts/build-exports.mjs` generates them from the same cruise records and statistics functions used by the website; `npm run build` regenerates them before Vite builds the site. They describe the full collection rather than the currently filtered map.
 
-- `little-voyages-logbook.json`: complete normalized cruise records, research notes and source URLs, plus the owner-confirmed shore excursions and owner-reported non-cruise comparison.
+- `little-voyages-logbook.json`: complete normalized cruise records, daily schedules including sea days, research notes and source URLs, plus the owner-confirmed shore excursions and owner-reported non-cruise comparison.
 - `little-voyages-statistics.json`: full-collection calculations, destination classifications and evidence, methodology, and separate owner-reported personal visits.
 - `little-voyages-cruises.csv`: one summary row per voyage.
-- `little-voyages-ports.csv`: ordered itinerary entries, including scenic stops and final homeport returns that some statistics exclude.
+- `little-voyages-ports.csv`: ordered port/scenic entries and final homeport returns that some statistics exclude; this port table does not contain sea days.
 - `little-voyages-routes.geojson`: illustrative route coordinates in GeoJSON longitude/latitude order, not actual GPS tracks.
-- `little-voyages-guide.md`: data dictionary, research notes and source links, interpretation guidance, and permission scope.
+- `little-voyages-guide.md`: data dictionary, readable daily schedules, research notes and source links, interpretation guidance, and permission scope.
 
 The ZIP contains all six. Builds are deterministic, and the guide explains CSV safety escaping and the limitations of historical itinerary estimates. An owner-authorized AI task may use supplied files; downloading them does not grant training or unrelated reuse rights.
 
@@ -69,6 +69,8 @@ npm test
 ```
 
 Confidence labels distinguish historical matches from likely reconstructions. A historical match does not imply that every port call is independently verified as actually visited. Notes identify scheduled itineraries, known changes, and remaining uncertainty. The owner clarified that the August 2008 cruise was Disney Wonder in the Bahamas. The June 2022 Regal Princess trip was confirmed as the seven-day voyage, matching the June 11–18 Barcelona-to-Civitavecchia schedule.
+
+Each voyage's `dailyItinerary` supplies one entry per day from embarkation through disembarkation (`nights + 1`), distinguishing port calls, sea days, scenic cruising, and unresolved days. The daily schedule has its own confidence, explanation, and source links. Dates are calculated from the researched departure date and day number, so they inherit the sailing and schedule uncertainty. Port and scenic entries reference the existing `ports` array with zero-based `portIndices`; overnight stays can repeat a port on consecutive days, and multiple calls can share a day. Sea days remain separate from the map's ports and routes and do not change existing duration, distance, or port statistics. The logbook JSON and readable export guide retain the complete schedules; the ports CSV remains a port/scenic-stop table.
 
 Map routes are **illustrative**, using port connections and some offshore waypoints. They are not recorded ship tracks or suitable for navigation. Ports, scenic cruising locations, and candidate segments should not be interpreted as independently verified personal visits.
 

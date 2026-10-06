@@ -1,6 +1,6 @@
 # Little Voyages — export guide
 
-Schema version: 1. Collection fingerprint: `bdd4816f8d7ee7c2d4e56705d49fd7b278030d09a0fd4b334922df0bd4001999` (SHA-256 of the compact JSON cruise array).
+Schema version: 1. Collection fingerprint: `16554d78a47cde944cb0a16bfcf648f25f3e3df7eca20ab98c7bafe7aba02820` (SHA-256 of the compact JSON cruise array).
 
 Personal-visit fingerprint: `ab1a17bd578f74a7d64b5d260f696dc96e1fd1207e30e207e9b2e7af1c40d45f` (SHA-256 of the compact JSON `personalVisits` object; separate from the unchanged cruise-array fingerprint).
 
@@ -14,12 +14,12 @@ For an owner-authorized AI task, provide the complete ZIP, or provide this guide
 
 | File | Contents |
 | --- | --- |
-| little-voyages-logbook.json | Metadata plus every field of every cruise, including original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance; separate owner-confirmed shore excursions and owner-reported non-cruise visits. |
+| little-voyages-logbook.json | Metadata plus every field of every cruise, including day-by-day schedules with sea days, original labels, ordered ports, schematic route coordinates, confidence, research notes, and source URLs with their relevance; separate owner-confirmed shore excursions and owner-reported non-cruise visits. |
 | little-voyages-statistics.json | The full statistics calculation, definitions, current destination classifications, associated cruise IDs and ports, classification evidence URLs, and separately preserved personal visits. |
 | little-voyages-cruises.csv | One row per cruise with dates, duration, labels, notes, and source references. |
-| little-voyages-ports.csv | One row per ordered itinerary entry, including scenic stops and final round-trip returns. |
+| little-voyages-ports.csv | One row per ordered port or scenic entry, including final round-trip returns. Sea days are in the logbook JSON and guide, not this port table. |
 | little-voyages-routes.geojson | GeoJSON FeatureCollection with one illustrative LineString per known route; unknown routes use null geometry. |
-| little-voyages-guide.md | This dictionary, interpretation notes, destination list, and readable research sources for every cruise. |
+| little-voyages-guide.md | This dictionary, interpretation notes, destination list, and readable day-by-day schedules and research sources for every cruise. |
 | little-voyages-complete.zip | All six files above in one ZIP. |
 
 Files are UTF-8. JSON uses null for unavailable values, not a guessed zero or date. Dates are calendar dates in YYYY-MM-DD format; they do not specify a time or timezone. This is a deterministic collection snapshot, not a live itinerary service. No current-time timestamp is added during a rebuild.
@@ -46,7 +46,15 @@ The top-level object contains `schemaVersion`, `title`, `siteUrl`, `scope`, `col
 | originalShip | Original ship wording, when retained separately from the normalized ship label. Absence means no separate label was needed. |
 | originalRegion | Original destination wording retained by the data normalization. |
 | year | Year of the original personal record; a cruise crossing New Year stays in this year. |
-| ports | Ordered entries with name, country (a country or territory label), lat, and lon. Repeated calls and final returns are retained. Optional scenic/type fields are retained if present. No call dates or day numbers are inferred. |
+| ports | Ordered entries with name, country (a country or territory label), lat, and lon. Repeated calls and final returns are retained. Optional scenic/type fields are retained if present. Array positions describe recorded calls, not day numbers; see dailyItinerary for the daily schedule. |
+| dailyItinerary | Day-by-day schedule with its own confidence, note, sources, and days; sea days do not become ports or route points. |
+| dailyItinerary.confidence | confirmed, likely, or unresolved for the day-by-day reconstruction, separately from the cruise's overall historical-match confidence. |
+| dailyItinerary.note / sources | Schedule explanation and evidence, with source title, exact url, and relevance note. Read these before treating a reconstructed daily schedule as certain. |
+| dailyItinerary.days | One entry for each calendar day from departure through arrival, numbered 1 through nights + 1. |
+| dailyItinerary.days[].day / date | One-based cruise day and its YYYY-MM-DD calendar date, calculated from startDate plus day minus 1. These dates inherit the sailing-date and schedule confidence; no arrival/departure times or timezone are supplied. |
+| dailyItinerary.days[].type | port, sea, scenic, or unknown. Sea means an at-sea day; scenic means scenic cruising, not an ordinary port call. Unknown preserves an unresolved day instead of guessing its activity. |
+| dailyItinerary.days[].portIndices | Zero-based references into this cruise's ports array, used only for port/scenic days. An overnight stay can repeat the same index on consecutive days; multiple indices on one day describe multiple calls or scenic locations that day. Neither case adds entries to the ports array. |
+| dailyItinerary.days[].note | Optional explanation of that day's activity or uncertainty. |
 | route | Illustrative route points in [longitude, latitude] order. Intermediate points may be offshore waypoints, not port calls. |
 | anchor | [longitude, latitude] presentation anchor retained from the atlas data; not an actual vessel location or recorded visit. |
 | confidence | confirmed, likely, or unresolved; these describe the historical itinerary match, not independent proof of every actual visit. |
@@ -117,7 +125,7 @@ The CSV and GeoJSON files cover recorded cruises only. Confirmed shore excursion
 
 Cruise CSV columns use the corresponding dictionary fields in snake_case, plus `port_entry_count` (all itinerary entries), `route_point_count` (ports and illustrative waypoints), and `sources_json`. The CSV does not duplicate full geometry; use the logbook or GeoJSON for coordinates.
 
-The ports CSV joins on `cruise_id`. `port_sequence` starts at 1 and means position in the recorded itinerary, not a cruise day or dated call. `cruise_start_date` and `cruise_end_date` describe the whole voyage. `stop_kind` identifies departure, port call, arrival, round-trip return, or scenic cruising. `is_final_roundtrip_return` marks the repeated endpoint. `included_in_port_statistics` excludes that repeated endpoint and scenic cruising; other repeated calls stay counted. `destination_type` and `destination_status` describe the current country/territory classification. `cruise_confidence` applies to the researched voyage, not independent validation of that particular stop.
+The ports CSV joins on `cruise_id`. `port_sequence` starts at 1 and means position in the recorded itinerary, not a cruise day or dated call. It is a port/scenic-stop table, not a complete daily schedule: use `dailyItinerary` in the logbook JSON or the readable schedules in this guide for sea days, overnight stays, daily dates, and schedule confidence. `cruise_start_date` and `cruise_end_date` describe the whole voyage. `stop_kind` identifies departure, port call, arrival, round-trip return, or scenic cruising. `is_final_roundtrip_return` marks the repeated endpoint. `included_in_port_statistics` excludes that repeated endpoint and scenic cruising; other repeated calls stay counted. `destination_type` and `destination_status` describe the current country/territory classification. `cruise_confidence` applies to the researched voyage, not independent validation of that particular stop.
 
 GeoJSON follows longitude, latitude order in decimal degrees on WGS 84 (RFC 7946). Feature IDs equal cruise IDs. Feature properties retain the cruise labels, dates, confidence, notes, and source references, and explicitly mark the geometry as illustrative. LineString points are not timed measurements. A line passing a coast or country does not establish a visit. No navigational precision or actual sailing track is claimed.
 
@@ -180,6 +188,27 @@ GeoJSON follows longitude, latitude order in decimal degrees on WGS 84 (RFC 7946
 - Original ship label: Disney Wonder; original destination label: Bahamas.
 - Ordered itinerary: Port Canaveral (United States) → Nassau (Bahamas) → Castaway Cay (Bahamas) → Port Canaveral (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The published 2005 three-night Wonder schedule has a port on every calendar day and no full sea day.
+
+- **Day 1 · 2005-05-19:** Port Canaveral (United States).
+- **Day 2 · 2005-05-20:** Nassau (Bahamas).
+- **Day 3 · 2005-05-21:** Castaway Cay (Bahamas).
+- **Day 4 · 2005-05-22:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **AllEars: Magical Disney Cruise Guide, August 2005**
+   <https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf>
+   Section 2.1, printed page 5: Thursday Port Canaveral, Friday Nassau, Saturday Castaway Cay, Sunday Port Canaveral.
+
+2. **DISboards: May 19, 2005 3 day Wonder**
+   <https://www.disboards.com/threads/may-19-2005-3-day-wonder-anyone.632193/>
+   Contemporary passenger roll call confirms ship, departure date, and three-night duration.
+
+#### Voyage notes and sources
+
 A contemporary roll call confirms the May 19, 2005 three-night Wonder departure. The port sequence is the published 2005 three-night schedule; individual weather-related changes have not been verified.
 
 1. **DISboards: May 19, 2005 3 day Wonder**
@@ -197,6 +226,35 @@ A contemporary roll call confirms the May 19, 2005 three-night Wonder departure.
 - Cruise line: Disney Cruise Line.
 - Original ship label: Disney Magic; original destination label: Eastern Caribbean.
 - Ordered itinerary: Port Canaveral (United States) → St. Maarten (Sint Maarten) → St. Thomas (U.S. Virgin Islands) → Castaway Cay (Bahamas) → Port Canaveral (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: likely. Reconstructed from the established Eastern Caribbean schedule and a January 2007 sailing on the same route. Full sea days fall on days 2, 3 and 6; an exact February 3 daily schedule has not been located.
+
+- **Day 1 · 2007-02-03:** Port Canaveral (United States).
+- **Day 2 · 2007-02-04:** At sea.
+- **Day 3 · 2007-02-05:** At sea.
+- **Day 4 · 2007-02-06:** St. Maarten (Sint Maarten).
+- **Day 5 · 2007-02-07:** St. Thomas (U.S. Virgin Islands).
+- **Day 6 · 2007-02-08:** At sea.
+- **Day 7 · 2007-02-09:** Castaway Cay (Bahamas).
+- **Day 8 · 2007-02-10:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **AllEars: Magical Disney Cruise Guide, Eastern itinerary**
+   <https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf>
+   Section 2.1, printed page 5: Saturday departure; Sunday and Monday at sea; Tuesday St. Maarten; Wednesday St. Thomas; Thursday at sea; Friday Castaway Cay; Saturday return.
+
+2. **Cruisemans: Disney Magic January 6, 2007**
+   <https://cruisemans.com/%40namber/m2v6ac46zzwa6mcn>
+   Nearby seven-night Eastern sailing supports the same route and early sea-day placement; it is not the February 3 departure.
+
+3. **DISboards: October 21st 2006 cruise discussion**
+   <https://www.disboards.com/threads/october-21st-2006.1059529/>
+   Post 18, dated March 27, 2006, says the passenger rebooked the same cabin for the February 3, 2007 Eastern sailing.
+
+#### Voyage notes and sources
 
 A contemporary passenger post explicitly calls February 3, 2007 an Eastern sailing. The seven-night route is reconstructed from Disney's established Eastern itinerary and a January 6, 2007 sailing record. Exact daily calls for this departure remain unverified.
 
@@ -220,6 +278,28 @@ A contemporary passenger post explicitly calls February 3, 2007 an Eastern saili
 - Original ship label: Disney Wonder; original destination label: Bahamas.
 - Ordered itinerary: Port Canaveral (United States) → Castaway Cay (Bahamas) → Nassau (Bahamas) → Castaway Cay (Bahamas) → Port Canaveral (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. Disney’s published summer 2008 double-Castaway-Cay schedule applies to the August 10 departure. There are no full sea days on this four-night itinerary.
+
+- **Day 1 · 2008-08-10:** Port Canaveral (United States).
+- **Day 2 · 2008-08-11:** Castaway Cay (Bahamas).
+- **Day 3 · 2008-08-12:** Nassau (Bahamas).
+- **Day 4 · 2008-08-13:** Castaway Cay (Bahamas).
+- **Day 5 · 2008-08-14:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **Cruise Industry News: Disney announces summer 2008 itineraries**
+   <https://cruiseindustrynews.com/cruise-news/2007/12/12407-disney-cruise-line-announces-future-itineraries/>
+   The December 2007 announcement gives Sunday Port Canaveral, Monday Castaway Cay, Tuesday Nassau, Wednesday Castaway Cay, Thursday return for every four-night sailing May 11–August 24, 2008.
+
+2. **DISboards: Wonder Aug. 10, 2008 — 4 Night**
+   <https://www.disboards.com/threads/wonder-aug-10-2008-4-night.1849941/>
+   Contemporary passenger roll call identifies Disney Wonder’s August 10, 2008 four-night sailing.
+
+#### Voyage notes and sources
+
 You clarified that this was Disney Wonder in the Bahamas. A contemporary roll call identifies the August 10, 2008 four-night Wonder sailing. Disney’s published summer 2008 schedule confirms the double visit to Castaway Cay: depart Port Canaveral Sunday August 10, Castaway Cay Monday August 11, Nassau Tuesday August 12, Castaway Cay Wednesday August 13, and return Thursday August 14. The itinerary is the historical published schedule; any unrecorded operational changes have not been independently verified.
 
 1. **DISboards: Wonder Aug. 10, 2008 — 4 Night**
@@ -242,6 +322,35 @@ You clarified that this was Disney Wonder in the Bahamas. A contemporary roll ca
 - Original ship label: Carnival Triumph; original destination label: Eastern Caribbean.
 - Ordered itinerary: Miami (United States) → San Juan (Puerto Rico) → St. Thomas (U.S. Virgin Islands) → St. Maarten (Sint Maarten) → Miami (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: likely. Day placement follows Triumph’s historical seven-night Miami Eastern route: one sea day before San Juan and two after St. Maarten. Nearby April 2009 accounts support the ports; the exact March 15 daily schedule remains unverified.
+
+- **Day 1 · 2009-03-15:** Miami (United States).
+- **Day 2 · 2009-03-16:** At sea.
+- **Day 3 · 2009-03-17:** San Juan (Puerto Rico).
+- **Day 4 · 2009-03-18:** St. Thomas (U.S. Virgin Islands).
+- **Day 5 · 2009-03-19:** St. Maarten (Sint Maarten).
+- **Day 6 · 2009-03-20:** At sea.
+- **Day 7 · 2009-03-21:** At sea.
+- **Day 8 · 2009-03-22:** Miami (United States).
+
+Schedule sources:
+
+1. **Carnival Triumph historical itinerary table**
+   <https://fr.wikipedia.org/wiki/Carnival_Sunrise#Itin%C3%A9raire>
+   The retained Triumph-era Miami route table places San Juan on day 3, St. Thomas on day 4, St. Maarten on day 5, and sea days on days 2, 6 and 7. This undated secondary table supports a reconstruction, not a confirmed March 2009 schedule.
+
+2. **Cruiseline: Carnival Triumph April 26, 2009 passenger review**
+   <https://cruiseline.com/ship/carnival-triumph/review/314186>
+   Nearby seasonal sailing confirms seven-night Eastern Miami roundtrip and San Juan, St. Thomas, St. Maarten ports, not the exact March date.
+
+3. **Cruise Critic: Just off the Triumph, April 2009**
+   <https://boards.cruisecritic.com/topic/922849-just-off-the-triumph-it-was-great>
+   Contemporary account of April 12 sailing corroborates the seasonal Eastern operation.
+
+#### Voyage notes and sources
+
 Likely seven-night Miami roundtrip, treating the supplied Sunday date as departure. The route is reconstructed from contemporary Triumph Eastern Caribbean sailings; a source for the exact March 15 departure was not located. Dates and stop order should be treated as provisional.
 
 1. **Cruiseline: Carnival Triumph April 26, 2009 passenger review**
@@ -260,6 +369,29 @@ Likely seven-night Miami roundtrip, treating the supplied Sunday date as departu
 - Original ship label: Carnival Fascination; original destination label: Bahamas.
 - Ordered itinerary: Jacksonville (United States) → Nassau (Bahamas) → Half Moon Cay (Bahamas) → Jacksonville (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: likely. The two sea days are reconstructed from a near-period advertised Saturday Fascination itinerary: days 2 and 5. Carnival’s 2009 operating announcement confirms this five-night Nassau/Half Moon Cay program, but not the exact August 8 day order.
+
+- **Day 1 · 2009-08-08:** Jacksonville (United States).
+- **Day 2 · 2009-08-09:** At sea.
+- **Day 3 · 2009-08-10:** Nassau (Bahamas).
+- **Day 4 · 2009-08-11:** Half Moon Cay (Bahamas).
+- **Day 5 · 2009-08-12:** At sea.
+- **Day 6 · 2009-08-13:** Jacksonville (United States).
+
+Schedule sources:
+
+1. **Owen Family Newsletter, Summer 2009**
+   <https://www.owenfuneralhome.com/download/97998/OwenFamilyNewsletter-2009Summer.pdf>
+   Printed page 2 advertises a February 2010 trip with Jacksonville embarkation, sea, Nassau, Half Moon Cay, sea, Jacksonville. Land travel days before and after the cruise are excluded.
+
+2. **Carnival: Fascination refurbishment and operating schedule, August 2009**
+   <https://www.carnival-news.com/2009/08/28/reservations-open-today-on-98-new-balcony-staterooms-added-during-carnival-fascinations-multimillion-dollar-refurb>
+   Official contemporary source: Saturday five-night sailings from Jacksonville visit Half Moon Cay and Nassau; other weekday departures use different itineraries.
+
+#### Voyage notes and sources
+
 The supplied Saturday date fits Carnival's official 2009 five-night Saturday schedule from Jacksonville to Nassau and Half Moon Cay. Stop order is reconstructed from a near-period advertised itinerary; the exact August 8 departure has not been independently located.
 
 1. **Carnival: Fascination refurbishment and operating schedule, August 2009**
@@ -277,6 +409,35 @@ The supplied Saturday date fits Carnival's official 2009 five-night Saturday sch
 - Cruise line: Carnival Cruise Line.
 - Original ship label: Carnival Liberty; original destination label: Exotic Eastern Caribbean.
 - Ordered itinerary: Miami (United States) → Half Moon Cay (Bahamas) → St. Thomas (U.S. Virgin Islands) → San Juan (Puerto Rico) → Grand Turk (Turks and Caicos Islands) → Miami (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: likely. Full sea days fall on days 3 and 7 in the Exotic Eastern itinerary introduced in April 2009. The January 23, 2010 departure is documented, while its daily positions are reconstructed from the matching route.
+
+- **Day 1 · 2010-01-23:** Miami (United States).
+- **Day 2 · 2010-01-24:** Half Moon Cay (Bahamas).
+- **Day 3 · 2010-01-25:** At sea.
+- **Day 4 · 2010-01-26:** St. Thomas (U.S. Virgin Islands).
+- **Day 5 · 2010-01-27:** San Juan (Puerto Rico).
+- **Day 6 · 2010-01-28:** Grand Turk (Turks and Caicos Islands).
+- **Day 7 · 2010-01-29:** At sea.
+- **Day 8 · 2010-01-30:** Miami (United States).
+
+Schedule sources:
+
+1. **Cruise Critic: Liberty’s new Eastern route, April 25–May 2, 2009**
+   <https://boards.cruisecritic.com/topic/939147-carnival-liberty-new-eastern-caribbean-route-review-april-25-may2/>
+   The contemporary first-sailing review explicitly gives Miami, Half Moon Cay, sea, St. Thomas, San Juan, Grand Turk, sea, Miami.
+
+2. **Military Cruise Deals: archived 2009 fare bulletin**
+   <https://militarycruisedeals.blogspot.com/2009/>
+   Lists CARNIVAL LIBERTY 1/23/2010 7 MIA EXOTIC EASTERN CARIB, directly supporting date, duration, homeport and route name.
+
+3. **Cruise Critic: Two Sisters Enjoying Liberty, May 2010**
+   <https://www.cruisecritic.com/cruise/carnival/carnival-liberty/reviews/68074>
+   2010 passenger account corroborates continued Half Moon Cay Eastern itinerary.
+
+#### Voyage notes and sources
 
 A contemporary fare bulletin confirms January 23, 2010, seven nights from Miami, labeled Exotic Eastern Caribbean. Port order is reconstructed from the itinerary introduced in April 2009 and continued in 2010. Exact daily calls for this January departure have not been found.
 
@@ -300,6 +461,32 @@ A contemporary fare bulletin confirms January 23, 2010, seven nights from Miami,
 - Original ship label: Carnival Freedom; original destination label: Exotic Western Caribbean.
 - Ordered itinerary: Fort Lauderdale (United States) → Cozumel (Mexico) → Puerto Limón (Costa Rica) → Colón (Panama) → Fort Lauderdale (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. Carnival’s 2011/2012 brochure lists the January 15 departure with full sea days on days 2, 4, 7 and 8. Colón is a port call; the schedule does not include a ship transit of the Panama Canal.
+
+- **Day 1 · 2011-01-15:** Fort Lauderdale (United States).
+- **Day 2 · 2011-01-16:** At sea.
+- **Day 3 · 2011-01-17:** Cozumel (Mexico).
+- **Day 4 · 2011-01-18:** At sea.
+- **Day 5 · 2011-01-19:** Puerto Limón (Costa Rica).
+- **Day 6 · 2011-01-20:** Colón (Panama).
+- **Day 7 · 2011-01-21:** At sea.
+- **Day 8 · 2011-01-22:** At sea.
+- **Day 9 · 2011-01-23:** Fort Lauderdale (United States).
+
+Schedule sources:
+
+1. **Carnival Cruise Lines: 2011/2012 German brochure, pages 44–45**
+   <https://de.scribd.com/doc/44541934/Kreuzfahrten-von-Carnival-Cruise-Lines-Deutschland-auf-einen-Blick-SAISON-2011-2012>
+   The eight-night Exotic Western table lists Saturday Fort Lauderdale, Sunday sea, Monday Cozumel, Tuesday sea, Wednesday Limón, Thursday Colón, Friday and Saturday sea, Sunday return. January 15, 2011 is listed without an itinerary-change marker.
+
+2. **Groomer to Groomer, October 2010: Pet Pro Cruise**
+   <https://www.groomertogroomer.com/ebooks/GTG_Oct%202010_w_links.pdf>
+   Page 49 explicitly advertises January 15–23, 2011 on Carnival Freedom, nine days/eight nights, Fort Lauderdale with Cozumel, Limon, Colon.
+
+#### Voyage notes and sources
+
 A contemporary advertisement confirms the January 15–23, 2011 eight-night sailing from Fort Lauderdale to Cozumel, Limón and Colón. This was an Exotic Western Caribbean itinerary reaching Costa Rica and Panama; it does not imply the ship transited the Panama Canal.
 
 1. **Groomer to Groomer, October 2010: Pet Pro Cruise**
@@ -317,6 +504,35 @@ A contemporary advertisement confirms the January 15–23, 2011 eight-night sail
 - Cruise line: Holland America Line.
 - Original ship label: Oosterdam; original destination label: Alaska Explorer.
 - Ordered itinerary: Seattle (United States) → Glacier Bay (United States) → Juneau (United States) → Sitka (United States) → Ketchikan (United States) → Victoria (Canada) → Seattle (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: likely. Reconstructed from the June 12, 2011 published itinerary and May 22 passenger diary for the same seasonal route. Monday is a full sea day; Tuesday in Glacier Bay is scenic cruising and is kept separate.
+
+- **Day 1 · 2011-06-05:** Seattle (United States).
+- **Day 2 · 2011-06-06:** At sea.
+- **Day 3 · 2011-06-07:** Scenic cruising — Glacier Bay (United States). Scenic cruising in Glacier Bay; no disembarkation.
+- **Day 4 · 2011-06-08:** Juneau (United States).
+- **Day 5 · 2011-06-09:** Sitka (United States).
+- **Day 6 · 2011-06-10:** Ketchikan (United States).
+- **Day 7 · 2011-06-11:** Victoria (Canada).
+- **Day 8 · 2011-06-12:** Seattle (United States).
+
+Schedule sources:
+
+1. **SSQQ Travel: archived June 2011 Oosterdam itinerary**
+   <https://www.ssqq.com/travel/travelfees.htm>
+   The April 20, 2011 travel quote lists June 12 Seattle; June 13 at sea; June 14 Glacier Bay; June 15 Juneau; June 16 Sitka; June 17 Ketchikan; June 18 Victoria; June 19 Seattle. This is the departure one week after the recorded voyage.
+
+2. **Cruise Critic: Oosterdam Alaska, May 2011**
+   <https://www.cruisecritic.com/cruise/holland-america/oosterdam/reviews/85183>
+   The May 22 sailing diary independently places Glacier Bay on Tuesday, Juneau on Wednesday, then Sitka, Ketchikan and Victoria.
+
+3. **Holland America: The Americas 2011–2012 brochure**
+   <https://www.rejsy.pl/sites/default/files/armator_files/HAL_AM11_Ebrochure_TA.pdf>
+   Alaska section lists Oosterdam 7-day Explorer from Seattle departures including June 5, 2011, and regional calls.
+
+#### Voyage notes and sources
 
 Holland America's 2011 brochure lists the June 5 seven-day Explorer departure from Seattle, and the Southern Medical Association lists June 5–12 on Oosterdam. The seasonal schedule included Glacier Bay; ordered calls are corroborated by a May 22, 2011 passenger diary. Glacier Bay is scenic cruising, not a disembarkation port. Actual day-specific deviations have not been checked.
 
@@ -344,6 +560,31 @@ Holland America's 2011 brochure lists the June 5 seven-day Explorer departure fr
 - Original ship label: Carnival Magic; original destination label: Western Caribbean.
 - Ordered itinerary: Galveston (United States) → Montego Bay (Jamaica) → Grand Cayman (Cayman Islands) → Cozumel (Mexico) → Galveston (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. Newly located Carnival 2011/2012 brochure evidence lists the February 19, 2012 departure and published daily schedule. Full sea days are days 2, 3 and 7.
+
+- **Day 1 · 2012-02-19:** Galveston (United States).
+- **Day 2 · 2012-02-20:** At sea.
+- **Day 3 · 2012-02-21:** At sea.
+- **Day 4 · 2012-02-22:** Montego Bay (Jamaica).
+- **Day 5 · 2012-02-23:** Grand Cayman (Cayman Islands).
+- **Day 6 · 2012-02-24:** Cozumel (Mexico).
+- **Day 7 · 2012-02-25:** At sea.
+- **Day 8 · 2012-02-26:** Galveston (United States).
+
+Schedule sources:
+
+1. **Carnival Cruise Lines: 2011/2012 German brochure, pages 60–61**
+   <https://de.scribd.com/doc/44541934/Kreuzfahrten-von-Carnival-Cruise-Lines-Deutschland-auf-einen-Blick-SAISON-2011-2012>
+   The Galveston Western table gives Sunday embarkation; Monday and Tuesday sea; Wednesday Montego Bay; Thursday Grand Cayman; Friday Cozumel; Saturday sea; Sunday return. Carnival Magic February 19, 2012 appears without the reverse-order marker applied to some nearby dates.
+
+2. **Ray’s Cruise and Travel Blog: Carnival Magic, March 4, 2012**
+   <https://snoozemanscruiseblog.blogspot.com/2012/03/carnival-magic.html>
+   Nearby sailing diary corroborates full sea days 2, 3 and 7 and the Wednesday-to-Friday port sequence.
+
+#### Voyage notes and sources
+
 Likely seven-night Galveston roundtrip, treating the supplied Sunday date as departure. Carnival's official 2011 deployment announcement and nearby February/March 2012 accounts identify its Western route as Montego Bay, Grand Cayman and Cozumel. Exact February 19–26 documentation was not located; dates and order are reconstructed.
 
 1. **Carnival: Magic's Galveston deployment announcement**
@@ -366,6 +607,37 @@ Likely seven-night Galveston roundtrip, treating the supplied Sunday date as dep
 - Original ship label: Carnival Sunshine; original destination label: Mediterranean.
 - Ordered itinerary: Barcelona (Spain) → Marseille (France) → Livorno (Florence/Pisa) (Italy) → Civitavecchia (Rome) (Italy) → Naples (Italy) → Messina (Italy) → Dubrovnik (Croatia) → Venice (Italy).
 
+#### Day-by-day schedule
+
+Schedule confidence: likely. The June 2013 passenger account confirms one sea day, and the archived sailing listing includes an overnight in Venice. Day 7 is a reconstruction of the sea-day placement between Messina and Dubrovnik; the exact daily schedule has not been independently recovered.
+
+- **Day 1 · 2013-06-07:** Barcelona (Spain).
+- **Day 2 · 2013-06-08:** Marseille (France).
+- **Day 3 · 2013-06-09:** Livorno (Florence/Pisa) (Italy).
+- **Day 4 · 2013-06-10:** Civitavecchia (Rome) (Italy).
+- **Day 5 · 2013-06-11:** Naples (Italy).
+- **Day 6 · 2013-06-12:** Messina (Italy).
+- **Day 7 · 2013-06-13:** At sea.
+- **Day 8 · 2013-06-14:** Dubrovnik (Croatia).
+- **Day 9 · 2013-06-15:** Venice (Italy). Overnight in Venice.
+- **Day 10 · 2013-06-16:** Venice (Italy). Disembarkation after the overnight in Venice.
+
+Schedule sources:
+
+1. **Family Travel Gurus: Carnival Sunshine review, June 2013**
+   <https://familytravelgurus.com/carnival-sunshine-review-june-2013/>
+   Nine-night Barcelona-to-Venice passenger account confirms all ordered ports and exactly one sea day.
+
+2. **ARKS Travel Agency: archived 2013 Carnival departures**
+   <https://arkstravelagency.weebly.com/cruises.html>
+   The June 7 nine-night itinerary lists Venice twice, supporting the final overnight stay.
+
+3. **Cruiseline: Carnival Sunshine, June 7, 2013 — 9 Night Italy & Adriatic**
+   <https://cruiseline.com/ship/carnival-sunshine/review/381014>
+   Exact departure, nine nights, endpoints and ordered ports.
+
+#### Voyage notes and sources
+
 Exact sailing match in a contemporary passenger review: 9-night Italy & Adriatic cruise from Barcelona to Venice. Port sequence follows the sailing review; the end date is calculated from the verified departure and nine-night duration. This was Sunshine's first Mediterranean season after the conversion from Carnival Destiny.
 
 1. **Cruiseline: Carnival Sunshine, June 7, 2013 — 9 Night Italy & Adriatic**
@@ -383,6 +655,25 @@ Exact sailing match in a contemporary passenger review: 9-night Italy & Adriatic
 - Cruise line: Carnival Cruise Line.
 - Original ship label: Carnival Elation; original destination label: Western Caribbean.
 - Ordered itinerary: New Orleans (United States) → Progreso (Mexico) → Cozumel (Mexico) → New Orleans (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: likely. The period Carnival brochure supplies the five-night New Orleans pattern, with sea days on Days 2 and 5. The date-to-sailing match and port order retain the uncertainty described in the voyage notes.
+
+- **Day 1 · 2013-12-28:** New Orleans (United States).
+- **Day 2 · 2013-12-29:** At sea.
+- **Day 3 · 2013-12-30:** Progreso (Mexico).
+- **Day 4 · 2013-12-31:** Cozumel (Mexico).
+- **Day 5 · 2014-01-01:** At sea.
+- **Day 6 · 2014-01-02:** New Orleans (United States).
+
+Schedule sources:
+
+1. **Carnival Cruise Lines 2014 brochure: five-day Western Caribbean from New Orleans**
+   <https://www.slideshare.net/slideshow/carnival-cruise-lines-2014/28593553>
+   Published day order is New Orleans, sea, Progreso, Cozumel, sea, New Orleans; this is a period route pattern rather than an exact December 28 sailing record.
+
+#### Voyage notes and sources
 
 Seasonal reconstruction, not an independently verified exact sailing. Elation was based in New Orleans on four- and five-night Mexico cruises in December 2013. The five-night Progreso/Cozumel itinerary and next four-night departure on January 2, 2014 support a December 28–January 2 sailing. Port order and the assumption that the supplied date is embarkation need confirmation; December 28 could instead be disembarkation from the preceding five-night cruise.
 
@@ -406,6 +697,31 @@ Seasonal reconstruction, not an independently verified exact sailing. Elation wa
 - Original ship label: Allure of the Seas; original destination label: Eastern Caribbean.
 - Ordered itinerary: Fort Lauderdale (United States) → Nassau (Bahamas) → St. Thomas (U.S. Virgin Islands) → St. Maarten (Sint Maarten) → Fort Lauderdale (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: likely. The contemporary Allure Eastern Caribbean Cruise Compass sequence places sea days on Days 3, 6 and 7. This follows the period route pattern; the voyage still uses the likely March 16 departure described in its notes.
+
+- **Day 1 · 2014-03-16:** Fort Lauderdale (United States).
+- **Day 2 · 2014-03-17:** Nassau (Bahamas).
+- **Day 3 · 2014-03-18:** At sea.
+- **Day 4 · 2014-03-19:** St. Thomas (U.S. Virgin Islands).
+- **Day 5 · 2014-03-20:** St. Maarten (Sint Maarten).
+- **Day 6 · 2014-03-21:** At sea.
+- **Day 7 · 2014-03-22:** At sea.
+- **Day 8 · 2014-03-23:** Fort Lauderdale (United States).
+
+Schedule sources:
+
+1. **DISboards: Allure Eastern Caribbean Cruise Compass sequence, 2013–14**
+   <https://www.disboards.com/threads/the-allure-of-the-seas-review-eastern-caribbean-august-2013.3267193/page-2>
+   Passenger transcription identifies Nassau Day 2, sea Day 3, St. Thomas Day 4, St. Maarten Day 5 and sea Days 6–7, with February 2014 compasses for the latter days.
+
+2. **Cruise Critic: Alluring cruise — March 16–23, 2014**
+   <https://www.cruisecritic.com/cruise/royal-caribbean/allure-of-the-seas/reviews/253085>
+   Passenger explicitly gives March 16–23 and Eastern Caribbean.
+
+#### Voyage notes and sources
+
 Likely one-day date correction: a passenger review explicitly identifies the March 16–23, 2014 Eastern Caribbean sailing. The supplied March 15 is the day before departure. That season's Eastern route was Fort Lauderdale–Nassau–St. Thomas–St. Maarten; the date-to-user-trip match remains an inference. The March 9 sailing containing March 15 was Western Caribbean, so it conflicts with the supplied destination.
 
 1. **Cruise Critic: Alluring cruise — March 16–23, 2014**
@@ -428,6 +744,31 @@ Likely one-day date correction: a passenger review explicitly identifies the Mar
 - Original ship label: Celebrity Reflection; original destination label: Eastern Mediterranean.
 - Ordered itinerary: Civitavecchia (Rome) (Italy) → Santorini (Greece) → Istanbul (Turkey) → Kuşadası (Ephesus) (Turkey) → Mykonos (Greece) → Athens (Piraeus) (Greece) → Naples (Italy) → Civitavecchia (Rome) (Italy).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The contemporary photo diary dates every port call, including the two-day Istanbul stay; the three intervening sailing days are June 3, June 5 and June 11.
+
+- **Day 1 · 2014-06-02:** Civitavecchia (Rome) (Italy).
+- **Day 2 · 2014-06-03:** At sea.
+- **Day 3 · 2014-06-04:** Santorini (Greece).
+- **Day 4 · 2014-06-05:** At sea.
+- **Day 5 · 2014-06-06:** Istanbul (Turkey). Overnight in Istanbul.
+- **Day 6 · 2014-06-07:** Istanbul (Turkey). Second day of the Istanbul overnight stay.
+- **Day 7 · 2014-06-08:** Kuşadası (Ephesus) (Turkey).
+- **Day 8 · 2014-06-09:** Mykonos (Greece).
+- **Day 9 · 2014-06-10:** Athens (Piraeus) (Greece).
+- **Day 10 · 2014-06-11:** At sea.
+- **Day 11 · 2014-06-12:** Naples (Italy).
+- **Day 12 · 2014-06-13:** Civitavecchia (Rome) (Italy).
+
+Schedule sources:
+
+1. **Flickr travel diary: Mediterranean Cruise on Celebrity Reflection — June 2014**
+   <https://api.flickr.com/photos/escriteur/albums/72157645178029754/with/14451670303/>
+   First-hand contemporary album explicitly lists dates and all ordered ports.
+
+#### Voyage notes and sources
+
 Contemporary passenger photo album explicitly records June 2–13, 2014 and dated calls: Santorini June 4; Istanbul June 6–7 overnight; Kusadasi June 8; Mykonos June 9; Athens June 10; Naples June 12. Piraeus is the port for Athens, and Civitavecchia is the port for Rome.
 
 1. **Flickr travel diary: Mediterranean Cruise on Celebrity Reflection — June 2014**
@@ -442,6 +783,31 @@ Contemporary passenger photo album explicitly records June 2–13, 2014 and date
 - Original ship label: Celebrity Summit; original destination label: Southern Caribbean.
 - Ordered itinerary: San Juan (Puerto Rico) → St. Croix (U.S. Virgin Islands) → St. Kitts (Saint Kitts and Nevis) → Dominica (Dominica) → Grenada (Grenada) → St. Thomas (U.S. Virgin Islands) → San Juan (Puerto Rico).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The archived official 2015 brochure includes the March 14 departure and its full day order, including a sea day between Grenada and St. Thomas.
+
+- **Day 1 · 2015-03-14:** San Juan (Puerto Rico).
+- **Day 2 · 2015-03-15:** St. Croix (U.S. Virgin Islands).
+- **Day 3 · 2015-03-16:** St. Kitts (Saint Kitts and Nevis).
+- **Day 4 · 2015-03-17:** Dominica (Dominica).
+- **Day 5 · 2015-03-18:** Grenada (Grenada).
+- **Day 6 · 2015-03-19:** At sea.
+- **Day 7 · 2015-03-20:** St. Thomas (U.S. Virgin Islands).
+- **Day 8 · 2015-03-21:** San Juan (Puerto Rico).
+
+Schedule sources:
+
+1. **Celebrity Cruises 2015 brochure: Southern Caribbean, page 52**
+   <https://doczz.net/doc/6035429/sehenswert---bei-rcl-cruises-ltd.>
+   Archived official brochure lists March 14, 2015 and Days 1–8, with sea on Day 6.
+
+2. **Cruiseline: Celebrity Summit — March 14, 2015**
+   <https://cruiseline.com/ship/celebrity-summit/review/401906>
+   Exact departure, seven-night duration, San Juan roundtrip and ordered ports.
+
+#### Voyage notes and sources
+
 Exact date matched to a passenger review of the seven-night San Juan roundtrip. All five intermediate ports are listed in itinerary order. End date calculated from verified departure and duration.
 
 1. **Cruiseline: Celebrity Summit — March 14, 2015**
@@ -455,6 +821,32 @@ Exact date matched to a passenger review of the seven-night San Juan roundtrip. 
 - Cruise line: Celebrity Cruises.
 - Original ship label: Celebrity Silhouette; original destination label: Scandinavia & Russia.
 - Ordered itinerary: Stockholm (Sweden) → Helsinki (Finland) → St. Petersburg (Russia) → Tallinn (Estonia) → Warnemünde (Berlin) (Germany) → Fredericia (Denmark) → Copenhagen (Denmark) → Amsterdam (Netherlands).
+
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The official 2015 Europe Guide gives the complete May 28 day-by-day itinerary, including sea Days 7 and 12 and overnight stays in Stockholm, St. Petersburg and Copenhagen.
+
+- **Day 1 · 2015-05-28:** Stockholm (Sweden). Overnight in Stockholm after embarkation.
+- **Day 2 · 2015-05-29:** Stockholm (Sweden). Second day of the Stockholm overnight stay.
+- **Day 3 · 2015-05-30:** Helsinki (Finland).
+- **Day 4 · 2015-05-31:** St. Petersburg (Russia). Overnight in St. Petersburg.
+- **Day 5 · 2015-06-01:** St. Petersburg (Russia). Second day of the St. Petersburg overnight stay.
+- **Day 6 · 2015-06-02:** Tallinn (Estonia).
+- **Day 7 · 2015-06-03:** At sea.
+- **Day 8 · 2015-06-04:** Warnemünde (Berlin) (Germany).
+- **Day 9 · 2015-06-05:** Fredericia (Denmark).
+- **Day 10 · 2015-06-06:** Copenhagen (Denmark). Overnight in Copenhagen.
+- **Day 11 · 2015-06-07:** Copenhagen (Denmark). Second day of the Copenhagen overnight stay.
+- **Day 12 · 2015-06-08:** At sea.
+- **Day 13 · 2015-06-09:** Amsterdam (Netherlands).
+
+Schedule sources:
+
+1. **Celebrity Cruises 2015 Europe Guide, page 59**
+   <https://www.scribd.com/doc/246907520/Celebrity-Cruises-2015-Europa>
+   Archived official brochure contains exact departure date and day-by-day itinerary.
+
+#### Voyage notes and sources
 
 Exact 12-night Stockholm-to-Amsterdam sailing appears in the Celebrity 2015 Europe brochure, page 59, and a verified passenger review. Overnight stays in Stockholm, St. Petersburg and Copenhagen. Brochure day order: Stockholm May 28–29, Helsinki May 30, St. Petersburg May 31–June 1, Tallinn June 2, sea June 3, Warnemunde June 4, Fredericia June 5, Copenhagen June 6–7, sea June 8, Amsterdam June 9.
 
@@ -478,6 +870,31 @@ Exact 12-night Stockholm-to-Amsterdam sailing appears in the Celebrity 2015 Euro
 - Original ship label: Celebrity Summit; original destination label: Southern Caribbean.
 - Ordered itinerary: San Juan (Puerto Rico) → Barbados (Barbados) → St. Lucia (Saint Lucia) → Antigua (Antigua and Barbuda) → St. Maarten (Sint Maarten) → St. Thomas (U.S. Virgin Islands) → San Juan (Puerto Rico).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The official 2016–17 brochure lists the March 19, 2016 departure and the complete sequence, beginning with a sea day before Barbados.
+
+- **Day 1 · 2016-03-19:** San Juan (Puerto Rico).
+- **Day 2 · 2016-03-20:** At sea.
+- **Day 3 · 2016-03-21:** Barbados (Barbados).
+- **Day 4 · 2016-03-22:** St. Lucia (Saint Lucia).
+- **Day 5 · 2016-03-23:** Antigua (Antigua and Barbuda).
+- **Day 6 · 2016-03-24:** St. Maarten (Sint Maarten).
+- **Day 7 · 2016-03-25:** St. Thomas (U.S. Virgin Islands).
+- **Day 8 · 2016-03-26:** San Juan (Puerto Rico).
+
+Schedule sources:
+
+1. **Celebrity Cruises 2016–17 worldwide brochure, page 37**
+   <https://doczz.net/doc/558975/luxury-cruises---celebrity-cruises>
+   The March 19 Summit departure follows San Juan, sea, Barbados, St. Lucia, Antigua, St. Maarten, St. Thomas and San Juan.
+
+2. **Crew Center: Philipsburg 2016 cruise ship port calendar**
+   <https://crew-center.com/philipsburg-st-maarten-cruise-ship-port-calendar-2016>
+   Celebrity Summit listed March 24, 2016.
+
+#### Voyage notes and sources
+
 Exact departure and seven-night San Juan roundtrip matched to verified passenger review. Port call sequence differs from the 2015 Summit cruise. Philipsburg on March 24 is independently supported by the 2016 port calendar. This was the first sailing after Summit's March 2016 drydock.
 
 1. **Cruiseline: Celebrity Summit — March 19, 2016**
@@ -499,6 +916,60 @@ Exact departure and seven-night San Juan roundtrip matched to verified passenger
 - Cruise line: Celebrity Cruises.
 - Original ship label: Celebrity Silhouette; original destination label: British Isles.
 - Ordered itinerary: Amsterdam (Netherlands) → Belfast (United Kingdom) → Ayr (United Kingdom) → Glasgow (Greenock) (United Kingdom) → Liverpool (United Kingdom) → Dún Laoghaire (Dublin) (Ireland) → Cork (Cobh) (Ireland) → St. Peter Port (Guernsey) (Guernsey) → Le Havre (Paris) (France) → Amsterdam (Netherlands).
+
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. Historical port calendars and the exact-sailing passenger review establish the day order. Liverpool spans July 18–19 as an overnight stay; the sea days are July 14 and July 24.
+
+- **Day 1 · 2016-07-13:** Amsterdam (Netherlands).
+- **Day 2 · 2016-07-14:** At sea.
+- **Day 3 · 2016-07-15:** Belfast (United Kingdom).
+- **Day 4 · 2016-07-16:** Ayr (United Kingdom).
+- **Day 5 · 2016-07-17:** Glasgow (Greenock) (United Kingdom).
+- **Day 6 · 2016-07-18:** Liverpool (United Kingdom). Overnight in Liverpool.
+- **Day 7 · 2016-07-19:** Liverpool (United Kingdom). Second day of the Liverpool overnight stay.
+- **Day 8 · 2016-07-20:** Dún Laoghaire (Dublin) (Ireland).
+- **Day 9 · 2016-07-21:** Cork (Cobh) (Ireland).
+- **Day 10 · 2016-07-22:** St. Peter Port (Guernsey) (Guernsey).
+- **Day 11 · 2016-07-23:** Le Havre (Paris) (France).
+- **Day 12 · 2016-07-24:** At sea.
+- **Day 13 · 2016-07-25:** Amsterdam (Netherlands).
+
+Schedule sources:
+
+1. **Cruiseline: Celebrity Silhouette — July 13, 2016**
+   <https://cruiseline.com/ship/celebrity-silhouette/review/425905>
+   Exact departure, duration, roundtrip and all ordered ports.
+
+2. **Belfast Harbour 2016 schedule, archived by NI Ferry**
+   <https://www.niferry.co.uk/downloads/Belfast%20Cruise%20Schedule%202016.pdf>
+   Lists Celebrity Silhouette at Belfast on July 15.
+
+3. **PortNews: Ayr and Troon receive record cruise calls in 2016**
+   <https://en.portnews.ru/news/220079/>
+   Contemporary ABP announcement identifies Silhouette's July 16 Ayr call for The Open.
+
+4. **Crew Center: Liverpool 2016 port calendar**
+   <https://crew-center.com/liverpool-england-cruise-ship-port-calendar-2016>
+   Records arrival July 18 and departure July 19, confirming the overnight in Liverpool.
+
+5. **Crew Center: Dublin 2016 port calendar**
+   <https://crew-center.com/dublin-ireland-cruise-ship-port-calendar-2016>
+   Lists the Dublin-area call on July 20.
+
+6. **data.gg: historical Guernsey cruise sailings**
+   <https://data.gg/Developers/Sailings/Cruises/View>
+   Lists Celebrity Silhouette in Guernsey on July 22, arriving from Cork and sailing to Le Havre.
+
+7. **Crew Center: Le Havre 2016 port calendar**
+   <https://crew-center.com/le-havre-france-cruise-ship-port-calendar-2016>
+   Lists Celebrity Silhouette at Le Havre on July 23.
+
+8. **Crew Center: Amsterdam 2016 port calendar**
+   <https://crew-center.com/amsterdam-holland-cruise-ship-port-calendar-2016>
+   Records the July 13 departure and July 25 return.
+
+#### Voyage notes and sources
 
 Exact match: 12-night British Isles & The Open, Amsterdam roundtrip. Verified passenger review supplies ordered ports including both Ayr and Greenock. Ayr call on July 16 is confirmed by a contemporary port announcement for The Open at Royal Troon. The return date is calculated from departure plus twelve nights.
 
@@ -526,6 +997,33 @@ Exact match: 12-night British Isles & The Open, Amsterdam roundtrip. Verified pa
 - Original ship label: Carnival Sunshine; original destination label: Eastern Caribbean.
 - Ordered itinerary: Port Canaveral (United States) → Amber Cove (Dominican Republic) → Grand Turk (Turks and Caicos Islands) → Port Canaveral (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The official deployment announcement and dated port calendars place Amber Cove on March 14 and Grand Turk on March 15, with sea days on March 13 and March 16.
+
+- **Day 1 · 2017-03-12:** Port Canaveral (United States).
+- **Day 2 · 2017-03-13:** At sea.
+- **Day 3 · 2017-03-14:** Amber Cove (Dominican Republic).
+- **Day 4 · 2017-03-15:** Grand Turk (Turks and Caicos Islands).
+- **Day 5 · 2017-03-16:** At sea.
+- **Day 6 · 2017-03-17:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **Carnival Cruise Line: Sunshine 2016–17 deployment announcement**
+   <https://www.carnival-news.com/2015/03/16/carnival-sunshine-to-operate-unique-schedule-of-two-to-10-day-voyages-from-new-york-june-to-october-2016>
+   Official release explicitly names March 12, 2017 five-day Amber Cove/Grand Turk sailing from Port Canaveral.
+
+2. **Crew Center: Amber Cove 2017 port calendar**
+   <https://crew-center.com/amber-cove-cruise-ship-schedule-2017>
+   Lists Carnival Sunshine at Amber Cove on March 14, 2017.
+
+3. **Crew Center: Grand Turk 2017 port calendar**
+   <https://crew-center.com/grand-turk-turks-and-caicos-cruise-ship-schedule-2017>
+   Lists Carnival Sunshine at Grand Turk on March 15, 2017.
+
+#### Voyage notes and sources
+
 Exact match to official Carnival deployment announcement and verified sailing review: five-night Eastern Caribbean cruise from Port Canaveral to Amber Cove and Grand Turk. End date calculated from verified departure and duration.
 
 1. **Carnival Cruise Line: Sunshine 2016–17 deployment announcement**
@@ -544,6 +1042,27 @@ Exact match to official Carnival deployment announcement and verified sailing re
 - Original ship label: Carnival Liberty; original destination label: Bahamas.
 - Ordered itinerary: Port Canaveral (United States) → Nassau (Bahamas) → Port Canaveral (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: likely. Reconstructed from the same ship’s three-night Port Canaveral itinerary documented in May 2017: Nassau on Day 2 and a full sea day on Day 3. The December 21 passenger review confirms the duration and Nassau call, but does not independently date the port or sea day.
+
+- **Day 1 · 2017-12-21:** Port Canaveral (United States).
+- **Day 2 · 2017-12-22:** Nassau (Bahamas).
+- **Day 3 · 2017-12-23:** At sea.
+- **Day 4 · 2017-12-24:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **Carnival Liberty — December 21, 2017 passenger review**
+   <https://cruiseline.com/ship/carnival-liberty/review/460341>
+   Exact departure, three-night duration, Port Canaveral roundtrip and Nassau.
+
+2. **Sweet Escapes — Carnival Liberty three-day cruise, May 2017**
+   <https://susancrow.blogspot.com/2017/05/carnival-liberty.html>
+   Same-year firsthand account follows embarkation, Nassau the next morning, then a full sea day. A seasonal comparison, not the December 21 sailing.
+
+#### Voyage notes and sources
+
 An exact-date passenger review identifies a three-night Bahamas sailing from Port Canaveral and lists Nassau. Return date is calculated from the published duration.
 
 1. **Carnival Liberty — December 21, 2017 passenger review**
@@ -557,6 +1076,26 @@ An exact-date passenger review identifies a three-night Bahamas sailing from Por
 - Cruise line: Celebrity Cruises.
 - Original ship label: Celebrity Reflection; original destination label: Mediterranean.
 - Ordered itinerary: Civitavecchia (Rome) (Italy) → La Spezia (Italy) → Villefranche (France) → Ajaccio (France) → Cagliari (Italy) → Naples (Italy) → Civitavecchia (Rome) (Italy).
+
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The exact-date archived itinerary lists a port on every calendar day; this six-night voyage had no full sea days.
+
+- **Day 1 · 2018-08-15:** Civitavecchia (Rome) (Italy).
+- **Day 2 · 2018-08-16:** La Spezia (Italy).
+- **Day 3 · 2018-08-17:** Villefranche (France).
+- **Day 4 · 2018-08-18:** Ajaccio (France).
+- **Day 5 · 2018-08-19:** Cagliari (Italy).
+- **Day 6 · 2018-08-20:** Naples (Italy).
+- **Day 7 · 2018-08-21:** Civitavecchia (Rome) (Italy).
+
+Schedule sources:
+
+1. **Archived Celebrity Mediterranean Getaway itinerary, August 15–21, 2018**
+   <https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/>
+   Full day-by-day historical schedule and Reflection ship identification.
+
+#### Voyage notes and sources
 
 Archived exact-date offer supplies the complete six-night itinerary. Every day had a port: La Spezia Aug 16, Villefranche Aug 17, Ajaccio Aug 18, Cagliari Aug 19 and Naples Aug 20. During our stop in Villefranche, France, we visited Monaco on a shore excursion.
 
@@ -575,6 +1114,32 @@ Archived exact-date offer supplies the complete six-night itinerary. Every day h
 - Cruise line: Norwegian Cruise Line.
 - Original ship label: NCL Sky; original destination label: Cuba.
 - Ordered itinerary: Miami (United States) → Havana (Cuba) → Great Stirrup Cay (Bahamas) → Miami (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. Historical port calendars give Havana June 4 through the early morning of June 5, then Great Stirrup Cay June 6. June 5 retains the overnight Havana call and is not counted as a full sea day. The Great Stirrup Cay visit remains a scheduled call.
+
+- **Day 1 · 2019-06-03:** Miami (United States).
+- **Day 2 · 2019-06-04:** Havana (Cuba). Overnight in Havana.
+- **Day 3 · 2019-06-05:** Havana (Cuba). The overnight Havana call ended at 06:00; sailing later that day is not a full sea day.
+- **Day 4 · 2019-06-06:** Great Stirrup Cay (Bahamas).
+- **Day 5 · 2019-06-07:** Miami (United States).
+
+Schedule sources:
+
+1. **Port of Miami ship calendar, May–August 2019**
+   <https://crew-center.com/port-miami-cruise-ship-schedule-may-august-2019>
+   Sky in Miami June 3 and June 7.
+
+2. **Havana ship calendar, January–June 2019**
+   <https://crew-center.com/havana-cuba-cruise-ship-schedule-january-june-2019>
+   Sky scheduled Havana June 4, 07:00 through June 5, 06:00.
+
+3. **Great Stirrup Cay ship calendar 2019**
+   <https://crew-center.com/great-stirrup-cay-bahamas-cruise-ship-schedule-2019>
+   Sky scheduled June 6, 08:00–17:00.
+
+#### Voyage notes and sources
 
 Matched across historical port calendars: Miami June 3, overnight Havana June 4–5, Great Stirrup Cay June 6, Miami June 7. Contemporary coverage documents Sky passengers in Havana June 4. This was one of the final US-to-Cuba cruise visits as the June 5 restrictions took effect; the similarly named Norwegian Sun was diverted, so its cancellation should not be applied to this sailing. Great Stirrup Cay is the scheduled call, not independently confirmed by a passenger report.
 
@@ -606,6 +1171,31 @@ Matched across historical port calendars: Miami June 3, overnight Havana June 4�
 - Original ship label: Emerald Princess; original destination label: Mediterranean.
 - Ordered itinerary: Athens (Piraeus) (Greece) → Santorini (Greece) → Kotor (Montenegro) → Messina (Italy) → Naples (Italy) → Barcelona (Spain).
 
+#### Day-by-day schedule
+
+Schedule confidence: likely. The original Princess brochure confirms the August 3 sailing and ordered ports. Sea days on Days 3 and 7 follow a day-by-day firsthand account of the identical July 13–20, 2019 route; the exact August departure’s day-by-day timetable was not located.
+
+- **Day 1 · 2019-08-03:** Athens (Piraeus) (Greece).
+- **Day 2 · 2019-08-04:** Santorini (Greece).
+- **Day 3 · 2019-08-05:** At sea.
+- **Day 4 · 2019-08-06:** Kotor (Montenegro).
+- **Day 5 · 2019-08-07:** Messina (Italy).
+- **Day 6 · 2019-08-08:** Naples (Italy).
+- **Day 7 · 2019-08-09:** At sea.
+- **Day 8 · 2019-08-10:** Barcelona (Spain).
+
+Schedule sources:
+
+1. **Princess Europe 2019 brochure — Mediterranean & Adriatic, page 20**
+   <https://www.princess.com/downloads/pdf/sin_brochures/2019/europe-2019.pdf>
+   Primary brochure: Emerald Princess Aug 3 departure, seven days, Athens–Santorini–Kotor–Messina–Naples–Barcelona.
+
+2. **Emerald Princess July 13–20, 2019 day-by-day trip report**
+   <https://cameltravel.co.uk/emerald-princess-cruise/>
+   Same-season Athens–Barcelona itinerary explicitly lists sea days on the third and seventh days, with Santorini, Kotor, Messina and Naples in between.
+
+#### Voyage notes and sources
+
 Princess's original Europe 2019 brochure (printed page 20) explicitly lists August 3 for the seven-day Athens-to-Barcelona Mediterranean & Adriatic sailing and supplies the port order. Return date follows its seven-night duration. This route was also available as part of longer combinations; the seven-night departure is the direct match to the supplied date.
 
 1. **Princess Europe 2019 brochure — Mediterranean & Adriatic, page 20**
@@ -623,6 +1213,40 @@ Princess's original Europe 2019 brochure (printed page 20) explicitly lists Augu
 - Cruise line: Carnival Cruise Line.
 - Original ship label: Carnival Magic; original destination label: Bahamas.
 - Ordered itinerary: Port Canaveral (United States) → Nassau (Bahamas) → Half Moon Cay (Bahamas) → Port Canaveral (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: likely. Likely day order reconstructed from the 2021 short-cruise pattern: Nassau on Day 2, Half Moon Cay on Day 3 and sea on Day 4. Exact August 12 passenger reviews confirm both ports and four nights; a September 23–27 Magic vlog places Half Moon Cay on Day 3, while Carnival’s nearby-period Port Canaveral brochure places the sea day last. Exact August port-day timing remains unverified.
+
+- **Day 1 · 2021-08-12:** Port Canaveral (United States).
+- **Day 2 · 2021-08-13:** Nassau (Bahamas).
+- **Day 3 · 2021-08-14:** Half Moon Cay (Bahamas).
+- **Day 4 · 2021-08-15:** At sea.
+- **Day 5 · 2021-08-16:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **Carnival Magic — First Cruise Back, August 12, 2021**
+   <https://cruiseline.com/ship/carnival-magic/review/529973>
+   Exact departure, four nights, Port Canaveral, Nassau and Half Moon Cay.
+
+2. **Carnival Magic — Great Family Cruise, August 12, 2021**
+   <https://cruiseline.com/ship/carnival-magic/review/542302>
+   Separate passenger corroborates exact departure, four nights and both stops.
+
+3. **GarnerTV — Carnival Magic 2021, Day 3 Half Moon Cay**
+   <https://www.youtube.com/watch?v=MFP4Hz9dlqo>
+   Video title and description explicitly identify Day 3 at Half Moon Cay on the September 23–27, 2021 four-night Port Canaveral sailing; same-season comparison, not the August 12 departure.
+
+4. **Carnival 2019–2021 cruise brochure, printed page 31**
+   <https://arrigogroup.com.mt/wp-content/uploads/2019/06/Carnival-2020-Brochure.pdf>
+   Primary brochure’s four-day Port Canaveral route has Nassau Day 2, a private island Day 3, sea Day 4, and return Day 5. This example names Princess Cays rather than Half Moon Cay, so it supports only the seasonal day pattern.
+
+5. **Carnival announces Magic replacing Elation on short Port Canaveral cruises**
+   <https://www.carnival-news.com/2021/06/10/carnival-cruise-line-confirms-first-sailing-for-mardi-gras-announces-more-ships-returning-in-august>
+   Official June 10, 2021 announcement says Magic would take over Elation’s four- and five-day Bahamas itineraries August 7–October 7.
+
+#### Voyage notes and sources
 
 Two independent exact-date passenger reviews identify a four-night Port Canaveral roundtrip with Nassau and Half Moon Cay. Return date is calculated from the duration; another passenger's next sailing begins August 16. Precise port-day timing was not found. An isolated blog's August 15 end date conflicts with the two four-night reviews.
 
@@ -642,6 +1266,27 @@ Two independent exact-date passenger reviews identify a four-night Port Canavera
 - Original ship label: Carnival Mardi Gras 2.0; original destination label: Bahamas.
 - Ordered itinerary: Port Canaveral (United States) → Nassau (Bahamas) → Amber Cove (Dominican Republic) → Grand Turk (Turks and Caicos Islands) → Port Canaveral (United States).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The exact March 12–19, 2022 archived schedule explicitly lists full sea days on March 13, 15 and 18. These are scheduled days, subject to any unrecorded operational changes.
+
+- **Day 1 · 2022-03-12:** Port Canaveral (United States).
+- **Day 2 · 2022-03-13:** At sea.
+- **Day 3 · 2022-03-14:** Nassau (Bahamas).
+- **Day 4 · 2022-03-15:** At sea.
+- **Day 5 · 2022-03-16:** Amber Cove (Dominican Republic).
+- **Day 6 · 2022-03-17:** Grand Turk (Turks and Caicos Islands).
+- **Day 7 · 2022-03-18:** At sea.
+- **Day 8 · 2022-03-19:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **Mardi Gras March 12–19, 2022 archived itinerary**
+   <https://www.icruise.com/itineraries/7-night-eastern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_3-12-2022.html>
+   Exact dates, duration and ordered port schedule.
+
+#### Voyage notes and sources
+
 The date matches an archived seven-night Eastern Caribbean itinerary. Nassau March 14, Amber Cove March 16 and Grand Turk March 17; Bahamas is only one part of the route. The modern ship's official name is Mardi Gras (the user's '2.0' distinguishes it from Carnival's original ship). Historical schedule, subject to any unrecorded operational changes.
 
 1. **Mardi Gras March 12–19, 2022 archived itinerary**
@@ -660,6 +1305,27 @@ The date matches an archived seven-night Eastern Caribbean itinerary. Nassau Mar
 - Original ship label: Regal Princess; original destination label: Mediterranean.
 - Ordered itinerary: Barcelona (Spain) → Gibraltar (Gibraltar) → Marseille (France) → Genoa (Italy) → Livorno (Florence/Pisa) (Italy) → Civitavecchia (Rome) (Italy).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The archived June 11 departure gives sea days June 12 and 14. Only its first seven nights are included, matching the owner-confirmed Barcelona–Civitavecchia voyage.
+
+- **Day 1 · 2022-06-11:** Barcelona (Spain).
+- **Day 2 · 2022-06-12:** At sea.
+- **Day 3 · 2022-06-13:** Gibraltar (Gibraltar).
+- **Day 4 · 2022-06-14:** At sea.
+- **Day 5 · 2022-06-15:** Marseille (France).
+- **Day 6 · 2022-06-16:** Genoa (Italy).
+- **Day 7 · 2022-06-17:** Livorno (Florence/Pisa) (Italy).
+- **Day 8 · 2022-06-18:** Civitavecchia (Rome) (Italy).
+
+Schedule sources:
+
+1. **Regal Princess June 11, 2022 archived Mediterranean itinerary**
+   <https://www.icruise.com/itineraries/14-night-mediterranean-with-greek-isles-france-and-turkey-cruise_regal-princess_6-11-2022.html>
+   Historical schedule for June 11–18: Barcelona, Gibraltar, Marseille, Genoa, Livorno and Civitavecchia. Published as the first week of a longer itinerary; the owner confirms sailing the seven-day voyage.
+
+#### Voyage notes and sources
+
 You confirmed this was the seven-day Regal Princess cruise. The historical schedule containing your June 16 date matches the June 11–18, 2022 Barcelona-to-Civitavecchia (Rome) sailing, seven nights: Gibraltar June 13, Marseille June 15, Genoa June 16, Livorno June 17, and Civitavecchia June 18. June 16 was the Genoa port day. The archived longer itinerary includes this same first week; your confirmed duration identifies the seven-night voyage.
 
 1. **Regal Princess June 11, 2022 archived Mediterranean itinerary**
@@ -673,6 +1339,27 @@ You confirmed this was the seven-day Regal Princess cruise. The historical sched
 - Cruise line: Norwegian Cruise Line.
 - Original ship label: NCL Bliss; original destination label: Mexico, Honduras & Belize.
 - Ordered itinerary: Miami (United States) → Roatán (Honduras) → Harvest Caye (Belize) → Costa Maya (Mexico) → Cozumel (Mexico) → Miami (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The exact December 31, 2022–January 7, 2023 archived itinerary lists full sea days on January 1 and January 6.
+
+- **Day 1 · 2022-12-31:** Miami (United States).
+- **Day 2 · 2023-01-01:** At sea.
+- **Day 3 · 2023-01-02:** Roatán (Honduras).
+- **Day 4 · 2023-01-03:** Harvest Caye (Belize).
+- **Day 5 · 2023-01-04:** Costa Maya (Mexico).
+- **Day 6 · 2023-01-05:** Cozumel (Mexico).
+- **Day 7 · 2023-01-06:** At sea.
+- **Day 8 · 2023-01-07:** Miami (United States).
+
+Schedule sources:
+
+1. **Norwegian Bliss December 31, 2022 archived itinerary**
+   <https://www.icruise.com/itineraries/7-night-caribbean-harvest-caye-cozumel-and-roatan-cruise_norwegian-bliss_12-31-2022.html>
+   Exact dates, duration, Miami roundtrip and ordered stops.
+
+#### Voyage notes and sources
 
 Exact archived seven-night sailing crosses into 2023: Roatán Jan 2, Harvest Caye Jan 3, Costa Maya Jan 4, Cozumel Jan 5. The Bahamas are not on this route. Historical scheduled itinerary, with a same-departure passenger review.
 
@@ -691,6 +1378,27 @@ Exact archived seven-night sailing crosses into 2023: Roatán Jan 2, Harvest Cay
 - Cruise line: Celebrity Cruises.
 - Original ship label: Celebrity Solstice; original destination label: Mexican Riviera.
 - Ordered itinerary: Los Angeles (San Pedro) (United States) → Cabo San Lucas (Mexico) → Mazatlán (Mexico) → San Diego (United States) → Los Angeles (San Pedro) (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: likely. The archived March 11–18, 2023 schedule explicitly lists sea days March 12, 15 and 16. Day positions are documented for that sailing; matching it to the owner’s March 18 date remains likely, as described in the voyage notes.
+
+- **Day 1 · 2023-03-11:** Los Angeles (San Pedro) (United States).
+- **Day 2 · 2023-03-12:** At sea.
+- **Day 3 · 2023-03-13:** Cabo San Lucas (Mexico).
+- **Day 4 · 2023-03-14:** Mazatlán (Mexico).
+- **Day 5 · 2023-03-15:** At sea.
+- **Day 6 · 2023-03-16:** At sea.
+- **Day 7 · 2023-03-17:** San Diego (United States).
+- **Day 8 · 2023-03-18:** Los Angeles (San Pedro) (United States).
+
+Schedule sources:
+
+1. **Celebrity Solstice March 11–18, 2023 archived itinerary**
+   <https://www.icruise.com/itineraries/7-night-mexican-riviera-cruise_celebrity-solstice_3-11-2023.html>
+   Exact return-date match and Cabo–Mazatlán–San Diego itinerary.
+
+#### Voyage notes and sources
 
 Your date is most likely the return date: the documented March 11–18 voyage matches your Cabo and Mazatlán memories, and also visited San Diego. Archived dates: Cabo March 13, Mazatlán March 14, San Diego March 17. A verified passenger review corroborates all three stops. The separate March 18 departure was marketed with Catalina Island and Cabo instead, making March 11–18 the stronger match. No Puerto Vallarta stop is supported for this sailing.
 
@@ -714,6 +1422,36 @@ Your date is most likely the return date: the documented March 11–18 voyage ma
 - Original ship label: Celebrity Millennium; original destination label: Japan & South Korea.
 - Ordered itinerary: Yokohama (Tokyo) (Japan) → Kobe (Japan) → Osaka (Japan) → Kochi (Japan) → Hiroshima (Japan) → Jeju (South Korea) → Kagoshima (Japan) → Shimizu (Mount Fuji) (Japan) → Yokohama (Tokyo) (Japan).
 
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The corrected July 2–14 itinerary has full sea days July 3, 9 and 12. Kobe and Osaka are overnight calls: July 5 includes departure from Kobe and arrival in Osaka, not a sea day.
+
+- **Day 1 · 2024-07-02:** Yokohama (Tokyo) (Japan).
+- **Day 2 · 2024-07-03:** At sea.
+- **Day 3 · 2024-07-04:** Kobe (Japan). Overnight in Kobe.
+- **Day 4 · 2024-07-05:** Kobe (Japan) → Osaka (Japan). Depart Kobe at 05:00, arrive Osaka at 08:00 and stay overnight.
+- **Day 5 · 2024-07-06:** Osaka (Japan). Overnight Osaka call continues until the 17:00 departure.
+- **Day 6 · 2024-07-07:** Kochi (Japan).
+- **Day 7 · 2024-07-08:** Hiroshima (Japan).
+- **Day 8 · 2024-07-09:** At sea.
+- **Day 9 · 2024-07-10:** Jeju (South Korea).
+- **Day 10 · 2024-07-11:** Kagoshima (Japan).
+- **Day 11 · 2024-07-12:** At sea.
+- **Day 12 · 2024-07-13:** Shimizu (Mount Fuji) (Japan).
+- **Day 13 · 2024-07-14:** Yokohama (Tokyo) (Japan).
+
+Schedule sources:
+
+1. **Celebrity official July 2, 2024 itinerary correction**
+   <https://www.celebritycruises.com/content/dam/celebrity/pdf/ML-7-2-24-12-nights-best-of-japan-cruises-Itinerary-Modification-Guest-Letter.pdf>
+   Primary correction adds Kochi July 7, moves Hiroshima to July 8 and Jeju to July 10, replaces Nagasaki with sea day.
+
+2. **Celebrity Millennium July 2–14, 2024 archived itinerary**
+   <https://www.icruise.com/itineraries/12-night-best-of-japan-cruise_celebrity-millennium_7-2-2024.html>
+   Full corrected route, dates and overnight calls.
+
+#### Voyage notes and sources
+
 Exact twelve-night departure with an official corrected itinerary letter. Kobe July 4–5, Osaka July 5–6, Kochi July 7, Hiroshima July 8, Jeju July 10, Kagoshima July 11 and Shimizu July 13. The official change added Kochi and removed Nagasaki; map follows that revision. Kobe and Osaka are separate calls with overnight stays.
 
 1. **Celebrity official July 2, 2024 itinerary correction**
@@ -731,6 +1469,32 @@ Exact twelve-night departure with an official corrected itinerary letter. Kobe J
 - Cruise line: Carnival Cruise Line.
 - Original ship label: Carnival Mardi Gras 2.0; original destination label: Aruba & Curaçao.
 - Ordered itinerary: Port Canaveral (United States) → Aruba (Aruba) → Curaçao (Curaçao) → Amber Cove (Dominican Republic) → Port Canaveral (United States).
+
+#### Day-by-day schedule
+
+Schedule confidence: confirmed. The updated June 7–15, 2025 schedule explicitly lists sea days June 8, 9, 12 and 14; Amber Cove is retained as the revised June 13 call.
+
+- **Day 1 · 2025-06-07:** Port Canaveral (United States).
+- **Day 2 · 2025-06-08:** At sea.
+- **Day 3 · 2025-06-09:** At sea.
+- **Day 4 · 2025-06-10:** Aruba (Aruba).
+- **Day 5 · 2025-06-11:** Curaçao (Curaçao).
+- **Day 6 · 2025-06-12:** At sea.
+- **Day 7 · 2025-06-13:** Amber Cove (Dominican Republic).
+- **Day 8 · 2025-06-14:** At sea.
+- **Day 9 · 2025-06-15:** Port Canaveral (United States).
+
+Schedule sources:
+
+1. **Mardi Gras June 7–15, 2025 archived itinerary**
+   <https://www.icruise.com/itineraries/8-night-southern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_6-7-2025.html>
+   Exact dates, eight nights and updated Aruba–Curaçao–Amber Cove route.
+
+2. **Carnival replaces Grand Turk calls on selected 2025 itineraries**
+   <https://www.cruisehive.com/carnival-passes-up-caribbean-port-for-multiple-itineraries/170377>
+   Specifically identifies June 7 Mardi Gras sailing's substitution of Amber Cove for Grand Turk.
+
+#### Voyage notes and sources
 
 Exact eight-night Port Canaveral roundtrip: Aruba June 10, Curaçao June 11 and Amber Cove June 13. Amber Cove replaced the originally planned Grand Turk call; the map uses the updated itinerary. Modern ship officially named Mardi Gras.
 

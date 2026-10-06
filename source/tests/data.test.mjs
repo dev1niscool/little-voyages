@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { cruises } from '../src/data.js';
+import { computeStatistics } from '../src/statistics-data.js';
+import { shoreExcursions } from '../src/personal-visits.js';
 
 test('all 29 personal voyages survive normalization in their original year', () => {
   assert.equal(cruises.length, 29);
@@ -84,6 +86,46 @@ test('clarified and revised itineraries retain their research distinctions', () 
   assert.ok(!byId(28).ports.some(port => port.name === 'Nagasaki'));
   assert.ok(byId(29).ports.some(port => port.name === 'Amber Cove'));
   assert.ok(!byId(29).ports.some(port => port.name === 'Grand Turk'));
+});
+
+test('all voyages include sourced calendar days without inserting sea days into geographic routes', () => {
+  for (const cruise of cruises) {
+    const label = `Voyage ${cruise.id}: ${cruise.ship}`;
+    const schedule = cruise.dailyItinerary;
+    assert.ok(schedule, `${label}: missing daily itinerary`);
+    assert.ok(['confirmed', 'likely', 'unresolved'].includes(schedule.confidence), label);
+    assert.ok(schedule.note && schedule.sources.length > 0, `${label}: daily reconstruction needs its evidence`);
+    for (const source of schedule.sources) {
+      assert.ok(source.title && source.note, label);
+      assert.equal(new URL(source.url).protocol, 'https:', label);
+    }
+    assert.equal(schedule.days.length, cruise.nights + 1, `${label}: embarkation and disembarkation are calendar days`);
+    for (const [index, day] of schedule.days.entries()) {
+      assert.equal(day.day, index + 1, label);
+      assert.equal(day.date, new Date(Date.parse(cruise.startDate) + index * 86_400_000).toISOString().slice(0, 10), label);
+      assert.ok(['port', 'sea', 'scenic', 'unknown'].includes(day.type), label);
+      if (['port', 'scenic'].includes(day.type)) {
+        assert.ok(day.portIndices.length > 0, label);
+        for (const portIndex of day.portIndices) {
+          assert.ok(Number.isInteger(portIndex) && portIndex >= 0 && portIndex < cruise.ports.length, label);
+        }
+      } else {
+        assert.ok(!('portIndices' in day), `${label}: a sea or unknown day cannot be a map port`);
+      }
+      if (day.type === 'unknown') assert.equal(schedule.confidence, 'unresolved', label);
+    }
+    assert.ok(!cruise.ports.some(port => /^(at sea|sea day)$/i.test(port.name)), label);
+  }
+  for (const id of [1, 3, 20, 21]) {
+    assert.equal(cruises.find(cruise => cruise.id === id).dailyItinerary.days.filter(day => day.type === 'sea').length, 0, `Voyage ${id} does not gain a sea day just because of a repeated port or overnight`);
+  }
+  const stats = computeStatistics(cruises, { shoreExcursions });
+  assert.equal(stats.cruiseCount, 29);
+  assert.equal(stats.totalNights, 202);
+  assert.equal(stats.uniquePorts, 87);
+  assert.equal(stats.countryCount, 40);
+  assert.equal(stats.territoryCount, 6);
+  assert.equal(cruises.reduce((total, cruise) => total + cruise.ports.length, 0), 167);
 });
 
 test('downloadable JSON exactly matches the atlas data', () => {

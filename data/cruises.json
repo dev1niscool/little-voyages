@@ -80,7 +80,57 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The published 2005 three-night Wonder schedule has a port on every calendar day and no full sea day.",
+      "sources": [
+        {
+          "title": "AllEars: Magical Disney Cruise Guide, August 2005",
+          "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+          "note": "Section 2.1, printed page 5: Thursday Port Canaveral, Friday Nassau, Saturday Castaway Cay, Sunday Port Canaveral."
+        },
+        {
+          "title": "DISboards: May 19, 2005 3 day Wonder",
+          "url": "https://www.disboards.com/threads/may-19-2005-3-day-wonder-anyone.632193/",
+          "note": "Contemporary passenger roll call confirms ship, departure date, and three-night duration."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2005-05-19"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2005-05-20"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2005-05-21"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2005-05-22"
+        }
+      ]
+    }
   },
   {
     "id": 2,
@@ -194,7 +244,85 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Reconstructed from the established Eastern Caribbean schedule and a January 2007 sailing on the same route. Full sea days fall on days 2, 3 and 6; an exact February 3 daily schedule has not been located.",
+      "sources": [
+        {
+          "title": "AllEars: Magical Disney Cruise Guide, Eastern itinerary",
+          "url": "https://allears.net/wp-content/uploads/archive/cruise/mdcg.pdf",
+          "note": "Section 2.1, printed page 5: Saturday departure; Sunday and Monday at sea; Tuesday St. Maarten; Wednesday St. Thomas; Thursday at sea; Friday Castaway Cay; Saturday return."
+        },
+        {
+          "title": "Cruisemans: Disney Magic January 6, 2007",
+          "url": "https://cruisemans.com/%40namber/m2v6ac46zzwa6mcn",
+          "note": "Nearby seven-night Eastern sailing supports the same route and early sea-day placement; it is not the February 3 departure."
+        },
+        {
+          "title": "DISboards: October 21st 2006 cruise discussion",
+          "url": "https://www.disboards.com/threads/october-21st-2006.1059529/",
+          "note": "Post 18, dated March 27, 2006, says the passenger rebooked the same cabin for the February 3, 2007 Eastern sailing."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2007-02-03"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2007-02-04"
+        },
+        {
+          "day": 3,
+          "type": "sea",
+          "date": "2007-02-05"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2007-02-06"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2007-02-07"
+        },
+        {
+          "day": 6,
+          "type": "sea",
+          "date": "2007-02-08"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2007-02-09"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2007-02-10"
+        }
+      ]
+    }
   },
   {
     "id": 3,
@@ -284,7 +412,65 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Disney’s published summer 2008 double-Castaway-Cay schedule applies to the August 10 departure. There are no full sea days on this four-night itinerary.",
+      "sources": [
+        {
+          "title": "Cruise Industry News: Disney announces summer 2008 itineraries",
+          "url": "https://cruiseindustrynews.com/cruise-news/2007/12/12407-disney-cruise-line-announces-future-itineraries/",
+          "note": "The December 2007 announcement gives Sunday Port Canaveral, Monday Castaway Cay, Tuesday Nassau, Wednesday Castaway Cay, Thursday return for every four-night sailing May 11–August 24, 2008."
+        },
+        {
+          "title": "DISboards: Wonder Aug. 10, 2008 — 4 Night",
+          "url": "https://www.disboards.com/threads/wonder-aug-10-2008-4-night.1849941/",
+          "note": "Contemporary passenger roll call identifies Disney Wonder’s August 10, 2008 four-night sailing."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2008-08-10"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2008-08-11"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2008-08-12"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2008-08-13"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2008-08-14"
+        }
+      ]
+    }
   },
   {
     "id": 4,
@@ -401,7 +587,85 @@
         -80.1765,
         25.7783
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Day placement follows Triumph’s historical seven-night Miami Eastern route: one sea day before San Juan and two after St. Maarten. Nearby April 2009 accounts support the ports; the exact March 15 daily schedule remains unverified.",
+      "sources": [
+        {
+          "title": "Carnival Triumph historical itinerary table",
+          "url": "https://fr.wikipedia.org/wiki/Carnival_Sunrise#Itin%C3%A9raire",
+          "note": "The retained Triumph-era Miami route table places San Juan on day 3, St. Thomas on day 4, St. Maarten on day 5, and sea days on days 2, 6 and 7. This undated secondary table supports a reconstruction, not a confirmed March 2009 schedule."
+        },
+        {
+          "title": "Cruiseline: Carnival Triumph April 26, 2009 passenger review",
+          "url": "https://cruiseline.com/ship/carnival-triumph/review/314186",
+          "note": "Nearby seasonal sailing confirms seven-night Eastern Miami roundtrip and San Juan, St. Thomas, St. Maarten ports, not the exact March date."
+        },
+        {
+          "title": "Cruise Critic: Just off the Triumph, April 2009",
+          "url": "https://boards.cruisecritic.com/topic/922849-just-off-the-triumph-it-was-great",
+          "note": "Contemporary account of April 12 sailing corroborates the seasonal Eastern operation."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2009-03-15"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2009-03-16"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2009-03-17"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2009-03-18"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2009-03-19"
+        },
+        {
+          "day": 6,
+          "type": "sea",
+          "date": "2009-03-20"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2009-03-21"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2009-03-22"
+        }
+      ]
+    }
   },
   {
     "id": 5,
@@ -476,7 +740,67 @@
         -81.5784,
         30.4084
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The two sea days are reconstructed from a near-period advertised Saturday Fascination itinerary: days 2 and 5. Carnival’s 2009 operating announcement confirms this five-night Nassau/Half Moon Cay program, but not the exact August 8 day order.",
+      "sources": [
+        {
+          "title": "Owen Family Newsletter, Summer 2009",
+          "url": "https://www.owenfuneralhome.com/download/97998/OwenFamilyNewsletter-2009Summer.pdf",
+          "note": "Printed page 2 advertises a February 2010 trip with Jacksonville embarkation, sea, Nassau, Half Moon Cay, sea, Jacksonville. Land travel days before and after the cruise are excluded."
+        },
+        {
+          "title": "Carnival: Fascination refurbishment and operating schedule, August 2009",
+          "url": "https://www.carnival-news.com/2009/08/28/reservations-open-today-on-98-new-balcony-staterooms-added-during-carnival-fascinations-multimillion-dollar-refurb",
+          "note": "Official contemporary source: Saturday five-night sailings from Jacksonville visit Half Moon Cay and Nassau; other weekday departures use different itineraries."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2009-08-08"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2009-08-09"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2009-08-10"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2009-08-11"
+        },
+        {
+          "day": 5,
+          "type": "sea",
+          "date": "2009-08-12"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2009-08-13"
+        }
+      ]
+    }
   },
   {
     "id": 6,
@@ -576,7 +900,88 @@
         -80.1765,
         25.7783
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Full sea days fall on days 3 and 7 in the Exotic Eastern itinerary introduced in April 2009. The January 23, 2010 departure is documented, while its daily positions are reconstructed from the matching route.",
+      "sources": [
+        {
+          "title": "Cruise Critic: Liberty’s new Eastern route, April 25–May 2, 2009",
+          "url": "https://boards.cruisecritic.com/topic/939147-carnival-liberty-new-eastern-caribbean-route-review-april-25-may2/",
+          "note": "The contemporary first-sailing review explicitly gives Miami, Half Moon Cay, sea, St. Thomas, San Juan, Grand Turk, sea, Miami."
+        },
+        {
+          "title": "Military Cruise Deals: archived 2009 fare bulletin",
+          "url": "https://militarycruisedeals.blogspot.com/2009/",
+          "note": "Lists CARNIVAL LIBERTY 1/23/2010 7 MIA EXOTIC EASTERN CARIB, directly supporting date, duration, homeport and route name."
+        },
+        {
+          "title": "Cruise Critic: Two Sisters Enjoying Liberty, May 2010",
+          "url": "https://www.cruisecritic.com/cruise/carnival/carnival-liberty/reviews/68074",
+          "note": "2010 passenger account corroborates continued Half Moon Cay Eastern itinerary."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2010-01-23"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2010-01-24"
+        },
+        {
+          "day": 3,
+          "type": "sea",
+          "date": "2010-01-25"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2010-01-26"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2010-01-27"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2010-01-28"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2010-01-29"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2010-01-30"
+        }
+      ]
+    }
   },
   {
     "id": 7,
@@ -725,7 +1130,85 @@
         -80.1159,
         26.094
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Carnival’s 2011/2012 brochure lists the January 15 departure with full sea days on days 2, 4, 7 and 8. Colón is a port call; the schedule does not include a ship transit of the Panama Canal.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Lines: 2011/2012 German brochure, pages 44–45",
+          "url": "https://de.scribd.com/doc/44541934/Kreuzfahrten-von-Carnival-Cruise-Lines-Deutschland-auf-einen-Blick-SAISON-2011-2012",
+          "note": "The eight-night Exotic Western table lists Saturday Fort Lauderdale, Sunday sea, Monday Cozumel, Tuesday sea, Wednesday Limón, Thursday Colón, Friday and Saturday sea, Sunday return. January 15, 2011 is listed without an itinerary-change marker."
+        },
+        {
+          "title": "Groomer to Groomer, October 2010: Pet Pro Cruise",
+          "url": "https://www.groomertogroomer.com/ebooks/GTG_Oct%202010_w_links.pdf",
+          "note": "Page 49 explicitly advertises January 15–23, 2011 on Carnival Freedom, nine days/eight nights, Fort Lauderdale with Cozumel, Limon, Colon."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2011-01-15"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2011-01-16"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2011-01-17"
+        },
+        {
+          "day": 4,
+          "type": "sea",
+          "date": "2011-01-18"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2011-01-19"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2011-01-20"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2011-01-21"
+        },
+        {
+          "day": 8,
+          "type": "sea",
+          "date": "2011-01-22"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2011-01-23"
+        }
+      ]
+    }
   },
   {
     "id": 8,
@@ -968,7 +1451,92 @@
         -122.3795,
         47.6335
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Reconstructed from the June 12, 2011 published itinerary and May 22 passenger diary for the same seasonal route. Monday is a full sea day; Tuesday in Glacier Bay is scenic cruising and is kept separate.",
+      "sources": [
+        {
+          "title": "SSQQ Travel: archived June 2011 Oosterdam itinerary",
+          "url": "https://www.ssqq.com/travel/travelfees.htm",
+          "note": "The April 20, 2011 travel quote lists June 12 Seattle; June 13 at sea; June 14 Glacier Bay; June 15 Juneau; June 16 Sitka; June 17 Ketchikan; June 18 Victoria; June 19 Seattle. This is the departure one week after the recorded voyage."
+        },
+        {
+          "title": "Cruise Critic: Oosterdam Alaska, May 2011",
+          "url": "https://www.cruisecritic.com/cruise/holland-america/oosterdam/reviews/85183",
+          "note": "The May 22 sailing diary independently places Glacier Bay on Tuesday, Juneau on Wednesday, then Sitka, Ketchikan and Victoria."
+        },
+        {
+          "title": "Holland America: The Americas 2011–2012 brochure",
+          "url": "https://www.rejsy.pl/sites/default/files/armator_files/HAL_AM11_Ebrochure_TA.pdf",
+          "note": "Alaska section lists Oosterdam 7-day Explorer from Seattle departures including June 5, 2011, and regional calls."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2011-06-05"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2011-06-06"
+        },
+        {
+          "day": 3,
+          "type": "scenic",
+          "portIndices": [
+            1
+          ],
+          "note": "Scenic cruising in Glacier Bay; no disembarkation.",
+          "date": "2011-06-07"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2011-06-08"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2011-06-09"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2011-06-10"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2011-06-11"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2011-06-12"
+        }
+      ]
+    }
   },
   {
     "id": 9,
@@ -1082,7 +1650,80 @@
         -94.7927,
         29.3102
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Newly located Carnival 2011/2012 brochure evidence lists the February 19, 2012 departure and published daily schedule. Full sea days are days 2, 3 and 7.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Lines: 2011/2012 German brochure, pages 60–61",
+          "url": "https://de.scribd.com/doc/44541934/Kreuzfahrten-von-Carnival-Cruise-Lines-Deutschland-auf-einen-Blick-SAISON-2011-2012",
+          "note": "The Galveston Western table gives Sunday embarkation; Monday and Tuesday sea; Wednesday Montego Bay; Thursday Grand Cayman; Friday Cozumel; Saturday sea; Sunday return. Carnival Magic February 19, 2012 appears without the reverse-order marker applied to some nearby dates."
+        },
+        {
+          "title": "Ray’s Cruise and Travel Blog: Carnival Magic, March 4, 2012",
+          "url": "https://snoozemanscruiseblog.blogspot.com/2012/03/carnival-magic.html",
+          "note": "Nearby sailing diary corroborates full sea days 2, 3 and 7 and the Wednesday-to-Friday port sequence."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2012-02-19"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2012-02-20"
+        },
+        {
+          "day": 3,
+          "type": "sea",
+          "date": "2012-02-21"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2012-02-22"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2012-02-23"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2012-02-24"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2012-02-25"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2012-02-26"
+        }
+      ]
+    }
   },
   {
     "id": 10,
@@ -1245,7 +1886,109 @@
         12.3074,
         45.4366
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The June 2013 passenger account confirms one sea day, and the archived sailing listing includes an overnight in Venice. Day 7 is a reconstruction of the sea-day placement between Messina and Dubrovnik; the exact daily schedule has not been independently recovered.",
+      "sources": [
+        {
+          "title": "Family Travel Gurus: Carnival Sunshine review, June 2013",
+          "url": "https://familytravelgurus.com/carnival-sunshine-review-june-2013/",
+          "note": "Nine-night Barcelona-to-Venice passenger account confirms all ordered ports and exactly one sea day."
+        },
+        {
+          "title": "ARKS Travel Agency: archived 2013 Carnival departures",
+          "url": "https://arkstravelagency.weebly.com/cruises.html",
+          "note": "The June 7 nine-night itinerary lists Venice twice, supporting the final overnight stay."
+        },
+        {
+          "title": "Cruiseline: Carnival Sunshine, June 7, 2013 — 9 Night Italy & Adriatic",
+          "url": "https://cruiseline.com/ship/carnival-sunshine/review/381014",
+          "note": "Exact departure, nine nights, endpoints and ordered ports."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2013-06-07"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2013-06-08"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2013-06-09"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2013-06-10"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2013-06-11"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2013-06-12"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2013-06-13"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2013-06-14"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "note": "Overnight in Venice.",
+          "date": "2013-06-15"
+        },
+        {
+          "day": 10,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "note": "Disembarkation after the overnight in Venice.",
+          "date": "2013-06-16"
+        }
+      ]
+    }
   },
   {
     "id": 11,
@@ -1349,7 +2092,62 @@
         -90.0602,
         29.9366
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The period Carnival brochure supplies the five-night New Orleans pattern, with sea days on Days 2 and 5. The date-to-sailing match and port order retain the uncertainty described in the voyage notes.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Lines 2014 brochure: five-day Western Caribbean from New Orleans",
+          "url": "https://www.slideshare.net/slideshow/carnival-cruise-lines-2014/28593553",
+          "note": "Published day order is New Orleans, sea, Progreso, Cozumel, sea, New Orleans; this is a period route pattern rather than an exact December 28 sailing record."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2013-12-28"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2013-12-29"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2013-12-30"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2013-12-31"
+        },
+        {
+          "day": 5,
+          "type": "sea",
+          "date": "2014-01-01"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2014-01-02"
+        }
+      ]
+    }
   },
   {
     "id": 12,
@@ -1439,7 +2237,80 @@
         -80.1159,
         26.094
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The contemporary Allure Eastern Caribbean Cruise Compass sequence places sea days on Days 3, 6 and 7. This follows the period route pattern; the voyage still uses the likely March 16 departure described in its notes.",
+      "sources": [
+        {
+          "title": "DISboards: Allure Eastern Caribbean Cruise Compass sequence, 2013–14",
+          "url": "https://www.disboards.com/threads/the-allure-of-the-seas-review-eastern-caribbean-august-2013.3267193/page-2",
+          "note": "Passenger transcription identifies Nassau Day 2, sea Day 3, St. Thomas Day 4, St. Maarten Day 5 and sea Days 6–7, with February 2014 compasses for the latter days."
+        },
+        {
+          "title": "Cruise Critic: Alluring cruise — March 16–23, 2014",
+          "url": "https://www.cruisecritic.com/cruise/royal-caribbean/allure-of-the-seas/reviews/253085",
+          "note": "Passenger explicitly gives March 16–23 and Eastern Caribbean."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2014-03-16"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2014-03-17"
+        },
+        {
+          "day": 3,
+          "type": "sea",
+          "date": "2014-03-18"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2014-03-19"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2014-03-20"
+        },
+        {
+          "day": 6,
+          "type": "sea",
+          "date": "2014-03-21"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2014-03-22"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2014-03-23"
+        }
+      ]
+    }
   },
   {
     "id": 13,
@@ -1677,7 +2548,109 @@
         11.7878,
         42.0954
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The contemporary photo diary dates every port call, including the two-day Istanbul stay; the three intervening sailing days are June 3, June 5 and June 11.",
+      "sources": [
+        {
+          "title": "Flickr travel diary: Mediterranean Cruise on Celebrity Reflection — June 2014",
+          "url": "https://api.flickr.com/photos/escriteur/albums/72157645178029754/with/14451670303/",
+          "note": "First-hand contemporary album explicitly lists dates and all ordered ports."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2014-06-02"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2014-06-03"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2014-06-04"
+        },
+        {
+          "day": 4,
+          "type": "sea",
+          "date": "2014-06-05"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Overnight in Istanbul.",
+          "date": "2014-06-06"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Second day of the Istanbul overnight stay.",
+          "date": "2014-06-07"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2014-06-08"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2014-06-09"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2014-06-10"
+        },
+        {
+          "day": 10,
+          "type": "sea",
+          "date": "2014-06-11"
+        },
+        {
+          "day": 11,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2014-06-12"
+        },
+        {
+          "day": 12,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "date": "2014-06-13"
+        }
+      ]
+    }
   },
   {
     "id": 14,
@@ -1777,7 +2750,86 @@
         -66.1107,
         18.4598
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The archived official 2015 brochure includes the March 14 departure and its full day order, including a sea day between Grenada and St. Thomas.",
+      "sources": [
+        {
+          "title": "Celebrity Cruises 2015 brochure: Southern Caribbean, page 52",
+          "url": "https://doczz.net/doc/6035429/sehenswert---bei-rcl-cruises-ltd.",
+          "note": "Archived official brochure lists March 14, 2015 and Days 1–8, with sea on Day 6."
+        },
+        {
+          "title": "Cruiseline: Celebrity Summit — March 14, 2015",
+          "url": "https://cruiseline.com/ship/celebrity-summit/review/401906",
+          "note": "Exact departure, seven-night duration, San Juan roundtrip and ordered ports."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2015-03-14"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2015-03-15"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2015-03-16"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2015-03-17"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2015-03-18"
+        },
+        {
+          "day": 6,
+          "type": "sea",
+          "date": "2015-03-19"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2015-03-20"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2015-03-21"
+        }
+      ]
+    }
   },
   {
     "id": 15,
@@ -2061,7 +3113,124 @@
         4.9215,
         52.3778
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The official 2015 Europe Guide gives the complete May 28 day-by-day itinerary, including sea Days 7 and 12 and overnight stays in Stockholm, St. Petersburg and Copenhagen.",
+      "sources": [
+        {
+          "title": "Celebrity Cruises 2015 Europe Guide, page 59",
+          "url": "https://www.scribd.com/doc/246907520/Celebrity-Cruises-2015-Europa",
+          "note": "Archived official brochure contains exact departure date and day-by-day itinerary."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "note": "Overnight in Stockholm after embarkation.",
+          "date": "2015-05-28"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "note": "Second day of the Stockholm overnight stay.",
+          "date": "2015-05-29"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2015-05-30"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Overnight in St. Petersburg.",
+          "date": "2015-05-31"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Second day of the St. Petersburg overnight stay.",
+          "date": "2015-06-01"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2015-06-02"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2015-06-03"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2015-06-04"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2015-06-05"
+        },
+        {
+          "day": 10,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "note": "Overnight in Copenhagen.",
+          "date": "2015-06-06"
+        },
+        {
+          "day": 11,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "note": "Second day of the Copenhagen overnight stay.",
+          "date": "2015-06-07"
+        },
+        {
+          "day": 12,
+          "type": "sea",
+          "date": "2015-06-08"
+        },
+        {
+          "day": 13,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "date": "2015-06-09"
+        }
+      ]
+    }
   },
   {
     "id": 16,
@@ -2171,7 +3340,86 @@
         -66.1107,
         18.4598
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The official 2016–17 brochure lists the March 19, 2016 departure and the complete sequence, beginning with a sea day before Barbados.",
+      "sources": [
+        {
+          "title": "Celebrity Cruises 2016–17 worldwide brochure, page 37",
+          "url": "https://doczz.net/doc/558975/luxury-cruises---celebrity-cruises",
+          "note": "The March 19 Summit departure follows San Juan, sea, Barbados, St. Lucia, Antigua, St. Maarten, St. Thomas and San Juan."
+        },
+        {
+          "title": "Crew Center: Philipsburg 2016 cruise ship port calendar",
+          "url": "https://crew-center.com/philipsburg-st-maarten-cruise-ship-port-calendar-2016",
+          "note": "Celebrity Summit listed March 24, 2016."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2016-03-19"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2016-03-20"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2016-03-21"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2016-03-22"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2016-03-23"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2016-03-24"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2016-03-25"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2016-03-26"
+        }
+      ]
+    }
   },
   {
     "id": 17,
@@ -2460,7 +3708,155 @@
         4.9215,
         52.3778
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Historical port calendars and the exact-sailing passenger review establish the day order. Liverpool spans July 18–19 as an overnight stay; the sea days are July 14 and July 24.",
+      "sources": [
+        {
+          "title": "Cruiseline: Celebrity Silhouette — July 13, 2016",
+          "url": "https://cruiseline.com/ship/celebrity-silhouette/review/425905",
+          "note": "Exact departure, duration, roundtrip and all ordered ports."
+        },
+        {
+          "title": "Belfast Harbour 2016 schedule, archived by NI Ferry",
+          "url": "https://www.niferry.co.uk/downloads/Belfast%20Cruise%20Schedule%202016.pdf",
+          "note": "Lists Celebrity Silhouette at Belfast on July 15."
+        },
+        {
+          "title": "PortNews: Ayr and Troon receive record cruise calls in 2016",
+          "url": "https://en.portnews.ru/news/220079/",
+          "note": "Contemporary ABP announcement identifies Silhouette's July 16 Ayr call for The Open."
+        },
+        {
+          "title": "Crew Center: Liverpool 2016 port calendar",
+          "url": "https://crew-center.com/liverpool-england-cruise-ship-port-calendar-2016",
+          "note": "Records arrival July 18 and departure July 19, confirming the overnight in Liverpool."
+        },
+        {
+          "title": "Crew Center: Dublin 2016 port calendar",
+          "url": "https://crew-center.com/dublin-ireland-cruise-ship-port-calendar-2016",
+          "note": "Lists the Dublin-area call on July 20."
+        },
+        {
+          "title": "data.gg: historical Guernsey cruise sailings",
+          "url": "https://data.gg/Developers/Sailings/Cruises/View",
+          "note": "Lists Celebrity Silhouette in Guernsey on July 22, arriving from Cork and sailing to Le Havre."
+        },
+        {
+          "title": "Crew Center: Le Havre 2016 port calendar",
+          "url": "https://crew-center.com/le-havre-france-cruise-ship-port-calendar-2016",
+          "note": "Lists Celebrity Silhouette at Le Havre on July 23."
+        },
+        {
+          "title": "Crew Center: Amsterdam 2016 port calendar",
+          "url": "https://crew-center.com/amsterdam-holland-cruise-ship-port-calendar-2016",
+          "note": "Records the July 13 departure and July 25 return."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2016-07-13"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2016-07-14"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2016-07-15"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2016-07-16"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2016-07-17"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "note": "Overnight in Liverpool.",
+          "date": "2016-07-18"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "note": "Second day of the Liverpool overnight stay.",
+          "date": "2016-07-19"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2016-07-20"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2016-07-21"
+        },
+        {
+          "day": 10,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "date": "2016-07-22"
+        },
+        {
+          "day": 11,
+          "type": "port",
+          "portIndices": [
+            8
+          ],
+          "date": "2016-07-23"
+        },
+        {
+          "day": 12,
+          "type": "sea",
+          "date": "2016-07-24"
+        },
+        {
+          "day": 13,
+          "type": "port",
+          "portIndices": [
+            9
+          ],
+          "date": "2016-07-25"
+        }
+      ]
+    }
   },
   {
     "id": 18,
@@ -2547,7 +3943,72 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The official deployment announcement and dated port calendars place Amber Cove on March 14 and Grand Turk on March 15, with sea days on March 13 and March 16.",
+      "sources": [
+        {
+          "title": "Carnival Cruise Line: Sunshine 2016–17 deployment announcement",
+          "url": "https://www.carnival-news.com/2015/03/16/carnival-sunshine-to-operate-unique-schedule-of-two-to-10-day-voyages-from-new-york-june-to-october-2016",
+          "note": "Official release explicitly names March 12, 2017 five-day Amber Cove/Grand Turk sailing from Port Canaveral."
+        },
+        {
+          "title": "Crew Center: Amber Cove 2017 port calendar",
+          "url": "https://crew-center.com/amber-cove-cruise-ship-schedule-2017",
+          "note": "Lists Carnival Sunshine at Amber Cove on March 14, 2017."
+        },
+        {
+          "title": "Crew Center: Grand Turk 2017 port calendar",
+          "url": "https://crew-center.com/grand-turk-turks-and-caicos-cruise-ship-schedule-2017",
+          "note": "Lists Carnival Sunshine at Grand Turk on March 15, 2017."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2017-03-12"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2017-03-13"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2017-03-14"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2017-03-15"
+        },
+        {
+          "day": 5,
+          "type": "sea",
+          "date": "2017-03-16"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2017-03-17"
+        }
+      ]
+    }
   },
   {
     "id": 19,
@@ -2623,7 +4084,54 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Reconstructed from the same ship’s three-night Port Canaveral itinerary documented in May 2017: Nassau on Day 2 and a full sea day on Day 3. The December 21 passenger review confirms the duration and Nassau call, but does not independently date the port or sea day.",
+      "sources": [
+        {
+          "title": "Carnival Liberty — December 21, 2017 passenger review",
+          "url": "https://cruiseline.com/ship/carnival-liberty/review/460341",
+          "note": "Exact departure, three-night duration, Port Canaveral roundtrip and Nassau."
+        },
+        {
+          "title": "Sweet Escapes — Carnival Liberty three-day cruise, May 2017",
+          "url": "https://susancrow.blogspot.com/2017/05/carnival-liberty.html",
+          "note": "Same-year firsthand account follows embarkation, Nassau the next morning, then a full sea day. A seasonal comparison, not the December 21 sailing."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2017-12-21"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2017-12-22"
+        },
+        {
+          "day": 3,
+          "type": "sea",
+          "date": "2017-12-23"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2017-12-24"
+        }
+      ]
+    }
   },
   {
     "id": 20,
@@ -2764,7 +4272,76 @@
         11.7878,
         42.0954
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The exact-date archived itinerary lists a port on every calendar day; this six-night voyage had no full sea days.",
+      "sources": [
+        {
+          "title": "Archived Celebrity Mediterranean Getaway itinerary, August 15–21, 2018",
+          "url": "https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/",
+          "note": "Full day-by-day historical schedule and Reflection ship identification."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2018-08-15"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2018-08-16"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2018-08-17"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2018-08-18"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2018-08-19"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2018-08-20"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2018-08-21"
+        }
+      ]
+    }
   },
   {
     "id": 21,
@@ -2855,7 +4432,72 @@
         -80.1765,
         25.7783
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "Historical port calendars give Havana June 4 through the early morning of June 5, then Great Stirrup Cay June 6. June 5 retains the overnight Havana call and is not counted as a full sea day. The Great Stirrup Cay visit remains a scheduled call.",
+      "sources": [
+        {
+          "title": "Port of Miami ship calendar, May–August 2019",
+          "url": "https://crew-center.com/port-miami-cruise-ship-schedule-may-august-2019",
+          "note": "Sky in Miami June 3 and June 7."
+        },
+        {
+          "title": "Havana ship calendar, January–June 2019",
+          "url": "https://crew-center.com/havana-cuba-cruise-ship-schedule-january-june-2019",
+          "note": "Sky scheduled Havana June 4, 07:00 through June 5, 06:00."
+        },
+        {
+          "title": "Great Stirrup Cay ship calendar 2019",
+          "url": "https://crew-center.com/great-stirrup-cay-bahamas-cruise-ship-schedule-2019",
+          "note": "Sky scheduled June 6, 08:00–17:00."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2019-06-03"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "note": "Overnight in Havana.",
+          "date": "2019-06-04"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "note": "The overnight Havana call ended at 06:00; sailing later that day is not a full sea day.",
+          "date": "2019-06-05"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2019-06-06"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2019-06-07"
+        }
+      ]
+    }
   },
   {
     "id": 22,
@@ -3046,7 +4688,83 @@
         2.1688,
         41.344
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The original Princess brochure confirms the August 3 sailing and ordered ports. Sea days on Days 3 and 7 follow a day-by-day firsthand account of the identical July 13–20, 2019 route; the exact August departure’s day-by-day timetable was not located.",
+      "sources": [
+        {
+          "title": "Princess Europe 2019 brochure — Mediterranean & Adriatic, page 20",
+          "url": "https://www.princess.com/downloads/pdf/sin_brochures/2019/europe-2019.pdf",
+          "note": "Primary brochure: Emerald Princess Aug 3 departure, seven days, Athens–Santorini–Kotor–Messina–Naples–Barcelona."
+        },
+        {
+          "title": "Emerald Princess July 13–20, 2019 day-by-day trip report",
+          "url": "https://cameltravel.co.uk/emerald-princess-cruise/",
+          "note": "Same-season Athens–Barcelona itinerary explicitly lists sea days on the third and seventh days, with Santorini, Kotor, Messina and Naples in between."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2019-08-03"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2019-08-04"
+        },
+        {
+          "day": 3,
+          "type": "sea",
+          "date": "2019-08-05"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2019-08-06"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2019-08-07"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2019-08-08"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2019-08-09"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2019-08-10"
+        }
+      ]
+    }
   },
   {
     "id": 23,
@@ -3129,7 +4847,77 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "Likely day order reconstructed from the 2021 short-cruise pattern: Nassau on Day 2, Half Moon Cay on Day 3 and sea on Day 4. Exact August 12 passenger reviews confirm both ports and four nights; a September 23–27 Magic vlog places Half Moon Cay on Day 3, while Carnival’s nearby-period Port Canaveral brochure places the sea day last. Exact August port-day timing remains unverified.",
+      "sources": [
+        {
+          "title": "Carnival Magic — First Cruise Back, August 12, 2021",
+          "url": "https://cruiseline.com/ship/carnival-magic/review/529973",
+          "note": "Exact departure, four nights, Port Canaveral, Nassau and Half Moon Cay."
+        },
+        {
+          "title": "Carnival Magic — Great Family Cruise, August 12, 2021",
+          "url": "https://cruiseline.com/ship/carnival-magic/review/542302",
+          "note": "Separate passenger corroborates exact departure, four nights and both stops."
+        },
+        {
+          "title": "GarnerTV — Carnival Magic 2021, Day 3 Half Moon Cay",
+          "url": "https://www.youtube.com/watch?v=MFP4Hz9dlqo",
+          "note": "Video title and description explicitly identify Day 3 at Half Moon Cay on the September 23–27, 2021 four-night Port Canaveral sailing; same-season comparison, not the August 12 departure."
+        },
+        {
+          "title": "Carnival 2019–2021 cruise brochure, printed page 31",
+          "url": "https://arrigogroup.com.mt/wp-content/uploads/2019/06/Carnival-2020-Brochure.pdf",
+          "note": "Primary brochure’s four-day Port Canaveral route has Nassau Day 2, a private island Day 3, sea Day 4, and return Day 5. This example names Princess Cays rather than Half Moon Cay, so it supports only the seasonal day pattern."
+        },
+        {
+          "title": "Carnival announces Magic replacing Elation on short Port Canaveral cruises",
+          "url": "https://www.carnival-news.com/2021/06/10/carnival-cruise-line-confirms-first-sailing-for-mardi-gras-announces-more-ships-returning-in-august",
+          "note": "Official June 10, 2021 announcement says Magic would take over Elation’s four- and five-day Bahamas itineraries August 7–October 7."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2021-08-12"
+        },
+        {
+          "day": 2,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2021-08-13"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2021-08-14"
+        },
+        {
+          "day": 4,
+          "type": "sea",
+          "date": "2021-08-15"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2021-08-16"
+        }
+      ]
+    }
   },
   {
     "id": 24,
@@ -3223,7 +5011,75 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The exact March 12–19, 2022 archived schedule explicitly lists full sea days on March 13, 15 and 18. These are scheduled days, subject to any unrecorded operational changes.",
+      "sources": [
+        {
+          "title": "Mardi Gras March 12–19, 2022 archived itinerary",
+          "url": "https://www.icruise.com/itineraries/7-night-eastern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_3-12-2022.html",
+          "note": "Exact dates, duration and ordered port schedule."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2022-03-12"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2022-03-13"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2022-03-14"
+        },
+        {
+          "day": 4,
+          "type": "sea",
+          "date": "2022-03-15"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2022-03-16"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2022-03-17"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2022-03-18"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2022-03-19"
+        }
+      ]
+    }
   },
   {
     "id": 25,
@@ -3373,7 +5229,78 @@
         11.7878,
         42.0954
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The archived June 11 departure gives sea days June 12 and 14. Only its first seven nights are included, matching the owner-confirmed Barcelona–Civitavecchia voyage.",
+      "sources": [
+        {
+          "title": "Regal Princess June 11, 2022 archived Mediterranean itinerary",
+          "url": "https://www.icruise.com/itineraries/14-night-mediterranean-with-greek-isles-france-and-turkey-cruise_regal-princess_6-11-2022.html",
+          "note": "Historical schedule for June 11–18: Barcelona, Gibraltar, Marseille, Genoa, Livorno and Civitavecchia. Published as the first week of a longer itinerary; the owner confirms sailing the seven-day voyage."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2022-06-11"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2022-06-12"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2022-06-13"
+        },
+        {
+          "day": 4,
+          "type": "sea",
+          "date": "2022-06-14"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2022-06-15"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2022-06-16"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2022-06-17"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2022-06-18"
+        }
+      ]
+    }
   },
   {
     "id": 26,
@@ -3505,7 +5432,78 @@
         -80.1765,
         25.7783
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The exact December 31, 2022–January 7, 2023 archived itinerary lists full sea days on January 1 and January 6.",
+      "sources": [
+        {
+          "title": "Norwegian Bliss December 31, 2022 archived itinerary",
+          "url": "https://www.icruise.com/itineraries/7-night-caribbean-harvest-caye-cozumel-and-roatan-cruise_norwegian-bliss_12-31-2022.html",
+          "note": "Exact dates, duration, Miami roundtrip and ordered stops."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2022-12-31"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2023-01-01"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2023-01-02"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2023-01-03"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2023-01-04"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2023-01-05"
+        },
+        {
+          "day": 7,
+          "type": "sea",
+          "date": "2023-01-06"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2023-01-07"
+        }
+      ]
+    }
   },
   {
     "id": 27,
@@ -3647,7 +5645,75 @@
         -118.277,
         33.7441
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "likely",
+      "note": "The archived March 11–18, 2023 schedule explicitly lists sea days March 12, 15 and 16. Day positions are documented for that sailing; matching it to the owner’s March 18 date remains likely, as described in the voyage notes.",
+      "sources": [
+        {
+          "title": "Celebrity Solstice March 11–18, 2023 archived itinerary",
+          "url": "https://www.icruise.com/itineraries/7-night-mexican-riviera-cruise_celebrity-solstice_3-11-2023.html",
+          "note": "Exact return-date match and Cabo–Mazatlán–San Diego itinerary."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2023-03-11"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2023-03-12"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2023-03-13"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2023-03-14"
+        },
+        {
+          "day": 5,
+          "type": "sea",
+          "date": "2023-03-15"
+        },
+        {
+          "day": 6,
+          "type": "sea",
+          "date": "2023-03-16"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2023-03-17"
+        },
+        {
+          "day": 8,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2023-03-18"
+        }
+      ]
+    }
   },
   {
     "id": 28,
@@ -3944,7 +6010,124 @@
         139.6489,
         35.4511
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The corrected July 2–14 itinerary has full sea days July 3, 9 and 12. Kobe and Osaka are overnight calls: July 5 includes departure from Kobe and arrival in Osaka, not a sea day.",
+      "sources": [
+        {
+          "title": "Celebrity official July 2, 2024 itinerary correction",
+          "url": "https://www.celebritycruises.com/content/dam/celebrity/pdf/ML-7-2-24-12-nights-best-of-japan-cruises-Itinerary-Modification-Guest-Letter.pdf",
+          "note": "Primary correction adds Kochi July 7, moves Hiroshima to July 8 and Jeju to July 10, replaces Nagasaki with sea day."
+        },
+        {
+          "title": "Celebrity Millennium July 2–14, 2024 archived itinerary",
+          "url": "https://www.icruise.com/itineraries/12-night-best-of-japan-cruise_celebrity-millennium_7-2-2024.html",
+          "note": "Full corrected route, dates and overnight calls."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2024-07-02"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2024-07-03"
+        },
+        {
+          "day": 3,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "note": "Overnight in Kobe.",
+          "date": "2024-07-04"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            1,
+            2
+          ],
+          "note": "Depart Kobe at 05:00, arrive Osaka at 08:00 and stay overnight.",
+          "date": "2024-07-05"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "note": "Overnight Osaka call continues until the 17:00 departure.",
+          "date": "2024-07-06"
+        },
+        {
+          "day": 6,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2024-07-07"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2024-07-08"
+        },
+        {
+          "day": 8,
+          "type": "sea",
+          "date": "2024-07-09"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            5
+          ],
+          "date": "2024-07-10"
+        },
+        {
+          "day": 10,
+          "type": "port",
+          "portIndices": [
+            6
+          ],
+          "date": "2024-07-11"
+        },
+        {
+          "day": 11,
+          "type": "sea",
+          "date": "2024-07-12"
+        },
+        {
+          "day": 12,
+          "type": "port",
+          "portIndices": [
+            7
+          ],
+          "date": "2024-07-13"
+        },
+        {
+          "day": 13,
+          "type": "port",
+          "portIndices": [
+            8
+          ],
+          "date": "2024-07-14"
+        }
+      ]
+    }
   },
   {
     "id": 29,
@@ -4086,6 +6269,84 @@
         -80.6188,
         28.4103
       ]
-    ]
+    ],
+    "dailyItinerary": {
+      "confidence": "confirmed",
+      "note": "The updated June 7–15, 2025 schedule explicitly lists sea days June 8, 9, 12 and 14; Amber Cove is retained as the revised June 13 call.",
+      "sources": [
+        {
+          "title": "Mardi Gras June 7–15, 2025 archived itinerary",
+          "url": "https://www.icruise.com/itineraries/8-night-southern-caribbean-from-port-canaveral-%28orlando%29-cruise_mardi-gras_6-7-2025.html",
+          "note": "Exact dates, eight nights and updated Aruba–Curaçao–Amber Cove route."
+        },
+        {
+          "title": "Carnival replaces Grand Turk calls on selected 2025 itineraries",
+          "url": "https://www.cruisehive.com/carnival-passes-up-caribbean-port-for-multiple-itineraries/170377",
+          "note": "Specifically identifies June 7 Mardi Gras sailing's substitution of Amber Cove for Grand Turk."
+        }
+      ],
+      "days": [
+        {
+          "day": 1,
+          "type": "port",
+          "portIndices": [
+            0
+          ],
+          "date": "2025-06-07"
+        },
+        {
+          "day": 2,
+          "type": "sea",
+          "date": "2025-06-08"
+        },
+        {
+          "day": 3,
+          "type": "sea",
+          "date": "2025-06-09"
+        },
+        {
+          "day": 4,
+          "type": "port",
+          "portIndices": [
+            1
+          ],
+          "date": "2025-06-10"
+        },
+        {
+          "day": 5,
+          "type": "port",
+          "portIndices": [
+            2
+          ],
+          "date": "2025-06-11"
+        },
+        {
+          "day": 6,
+          "type": "sea",
+          "date": "2025-06-12"
+        },
+        {
+          "day": 7,
+          "type": "port",
+          "portIndices": [
+            3
+          ],
+          "date": "2025-06-13"
+        },
+        {
+          "day": 8,
+          "type": "sea",
+          "date": "2025-06-14"
+        },
+        {
+          "day": 9,
+          "type": "port",
+          "portIndices": [
+            4
+          ],
+          "date": "2025-06-15"
+        }
+      ]
+    }
   }
 ]

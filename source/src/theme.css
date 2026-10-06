@@ -222,6 +222,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .port-date,.port-list li>div>span,.itinerary-footnote { color: var(--muted); }
 .itinerary-note { background: color-mix(in srgb,#ddb151 13%,var(--paper)); color: var(--ink); }
 .itinerary-note p { color: var(--muted); }
+.daily-itinerary-summary { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:20px 24px 0; font-size:9px; letter-spacing:1px; color:var(--muted); }
+.daily-itinerary-summary>span:last-child { color:var(--teal); letter-spacing:0; }
+.port-list.daily-itinerary { display:block; margin-top:12px; }
+.daily-itinerary .itinerary-day { min-height:67px; padding:8px 0; gap:10px; }
+.daily-itinerary .itinerary-day-copy { min-width:0; gap:5px; }
+.daily-itinerary .itinerary-day-copy strong { overflow-wrap:anywhere; line-height:1.5; }
+.daily-itinerary .itinerary-day-copy>span { font-size:8px; line-height:1.5; letter-spacing:.6px; }
+.daily-itinerary .port-date { flex:none; font-size:9px; white-space:nowrap; }
+.daily-itinerary .itinerary-day-note { color:var(--muted); font-size:10px; line-height:1.55; }
+.daily-itinerary .itinerary-day--sea .port-dot { background:color-mix(in srgb,var(--teal) 10%,var(--paper)); color:var(--teal); border-color:color-mix(in srgb,var(--teal) 30%,transparent); }
+.daily-itinerary .itinerary-day--sea strong { color:var(--teal); }
+.daily-itinerary .itinerary-day--sea .port-dot .icon { color:var(--teal); }
+.daily-itinerary .itinerary-day--unknown .port-dot { border-style:dashed; }
+.daily-itinerary li:not(:last-child):before { display:block; }
 .research-notes h3 { color: var(--ink); }
 .research-notes>.eyebrow { color: var(--violet); }
 .research-notes p,.research-notes blockquote,.source-list small { color: var(--muted); }
