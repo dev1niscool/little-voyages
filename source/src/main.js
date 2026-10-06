@@ -177,7 +177,7 @@ function setView(view,{push=true,scroll=true}={}){
   document.querySelector('#atlas-page').hidden=stats;
   document.body.classList.toggle('view-statistics',stats);
   document.querySelectorAll('[data-view]').forEach(button=>{if(button.dataset.view===state.view)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')});
-  document.title=stats?'By the numbers — Little voyages':'Little voyages — My cruise atlas';
+  document.title=stats?'By the numbers — Little Voyages':'Little Voyages';
   if(stats)statisticsPage?.show();else statisticsPage?.hide();
   syncMapActivity();
   syncUrl(push);
