@@ -1,8 +1,8 @@
 # Little Voyages — export guide
 
-Schema version: 1. Collection fingerprint: `bcd1324ed6a95400db1360931f29539401be42177a31483b95c16529b1a1862c` (SHA-256 of the compact JSON cruise array).
+Schema version: 1. Collection fingerprint: `bdd4816f8d7ee7c2d4e56705d49fd7b278030d09a0fd4b334922df0bd4001999` (SHA-256 of the compact JSON cruise array).
 
-Personal-visit fingerprint: `28bff7e99f1c6e4d4b746122fc9ea11dbc50342cd60660b179860e84fdfc54a1` (SHA-256 of the compact JSON `personalVisits` object; separate from the unchanged cruise-array fingerprint).
+Personal-visit fingerprint: `ab1a17bd578f74a7d64b5d260f696dc96e1fd1207e30e207e9b2e7af1c40d45f` (SHA-256 of the compact JSON `personalVisits` object; separate from the unchanged cruise-array fingerprint).
 
 This bundle is a portable copy of the complete 29-cruise collection, independent of the website’s map filters. It contains 202 recorded nights, 87 distinct non-scenic ports, 40 countries reached through cruising (including confirmed shore excursions), and 6 territories or special jurisdictions under the definitions below. It also preserves 5 countries and 2 special places reported as non-cruise visits; these do not enter cruise totals. The website is <https://dev1niscool.github.io/little-voyages/>.
 
@@ -67,7 +67,7 @@ Both JSON files preserve the same `personalVisits` object. The shore excursions 
 - Visit rows retain `name`, `flag`, `status`, any `note`, `evidence`, source URLs, and any background/dispute links supplied in the source. Unknown dates and trip associations remain unknown. Fields absent from a personal-visit record must not be inferred from a nearby cruise.
 
 - 🇻🇦 **Vatican City**: The owner confirms visiting Vatican City as a cruise shore excursion, by car while the ship was docked, approximately twice. Counted as one country; no ship port or dated sailing association is added. Evidence: owner-confirmed. Approximate visit count: 2. No port, specific cruise association, travel date, or route is invented.
-- 🇲🇨 **Monaco**: The owner confirms visiting Monaco as a cruise shore excursion from a nearby French port on Celebrity Reflection. The 2018 sailing includes Villefranche, where Celebrity offers Monaco excursions; this is a candidate sailing association. The visit itself is confirmed and counts as one country. Evidence: owner-confirmed. Approximate visit count: unknown. No port, specific cruise association, travel date, or route is invented.
+- 🇲🇨 **Monaco**: The owner confirms visiting Monaco on a shore excursion from Villefranche, France, during the August 15–21, 2018 Celebrity Reflection cruise. Counted as one country. Evidence: owner-confirmed. Approximate visit count: unknown. No port, specific cruise association, travel date, or route is invented.
 
 This is a personal travel grouping, not a claim about sovereignty. These owner-reported visits happened without a cruise and are excluded from every cruise total. The “NOT by cruise” comparison is a playful presentation of the owner’s travel history, grouped as requested by the owner. Palestine is a UN non-member observer State with disputed status; Hong Kong is a Special Administrative Region of China. The status labels describe each place individually.
 
@@ -91,7 +91,7 @@ The statistics file has the same collection metadata plus `personalVisitsSha256`
 - `uniquePorts`, `portCalls`, `scenicStops`: distinct port locations, eligible recorded calls, and scenic entries. Shore excursions do not change these quantities.
 - `itineraryPlaceCount`: distinct raw country/territory labels from itinerary ports (44 in the current complete collection). `placeCount` additionally includes distinct confirmed shore-excursion destinations (46 with Monaco and Vatican City). Non-cruise visits do not enter either total.
 - `countryCount`, `territoryCount`, `countries`, `territories`, `unclassifiedPlaces`: explicit destination classifications. Destination rows contain name, flag, type, status, sovereign association, classification source URLs, distinct port names, and cruiseIds. Flags are decorative. The country category includes sovereign states plus Aruba, Curaçao, and Sint Maarten, constituent countries of the Kingdom of the Netherlands. Their individual status labels and classification sources are preserved. A sovereign association is not an additional visit.
-- `shoreExcursionPlaces`: additional country/territory destination rows with their owner-confirmed shore-excursion evidence. Monaco and Vatican City have empty `ports` and `cruiseIds` arrays; these must not be filled by guessing. Each contributes one distinct country, regardless of the number of visits. Monaco’s candidate sailing and port are stored separately from confirmed cruise IDs.
+- `shoreExcursionPlaces`: additional country/territory destination rows with their owner-confirmed shore-excursion evidence. Monaco and Vatican City have empty `ports` arrays. Monaco is linked to cruise 20, the August 15–21, 2018 Celebrity Reflection sailing, through the owner-confirmed excursion from Villefranche, France. Vatican City has no confirmed sailing association, so its `cruiseIds` array remains empty. Each contributes one distinct country, regardless of the number of visits.
 - `years`: chronological rows containing year, cruises, nights, and approximate miles.
 - `lines`: rows with name, count, nights, and presentation color.
 - `regions`: grouped region rows with name, count, nights, and approximate miles.
@@ -113,7 +113,7 @@ Distance values are reproducible calculations from illustrative routes, not meas
 
 Both CSV files have a header row and use RFC 4180 quoting and CRLF row endings. Quotes are doubled within quoted cells; embedded line breaks stay within the cell. Empty cells represent unavailable optional fields. Formula-like text cells beginning with =, +, -, @, tab, or a line break (including an operator after whitespace) receive a leading apostrophe for safer spreadsheet opening. This affects only the CSV representation; the JSON preserves exact text. Negative numeric coordinates stay numeric. The `sources_json` cell is a JSON array, preserving each source’s title, URL, and note without an ambiguous separator.
 
-The CSV and GeoJSON files cover recorded cruises only. Confirmed Monaco and Vatican City shore excursions and owner-reported non-cruise travel remain in the JSON files and this guide; they are never fabricated as extra cruise rows, port calls, or ship routes.
+The CSV and GeoJSON files cover recorded cruises only. Confirmed shore excursions can appear in the notes of an associated cruise, as Monaco does for cruise 20. The separate personal-visit records remain in the JSON files and this guide; they never create extra cruise rows, port calls, or ship routes.
 
 Cruise CSV columns use the corresponding dictionary fields in snake_case, plus `port_entry_count` (all itinerary entries), `route_point_count` (ports and illustrative waypoints), and `sources_json`. The CSV does not duplicate full geometry; use the logbook or GeoJSON for coordinates.
 
@@ -151,7 +151,7 @@ GeoJSON follows longitude, latitude order in decimal degrees on WGS 84 (RFC 7946
 - 🇯🇲 **Jamaica** — Sovereign country. Ports: Montego Bay. Cruise IDs: 9.
 - 🇯🇵 **Japan** — Sovereign country. Ports: Hiroshima; Kagoshima; Kobe; Kochi; Osaka; Shimizu (Mount Fuji); Yokohama (Tokyo). Cruise IDs: 28.
 - 🇲🇽 **Mexico** — Sovereign country. Ports: Cabo San Lucas; Costa Maya; Cozumel; Mazatlán; Progreso. Cruise IDs: 7, 9, 11, 26, 27.
-- 🇲🇨 **Monaco** — Sovereign country. Owner-confirmed shore excursion; not a port. The owner confirms visiting Monaco as a cruise shore excursion from a nearby French port on Celebrity Reflection. The 2018 sailing includes Villefranche, where Celebrity offers Monaco excursions; this is a candidate sailing association. The visit itself is confirmed and counts as one country. No cruise IDs or travel dates are inferred. Classification evidence: <https://www.un.org/en/about-us/member-states>, <https://www.celebritycruises.com/ports/nice/shore-excursions>, <https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/>.
+- 🇲🇨 **Monaco** — Sovereign country. Owner-confirmed shore excursion; not a port. The owner confirms visiting Monaco on a shore excursion from Villefranche, France, during the August 15–21, 2018 Celebrity Reflection cruise. Counted as one country. Confirmed cruise IDs: 20. Classification evidence: <https://www.un.org/en/about-us/member-states>, <https://www.celebritycruises.com/ports/nice/shore-excursions>, <https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/>.
 - 🇲🇪 **Montenegro** — Sovereign country. Ports: Kotor. Cruise IDs: 22.
 - 🇳🇱 **Netherlands** — Sovereign country. Ports: Amsterdam. Cruise IDs: 15, 17.
 - 🇵🇦 **Panama** — Sovereign country. Ports: Colón. Cruise IDs: 7.
@@ -558,7 +558,7 @@ An exact-date passenger review identifies a three-night Bahamas sailing from Por
 - Original ship label: Celebrity Reflection; original destination label: Mediterranean.
 - Ordered itinerary: Civitavecchia (Rome) (Italy) → La Spezia (Italy) → Villefranche (France) → Ajaccio (France) → Cagliari (Italy) → Naples (Italy) → Civitavecchia (Rome) (Italy).
 
-Archived exact-date offer supplies the complete six-night itinerary. Every day had a port: La Spezia Aug 16, Villefranche Aug 17, Ajaccio Aug 18, Cagliari Aug 19 and Naples Aug 20.
+Archived exact-date offer supplies the complete six-night itinerary. Every day had a port: La Spezia Aug 16, Villefranche Aug 17, Ajaccio Aug 18, Cagliari Aug 19 and Naples Aug 20. During our stop in Villefranche, France, we visited Monaco on a shore excursion.
 
 1. **Archived Celebrity Mediterranean Getaway itinerary, August 15–21, 2018**
    <https://platinumcruising.com/cruise/6-nights-mediterranean-getaway-cruise-with-celebrity/>

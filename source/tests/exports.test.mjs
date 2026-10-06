@@ -82,9 +82,9 @@ test('personal travel survives both JSON exports without becoming invented cruis
   assert.equal(monaco.isShoreExcursion, true);
   assert.equal(monaco.evidence, 'owner-confirmed');
   assert.deepEqual(monaco.ports, []);
-  assert.deepEqual(monaco.cruiseIds, []);
-  assert.deepEqual(monaco.candidateCruiseIds, [20]);
-  assert.equal(monaco.candidatePort, 'Villefranche');
+  assert.deepEqual(monaco.cruiseIds, [20]);
+  assert.ok(!('candidateCruiseIds' in monaco));
+  assert.ok(!('candidatePort' in monaco));
   assert.ok(!('startDate' in monaco));
   assert.ok(!('endDate' in monaco));
   assert.deepEqual(logbook.personalVisits.shoreExcursions.map(place => place.name), ['Vatican City', 'Monaco']);
@@ -155,6 +155,7 @@ test('GeoJSON preserves longitude-latitude route geometry and marks it as illust
     assert.equal(feature.geometry.type, 'LineString');
     assert.deepEqual(feature.geometry.coordinates, cruise.route);
     assert.deepEqual(feature.geometry.coordinates[0], [cruise.ports[0].lon, cruise.ports[0].lat]);
+    assert.equal(feature.properties.notes, cruise.notes);
     assert.deepEqual(feature.properties.sources, cruise.sources);
   }
 });
@@ -170,7 +171,7 @@ test('unknown values remain unknown rather than becoming dates, zero durations, 
   assert.equal(summary.nights, '');
   assert.equal(summary.start_date, '');
   assert.equal(geojson.features[0].geometry, null);
-  assert.deepEqual(logbook.personalVisits.shoreExcursions, [], 'custom selections do not inherit personal shore visits without confirmed sailing dates');
+  assert.deepEqual(logbook.personalVisits.shoreExcursions, [], 'custom selections do not automatically inherit personal shore visits');
   assert.deepEqual(logbook.personalVisits.nonCruiseVisits.countries, []);
 });
 

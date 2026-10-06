@@ -27,9 +27,8 @@ export const shoreExcursions = Object.freeze([
     status: 'Sovereign country',
     isShoreExcursion: true,
     evidence: 'owner-confirmed',
-    candidateCruiseIds: [20],
-    candidatePort: 'Villefranche',
-    note: 'The owner confirms visiting Monaco as a cruise shore excursion from a nearby French port on Celebrity Reflection. The 2018 sailing includes Villefranche, where Celebrity offers Monaco excursions; this is a candidate sailing association. The visit itself is confirmed and counts as one country.',
+    cruiseIds: [20],
+    note: 'The owner confirms visiting Monaco on a shore excursion from Villefranche, France, during the August 15–21, 2018 Celebrity Reflection cruise. Counted as one country.',
     sources: [
       'https://www.un.org/en/about-us/member-states',
       'https://www.celebritycruises.com/ports/nice/shore-excursions',

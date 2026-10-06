@@ -157,7 +157,7 @@ test('year selections recalculate destinations without inferring visits to assoc
   assert.equal(stats.countryCount, 4, 'a visit to Aruba or Curaçao does not also add the Netherlands');
   assert.ok(!stats.countries.some(place => place.name === 'Netherlands'));
   assert.equal(stats.territoryCount, 0);
-  assert.ok(stats.countries.every(place => !['Vatican City', 'Monaco'].includes(place.name)), 'personal visits without confirmed sailing dates are not silently assigned to a year');
+  assert.ok(stats.countries.every(place => !['Vatican City', 'Monaco'].includes(place.name)), 'shore excursions are not silently included in itinerary-only calculations');
   assert.deepEqual(stats.countries.find(place => place.name === 'Aruba').cruiseIds, [29]);
 
   const territoryOnly = computeStatistics([{ id: 1, ports: [
@@ -180,7 +180,7 @@ test('year selections recalculate destinations without inferring visits to assoc
   assert.ok(!constituentVisits.countries.some(place => ['Netherlands', 'United Kingdom'].includes(place.name)), 'Associated countries require their own visit evidence');
 });
 
-test('Confirmed Vatican and Monaco shore excursions add countries without inventing port calls or dated sailings', () => {
+test('Confirmed Vatican and Monaco shore excursions preserve sailing associations without inventing port calls', () => {
   const cruisesBefore = structuredClone(cruises);
   const visitsBefore = structuredClone(shoreExcursions);
   const itineraryOnly = computeStatistics(cruises);
@@ -202,9 +202,9 @@ test('Confirmed Vatican and Monaco shore excursions add countries without invent
   assert.equal(monaco.isShoreExcursion, true);
   assert.equal(monaco.evidence, 'owner-confirmed');
   assert.deepEqual(monaco.ports, [], 'a shore excursion does not add a Monaco ship port call');
-  assert.deepEqual(monaco.cruiseIds, [], 'the tentative 2018 sailing is not a confirmed association');
-  assert.deepEqual(monaco.candidateCruiseIds, [20]);
-  assert.equal(monaco.candidatePort, 'Villefranche');
+  assert.deepEqual(monaco.cruiseIds, [20], 'the owner confirmed Monaco during the August 2018 Reflection sailing');
+  assert.ok(!('candidateCruiseIds' in monaco));
+  assert.ok(!('candidatePort' in monaco));
   assert.deepEqual(stats.shoreExcursionPlaces, [monaco, vatican]);
   const monacoIndex = stats.countries.indexOf(monaco);
   assert.deepEqual(stats.countries.slice(monacoIndex - 1, monacoIndex + 2).map(place => place.name), ['Mexico', 'Monaco', 'Montenegro']);

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { chromium } from '@playwright/test';
+import { csvParse } from 'd3';
 import { unzipSync } from 'fflate';
 
 // ATLAS_URL=http://localhost:4176/ node scripts/check-downloads.mjs
@@ -148,9 +149,9 @@ try {
   assert.equal(shoreExcursions[1].name, 'Monaco');
   assert.equal(shoreExcursions[1].flag, '🇲🇨');
   assert.equal(shoreExcursions[1].evidence, 'owner-confirmed');
-  assert.deepEqual(shoreExcursions[1].cruiseIds, []);
-  assert.deepEqual(shoreExcursions[1].candidateCruiseIds, [20]);
-  assert.equal(shoreExcursions[1].candidatePort, 'Villefranche');
+  assert.deepEqual(shoreExcursions[1].cruiseIds, [20]);
+  assert.ok(!('candidateCruiseIds' in shoreExcursions[1]));
+  assert.ok(!('candidatePort' in shoreExcursions[1]));
   const vatican = statistics.statistics.countries.find(place => place.name === 'Vatican City');
   assert.equal(vatican.isShoreExcursion, true);
   assert.equal(vatican.approximateVisits, 2);
@@ -159,9 +160,9 @@ try {
   const monaco = statistics.statistics.countries.find(place => place.name === 'Monaco');
   assert.equal(monaco.isShoreExcursion, true);
   assert.deepEqual(monaco.ports, []);
-  assert.deepEqual(monaco.cruiseIds, []);
-  assert.deepEqual(monaco.candidateCruiseIds, [20]);
-  assert.equal(monaco.candidatePort, 'Villefranche');
+  assert.deepEqual(monaco.cruiseIds, [20]);
+  assert.ok(!('candidateCruiseIds' in monaco));
+  assert.ok(!('candidatePort' in monaco));
   assert.deepEqual(statistics.statistics.shoreExcursionPlaces, [monaco, vatican]);
   assert.deepEqual(nonCruiseVisits.countries.map(place => [place.name, place.flag]), [
     ['China', '🇨🇳'], ['Egypt', '🇪🇬'], ['India', '🇮🇳'], ['Israel', '🇮🇱'], ['South Africa', '🇿🇦'],
@@ -186,13 +187,21 @@ try {
     assert.equal(feature.geometry.type, 'LineString');
     const cruise = logbook.cruises.find(record => record.id === feature.id);
     assert.deepEqual(feature.geometry.coordinates, cruise.route);
+    assert.equal(feature.properties.notes, cruise.notes, 'Route downloads retain shore-excursion notes');
   }
   for (const name of ['little-voyages-cruises.csv', 'little-voyages-ports.csv']) {
     const csv = downloaded.get(name).toString('utf8').replace(/^\uFEFF/, '');
     assert.match(csv.split(/\r?\n/, 1)[0], /cruise/i);
     assert.match(csv, /Disney Wonder/);
     assert.match(csv, /Mardi Gras/);
-    assert.doesNotMatch(csv, /Vatican City|Monaco/, 'Shore excursions do not create CSV port calls or sailings');
+    if (name === 'little-voyages-ports.csv') {
+      assert.doesNotMatch(csv, /Vatican City|Monaco/, 'Shore excursions do not create CSV port calls');
+    } else {
+      for (const row of csvParse(csv)) {
+        const cruise = logbook.cruises.find(record => record.id === Number(row.cruise_id));
+        assert.equal(row.notes, cruise.notes, 'Cruise CSV notes agree with the complete logbook');
+      }
+    }
     assert.ok(csv.split(/\r?\n/).length > 29);
   }
   const guide = downloaded.get('little-voyages-guide.md').toString('utf8');
